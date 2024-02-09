@@ -62,8 +62,6 @@ fun tileSelected(
     cardBorderState: MutableState<BorderStroke?>,
     gameState: MutableState<String>
 ) {
-    // todo mark also if symbol is clicked
-
     if (selected.value.first == null) {
         // select first Tile
         selected.value = Pair(tileDataState.value, null)
@@ -99,11 +97,10 @@ fun tileSelected(
 }
 
 @Composable
-fun polygonBox(color: Color, sides: Int, rotation: Float, modifier: Modifier = Modifier, onClick: () -> (Unit) = {}) {
+fun polygonBox(color: Color, sides: Int, rotation: Float, modifier: Modifier = Modifier) {
     Box(modifier = modifier
         .clip(Polygon(sides = sides, rotation = rotation))
         .background(color)
-        .clickable(onClick = onClick)
     ) {}
 }
 

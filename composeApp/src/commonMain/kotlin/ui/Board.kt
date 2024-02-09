@@ -129,7 +129,6 @@ private fun card(
     }
 
     if (!played.value) {
-    // todo react on click on card and symbol
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
 
         Card(
