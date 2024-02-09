@@ -69,7 +69,6 @@ fun restartGame(
 
     val tilesForGame = boardData.tiles
         .filter { tileData -> tileData.chosenForPlay }
-        // .filter { it.played }
 
     tilesForGame.forEach {
         it.played = false
@@ -81,7 +80,15 @@ fun restartGame(
 }
 
 fun newGame(gameState: MutableState<String>) {
+    // todo this does not work
 
+    boardData.tiles.forEach {
+        it.chosenForPlay = false
+        it.played = false
+        it.borderStroke = null
+    }
+
+    boardData.tiles = boardData.selectTilesForGame(boardData.size, boardData.tiles)
 }
 
 @Composable

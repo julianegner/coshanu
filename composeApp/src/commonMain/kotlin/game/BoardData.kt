@@ -27,7 +27,7 @@ fun TileData.same(secondTileData: TileData): Boolean {
 
 // todo size, amount of the dimensions as optional params
 class BoardData() {
-    val tiles: List<TileData> = createBoard()
+    var tiles: List<TileData> = createBoard()
     val size = 4
 
     var selected: Pair<TileData?, TileData?> = Pair(null, null)
@@ -79,8 +79,15 @@ class BoardData() {
                 }
             }
         }
+        return selectTilesForGame(boardSize, possibleTiles)
+    }
+
+    fun selectTilesForGame(
+        boardSize: Int,
+        possibleTiles: List<TileData>
+    ): List<TileData> {
         val neededPairs = (boardSize * boardSize) / 2
-        val p = (1 .. neededPairs).toList()
+        val p = (1..neededPairs).toList()
 
         println("possibleTiles: ${possibleTiles.size}, neededPairs: $neededPairs")
 
@@ -90,7 +97,7 @@ class BoardData() {
         return possibleTiles
     }
 
-    fun findPair(possibleTiles: ArrayList<TileData>) {
+    private fun findPair(possibleTiles: List<TileData>) {
         val firstTile = possibleTiles
             .filter {tileData -> !tileData.chosenForPlay }
             .random()
