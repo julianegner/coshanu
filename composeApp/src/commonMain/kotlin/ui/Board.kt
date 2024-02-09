@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -30,8 +31,7 @@ fun Board() {
     }
 
     val selected = remember { mutableStateOf(boardData.selected) }
-    val gameText = remember { mutableStateOf("started") }
-
+    val gameState = remember { mutableStateOf("S") }
 
     LazyVerticalGrid(
         modifier = Modifier.size(800.dp).border(width = 1.dp, color = Color.Black),
@@ -43,11 +43,58 @@ fun Board() {
         items(list.value.size) { index ->
             val tileDataState: MutableState<TileData> = remember { mutableStateOf(list.value.get(index)) }
             val played = remember { mutableStateOf(tileDataState.value.played) }
-            card(tileDataState, selected, played, gameText)
+            card(tileDataState, selected, played, gameState)
         }
     }
+    GameText(gameState)
 
-    Text(gameText.value)
+    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (gameState.value == "L") {
+            Button(onClick = { restartGame(gameState, list) }) {
+                Text("restart Game")
+            }
+        }
+        if (gameState.value == "L" || gameState.value == "W") {
+
+            Button(onClick = { newGame(gameState) }) {
+                Text("New Game")
+            }
+        }
+    }
+}
+
+fun restartGame(
+    gameState: MutableState<String>,
+    list: MutableState<List<TileData>>) {
+
+    val tilesForGame = boardData.tiles
+        .filter { tileData -> tileData.chosenForPlay }
+        // .filter { it.played }
+
+    tilesForGame.forEach {
+        it.played = false
+        it.borderStroke = null
+    }
+
+    list.value = tilesForGame
+    gameState.value = "RESTART"
+}
+
+fun newGame(gameState: MutableState<String>) {
+
+}
+
+@Composable
+private fun GameText(gameState: MutableState<String>) {
+    val game =  gameState.value
+    var gameText = when (game) {
+        "RESTART" -> "starting again"
+        "S" -> "starting"
+        "W" -> "You Won!!"
+        "L" -> "Sorry, you lost!"
+        else -> "running... remaining Tiles: ${game.removePrefix("R")}"
+    }
+    Text(gameText)
 }
 
 @Composable
@@ -55,7 +102,7 @@ private fun card(
     tileDataState: MutableState<TileData>,
     selected: MutableState<Pair<TileData?,TileData?>>,
     played: MutableState<Boolean>,
-    gameText: MutableState<String>
+    gameState: MutableState<String>
 ) {
     val cardModifier = Modifier
         .aspectRatio(1f)
@@ -70,6 +117,9 @@ private fun card(
         }
     }
 
+    if (gameState.value == "RESTART") {
+        played.value = false
+    }
 
     if (!played.value) {
     // todo react on click on card and symbol
@@ -77,12 +127,12 @@ private fun card(
 
         Card(
             modifier = cardModifier
-                .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameText) }),
+                .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState) }),
             backgroundColor = Color.LightGray,
             border = cardBorderState.value
 
         ) {
-            Tile(tileDataState, selected, cardBorderState, gameText)
+            Tile(tileDataState, selected, cardBorderState, gameState)
         }
     } else {
         Card(

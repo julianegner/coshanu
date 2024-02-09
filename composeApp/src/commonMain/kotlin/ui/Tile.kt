@@ -23,11 +23,11 @@ import util.runOnMainAfter
 fun Tile(tileDataState: MutableState<TileData>,
          selected: MutableState<Pair<TileData?,TileData?>>,
          cardBorderState: MutableState<BorderStroke?>,
-         gameText: MutableState<String>
+         gameState: MutableState<String>
          ) {
 
     val modifier = Modifier
-         .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameText) })
+         .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState) })
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> {
@@ -60,21 +60,24 @@ fun tileSelected(
     tileDataState: MutableState<TileData>,
     selected: MutableState<Pair<TileData?,TileData?>>,
     cardBorderState: MutableState<BorderStroke?>,
-    gameText: MutableState<String>
+    gameState: MutableState<String>
 ) {
     // todo mark also if symbol is clicked
 
     if (selected.value.first == null) {
+        // select first Tile
         selected.value = Pair(tileDataState.value, null)
 
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
         cardBorderState.value = BorderStroke(5.dp, Color.Green)
 
     } else if (selected.value.first == tileDataState.value) {
+        // first Tile is deselected by clicking again
         selected.value = Pair(null, null)
         tileDataState.value.borderStroke = null
         cardBorderState.value = null
     } else if (selected.value.first != null && selected.value.first!!.match(tileDataState.value)) {
+        // second Tile does match first Tile, both are played
         selected.value = Pair(selected.value.first, tileDataState.value)
 
         // todo check which is needed
@@ -85,13 +88,14 @@ fun tileSelected(
         selected.value = Pair(first, second)
 
     } else if (selected.value.first != null && !selected.value.first!!.match(tileDataState.value)) {
+        // second Tile does not match first Tile
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
         cardBorderState.value = BorderStroke(5.dp, Color.Red)
 
         runOnMainAfter(2000L) {cardBorderState.value = null}
     }
 
-    checkGameFinished(gameText)
+    checkGameFinished(gameState)
 }
 
 @Composable
@@ -112,11 +116,11 @@ fun checkGameFinished(gameText: MutableState<String>) {
         .filter { it.chosenForPlay }
         .filter { !it.played }
             .isEmpty()) {
-        gameText.value = "You Won!"
+        gameText.value = "W"
     } else if (boardData.lostGame()) {
-        gameText.value = "you Lost!"
+        gameText.value = "L"
     } else {
-        gameText.value = "playing..." + tilesInGame.size
+        gameText.value = "R" + tilesInGame.size
     }
 }
 
