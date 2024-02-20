@@ -1,8 +1,8 @@
 package game
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
-import ui.boardData
 
 enum class ShapeEnum {
     CIRCLE, TRIANGLE, SQUARE, PENTAGON, HEXAGON, OKTAGON
@@ -26,14 +26,14 @@ fun TileData.same(secondTileData: TileData): Boolean {
 }
 
 // todo size, amount of the dimensions as optional params
-class BoardData() {
-    var tiles: List<TileData> = createBoard()
-    val size = 4
+class BoardData(size: Int = 4) {
+    val size = size
+    var tiles: List<TileData> = createBoard(size)
 
     var selected: Pair<TileData?, TileData?> = Pair(null, null)
 
     fun lostGame(): Boolean {
-        val tilesInGame = boardData.tiles
+        val tilesInGame = this.tiles
             .filter { it.chosenForPlay }
             .filter { !it.played }
 
@@ -49,7 +49,8 @@ class BoardData() {
         return false
     }
 
-    fun createBoard(): List<TileData> {
+    fun createBoard(size: Int): List<TileData> {
+        if (size == 0) { return listOf() }
         val colors: List<Color> = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)
         val shapes: List<ShapeEnum> = listOf(
             ShapeEnum.CIRCLE,
@@ -60,7 +61,7 @@ class BoardData() {
             ShapeEnum.OKTAGON
         )
         val numbers = (1..4).toList()
-        val boardSize = 4 // todo this.size does not work
+        val boardSize = size // todo this.size does not work
 
         val possibleTiles: ArrayList<TileData> = arrayListOf()
 
@@ -95,6 +96,23 @@ class BoardData() {
             findPair(possibleTiles)
         }
         return possibleTiles
+    }
+
+    fun checkGameFinished(gameText: MutableState<String>) {
+        val tilesInGame = this.tiles
+            .filter { it.chosenForPlay }
+            .filter { !it.played }
+
+        if (this.tiles
+                .filter { it.chosenForPlay }
+                .filter { !it.played }
+                .isEmpty()) {
+            gameText.value = "W"
+        } else if (this.lostGame()) {
+            gameText.value = "L"
+        } else {
+            gameText.value = "R" + tilesInGame.size
+        }
     }
 
     private fun findPair(possibleTiles: List<TileData>) {

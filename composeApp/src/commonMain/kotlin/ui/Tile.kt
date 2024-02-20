@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import game.BoardData
 import game.ShapeEnum
 import game.TileData
 import game.match
@@ -23,11 +24,12 @@ import util.runOnMainAfter
 fun Tile(tileDataState: MutableState<TileData>,
          selected: MutableState<Pair<TileData?,TileData?>>,
          cardBorderState: MutableState<BorderStroke?>,
-         gameState: MutableState<String>
+         gameState: MutableState<String>,
+         boardDataState: MutableState<BoardData>
          ) {
 
     val modifier = Modifier
-         .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState) })
+         .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState, boardDataState) })
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> {
@@ -47,12 +49,38 @@ fun Tile(tileDataState: MutableState<TileData>,
         ShapeEnum.OKTAGON ->    polygonBox(color = tileDataState.value.color, sides = 8, rotation = 22.5f, modifier = modifier)
     }
 
-    val xOffset = if (tileDataState.value.number < 10) {70.dp} else {30.dp}
-    val yOffset = if (tileDataState.value.shape == ShapeEnum.TRIANGLE) {60.dp} else {50.dp}
+    TileText(boardDataState.value.size, tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE)
+}
+
+@Composable
+fun TileText(boardSize: Int, tileNumber: Int, isTriangle: Boolean) {
+    var xOffset = 0.dp
+    var yOffset = 0.dp
+    var textSize = 4f
+
+
+    when (boardSize) {
+        2 -> {
+            xOffset = if (tileNumber < 10) {150.dp} else {80.dp}
+            yOffset = if (isTriangle) {140.dp} else {120.dp}
+            textSize = 6f
+        }
+        4 -> {
+            xOffset = if (tileNumber< 10) {70.dp} else {30.dp}
+            yOffset = if (isTriangle) {60.dp} else {50.dp}
+            textSize = 4f
+        }
+        8 -> {
+            xOffset = if (tileNumber < 10) {30.dp} else {0.dp}
+            yOffset = if (isTriangle) {40.dp} else {20.dp}
+            textSize = 2f
+        }
+    }
+
     Text(
         modifier = Modifier.offset(x = xOffset, y = yOffset),
-        text = tileDataState.value.number.toString(),
-        fontSize = TextUnit(4f, TextUnitType.Em)
+        text = tileNumber.toString(),
+        fontSize = TextUnit(textSize, TextUnitType.Em)
     )
 }
 
@@ -60,7 +88,8 @@ fun tileSelected(
     tileDataState: MutableState<TileData>,
     selected: MutableState<Pair<TileData?,TileData?>>,
     cardBorderState: MutableState<BorderStroke?>,
-    gameState: MutableState<String>
+    gameState: MutableState<String>,
+    boardDataState: MutableState<BoardData>
 ) {
     if (selected.value.first == null) {
         // select first Tile
@@ -93,7 +122,7 @@ fun tileSelected(
         runOnMainAfter(2000L) {cardBorderState.value = null}
     }
 
-    checkGameFinished(gameState)
+    boardDataState.value.checkGameFinished(gameState)
 }
 
 @Composable
@@ -104,20 +133,5 @@ fun polygonBox(color: Color, sides: Int, rotation: Float, modifier: Modifier = M
     ) {}
 }
 
-fun checkGameFinished(gameText: MutableState<String>) {
-    val tilesInGame = boardData.tiles
-        .filter { it.chosenForPlay }
-        .filter { !it.played }
 
-    if (boardData.tiles
-        .filter { it.chosenForPlay }
-        .filter { !it.played }
-            .isEmpty()) {
-        gameText.value = "W"
-    } else if (boardData.lostGame()) {
-        gameText.value = "L"
-    } else {
-        gameText.value = "R" + tilesInGame.size
-    }
-}
 
