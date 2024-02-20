@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -54,10 +55,9 @@ fun Tile(tileDataState: MutableState<TileData>,
 
 @Composable
 fun TileText(boardSize: Int, tileNumber: Int, isTriangle: Boolean) {
-    var xOffset = 0.dp
-    var yOffset = 0.dp
-    var textSize = 4f
-
+    var xOffset: Dp
+    var yOffset: Dp
+    var textSize: Float
 
     when (boardSize) {
         2 -> {
@@ -71,6 +71,16 @@ fun TileText(boardSize: Int, tileNumber: Int, isTriangle: Boolean) {
             textSize = 4f
         }
         8 -> {
+            xOffset = if (tileNumber < 10) {30.dp} else {0.dp}
+            yOffset = if (isTriangle) {40.dp} else {20.dp}
+            textSize = 2f
+        }
+        12 -> {
+            xOffset = if (tileNumber < 10) {10.dp} else {0.dp}
+            yOffset = if (isTriangle) {20.dp} else {0.dp}
+            textSize = 2f
+        }
+        else -> {
             xOffset = if (tileNumber < 10) {30.dp} else {0.dp}
             yOffset = if (isTriangle) {40.dp} else {20.dp}
             textSize = 2f

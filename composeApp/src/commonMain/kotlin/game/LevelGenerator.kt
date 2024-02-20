@@ -17,8 +17,8 @@ class LevelGenerator {
                             .filter { tileData -> tileData.chosenForPlay }
                             .shuffled()
             }
-            2 -> {
-                boardDataState.value = BoardData(size = 8)
+            else -> {
+                boardDataState.value = BoardData(size = levelNumber * 4, maxNumber = 2 * levelNumber)
                 listState.value =
                     boardDataState.value.tiles
                         .filter { tileData -> tileData.chosenForPlay }

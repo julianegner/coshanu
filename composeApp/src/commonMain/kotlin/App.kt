@@ -30,7 +30,7 @@ fun App() {
         mutableStateOf(boardDataState.value.tiles)
     }
 
-    LevelGenerator().generateLevel(2, boardDataState, listState)
+    LevelGenerator().generateLevel(3, boardDataState, listState)
 
     // todo create a service for all the game data to change while playing
 
