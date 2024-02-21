@@ -26,9 +26,12 @@ fun TileData.same(secondTileData: TileData): Boolean {
 }
 
 // todo size, amount of the dimensions as optional params
-class BoardData(size: Int = 4, maxNumber: Int = 4) {
-    val size = size
-    var tiles: List<TileData> = createBoard(size, maxNumber)
+class BoardData(
+        val size: Int = 4,
+        maxNumber: Int = 4,
+        val colors: List<Color> = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)
+    ) {
+    var tiles: List<TileData> = createBoard(size, maxNumber, colors)
 
     var selected: Pair<TileData?, TileData?> = Pair(null, null)
 
@@ -49,9 +52,9 @@ class BoardData(size: Int = 4, maxNumber: Int = 4) {
         return false
     }
 
-    fun createBoard(size: Int, maxNumber: Int): List<TileData> {
+    fun createBoard(size: Int, maxNumber: Int, colors: List<Color>): List<TileData> {
         if (size == 0) { return listOf() }
-        val colors: List<Color> = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)
+        val colors: List<Color> = colors
         val shapes: List<ShapeEnum> = listOf(
             ShapeEnum.CIRCLE,
             ShapeEnum.TRIANGLE,
@@ -61,7 +64,7 @@ class BoardData(size: Int = 4, maxNumber: Int = 4) {
             ShapeEnum.OKTAGON
         )
         val numbers = (1..maxNumber).toList()
-        val boardSize = size // todo this.size does not work
+        val boardSize = size
 
         val possibleTiles: ArrayList<TileData> = arrayListOf()
 

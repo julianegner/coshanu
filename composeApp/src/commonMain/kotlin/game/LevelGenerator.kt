@@ -17,6 +17,32 @@ class LevelGenerator {
                             .filter { tileData -> tileData.chosenForPlay }
                             .shuffled()
             }
+            2 -> {
+                boardDataState.value = BoardData(
+                    size = 4,
+                    maxNumber = 10,
+                    colors = listOf(
+                        Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan
+                    )
+                )
+                listState.value =
+                    boardDataState.value.tiles
+                        .filter { tileData -> tileData.chosenForPlay }
+                        .shuffled()
+            }
+            3 -> {
+                boardDataState.value = BoardData(
+                    size = 8,
+                    maxNumber = 10,
+                    colors = listOf(
+                    Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan
+                    )
+                )
+                listState.value =
+                    boardDataState.value.tiles
+                        .filter { tileData -> tileData.chosenForPlay }
+                        .shuffled()
+            }
             else -> {
                 boardDataState.value = BoardData(size = levelNumber * 4, maxNumber = 2 * levelNumber)
                 listState.value =

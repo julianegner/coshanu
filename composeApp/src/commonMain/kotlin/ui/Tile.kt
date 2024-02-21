@@ -38,7 +38,7 @@ fun Tile(tileDataState: MutableState<TileData>,
                 modifier = modifier
             ) {
                 drawCircle(
-                    radius = 150f,
+                    radius = getCircleRadius(),
                     color = tileDataState.value.color)
             }
         }
@@ -50,14 +50,26 @@ fun Tile(tileDataState: MutableState<TileData>,
         ShapeEnum.OKTAGON ->    polygonBox(color = tileDataState.value.color, sides = 8, rotation = 22.5f, modifier = modifier)
     }
 
-    TileText(boardDataState.value.size, tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE)
+    TileText(// boardDataState.value.size,
+        tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE)
+}
+
+fun getCircleRadius() = when (DataHolder.instance.boardDataState.value.size) {
+    2 -> 150f
+    4 -> 150f
+    8 -> 70f
+    12 -> 40f
+    else -> 40f
 }
 
 @Composable
-fun TileText(boardSize: Int, tileNumber: Int, isTriangle: Boolean) {
+fun TileText(// boardSize: Int,
+             tileNumber: Int, isTriangle: Boolean) {
     var xOffset: Dp
     var yOffset: Dp
     var textSize: Float
+
+    val boardSize = DataHolder.instance.boardDataState.value.size
 
     when (boardSize) {
         2 -> {
@@ -71,7 +83,7 @@ fun TileText(boardSize: Int, tileNumber: Int, isTriangle: Boolean) {
             textSize = 4f
         }
         8 -> {
-            xOffset = if (tileNumber < 10) {30.dp} else {0.dp}
+            xOffset = if (tileNumber < 10) {30.dp} else {20.dp}
             yOffset = if (isTriangle) {40.dp} else {20.dp}
             textSize = 2f
         }

@@ -1,6 +1,7 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -18,9 +19,24 @@ import game.BoardData
 import game.LevelGenerator
 import game.ShapeEnum
 import game.TileData
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.internal.synchronized
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import ui.Board
 import ui.Polygon
+import kotlin.concurrent.Volatile
+
+class DataHolder private constructor() {
+
+    companion object {
+        val instance:DataHolder by lazy {
+            DataHolder()
+        }
+    }
+
+    val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
+    val listState: MutableState<List<TileData>> = mutableStateOf(boardDataState.value.tiles)
+}
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -30,7 +46,10 @@ fun App() {
         mutableStateOf(boardDataState.value.tiles)
     }
 
-    LevelGenerator().generateLevel(3, boardDataState, listState)
+    LevelGenerator().generateLevel(2, boardDataState, listState)
+
+    DataHolder.instance.boardDataState.value = boardDataState.value
+    DataHolder.instance.listState.value = listState.value
 
     // todo create a service for all the game data to change while playing
 
@@ -57,6 +76,29 @@ fun App() {
      */
 
     MaterialTheme {
+
+        // todo change board on level change
+        // or put a menu page above...
+        /*
+        Row {
+            Button(
+                onClick = {
+                    LevelGenerator().generateLevel(0, boardDataState, listState)
+                }) { Text("0") }
+            Button(
+                onClick = {
+                    LevelGenerator().generateLevel(1, boardDataState, listState)
+                }) { Text("1") }
+            Button(
+                onClick = {
+                    LevelGenerator().generateLevel(2, boardDataState, listState)
+                }) { Text("2") }
+            Button(
+                onClick = {
+                    LevelGenerator().generateLevel(3, boardDataState, listState)
+                }) { Text("3") }
+        }
+         */
 
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
