@@ -41,19 +41,9 @@ class DataHolder private constructor() {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
-    val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
-    val listState = remember {
-        mutableStateOf(boardDataState.value.tiles)
-    }
 
-    LevelGenerator().generateLevel(2, boardDataState, listState)
+    val level: MutableState<Int?> = remember { mutableStateOf(null) }
 
-    DataHolder.instance.boardDataState.value = boardDataState.value
-    DataHolder.instance.listState.value = listState.value
-
-    // todo create a service for all the game data to change while playing
-
-    val tutorialTextState = mutableStateOf("")
 
     /*
     // todo show tutorial text step by step
@@ -76,6 +66,10 @@ fun App() {
      */
 
     MaterialTheme {
+
+
+
+
 
         // todo change board on level change
         // or put a menu page above...
@@ -106,8 +100,11 @@ fun App() {
                 text = "CoShaNu - Color, Shape, Number",
                 fontSize = TextUnit(2f, TextUnitType.Em)
             )
+            // todo display main menu OR game
 
-            Board(boardDataState, listState, tutorialTextState)
+            Menu(level)
+
+            T(level)
             Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
         }
         /*
@@ -125,5 +122,61 @@ fun App() {
             }
         }
          */
+    }
+}
+
+@Composable
+fun T(level: MutableState<Int?>) {
+    val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
+    val listState = remember {
+        mutableStateOf(boardDataState.value.tiles)
+    }
+
+    // val level = remember { mutableStateOf(levelA.value) }
+
+    if (level.value !== null) {
+        boardDataState.value.reset()
+        listState.value = listOf()
+        DataHolder.instance.boardDataState.value = boardDataState.value
+        DataHolder.instance.listState.value = listState.value
+
+        LevelGenerator().generateLevel(level.value!!, boardDataState, listState)
+
+        // LevelGenerator().generateLevel(2, boardDataState, listState)
+
+        DataHolder.instance.boardDataState.value = boardDataState.value
+        DataHolder.instance.listState.value = listState.value
+
+        // todo create a service for all the game data to change while playing
+
+        val tutorialTextState = mutableStateOf("")
+
+        Board(boardDataState, listState, tutorialTextState)
+    }
+}
+
+@Composable
+fun Menu(level: MutableState<Int?>) {
+    Row {
+        Button(
+            onClick = {
+                level.value = 0
+                //LevelGenerator().generateLevel(0, boardDataState, listState)
+            }) { Text("0") }
+        Button(
+            onClick = {
+                level.value = 1
+                //LevelGenerator().generateLevel(1, boardDataState, listState)
+            }) { Text("1") }
+        Button(
+            onClick = {
+                level.value = 2
+                //LevelGenerator().generateLevel(2, boardDataState, listState)
+            }) { Text("2") }
+        Button(
+            onClick = {
+                level.value = 3
+                //LevelGenerator().generateLevel(3, boardDataState, listState)
+            }) { Text("3") }
     }
 }

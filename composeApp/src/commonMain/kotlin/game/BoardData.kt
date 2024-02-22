@@ -35,6 +35,11 @@ class BoardData(
 
     var selected: Pair<TileData?, TileData?> = Pair(null, null)
 
+    fun reset() {
+        tiles = listOf()
+        selected = Pair(null, null)
+    }
+
     fun lostGame(): Boolean {
         val tilesInGame = this.tiles
             .filter { it.chosenForPlay }
