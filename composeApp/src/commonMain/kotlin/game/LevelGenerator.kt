@@ -4,61 +4,75 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 
 class LevelGenerator {
-    fun generateLevel(levelNumber: Int,
-                      boardDataState: MutableState<BoardData>,
-                      listState: MutableState<List<TileData>>) {
+    fun generateLevel(levelNumber: Int) {
+                      // boardDataState: MutableState<BoardData>,
+                      // listState: MutableState<List<TileData>>) {
 
+        // GameStateHolder.boardDataState, GameStateHolder.listState
+
+        GameStateHolder.resetBoard()
         when(levelNumber) {
-            0 -> generateTutorial(boardDataState, listState)
+            0 -> generateTutorial()
             1 -> {
-                    boardDataState.value = BoardData(size = 4)
-                    listState.value =
-                        boardDataState.value.tiles
-                            .filter { tileData -> tileData.chosenForPlay }
-                            .shuffled()
+                    val board = BoardData(4)
+                    board.tiles = board.tiles
+                        .filter { tileData -> tileData.chosenForPlay }
+                        .shuffled()
+                    GameStateHolder.updateBoard(board)
+
+                    // boardDataState.value = BoardData(size = 4)
+                    // listState.value =
+                    //     boardDataState.value.tiles
+                    //         .filter { tileData -> tileData.chosenForPlay }
+                    //         .shuffled()
             }
             2 -> {
-                boardDataState.value = BoardData(
+                val board = BoardData(
                     size = 4,
                     maxNumber = 10,
                     colors = listOf(
                         Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan
                     )
                 )
-                listState.value =
-                    boardDataState.value.tiles
-                        .filter { tileData -> tileData.chosenForPlay }
-                        .shuffled()
+                board.tiles = board.tiles
+                    .filter { tileData -> tileData.chosenForPlay }
+                    .shuffled()
+
+                GameStateHolder.updateBoard(board)
             }
             3 -> {
-                boardDataState.value = BoardData(
+                val board = BoardData(
                     size = 8,
                     maxNumber = 10,
                     colors = listOf(
                     Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan
                     )
                 )
-                listState.value =
-                    boardDataState.value.tiles
-                        .filter { tileData -> tileData.chosenForPlay }
-                        .shuffled()
+                board.tiles = board.tiles
+                    .filter { tileData -> tileData.chosenForPlay }
+                    .shuffled()
+                GameStateHolder.updateBoard(board)
             }
             else -> {
-                boardDataState.value = BoardData(size = levelNumber * 4, maxNumber = 2 * levelNumber)
-                listState.value =
-                    boardDataState.value.tiles
-                        .filter { tileData -> tileData.chosenForPlay }
-                        .shuffled()
+                val board = BoardData(size = levelNumber * 4, maxNumber = 2 * levelNumber)
+                board.tiles = board.tiles
+                    .filter { tileData -> tileData.chosenForPlay }
+                    .shuffled()
+                GameStateHolder.updateBoard(board)
             }
         }
     }
 
-    fun generateTutorial(
-            boardDataState: MutableState<BoardData>,
-            listState: MutableState<List<TileData>>) {
-        boardDataState.value = BoardData(2)
+    fun generateTutorial() {
+            // boardDataState: MutableState<BoardData>,
+            // listState: MutableState<List<TileData>>) {
 
-        boardDataState.value.tiles = listOf(
+        // GameStateHolder.boardDataState, GameStateHolder.listState
+
+        val board = BoardData(2)
+
+        // boardDataState.value = BoardData(2)
+        board.tiles = listOf(
             TileData(
                 color = Color.Green,
                 shape = ShapeEnum.TRIANGLE,
@@ -88,7 +102,6 @@ class LevelGenerator {
                 played = false
             )
         )
-
-        listState.value = boardDataState.value.tiles
+        GameStateHolder.updateBoard(board)
     }
 }

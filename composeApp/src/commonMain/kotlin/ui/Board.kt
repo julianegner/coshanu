@@ -12,19 +12,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import game.BoardData
-import game.TileData
-import game.same
+import game.*
 import util.runOnMainAfter
 
 @Composable
-fun Board(boardDataState: MutableState<BoardData>,
-          listState: MutableState<List<TileData>>,
-          tutorialTextState: MutableState<String>
-          ) {
+fun Board() {
+         //    boardDataState: MutableState<BoardData>,
+         //  listState: MutableState<List<TileData>>,
+         //  tutorialTextState: MutableState<String>
+         //  ) {
+    // val boardDataState = GameStateHolder.boardDataState
+    // val listState = GameStateHolder.listState
+    // val tutorialTextState = GameStateHolder.tutorialTextState
+    // val gameState = GameStateHolder.gameState
 
-    val selected = remember { mutableStateOf(boardDataState.value.selected) }
-    val gameState = remember { mutableStateOf("S") }
+
+    // val selected = remember { mutableStateOf(boardDataState.value.selected) }
+    // val gameState = remember { mutableStateOf("S") }
 
     Row() {
         LazyVerticalGrid(
@@ -32,30 +36,35 @@ fun Board(boardDataState: MutableState<BoardData>,
             contentPadding = PaddingValues(12.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalArrangement = Arrangement.SpaceBetween,
-            columns = GridCells.Fixed(boardDataState.value.size)
+            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
         ) {
-            items(listState.value.size) { index ->
-                val tileDataState: MutableState<TileData> = remember { mutableStateOf(listState.value.get(index)) }
-                val played = remember { mutableStateOf(tileDataState.value.played) }
-                card(tileDataState, selected, played, gameState, boardDataState)
+            items(GameStateHolder.listState.value.size) { index ->
+
+                val tileData =  GameStateHolder.listState.value.get(index)
+                // val tileDataState: MutableState<TileData> = remember { mutableStateOf(GameStateHolder.listState.value.get(index)) }
+                card(tileData)
+                // card(tileDataState, selected, played, gameState, boardDataState)
             }
         }
         Text(
             modifier = Modifier.padding(horizontal = 20.dp),
-            text = tutorialTextState.value
+            text = GameStateHolder.tutorialTextState.value
         )
     }
-    GameText(gameState)
+    if (GameStateHolder.gameState.value == GameState.RUNNING) {
+        Text(GameStateHolder.gameState.value.message + " " + GameStateHolder.getRemainingTileAmount())
+    } else {
+        Text(GameStateHolder.gameState.value.message)
+    }
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        if (gameState.value == "L") {
-            Button(onClick = { restartGame(gameState, listState, boardDataState.value.tiles) }) {
+        if (GameStateHolder.isGameState(GameState.LOST)) {
+            Button(onClick = { restartGame() }) {
                 Text("restart Game")
             }
         }
-        if (gameState.value == "L" || gameState.value == "W") {
-
-            Button(onClick = { newGame(boardDataState, listState) }) {
+        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+            Button(onClick = { newGame() }) {
                 Text("New Game")
             }
         }
@@ -63,12 +72,14 @@ fun Board(boardDataState: MutableState<BoardData>,
 }
 
 fun restartGame(
-    gameState: MutableState<String>,
-    list: MutableState<List<TileData>>,
-    tiles: List<TileData>
+    // gameState: MutableState<String>,
+    // list: MutableState<List<TileData>>,
+    // tiles: List<TileData>
 ) {
+    //GameStateHolder.resetBoard()
+    GameStateHolder.updateGameState(GameState.RESTART)
 
-    val tilesForGame = tiles
+    val tilesForGame = GameStateHolder.listState.value
         .filter { tileData -> tileData.chosenForPlay }
 
     tilesForGame.forEach {
@@ -76,11 +87,22 @@ fun restartGame(
         it.borderStroke = null
     }
 
-    list.value = tilesForGame
-    gameState.value = "RESTART"
+    val board = GameStateHolder.boardDataState.value
+
+    board.tiles = tilesForGame
+
+    GameStateHolder.updateBoard(board)
+
+    // list.value = tilesForGame
+    // gameState.value = "RESTART"
 }
 
-fun newGame(boardDataState: MutableState<BoardData>, list: MutableState<List<TileData>> ) { //gameState: MutableState<String>
+fun newGame(
+    // boardDataState: MutableState<BoardData>, list: MutableState<List<TileData>>
+) { //gameState: MutableState<String>
+
+
+
     // todo this does not work
 /*
     boardData.tiles.forEach {
@@ -91,61 +113,60 @@ fun newGame(boardDataState: MutableState<BoardData>, list: MutableState<List<Til
 
     boardData.tiles = boardData.selectTilesForGame(boardData.size, boardData.tiles)
     */
-    boardDataState.value = BoardData()
-    list.value = boardDataState.value.tiles
+    val board = BoardData()
+    board.tiles = board.tiles
         .filter { tileData -> tileData.chosenForPlay }
         .shuffled()
-}
 
-@Composable
-private fun GameText(gameState: MutableState<String>) {
-    val game =  gameState.value
-    var gameText = when (game) {
-        "RESTART" -> "starting again"
-        "S" -> "starting"
-        "W" -> "You Won!!"
-        "L" -> "Sorry, you lost!"
-        else -> "running... remaining Tiles: ${game.removePrefix("R")}"
-    }
-    Text(gameText)
+    GameStateHolder.updateBoard(board)
+    GameStateHolder.updateGameState(GameState.STARTING)
 }
 
 @Composable
 private fun card(
-    tileDataState: MutableState<TileData>,
-    selected: MutableState<Pair<TileData?,TileData?>>,
-    played: MutableState<Boolean>,
-    gameState: MutableState<String>,
-    boardDataState: MutableState<BoardData>
+    tileData: TileData,
+    // tileDataState: MutableState<TileData>,
+    // selected: MutableState<Pair<TileData?,TileData?>>,
+    // played: MutableState<Boolean>,
+    // gameState: MutableState<String>,
+    // boardDataState: MutableState<BoardData>
 ) {
+    val tileDataState: MutableState<TileData> = remember { mutableStateOf(tileData) }
+
+    val played = remember { mutableStateOf(tileDataState.value.played) }
+    // val selected = remember { mutableStateOf(GameStateHolder.boardDataState.value.selected) }
+
     val cardModifier = Modifier
         .aspectRatio(1f)
         .padding(10.dp)
 
-    if (selected.value.first != null && selected.value.second != null) {
-        if (selected.value.first!!.same(tileDataState.value) || selected.value.second!!.same(tileDataState.value)) {
+    if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
+        if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
             played.value = true
             runOnMainAfter(200L) {
-                selected.value = Pair(null, null)
+                GameStateHolder.selected.value = Pair(null, null)
             }
         }
     }
 
-    if (gameState.value == "RESTART") {
+    if (GameStateHolder.gameState.value == GameState.RESTART) {
         played.value = false
     }
+    // if (gameState.value == "RESTART") {
+    //     played.value = false
+    // }
 
     if (!played.value) {
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
 
         Card(
             modifier = cardModifier
-                .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState, boardDataState) }),
+                .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
             backgroundColor = Color.LightGray,
             border = cardBorderState.value
 
         ) {
-            Tile(tileDataState, selected, cardBorderState, gameState, boardDataState)
+            Tile(tileDataState, cardBorderState)
         }
     } else {
         Card(

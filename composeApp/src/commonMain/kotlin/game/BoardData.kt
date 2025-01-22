@@ -98,7 +98,7 @@ class BoardData(
         val neededPairs = (boardSize * boardSize) / 2
         val p = (1..neededPairs).toList()
 
-        println("possibleTiles: ${possibleTiles.size}, neededPairs: $neededPairs")
+        // println("possibleTiles: ${possibleTiles.size}, neededPairs: $neededPairs")
 
         for (i in p) {
             findPair(possibleTiles)
@@ -106,20 +106,25 @@ class BoardData(
         return possibleTiles
     }
 
-    fun checkGameFinished(gameText: MutableState<String>) {
-        val tilesInGame = this.tiles
-            .filter { it.chosenForPlay }
-            .filter { !it.played }
+    fun checkGameFinished(
+        //gameText: MutableState<String>
+        ) {
+        // val tilesInGame = this.tiles
+        //     .filter { it.chosenForPlay }
+        //     .filter { !it.played }
 
         if (this.tiles
                 .filter { it.chosenForPlay }
                 .filter { !it.played }
                 .isEmpty()) {
-            gameText.value = "W"
+            GameStateHolder.updateGameState(GameState.WON)
+            //gameText.value = "W"
         } else if (this.lostGame()) {
-            gameText.value = "L"
+            GameStateHolder.updateGameState(GameState.LOST)
+            // gameText.value = "L"
         } else {
-            gameText.value = "R" + tilesInGame.size
+            GameStateHolder.updateGameState(GameState.RUNNING)
+            // gameText.value = "R" + tilesInGame.size
         }
     }
 

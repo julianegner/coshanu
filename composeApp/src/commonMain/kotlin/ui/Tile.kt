@@ -14,23 +14,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import game.BoardData
-import game.ShapeEnum
-import game.TileData
-import game.match
+import game.*
 import util.runOnMainAfter
 
 
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
-         selected: MutableState<Pair<TileData?,TileData?>>,
+         // selected: MutableState<Pair<TileData?,TileData?>>,
          cardBorderState: MutableState<BorderStroke?>,
-         gameState: MutableState<String>,
-         boardDataState: MutableState<BoardData>
          ) {
 
     val modifier = Modifier
-         .clickable(onClick = { tileSelected(tileDataState, selected, cardBorderState, gameState, boardDataState) })
+         .clickable(onClick = { tileSelected(tileDataState, cardBorderState) })
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> {
@@ -54,7 +49,7 @@ fun Tile(tileDataState: MutableState<TileData>,
         tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE)
 }
 
-fun getCircleRadius() = when (DataHolder.instance.boardDataState.value.size) {
+fun getCircleRadius() = when (GameStateHolder.boardDataState.value.size) {
     2 -> 150f
     4 -> 150f
     8 -> 70f
@@ -69,9 +64,7 @@ fun TileText(// boardSize: Int,
     var yOffset: Dp
     var textSize: Float
 
-    val boardSize = DataHolder.instance.boardDataState.value.size
-
-    when (boardSize) {
+    when (GameStateHolder.boardDataState.value.size) {
         2 -> {
             xOffset = if (tileNumber < 10) {150.dp} else {80.dp}
             yOffset = if (isTriangle) {140.dp} else {120.dp}
@@ -108,35 +101,49 @@ fun TileText(// boardSize: Int,
 
 fun tileSelected(
     tileDataState: MutableState<TileData>,
-    selected: MutableState<Pair<TileData?,TileData?>>,
+    // selected: MutableState<Pair<TileData?,TileData?>>,
     cardBorderState: MutableState<BorderStroke?>,
-    gameState: MutableState<String>,
-    boardDataState: MutableState<BoardData>
+    // gameState: MutableState<String>,
+    // boardDataState: MutableState<BoardData>
 ) {
-    if (selected.value.first == null) {
+
+    // add logging of state changes
+    println("tileSelected: ${tileDataState.value} selected: ${GameStateHolder.selected.value} cardBorderState: ${cardBorderState.value}")
+
+    if (GameStateHolder.selected.value.first == null) {
+        println("select first tile.")
         // select first Tile
-        selected.value = Pair(tileDataState.value, null)
+        GameStateHolder.updateSelected(Pair(tileDataState.value, null))
+        // selected.value = Pair(tileDataState.value, null)
 
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
         cardBorderState.value = BorderStroke(5.dp, Color.Green)
 
-    } else if (selected.value.first == tileDataState.value) {
+    } else if (GameStateHolder.selected.value.first == tileDataState.value) {
+        println("deselect first tile.")
         // first Tile is deselected by clicking again
-        selected.value = Pair(null, null)
+        GameStateHolder.updateSelected(Pair(null, null))
+        // selected.value = Pair(null, null)
         tileDataState.value.borderStroke = null
         cardBorderState.value = null
-    } else if (selected.value.first != null && selected.value.first!!.match(tileDataState.value)) {
+    } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
+        println("2nd tile does match.")
         // second Tile does match first Tile, both are played
-        selected.value = Pair(selected.value.first, tileDataState.value)
+        GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
+        // selected.value = Pair(selected.value.first, tileDataState.value)
 
         // todo check which is needed
-        val first = selected.value.first!!
-        val second = selected.value.second!!
+        val first = GameStateHolder.selected.value.first!!
+        val second = GameStateHolder.selected.value.second!!
         first.played = true
         second.played = true
-        selected.value = Pair(first, second)
+        GameStateHolder.updateSelected(Pair(first, second))
+        // selected.value = Pair(first, second)
 
-    } else if (selected.value.first != null && !selected.value.first!!.match(tileDataState.value)) {
+        println("2nd tile does not match. selected: ${GameStateHolder.selected.value} ")
+
+    } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
+        println("2nd tile does not match.")
         // second Tile does not match first Tile
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
         cardBorderState.value = BorderStroke(5.dp, Color.Red)
@@ -144,7 +151,8 @@ fun tileSelected(
         runOnMainAfter(2000L) {cardBorderState.value = null}
     }
 
-    boardDataState.value.checkGameFinished(gameState)
+    GameStateHolder.boardDataState.value.checkGameFinished()
+    // boardDataState.value.checkGameFinished(gameState)
 }
 
 @Composable
