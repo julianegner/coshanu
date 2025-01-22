@@ -40,23 +40,6 @@ class BoardData(
         selected = Pair(null, null)
     }
 
-    fun lostGame(): Boolean {
-        val tilesInGame = this.tiles
-            .filter { it.chosenForPlay }
-            .filter { !it.played }
-
-        tilesInGame.forEach { tile ->
-            if (tilesInGame
-                .filter { !it.same(tile) }
-                .filter { it.match(tile) }
-                .isEmpty()
-                ) {
-                return true
-            }
-        }
-        return false
-    }
-
     fun createBoard(size: Int, maxNumber: Int, colors: List<Color>): List<TileData> {
         if (size == 0) { return listOf() }
         val colors: List<Color> = colors
@@ -104,28 +87,6 @@ class BoardData(
             findPair(possibleTiles)
         }
         return possibleTiles
-    }
-
-    fun checkGameFinished(
-        //gameText: MutableState<String>
-        ) {
-        // val tilesInGame = this.tiles
-        //     .filter { it.chosenForPlay }
-        //     .filter { !it.played }
-
-        if (this.tiles
-                .filter { it.chosenForPlay }
-                .filter { !it.played }
-                .isEmpty()) {
-            GameStateHolder.updateGameState(GameState.WON)
-            //gameText.value = "W"
-        } else if (this.lostGame()) {
-            GameStateHolder.updateGameState(GameState.LOST)
-            // gameText.value = "L"
-        } else {
-            GameStateHolder.updateGameState(GameState.RUNNING)
-            // gameText.value = "R" + tilesInGame.size
-        }
     }
 
     private fun findPair(possibleTiles: List<TileData>) {

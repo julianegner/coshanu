@@ -13,49 +13,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.*
+import tutorialPart3
+import tutorialPart3b
+import tutorialPart4
 import util.runOnMainAfter
 
 @Composable
 fun Board() {
-         //    boardDataState: MutableState<BoardData>,
-         //  listState: MutableState<List<TileData>>,
-         //  tutorialTextState: MutableState<String>
-         //  ) {
-    // val boardDataState = GameStateHolder.boardDataState
-    // val listState = GameStateHolder.listState
-    // val tutorialTextState = GameStateHolder.tutorialTextState
-    // val gameState = GameStateHolder.gameState
 
-
-    // val selected = remember { mutableStateOf(boardDataState.value.selected) }
-    // val gameState = remember { mutableStateOf("S") }
-
-    Row() {
-        LazyVerticalGrid(
-            modifier = Modifier.size(800.dp).border(width = 1.dp, color = Color.Black),
-            contentPadding = PaddingValues(12.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
-        ) {
-            items(GameStateHolder.listState.value.size) { index ->
-
-                val tileData =  GameStateHolder.listState.value.get(index)
-                // val tileDataState: MutableState<TileData> = remember { mutableStateOf(GameStateHolder.listState.value.get(index)) }
-                card(tileData)
-                // card(tileDataState, selected, played, gameState, boardDataState)
-            }
-        }
-        Text(
-            modifier = Modifier.padding(horizontal = 20.dp),
-            text = GameStateHolder.tutorialTextState.value
-        )
+    /*
+    todo fix this:
+     getRemainingTileAmount() gives 4 (incorrect), but remainingTileAmount.value gives 2 (correct)
+     so something changes GameStateHolder.listState
+     */
+    Button(onClick = {
+        println("liststate ${GameStateHolder.listState.value}")
+        println("TEST: ${GameStateHolder.getRemainingTileAmount()} ${GameStateHolder.remainingTileAmount.value} ${GameStateHolder.listState.value} ") }) {
+        Text("TEST")
     }
-    if (GameStateHolder.gameState.value == GameState.RUNNING) {
-        Text(GameStateHolder.gameState.value.message + " " + GameStateHolder.getRemainingTileAmount())
-    } else {
-        Text(GameStateHolder.gameState.value.message)
-    }
+
+    Text(GameStateHolder.getGameStateText().value)
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -69,14 +46,28 @@ fun Board() {
             }
         }
     }
+
+    Row() {
+        LazyVerticalGrid(
+            modifier = Modifier.size(800.dp).border(width = 1.dp, color = Color.Black),
+            contentPadding = PaddingValues(12.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
+        ) {
+            items(GameStateHolder.listState.value.size) { index ->
+                card(GameStateHolder.listState.value.get(index))
+            }
+        }
+        Text(
+            modifier = Modifier.padding(horizontal = 20.dp),
+            text = GameStateHolder.tutorialTextState.value
+        )
+    }
 }
 
 fun restartGame(
-    // gameState: MutableState<String>,
-    // list: MutableState<List<TileData>>,
-    // tiles: List<TileData>
 ) {
-    //GameStateHolder.resetBoard()
     GameStateHolder.updateGameState(GameState.RESTART)
 
     val tilesForGame = GameStateHolder.listState.value
@@ -91,50 +82,31 @@ fun restartGame(
 
     board.tiles = tilesForGame
 
-    GameStateHolder.updateBoard(board)
+    GameStateHolder.updateBoard(board, GameState.RESTART)
 
-    // list.value = tilesForGame
-    // gameState.value = "RESTART"
+    if (GameStateHolder.level.value == 0) {
+        if (GameStateHolder.tutorialTextState.value == tutorialPart3b) {
+            GameStateHolder.updateTutorialText(tutorialPart4)
+        }
+    }
 }
 
 fun newGame(
-    // boardDataState: MutableState<BoardData>, list: MutableState<List<TileData>>
-) { //gameState: MutableState<String>
-
-
-
-    // todo this does not work
-/*
-    boardData.tiles.forEach {
-        it.chosenForPlay = false
-        it.played = false
-        it.borderStroke = null
-    }
-
-    boardData.tiles = boardData.selectTilesForGame(boardData.size, boardData.tiles)
-    */
+) {
     val board = BoardData()
     board.tiles = board.tiles
         .filter { tileData -> tileData.chosenForPlay }
         .shuffled()
 
-    GameStateHolder.updateBoard(board)
-    GameStateHolder.updateGameState(GameState.STARTING)
+    GameStateHolder.updateBoard(board, GameState.STARTING)
 }
 
 @Composable
 private fun card(
-    tileData: TileData,
-    // tileDataState: MutableState<TileData>,
-    // selected: MutableState<Pair<TileData?,TileData?>>,
-    // played: MutableState<Boolean>,
-    // gameState: MutableState<String>,
-    // boardDataState: MutableState<BoardData>
-) {
+    tileData: TileData) {
     val tileDataState: MutableState<TileData> = remember { mutableStateOf(tileData) }
 
     val played = remember { mutableStateOf(tileDataState.value.played) }
-    // val selected = remember { mutableStateOf(GameStateHolder.boardDataState.value.selected) }
 
     val cardModifier = Modifier
         .aspectRatio(1f)
@@ -143,7 +115,15 @@ private fun card(
     if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
         if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
             played.value = true
+            // set played to true for current tile
+
+
+            // GameStateHolder.listState.value
+            //     .filter { it.same(tileDataState.value) }
+            //     .first()
+            //     .played = true
             runOnMainAfter(200L) {
+                // GameStateHolder.playCard(tileDataState.value)
                 GameStateHolder.selected.value = Pair(null, null)
             }
         }
@@ -152,9 +132,6 @@ private fun card(
     if (GameStateHolder.gameState.value == GameState.RESTART) {
         played.value = false
     }
-    // if (gameState.value == "RESTART") {
-    //     played.value = false
-    // }
 
     if (!played.value) {
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
