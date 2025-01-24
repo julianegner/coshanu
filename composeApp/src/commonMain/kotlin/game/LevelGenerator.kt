@@ -18,13 +18,7 @@ class LevelGenerator {
                     board.tiles = board.tiles
                         .filter { tileData -> tileData.chosenForPlay }
                         .shuffled()
-                    GameStateHolder.updateBoard(board)
-
-                    // boardDataState.value = BoardData(size = 4)
-                    // listState.value =
-                    //     boardDataState.value.tiles
-                    //         .filter { tileData -> tileData.chosenForPlay }
-                    //         .shuffled()
+                    GameStateHolder.saveNewBoard(board)
             }
             2 -> {
                 val board = BoardData(
@@ -37,8 +31,7 @@ class LevelGenerator {
                 board.tiles = board.tiles
                     .filter { tileData -> tileData.chosenForPlay }
                     .shuffled()
-
-                GameStateHolder.updateBoard(board)
+                GameStateHolder.saveNewBoard(board)
             }
             3 -> {
                 val board = BoardData(
@@ -51,14 +44,14 @@ class LevelGenerator {
                 board.tiles = board.tiles
                     .filter { tileData -> tileData.chosenForPlay }
                     .shuffled()
-                GameStateHolder.updateBoard(board)
+                GameStateHolder.saveNewBoard(board)
             }
             else -> {
                 val board = BoardData(size = levelNumber * 4, maxNumber = 2 * levelNumber)
                 board.tiles = board.tiles
                     .filter { tileData -> tileData.chosenForPlay }
                     .shuffled()
-                GameStateHolder.updateBoard(board)
+                GameStateHolder.saveNewBoard(board)
             }
         }
     }
@@ -102,6 +95,6 @@ class LevelGenerator {
                 played = false
             )
         )
-        GameStateHolder.updateBoard(board)
+        GameStateHolder.saveNewBoard(board)
     }
 }

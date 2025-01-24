@@ -55,21 +55,12 @@ fun App() {
 
             Menu()
 
-            T()
             Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+
+            if (GameStateHolder.level.value != null) {
+                Board()
+            }
         }
-    }
-}
-
-@Composable
-fun T() {
-
-    GameStateHolder.updateBoard(BoardData(1))
-
-    if (GameStateHolder.level.value !== null) {
-        GameStateHolder.resetBoard()
-        LevelGenerator().generateLevel(GameStateHolder.level.value!!)
-        Board()
     }
 }
 
@@ -80,13 +71,13 @@ fun Menu() {
     Row {
         Button(
             onClick = {
-                GameStateHolder.updateLevel(0)
+                GameStateHolder.changeLevel(0)
                 GameStateHolder.updateTutorialText(tutorialPart1)
             }) { Text("Tutorial") }
         (1..3).forEach { i ->
             Button(
                 onClick = {
-                    GameStateHolder.updateLevel(i)
+                    GameStateHolder.changeLevel(i)
                 }) { Text(i.toString()) }
         }
     }

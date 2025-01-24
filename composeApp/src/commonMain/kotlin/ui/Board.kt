@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.*
-import tutorialPart3
+import game.GameStateHolder.changeLevel
+import game.GameStateHolder.getRemainingTileAmount
+import game.GameStateHolder.remainingTileAmount
 import tutorialPart3b
 import tutorialPart4
 import util.runOnMainAfter
@@ -32,7 +34,7 @@ fun Board() {
         Text("TEST")
     }
 
-    Text(GameStateHolder.getGameStateText().value)
+    Text(GameStateHolder.gameStateText.value)
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -81,24 +83,43 @@ fun restartGame(
     val board = GameStateHolder.boardDataState.value
 
     board.tiles = tilesForGame
+    GameStateHolder.listState.value = tilesForGame
+    GameStateHolder.remainingTileAmount.value = tilesForGame.size
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
+
+    println("restartGame:level: ${GameStateHolder.level.value}")
 
     if (GameStateHolder.level.value == 0) {
         if (GameStateHolder.tutorialTextState.value == tutorialPart3b) {
             GameStateHolder.updateTutorialText(tutorialPart4)
         }
+    } else {
+        GameStateHolder.updateTutorialText("")
     }
 }
 
 fun newGame(
 ) {
-    val board = BoardData()
-    board.tiles = board.tiles
+    GameStateHolder.level.value = 1 // todo make it selectable
+
+    changeLevel(GameStateHolder.level.value!!)
+/*
+    val board = BoardData(GameStateHolder.level.value!!)
+    val tilesForGame = board.tiles
         .filter { tileData -> tileData.chosenForPlay }
         .shuffled()
 
-    GameStateHolder.updateBoard(board, GameState.STARTING)
+    board.tiles = tilesForGame
+    GameStateHolder.listState.value = tilesForGame
+    GameStateHolder.remainingTileAmount.value = tilesForGame.size
+ */
+    // GameStateHolder.updateBoard(GameStateHolder.boardDataState.value, GameState.STARTING)
+
+    if (GameStateHolder.level.value != 0) {
+        GameStateHolder.updateTutorialText("")
+    }
+
 }
 
 @Composable

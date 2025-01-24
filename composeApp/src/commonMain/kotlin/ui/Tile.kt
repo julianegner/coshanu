@@ -28,7 +28,6 @@ import util.runOnMainAfter
 
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
-         // selected: MutableState<Pair<TileData?,TileData?>>,
          cardBorderState: MutableState<BorderStroke?>,
          ) {
 
@@ -112,6 +111,7 @@ fun tileSelected(
     cardBorderState: MutableState<BorderStroke?>,
 ) {
     println("OOOO: ${GameStateHolder.listState.value} ")
+    println("OOOO C: ${GameStateHolder.boardDataState.value.tiles} ")
 
     // add logging of state changes
     println("tileSelected: ${tileDataState.value} selected: ${GameStateHolder.selected.value} cardBorderState: ${cardBorderState.value}")
