@@ -50,10 +50,23 @@ fun App() {
             )
             // todo display main menu OR game
 
-            Menu()
+            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                Text(
+                    modifier = Modifier.padding(vertical = 20.dp),
+                    text = GameStateHolder.gameStateText.value,
+                    fontSize = TextUnit(2f, TextUnitType.Em))
+            } else {
+                Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
+            }
+
+            if (!GameStateHolder.isGameState(GameState.RUNNING)) {
+                Menu()
+            }
 
             // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
 
+
+            // if level is chosen, display the board
             if (GameStateHolder.level.value != null) {
                 Board()
             }

@@ -2,7 +2,6 @@ package game
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import ui.Board
 
 object GameStateHolder {
     val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
@@ -23,7 +22,6 @@ object GameStateHolder {
 
     fun saveNewBoard(board: BoardData) {
         updateBoard(board)
-        println("------ saveNewBoard: ${remainingTileAmount.value}")
         remainingTileAmount.value = getRemainingTileAmount()
     }
 
@@ -32,8 +30,6 @@ object GameStateHolder {
             boardDataState.value = newBoardData
             listState.value = newBoardData.tiles
         }
-        println("------ updateBoard: ${remainingTileAmount.value}")
-        // remainingTileAmount.value = getRemainingTileAmount()
     }
 
     fun updateBoard(newBoardData: BoardData, newState: GameState) {
@@ -47,26 +43,16 @@ object GameStateHolder {
     }
 
     fun updateGameState(newState: GameState) {
-        println("GameStateHolder.updateGameState: $newState")
-
-        println("GameStateHolder.updateGameState tiles: ${listState.value}")
-
         gameState.value = newState
         updateGameStateTextRemainingTileAmount()
-
-        println("GameStateHolder.updateGameState: " +
-                "remainingTileAmount ${remainingTileAmount.value} " +
-                "gameStateText ${gameStateText.value} " +
-                "getRemainingTileAmount ${getRemainingTileAmount()}"
-        )
+        if (newState == GameState.LOST || newState == GameState.WON) {
+            level.value = null
+        }
     }
 
     fun changeLevel(newLevel: Int) {
         level.value = newLevel
-
         updateGameState(GameState.LEVEL_CHANGE)
-
-        println("GameStateHolder.changeLevel: $newLevel")
         resetBoard()
     }
 
@@ -93,9 +79,9 @@ object GameStateHolder {
     }
 
     fun getGameStateText(): MutableState<String> {
-        println("GameStateHolder.getGameStateText: ${gameState.value} ${remainingTileAmount.value}")
         val text = when (gameState.value) {
-            GameState.RUNNING -> gameState.value.message + " " + remainingTileAmount.value
+            GameState.RUNNING ->
+                "${gameState.value.message} Remaining tiles: ${remainingTileAmount.value}"
             else -> gameState.value.message
         }
         gameStateText.value = text
@@ -104,20 +90,12 @@ object GameStateHolder {
 
     fun checkGameFinished(
     ) {
-        println("GameStateHolder.checkGameFinished: ${listState.value}")
-
-        val r = remainingTileAmount.value // getRemainingTileAmount()
-        println("GameStateHolder.checkGameFinished getRemainingTileAmount: $r")
-        if ( r == 0) {
+        if ( remainingTileAmount.value == 0) {
             updateGameState(GameState.WON)
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
         } else {
-            println("GameStateHolder.checkGameFinished A: ${listState.value}")
             updateGameState(GameState.RUNNING)
-            // remainingTileAmount.value -= 2 // getRemainingTileAmount()
-            println("GameStateHolder.checkGameFinished: remainingTileAmount ${remainingTileAmount.value}")
-            println("GameStateHolder.checkGameFinished B: ${listState.value} --- ${boardDataState.value.tiles}")
         }
     }
 
@@ -159,22 +137,9 @@ object GameStateHolder {
 
         println("GameStateHolder.playCard B: ${remainingTileAmount.value}")
         println("playCard tiles: ${listState.value} ${boardDataState.value.tiles}")
-
-        // val board = boardDataState.value
-        // listState.value.get(listState.value.indexOf(tileData)).played = true
-        // board.tiles = listState.value
-
-        // updateBoard(board)
     }
 
     private fun updateGameStateTextRemainingTileAmount() {
-        // remainingTileAmount.value = getRemainingTileAmount()
         gameStateText.value = getGameStateText().value
-
-        println("GameStateHolder.updateGameStateTextRemainingTileAmount: " +
-                "remainingTileAmount ${remainingTileAmount.value} " +
-                "gameStateText ${gameStateText.value} " +
-                "getRemainingTileAmount ${remainingTileAmount.value}"
-        )
     }
 }

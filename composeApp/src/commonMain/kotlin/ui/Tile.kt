@@ -142,8 +142,7 @@ fun tileSelected(
     } else if (GameStateHolder.selected.value.first == tileDataState.value) {
         println("deselect first tile.")
         // first Tile is deselected by clicking again
-        GameStateHolder.updateSelected(Pair(null, null))
-        // selected.value = Pair(null, null)
+        GameStateHolder.resetSelected()
         tileDataState.value.borderStroke = null
         cardBorderState.value = null
     } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {

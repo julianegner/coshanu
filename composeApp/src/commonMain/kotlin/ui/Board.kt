@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
 import game.GameStateHolder.level
-import game.GameStateHolder.resetBoard
 import tutorialPart1
 import tutorialPart3b
 import tutorialPart4
@@ -24,14 +23,6 @@ import util.runOnMainAfter
 
 @Composable
 fun Board() {
-
-    // Button(onClick = {
-    //     println("liststate ${GameStateHolder.listState.value}")
-    //     println("TEST: ${GameStateHolder.getRemainingTileAmount()} ${GameStateHolder.remainingTileAmount.value} ${GameStateHolder.listState.value} ") }) {
-    //     Text("TEST")
-    // }
-
-    Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -103,10 +94,18 @@ fun restartGame(
 
 fun newGame(
 ) {
+    // todo somehow, when new game is clicked the second time, the board stays empty
+    //  it works if level is selected before
+
+    println("newGame:level: ${GameStateHolder.level.value}")
+
     if (GameStateHolder.level.value !== null) {
-        resetBoard()
+        // GameStateHolder.changeLevel(GameStateHolder.level.value!!) // todo try this
+
+
+        // resetBoard()
         LevelGenerator().generateLevel(level.value!!)
-        GameStateHolder.updateGameState(GameState.STARTING)
+        GameStateHolder.updateGameState(GameState.RUNNING)
         if (GameStateHolder.level.value == 0) {
             if (GameStateHolder.tutorialTextState.value == "") {
                 GameStateHolder.updateTutorialText(tutorialPart1)
