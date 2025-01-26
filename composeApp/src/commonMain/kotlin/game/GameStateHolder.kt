@@ -63,12 +63,11 @@ object GameStateHolder {
 
     fun changeLevel(newLevel: Int) {
         level.value = newLevel
-        // GameStateHolder.updateBoard(BoardData(1))
 
-        if (GameStateHolder.level.value !== null) {
-            resetBoard()
-            LevelGenerator().generateLevel(level.value!!)
-        }
+        updateGameState(GameState.LEVEL_CHANGE)
+
+        println("GameStateHolder.changeLevel: $newLevel")
+        resetBoard()
     }
 
     // this only works at startup

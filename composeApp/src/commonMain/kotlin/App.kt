@@ -36,14 +36,11 @@ const val wholeTutorialText = tutorialPart1 + tutorialPart2 + tutorialPart3 + tu
 @Composable
 fun App() {
 
-    // todo show tutorial text step by step
-
-
     MaterialTheme {
 
 
         // todo change board on level change
-        // or put a menu page above...
+        //  or put a menu page above...
 
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -55,7 +52,7 @@ fun App() {
 
             Menu()
 
-            Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+            // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
 
             if (GameStateHolder.level.value != null) {
                 Board()
@@ -72,7 +69,6 @@ fun Menu() {
         Button(
             onClick = {
                 GameStateHolder.changeLevel(0)
-                GameStateHolder.updateTutorialText(tutorialPart1)
             }) { Text("Tutorial") }
         (1..3).forEach { i ->
             Button(

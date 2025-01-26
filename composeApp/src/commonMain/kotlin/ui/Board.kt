@@ -11,11 +11,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
-import game.GameStateHolder.changeLevel
-import game.GameStateHolder.getRemainingTileAmount
-import game.GameStateHolder.remainingTileAmount
+import game.GameStateHolder.level
+import game.GameStateHolder.resetBoard
+import tutorialPart1
 import tutorialPart3b
 import tutorialPart4
 import util.runOnMainAfter
@@ -23,28 +25,28 @@ import util.runOnMainAfter
 @Composable
 fun Board() {
 
-    /*
-    todo fix this:
-     getRemainingTileAmount() gives 4 (incorrect), but remainingTileAmount.value gives 2 (correct)
-     so something changes GameStateHolder.listState
-     */
-    Button(onClick = {
-        println("liststate ${GameStateHolder.listState.value}")
-        println("TEST: ${GameStateHolder.getRemainingTileAmount()} ${GameStateHolder.remainingTileAmount.value} ${GameStateHolder.listState.value} ") }) {
-        Text("TEST")
-    }
+    // Button(onClick = {
+    //     println("liststate ${GameStateHolder.listState.value}")
+    //     println("TEST: ${GameStateHolder.getRemainingTileAmount()} ${GameStateHolder.remainingTileAmount.value} ${GameStateHolder.listState.value} ") }) {
+    //     Text("TEST")
+    // }
 
-    Text(GameStateHolder.gameStateText.value)
+    Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
             Button(onClick = { restartGame() }) {
-                Text("restart Game")
+                Text("Restart Game")
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
             Button(onClick = { newGame() }) {
                 Text("New Game")
+            }
+        }
+        if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
+            Button(onClick = { newGame() }) {
+                Text("Start Game")
             }
         }
     }
@@ -101,25 +103,21 @@ fun restartGame(
 
 fun newGame(
 ) {
-    GameStateHolder.level.value = 1 // todo make it selectable
-
-    changeLevel(GameStateHolder.level.value!!)
-/*
-    val board = BoardData(GameStateHolder.level.value!!)
-    val tilesForGame = board.tiles
-        .filter { tileData -> tileData.chosenForPlay }
-        .shuffled()
-
-    board.tiles = tilesForGame
-    GameStateHolder.listState.value = tilesForGame
-    GameStateHolder.remainingTileAmount.value = tilesForGame.size
- */
-    // GameStateHolder.updateBoard(GameStateHolder.boardDataState.value, GameState.STARTING)
-
-    if (GameStateHolder.level.value != 0) {
-        GameStateHolder.updateTutorialText("")
+    if (GameStateHolder.level.value !== null) {
+        resetBoard()
+        LevelGenerator().generateLevel(level.value!!)
+        GameStateHolder.updateGameState(GameState.STARTING)
+        if (GameStateHolder.level.value == 0) {
+            if (GameStateHolder.tutorialTextState.value == "") {
+                GameStateHolder.updateTutorialText(tutorialPart1)
+            }
+        } else {
+            GameStateHolder.updateTutorialText("")
+        }
+        // GameStateHolder.
+        //todo i don't know what I wanted to do here
+        // regarding level change
     }
-
 }
 
 @Composable

@@ -5,5 +5,6 @@ enum class GameState(val message: String) {
     STARTING("starting"),
     WON("You Won!!"),
     LOST("Sorry, you lost!"),
-    RUNNING("running...")
+    RUNNING("running..."),
+    LEVEL_CHANGE("changing level")
 }
