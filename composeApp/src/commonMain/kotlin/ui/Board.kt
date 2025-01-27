@@ -11,11 +11,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
-import game.GameStateHolder.level
 import tutorialPart1
 import tutorialPart3b
 import tutorialPart4
@@ -100,11 +97,8 @@ fun newGame(
     println("newGame:level: ${GameStateHolder.level.value}")
 
     if (GameStateHolder.level.value !== null) {
-        // GameStateHolder.changeLevel(GameStateHolder.level.value!!) // todo try this
-
-
-        // resetBoard()
-        LevelGenerator().generateLevel(level.value!!)
+        GameStateHolder.resetBoard()
+        LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
         if (GameStateHolder.level.value == 0) {
             if (GameStateHolder.tutorialTextState.value == "") {
@@ -113,9 +107,6 @@ fun newGame(
         } else {
             GameStateHolder.updateTutorialText("")
         }
-        // GameStateHolder.
-        //todo i don't know what I wanted to do here
-        // regarding level change
     }
 }
 

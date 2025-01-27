@@ -18,6 +18,7 @@ object GameStateHolder {
         boardDataState.value.reset()
         listState.value = listOf()
         remainingTileAmount.value = 0
+        resetSelected()
     }
 
     fun saveNewBoard(board: BoardData) {
@@ -54,6 +55,7 @@ object GameStateHolder {
         level.value = newLevel
         updateGameState(GameState.LEVEL_CHANGE)
         resetBoard()
+        updateTutorialText("") // tutorial text is set when game is started
     }
 
     // this only works at startup
