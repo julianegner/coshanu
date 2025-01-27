@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.*
 import game.GameStateHolder.gameMode
+import game.GameStateHolder.level
 import tutorialPart1
 import tutorialPart3b
 import tutorialPart4
@@ -37,8 +38,8 @@ fun Board() {
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
-            Button(onClick = { newGame() }) {
-                Text("New Game")
+            Button(onClick = { endGame() }) {
+                Text("End Game")
             }
         }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
@@ -96,6 +97,11 @@ fun restartGame(
     } else {
         GameStateHolder.updateTutorialText("")
     }
+}
+
+fun endGame(
+) {
+    level.value = null
 }
 
 fun newGame(
