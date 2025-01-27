@@ -78,12 +78,26 @@ fun App() {
 fun Menu() {
 
     Text("Choose a Level:")
+    Text(GameMode.SINGLE_ELEMENT.message)
     Row {
         Button(
             onClick = {
                 GameStateHolder.changeLevel(0)
             }) { Text("Tutorial") }
         (1..3).forEach { i ->
+            Button(
+                onClick = {
+                    GameStateHolder.changeLevel(i)
+                }) { Text(i.toString()) }
+        }
+    }
+    Text(GameMode.TWO_ELEMENTS.message)
+    Row {
+        Button(
+            onClick = {
+                GameStateHolder.changeLevel(10)
+            }) { Text("Tutorial") }
+        (11..13).forEach { i ->
             Button(
                 onClick = {
                     GameStateHolder.changeLevel(i)

@@ -47,7 +47,6 @@ object GameStateHolder {
     fun updateGameState(newState: GameState) {
         gameState.value = newState
         updateGameStateTextRemainingTileAmount()
-        // if (newState == GameState.LOST || newState == GameState.WON) {
         if (newState == GameState.WON) {
             level.value = null
         }
