@@ -122,7 +122,7 @@ fun tileSelected(
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
         cardBorderState.value = BorderStroke(5.dp, Color.Green)
 
-        if (level.value == 0) {
+        if (GameStateHolder.isTutorial()) {
             if (GameStateHolder.selected.value.first != null
                 && GameStateHolder.selected.value.second == null
                 && tutorialTextState.value == tutorialPart1
@@ -149,7 +149,7 @@ fun tileSelected(
         GameStateHolder.updateSelected(Pair(first, second))
         GameStateHolder.playCard(first, second)
 
-        if (GameStateHolder.level.value == 0) {
+        if (GameStateHolder.isTutorial()) {
             if (GameStateHolder.tutorialTextState.value == tutorialPart4
                 && GameStateHolder.selected.value.first!!.number == 3
                 && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
@@ -176,7 +176,7 @@ fun tileSelected(
 
         runOnMainAfter(2000L) { cardBorderState.value = null }
 
-        if (GameStateHolder.level.value == 0) {
+        if (GameStateHolder.isTutorial()) {
             if (GameStateHolder.tutorialTextState.value == tutorialPart2
                 && GameStateHolder.selected.value.first!!.number == 3
                 && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE

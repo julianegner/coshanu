@@ -25,7 +25,6 @@ fun TileData.same(secondTileData: TileData): Boolean {
     return ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))
 }
 
-// todo size, amount of the dimensions as optional params
 class BoardData(
         val size: Int = 4,
         maxNumber: Int = 4,

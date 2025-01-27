@@ -9,6 +9,7 @@ object GameStateHolder {
     val tutorialTextState: MutableState<String> = mutableStateOf("")
     val gameState: MutableState<GameState> = mutableStateOf(GameState.STARTING)
     val level: MutableState<Int?> = mutableStateOf(null)
+    val gameMode: MutableState<GameMode?> = mutableStateOf(null)
 
     val selected: MutableState<Pair<TileData?, TileData?>> = mutableStateOf(Pair(null, null))
     val gameStateText: MutableState<String> = mutableStateOf("")
@@ -71,6 +72,10 @@ object GameStateHolder {
 
     fun isGameState(state: GameState): Boolean {
         return gameState.value == state
+    }
+
+    fun isTutorial(): Boolean {
+        return level.value == 0 || level.value == 10
     }
 
     fun updateSelected(newSelected: Pair<TileData?, TileData?>) {

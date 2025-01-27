@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.*
+import game.GameStateHolder.gameMode
 import tutorialPart1
 import tutorialPart3b
 import tutorialPart4
@@ -22,7 +23,12 @@ import util.runOnMainAfter
 fun Board() {
 
     // todo add option to end or restart game even if you did not loose yet
-    // todo create a symbol for the game
+    // todo add new levels where you need to have 2 elements of co sha nu equal (like 5 and blue)
+    //  pairing at level generation
+    //  in game pair check
+    //  maybe win/loose check
+    //  level choosing
+    //   store as extra field in GameStateHolder
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -83,7 +89,7 @@ fun restartGame(
 
     println("restartGame:level: ${GameStateHolder.level.value}")
 
-    if (GameStateHolder.level.value == 0) {
+    if (GameStateHolder.isTutorial()) {
         if (GameStateHolder.tutorialTextState.value == tutorialPart3b) {
             GameStateHolder.updateTutorialText(tutorialPart4)
         }
@@ -100,12 +106,19 @@ fun newGame(
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
-        if (GameStateHolder.level.value == 0) {
+        if (GameStateHolder.isTutorial()) {
             if (GameStateHolder.tutorialTextState.value == "") {
                 GameStateHolder.updateTutorialText(tutorialPart1)
             }
+            gameMode.value = GameMode.SINGLE_ELEMENT
         } else {
             GameStateHolder.updateTutorialText("")
+
+            when (GameStateHolder.level.value) {
+                0,1,2,3 -> gameMode.value = GameMode.SINGLE_ELEMENT
+                10,11,12,13 -> gameMode.value = GameMode.TWO_ELEMENTS
+                else -> gameMode.value = GameMode.SINGLE_ELEMENT
+            }
         }
     }
 }
