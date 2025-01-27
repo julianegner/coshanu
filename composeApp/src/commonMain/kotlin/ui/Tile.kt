@@ -29,10 +29,10 @@ import util.runOnMainAfter
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
          cardBorderState: MutableState<BorderStroke?>,
+         boardSize: Int = GameStateHolder.boardDataState.value.size,
+            modifier: Modifier = Modifier.clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
+         displayText: Boolean = true
          ) {
-
-    val modifier = Modifier
-         .clickable(onClick = { tileSelected(tileDataState, cardBorderState) })
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> {
@@ -40,7 +40,7 @@ fun Tile(tileDataState: MutableState<TileData>,
                 modifier = modifier
             ) {
                 drawCircle(
-                    radius = getCircleRadius(),
+                    radius = getCircleRadius(boardSize),
                     color = tileDataState.value.color)
             }
         }
@@ -52,26 +52,31 @@ fun Tile(tileDataState: MutableState<TileData>,
         ShapeEnum.OKTAGON ->    polygonBox(color = tileDataState.value.color, sides = 8, rotation = 22.5f, modifier = modifier)
     }
 
-    TileText(// boardDataState.value.size,
-        tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE)
+    if (displayText) {
+        TileText(
+            boardSize,
+            tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE
+        )
+    }
 }
 
-fun getCircleRadius() = when (GameStateHolder.boardDataState.value.size) {
+fun getCircleRadius(boardSize: Int) = when (boardSize) {
     2 -> 150f
     4 -> 150f
     8 -> 70f
     12 -> 40f
+    20 -> 30f // for the GameSymbol
     else -> 40f
 }
 
 @Composable
-fun TileText(// boardSize: Int,
+fun TileText(boardSize: Int,
              tileNumber: Int, isTriangle: Boolean) {
     var xOffset: Dp
     var yOffset: Dp
     var textSize: Float
 
-    when (GameStateHolder.boardDataState.value.size) {
+    when (boardSize) {
         2 -> {
             xOffset = if (tileNumber < 10) {150.dp} else {80.dp}
             yOffset = if (isTriangle) {140.dp} else {120.dp}
@@ -110,20 +115,9 @@ fun tileSelected(
     tileDataState: MutableState<TileData>,
     cardBorderState: MutableState<BorderStroke?>,
 ) {
-    println("OOOO: ${GameStateHolder.listState.value} ")
-    println("OOOO C: ${GameStateHolder.boardDataState.value.tiles} ")
-
-    // add logging of state changes
-    println("tileSelected: ${tileDataState.value} selected: ${GameStateHolder.selected.value} cardBorderState: ${cardBorderState.value}")
-
     if (GameStateHolder.selected.value.first == null) {
-        println("select first tile.")
-
-        println("AAAA: ${GameStateHolder.listState.value} ")
         // select first Tile
         GameStateHolder.updateSelected(Pair(tileDataState.value, null))
-        println("BBBB: ${GameStateHolder.listState.value} ")
-        // selected.value = Pair(tileDataState.value, null)
 
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
         cardBorderState.value = BorderStroke(5.dp, Color.Green)
@@ -140,13 +134,11 @@ fun tileSelected(
         }
 
     } else if (GameStateHolder.selected.value.first == tileDataState.value) {
-        println("deselect first tile.")
         // first Tile is deselected by clicking again
         GameStateHolder.resetSelected()
         tileDataState.value.borderStroke = null
         cardBorderState.value = null
     } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
-        println("2nd tile does match.")
         // second Tile does match first Tile, both are played
         GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
 
@@ -156,8 +148,6 @@ fun tileSelected(
         second.played = true
         GameStateHolder.updateSelected(Pair(first, second))
         GameStateHolder.playCard(first, second)
-
-        println("2nd tile does match. selected: ${GameStateHolder.selected.value} ")
 
         if (GameStateHolder.level.value == 0) {
             if (GameStateHolder.tutorialTextState.value == tutorialPart4
@@ -180,12 +170,11 @@ fun tileSelected(
         }
 
     } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
-        println("2nd tile does not match.")
         // second Tile does not match first Tile
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
         cardBorderState.value = BorderStroke(5.dp, Color.Red)
 
-        runOnMainAfter(2000L) {cardBorderState.value = null}
+        runOnMainAfter(2000L) { cardBorderState.value = null }
 
         if (GameStateHolder.level.value == 0) {
             if (GameStateHolder.tutorialTextState.value == tutorialPart2

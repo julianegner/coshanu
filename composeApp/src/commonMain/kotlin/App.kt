@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import game.*
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import ui.Board
+import ui.GameSymbol
 
 const val tutorialPart1 = "Welcome to the Tutorial!\nPlease click on the upper left green Triangle with Number 3."
 const val tutorialPart2 = "you see that the Frame of that Tile is green now.\n" +
@@ -37,38 +38,37 @@ const val wholeTutorialText = tutorialPart1 + tutorialPart2 + tutorialPart3 + tu
 fun App() {
 
     MaterialTheme {
+        Row(modifier = Modifier.padding(horizontal = 20.dp)) {
+            GameSymbol()
 
-
-        // todo change board on level change
-        //  or put a menu page above...
-
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                modifier = Modifier.padding(vertical = 20.dp),
-                text = "CoShaNu - Color, Shape, Number",
-                fontSize = TextUnit(2f, TextUnitType.Em)
-            )
-            // todo display main menu OR game
-
-            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     modifier = Modifier.padding(vertical = 20.dp),
-                    text = GameStateHolder.gameStateText.value,
-                    fontSize = TextUnit(2f, TextUnitType.Em))
-            } else {
-                Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
-            }
+                    text = "CoShaNu - Color, Shape, Number",
+                    fontSize = TextUnit(2f, TextUnitType.Em)
+                )
 
-            if (!GameStateHolder.isGameState(GameState.RUNNING)) {
-                Menu()
-            }
+                if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                    Text(
+                        modifier = Modifier.padding(vertical = 20.dp),
+                        text = GameStateHolder.gameStateText.value,
+                        fontSize = TextUnit(2f, TextUnitType.Em)
+                    )
+                } else {
+                    Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
+                }
 
-            // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+                if (!GameStateHolder.isGameState(GameState.RUNNING)) {
+                    Menu()
+                }
+
+                // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
 
 
-            // if level is chosen, display the board
-            if (GameStateHolder.level.value != null) {
-                Board()
+                // if level is chosen, display the board
+                if (GameStateHolder.level.value != null) {
+                    Board()
+                }
             }
         }
     }

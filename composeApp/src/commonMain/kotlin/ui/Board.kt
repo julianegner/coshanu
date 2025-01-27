@@ -21,6 +21,9 @@ import util.runOnMainAfter
 @Composable
 fun Board() {
 
+    // todo add option to end or restart game even if you did not loose yet
+    // todo create a symbol for the game
+
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
             Button(onClick = { restartGame() }) {
@@ -91,9 +94,6 @@ fun restartGame(
 
 fun newGame(
 ) {
-    // todo somehow, when new game is clicked the second time, the board stays empty
-    //  it works if level is selected before
-
     println("newGame:level: ${GameStateHolder.level.value}")
 
     if (GameStateHolder.level.value !== null) {
@@ -117,10 +117,6 @@ private fun card(
 
     val played = remember { mutableStateOf(tileDataState.value.played) }
 
-    val cardModifier = Modifier
-        .aspectRatio(1f)
-        .padding(10.dp)
-
     if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
         if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
             played.value = true
@@ -141,6 +137,10 @@ private fun card(
     if (GameStateHolder.gameState.value == GameState.RESTART) {
         played.value = false
     }
+
+    val cardModifier = Modifier
+        .aspectRatio(1f)
+        .padding(10.dp)
 
     if (!played.value) {
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
