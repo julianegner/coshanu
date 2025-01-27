@@ -66,6 +66,8 @@ object GameStateHolder {
             .filter { !it.played }
             .size
 
+        println("GameStateHolder.getRemainingTileAmount: $remainingTileAmount ${listState.value}")
+
         return remainingTileAmount
     }
 

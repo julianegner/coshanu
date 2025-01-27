@@ -13,14 +13,15 @@ class LevelGenerator {
         GameStateHolder.resetBoard()
         when(levelNumber) {
             0 -> generateTutorial()
-            1 -> {
+            10 -> generateTutorial() // todo tutorial for two elements
+            1,11 -> {
                     val board = BoardData(4)
                     board.tiles = board.tiles
                         .filter { tileData -> tileData.chosenForPlay }
                         .shuffled()
                     GameStateHolder.saveNewBoard(board)
             }
-            2 -> {
+            2,12 -> {
                 val board = BoardData(
                     size = 4,
                     maxNumber = 10,
@@ -33,7 +34,7 @@ class LevelGenerator {
                     .shuffled()
                 GameStateHolder.saveNewBoard(board)
             }
-            3 -> {
+            3,13 -> {
                 val board = BoardData(
                     size = 8,
                     maxNumber = 10,

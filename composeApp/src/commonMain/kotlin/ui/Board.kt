@@ -109,6 +109,11 @@ fun newGame(
     println("newGame:level: ${GameStateHolder.level.value}")
 
     if (GameStateHolder.level.value !== null) {
+        when (GameStateHolder.level.value) {
+            0,1,2,3 -> gameMode.value = GameMode.SINGLE_ELEMENT
+            10,11,12,13 -> gameMode.value = GameMode.TWO_ELEMENTS
+            else -> gameMode.value = GameMode.SINGLE_ELEMENT
+        }
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
@@ -119,12 +124,6 @@ fun newGame(
             gameMode.value = GameMode.SINGLE_ELEMENT
         } else {
             GameStateHolder.updateTutorialText("")
-
-            when (GameStateHolder.level.value) {
-                0,1,2,3 -> gameMode.value = GameMode.SINGLE_ELEMENT
-                10,11,12,13 -> gameMode.value = GameMode.TWO_ELEMENTS
-                else -> gameMode.value = GameMode.SINGLE_ELEMENT
-            }
         }
     }
 }

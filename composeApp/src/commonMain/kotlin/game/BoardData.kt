@@ -80,10 +80,19 @@ class BoardData(
         val neededPairs = (boardSize * boardSize) / 2
         val p = (1..neededPairs).toList()
 
-        // println("possibleTiles: ${possibleTiles.size}, neededPairs: $neededPairs")
-
         for (i in p) {
-            findPair(possibleTiles)
+            when (GameStateHolder.gameMode.value) {
+                GameMode.SINGLE_ELEMENT -> {
+                    findPair(possibleTiles)
+                }
+                GameMode.TWO_ELEMENTS -> {
+                    findPairTwoMatchingElements(possibleTiles)
+                }
+                else -> {
+                    // this should never happen
+                    throw RuntimeException("GameMode not valid")
+                }
+            }
         }
         return possibleTiles
     }
@@ -115,6 +124,52 @@ class BoardData(
                 if (dimColor.size > 0) { dimColor} else {
                     if (dimShape.size > 0) dimShape else {
                         dimNumber
+                    }
+                }
+            }
+        }
+
+        if (pairDimension.isEmpty()) {
+            throw RuntimeException("pairDimension is empty")
+        }
+
+        val secondTile = pairDimension.random()
+        secondTile.chosenForPlay = true
+    }
+
+    private fun findPairTwoMatchingElements(possibleTiles: List<TileData>) {
+        val firstTile = possibleTiles
+            .filter {tileData -> !tileData.chosenForPlay }
+            .random()
+
+        firstTile.chosenForPlay = true
+
+        // make mixed dimensions
+        val dimColorShape = possibleTiles
+            .filter { tileData -> !tileData.chosenForPlay }
+            .filter { tileData -> tileData.color == firstTile.color }
+            .filter { tileData -> tileData.shape == firstTile.shape }
+
+        val dimColorNumber = possibleTiles
+            .filter { tileData -> !tileData.chosenForPlay }
+            .filter { tileData -> tileData.color == firstTile.color }
+            .filter { tileData -> tileData.number == firstTile.number }
+
+        val dimShapeNumber = possibleTiles
+            .filter { tileData -> !tileData.chosenForPlay }
+            .filter { tileData -> tileData.shape == firstTile.shape }
+            .filter { tileData -> tileData.number == firstTile.number }
+
+
+        // need to know which dimension is largest
+        val pairDimension = when {
+            dimColorShape.size >= dimColorNumber.size && dimColorShape.size >= dimShapeNumber.size -> dimColorShape
+            dimColorNumber.size >= dimColorShape.size && dimColorNumber.size >= dimShapeNumber.size -> dimColorNumber
+            dimShapeNumber.size >= dimColorShape.size && dimShapeNumber.size >= dimColorNumber.size -> dimShapeNumber
+            else -> {
+                if (dimColorShape.size > 0) { dimColorShape} else {
+                    if (dimColorNumber.size > 0) dimColorNumber else {
+                        dimShapeNumber
                     }
                 }
             }
