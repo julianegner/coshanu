@@ -18,7 +18,30 @@ data class TileData(
 )
 
 fun TileData.match(secondTileData: TileData): Boolean {
+    when (GameStateHolder.gameMode.value) {
+        GameMode.SINGLE_ELEMENT -> {
+            return matchOne(secondTileData)
+        }
+        GameMode.TWO_ELEMENTS -> {
+            return matchTwo(secondTileData)
+        }
+        else -> {
+            // this should never happen
+            throw RuntimeException("GameMode not valid")
+        }
+    }
+}
+
+private fun TileData.matchOne(secondTileData: TileData): Boolean {
     return ((this.color == secondTileData.color) || (this.shape == secondTileData.shape) || (this.number == secondTileData.number))
+}
+
+private fun TileData.matchTwo(secondTileData: TileData): Boolean {
+    var matchCount = 0
+    if (this.color == secondTileData.color) matchCount++
+    if (this.shape == secondTileData.shape) matchCount++
+    if (this.number == secondTileData.number) matchCount++
+    return (matchCount >= 2)
 }
 
 fun TileData.same(secondTileData: TileData): Boolean {

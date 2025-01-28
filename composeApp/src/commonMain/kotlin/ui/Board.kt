@@ -24,12 +24,6 @@ import util.runOnMainAfter
 fun Board() {
 
     // todo add option to end or restart game even if you did not loose yet
-    // todo add new levels where you need to have 2 elements of co sha nu equal (like 5 and blue)
-    //  pairing at level generation
-    //  in game pair check
-    //  maybe win/loose check
-    //  level choosing
-    //   store as extra field in GameStateHolder
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -96,6 +90,9 @@ fun restartGame(
         }
     } else {
         GameStateHolder.updateTutorialText("")
+    }
+    runOnMainAfter(200L) {
+        GameStateHolder.updateGameState(GameState.RUNNING)
     }
 }
 

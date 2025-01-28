@@ -139,57 +139,70 @@ fun tileSelected(
         tileDataState.value.borderStroke = null
         cardBorderState.value = null
     } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
-        // second Tile does match first Tile, both are played
-        GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
-
-        val first = GameStateHolder.selected.value.first!!
-        val second = GameStateHolder.selected.value.second!!
-        first.played = true
-        second.played = true
-        GameStateHolder.updateSelected(Pair(first, second))
-        GameStateHolder.playCard(first, second)
-
-        if (GameStateHolder.isTutorial()) {
-            if (GameStateHolder.tutorialTextState.value == tutorialPart4
-                && GameStateHolder.selected.value.first!!.number == 3
-                && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-                && GameStateHolder.selected.value.first!!.color == Color.Green
-                && tileDataState.value.number == 3
-                && tileDataState.value.shape == ShapeEnum.TRIANGLE
-                && tileDataState.value.color == Color.Yellow) {
-                GameStateHolder.updateTutorialText(tutorialPart5)
-            } else if (GameStateHolder.tutorialTextState.value == tutorialPart3
-                && GameStateHolder.selected.value.first!!.number == 3
-                && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-                && GameStateHolder.selected.value.first!!.color == Color.Green
-                && tileDataState.value.number == 3
-                && tileDataState.value.shape == ShapeEnum.TRIANGLE
-                && tileDataState.value.color == Color.Blue) {
-                GameStateHolder.updateTutorialText(tutorialPart3b)
-            }
-        }
-
+        secondTileMatchesPlayCards(tileDataState)
     } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
-        // second Tile does not match first Tile
-        tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
-        cardBorderState.value = BorderStroke(5.dp, Color.Red)
-
-        runOnMainAfter(2000L) { cardBorderState.value = null }
-
-        if (GameStateHolder.isTutorial()) {
-            if (GameStateHolder.tutorialTextState.value == tutorialPart2
-                && GameStateHolder.selected.value.first!!.number == 3
-                && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-                && GameStateHolder.selected.value.first!!.color == Color.Green
-                && tileDataState.value.number == 1
-                && tileDataState.value.shape == ShapeEnum.CIRCLE
-                && tileDataState.value.color == Color.Blue) {
-                GameStateHolder.updateTutorialText(tutorialPart3)
-            }
-        }
+        secondTileDoesNotMatch(tileDataState, cardBorderState)
     }
 
     GameStateHolder.checkGameFinished()
+}
+
+private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
+    // second Tile does match first Tile, both are played
+    GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
+
+    val first = GameStateHolder.selected.value.first!!
+    val second = GameStateHolder.selected.value.second!!
+    first.played = true
+    second.played = true
+    GameStateHolder.updateSelected(Pair(first, second))
+    GameStateHolder.playCard(first, second)
+
+    if (GameStateHolder.isTutorial()) {
+        if (tutorialTextState.value == tutorialPart4
+            && GameStateHolder.selected.value.first!!.number == 3
+            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
+            && GameStateHolder.selected.value.first!!.color == Color.Green
+            && tileDataState.value.number == 3
+            && tileDataState.value.shape == ShapeEnum.TRIANGLE
+            && tileDataState.value.color == Color.Yellow
+        ) {
+            GameStateHolder.updateTutorialText(tutorialPart5)
+        } else if (tutorialTextState.value == tutorialPart3
+            && GameStateHolder.selected.value.first!!.number == 3
+            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
+            && GameStateHolder.selected.value.first!!.color == Color.Green
+            && tileDataState.value.number == 3
+            && tileDataState.value.shape == ShapeEnum.TRIANGLE
+            && tileDataState.value.color == Color.Blue
+        ) {
+            GameStateHolder.updateTutorialText(tutorialPart3b)
+        }
+    }
+}
+
+private fun secondTileDoesNotMatch(
+    tileDataState: MutableState<TileData>,
+    cardBorderState: MutableState<BorderStroke?>
+) {
+    // second Tile does not match first Tile
+    tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
+    cardBorderState.value = BorderStroke(5.dp, Color.Red)
+
+    runOnMainAfter(2000L) { cardBorderState.value = null }
+
+    if (GameStateHolder.isTutorial()) {
+        if (tutorialTextState.value == tutorialPart2
+            && GameStateHolder.selected.value.first!!.number == 3
+            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
+            && GameStateHolder.selected.value.first!!.color == Color.Green
+            && tileDataState.value.number == 1
+            && tileDataState.value.shape == ShapeEnum.CIRCLE
+            && tileDataState.value.color == Color.Blue
+        ) {
+            GameStateHolder.updateTutorialText(tutorialPart3)
+        }
+    }
 }
 
 @Composable
