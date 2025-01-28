@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
-import game.GameStateHolder.level
 import game.GameStateHolder.tutorialTextState
 import tutorialPart1
 import tutorialPart2
@@ -61,7 +60,7 @@ fun Tile(tileDataState: MutableState<TileData>,
 }
 
 fun getCircleRadius(boardSize: Int) = when (boardSize) {
-    2 -> 150f
+    2 -> 300f
     4 -> 150f
     8 -> 70f
     12 -> 40f

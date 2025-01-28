@@ -23,8 +23,8 @@ import util.runOnMainAfter
 @Composable
 fun Board() {
 
-    // todo add option to end or restart game even if you did not loose yet
     // todo add tutorial for two elements
+    // todo show if you need one or two elements
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
@@ -56,10 +56,13 @@ fun Board() {
                 card(GameStateHolder.listState.value.get(index))
             }
         }
-        Text(
-            modifier = Modifier.padding(horizontal = 20.dp),
-            text = GameStateHolder.tutorialTextState.value
-        )
+        Column {
+            GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
+            Text(
+                modifier = Modifier.padding(horizontal = 20.dp),
+                text = GameStateHolder.tutorialTextState.value
+            )
+        }
     }
 }
 
@@ -139,13 +142,7 @@ private fun card(
     if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
         if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
             played.value = true
-            // set played to true for current tile
 
-
-            // GameStateHolder.listState.value
-            //     .filter { it.same(tileDataState.value) }
-            //     .first()
-            //     .played = true
             runOnMainAfter(200L) {
                 // GameStateHolder.playCard(tileDataState.value)
                 GameStateHolder.selected.value = Pair(null, null)

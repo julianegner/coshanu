@@ -55,7 +55,8 @@ fun App() {
                         fontSize = TextUnit(2f, TextUnitType.Em)
                     )
                 } else {
-                    Text(GameStateHolder.gameStateText.value, fontSize = TextUnit(1.5f, TextUnitType.Em))
+                    Text(GameStateHolder.gameStateText.value,
+                        fontSize = TextUnit(1.5f, TextUnitType.Em))
                 }
 
                 if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.WON))) {
