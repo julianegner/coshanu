@@ -24,14 +24,15 @@ import util.runOnMainAfter
 fun Board() {
 
     // todo add option to end or restart game even if you did not loose yet
+    // todo add tutorial for two elements
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        if (GameStateHolder.isGameState(GameState.LOST)) {
+        if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { restartGame() }) {
                 Text("Restart Game")
             }
         }
-        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
                 Text("End Game")
             }
@@ -99,6 +100,9 @@ fun restartGame(
 fun endGame(
 ) {
     level.value = null
+    GameStateHolder.gameState.value = GameState.LEVEL_CHANGE
+    GameStateHolder.resetBoard()
+    GameStateHolder.gameStateText.value = ""
 }
 
 fun newGame(
