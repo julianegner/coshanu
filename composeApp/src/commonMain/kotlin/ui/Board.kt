@@ -24,6 +24,8 @@ import util.runOnMainAfter
 fun Board() {
 
     // todo add tutorial for two elements
+    // todo in tutorial, prevent to click any tile except the one from the tutorial
+    //  do a list of tiles and right tutorial textes ?
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
