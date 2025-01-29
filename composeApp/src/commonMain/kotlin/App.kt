@@ -1,10 +1,9 @@
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -79,8 +78,9 @@ fun App() {
 fun Menu() {
 
     Text("Choose a Level:")
-    Text(GameMode.SINGLE_ELEMENT.message)
+
     Row {
+        Text(GameMode.SINGLE_ELEMENT.message, modifier = Modifier.padding(5.dp).width(100.dp))
         Button(
             onClick = {
                 GameStateHolder.changeLevel(0)
@@ -92,14 +92,22 @@ fun Menu() {
                 }) { Text(i.toString()) }
         }
     }
-    Text(GameMode.TWO_ELEMENTS.message)
+
+    val buttonColor = ButtonDefaults.buttonColors(
+        contentColor = Color.White,
+        backgroundColor = Color.Blue
+    )
+
     Row {
+        Text(GameMode.TWO_ELEMENTS.message, modifier = Modifier.padding(5.dp).width(100.dp))
         Button(
+            colors = buttonColor,
             onClick = {
                 GameStateHolder.changeLevel(10)
             }) { Text("Tutorial") }
         (11..13).forEach { i ->
             Button(
+                colors = buttonColor,
                 onClick = {
                     GameStateHolder.changeLevel(i)
                 }) { Text(i.toString()) }

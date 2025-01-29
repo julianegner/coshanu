@@ -5,10 +5,6 @@ import androidx.compose.ui.graphics.Color
 
 class LevelGenerator {
     fun generateLevel(levelNumber: Int) {
-                      // boardDataState: MutableState<BoardData>,
-                      // listState: MutableState<List<TileData>>) {
-
-        // GameStateHolder.boardDataState, GameStateHolder.listState
 
         GameStateHolder.resetBoard()
         when(levelNumber) {
@@ -58,10 +54,6 @@ class LevelGenerator {
     }
 
     fun generateTutorial() {
-            // boardDataState: MutableState<BoardData>,
-            // listState: MutableState<List<TileData>>) {
-
-        // GameStateHolder.boardDataState, GameStateHolder.listState
 
         val board = BoardData(2)
 

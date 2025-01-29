@@ -24,7 +24,6 @@ import util.runOnMainAfter
 fun Board() {
 
     // todo add tutorial for two elements
-    // todo show if you need one or two elements
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
