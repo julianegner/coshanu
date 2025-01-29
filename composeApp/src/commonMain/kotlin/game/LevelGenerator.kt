@@ -57,7 +57,13 @@ class LevelGenerator {
 
         val board = BoardData(2)
 
-        // boardDataState.value = BoardData(2)
+        GameStateHolder.tutorial.startTutorial()
+
+        board.tiles = GameStateHolder.tutorial.getTileList()
+
+        println("generateTutorial: ${board.tiles}")
+
+        /*
         board.tiles = listOf(
             TileData(
                 color = Color.Green,
@@ -88,6 +94,7 @@ class LevelGenerator {
                 played = false
             )
         )
+        */
         GameStateHolder.saveNewBoard(board)
     }
 }

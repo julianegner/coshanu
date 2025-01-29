@@ -2,11 +2,12 @@ package game
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import util.runOnMainAfter
 
 object GameStateHolder {
     val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
     val listState: MutableState<List<TileData>> = mutableStateOf(boardDataState.value.tiles)
-    val tutorialTextState: MutableState<String> = mutableStateOf("")
+
     val gameState: MutableState<GameState> = mutableStateOf(GameState.STARTING)
     val level: MutableState<Int?> = mutableStateOf(null)
     val gameMode: MutableState<GameMode?> = mutableStateOf(null)
@@ -14,6 +15,8 @@ object GameStateHolder {
     val selected: MutableState<Pair<TileData?, TileData?>> = mutableStateOf(Pair(null, null))
     val gameStateText: MutableState<String> = mutableStateOf("")
     val remainingTileAmount: MutableState<Int> = mutableStateOf(0)
+
+    val tutorial: Tutorial = Tutorial()
 
     fun resetBoard() {
         boardDataState.value.reset()
@@ -40,10 +43,6 @@ object GameStateHolder {
         updateGameState(newState)
     }
 
-    fun updateTutorialText(newText: String) {
-        tutorialTextState.value = newText
-    }
-
     fun updateGameState(newState: GameState) {
         gameState.value = newState
         updateGameStateTextRemainingTileAmount()
@@ -56,7 +55,6 @@ object GameStateHolder {
         level.value = newLevel
         updateGameState(GameState.LEVEL_CHANGE)
         resetBoard()
-        updateTutorialText("") // tutorial text is set when game is started
     }
 
     // this only works at startup
@@ -73,10 +71,6 @@ object GameStateHolder {
 
     fun isGameState(state: GameState): Boolean {
         return gameState.value == state
-    }
-
-    fun isTutorial(): Boolean {
-        return level.value == 0 || level.value == 10
     }
 
     fun updateSelected(newSelected: Pair<TileData?, TileData?>) {
@@ -100,7 +94,14 @@ object GameStateHolder {
     fun checkGameFinished(
     ) {
         if ( remainingTileAmount.value == 0) {
-            updateGameState(GameState.WON)
+            if (tutorial.isTutorial()) {
+                runOnMainAfter(5000L) {
+                    tutorial.endTutorial()
+                    updateGameState(GameState.WON)
+                }
+            } else {
+                updateGameState(GameState.WON)
+            }
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
         } else {
@@ -125,7 +126,6 @@ object GameStateHolder {
         return false
     }
 
-
     fun playCard(vararg tileDataArgs: TileData) {
         tileDataArgs.forEach { tileData ->
             println("GameStateHolder.playCard: $tileData")
@@ -140,12 +140,8 @@ object GameStateHolder {
         }
         boardDataState.value.tiles = listState.value
 
-        println("GameStateHolder.playCard A: ${remainingTileAmount.value}")
         remainingTileAmount.value -= 2
         updateGameStateTextRemainingTileAmount()
-
-        println("GameStateHolder.playCard B: ${remainingTileAmount.value}")
-        println("playCard tiles: ${listState.value} ${boardDataState.value.tiles}")
     }
 
     private fun updateGameStateTextRemainingTileAmount() {

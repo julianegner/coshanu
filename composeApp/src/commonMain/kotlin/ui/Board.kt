@@ -15,17 +15,12 @@ import androidx.compose.ui.unit.dp
 import game.*
 import game.GameStateHolder.gameMode
 import game.GameStateHolder.level
-import tutorialPart1
-import tutorialPart3b
-import tutorialPart4
 import util.runOnMainAfter
 
 @Composable
 fun Board() {
 
     // todo add tutorial for two elements
-    // todo in tutorial, prevent to click any tile except the one from the tutorial
-    //  do a list of tiles and right tutorial textes ?
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
@@ -61,7 +56,7 @@ fun Board() {
             GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
             Text(
                 modifier = Modifier.padding(horizontal = 20.dp),
-                text = GameStateHolder.tutorialTextState.value
+                text = GameStateHolder.tutorial.getCurrentTutorialText()
             )
         }
     }
@@ -89,13 +84,7 @@ fun restartGame(
 
     println("restartGame:level: ${GameStateHolder.level.value}")
 
-    if (GameStateHolder.isTutorial()) {
-        if (GameStateHolder.tutorialTextState.value == tutorialPart3b) {
-            GameStateHolder.updateTutorialText(tutorialPart4)
-        }
-    } else {
-        GameStateHolder.updateTutorialText("")
-    }
+    GameStateHolder.tutorial.nextStep()
     runOnMainAfter(200L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
     }
@@ -122,14 +111,6 @@ fun newGame(
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
-        if (GameStateHolder.isTutorial()) {
-            if (GameStateHolder.tutorialTextState.value == "") {
-                GameStateHolder.updateTutorialText(tutorialPart1)
-            }
-            gameMode.value = GameMode.SINGLE_ELEMENT
-        } else {
-            GameStateHolder.updateTutorialText("")
-        }
     }
 }
 
@@ -145,8 +126,7 @@ private fun card(
             played.value = true
 
             runOnMainAfter(200L) {
-                // GameStateHolder.playCard(tileDataState.value)
-                GameStateHolder.selected.value = Pair(null, null)
+                GameStateHolder.resetSelected()
             }
         }
     }

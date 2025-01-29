@@ -15,13 +15,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
-import game.GameStateHolder.tutorialTextState
-import tutorialPart1
-import tutorialPart2
-import tutorialPart3
-import tutorialPart3b
-import tutorialPart4
-import tutorialPart5
 import util.runOnMainAfter
 
 
@@ -114,6 +107,11 @@ fun tileSelected(
     tileDataState: MutableState<TileData>,
     cardBorderState: MutableState<BorderStroke?>,
 ) {
+    if (GameStateHolder.tutorial.isTutorial() && !GameStateHolder.tutorial.isAllowedTile(tileDataState.value)) {
+        // todo make warning visible
+        return
+    }
+
     if (GameStateHolder.selected.value.first == null) {
         // select first Tile
         GameStateHolder.updateSelected(Pair(tileDataState.value, null))
@@ -121,16 +119,7 @@ fun tileSelected(
         tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
         cardBorderState.value = BorderStroke(5.dp, Color.Green)
 
-        if (GameStateHolder.isTutorial()) {
-            if (GameStateHolder.selected.value.first != null
-                && GameStateHolder.selected.value.second == null
-                && tutorialTextState.value == tutorialPart1
-                && GameStateHolder.selected.value.first!!.number == 3
-                && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-                && GameStateHolder.selected.value.first!!.color == Color.Green) {
-                tutorialTextState.value = tutorialPart2
-            }
-        }
+        GameStateHolder.tutorial.nextStep()
 
     } else if (GameStateHolder.selected.value.first == tileDataState.value) {
         // first Tile is deselected by clicking again
@@ -157,27 +146,7 @@ private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
     GameStateHolder.updateSelected(Pair(first, second))
     GameStateHolder.playCard(first, second)
 
-    if (GameStateHolder.isTutorial()) {
-        if (tutorialTextState.value == tutorialPart4
-            && GameStateHolder.selected.value.first!!.number == 3
-            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-            && GameStateHolder.selected.value.first!!.color == Color.Green
-            && tileDataState.value.number == 3
-            && tileDataState.value.shape == ShapeEnum.TRIANGLE
-            && tileDataState.value.color == Color.Yellow
-        ) {
-            GameStateHolder.updateTutorialText(tutorialPart5)
-        } else if (tutorialTextState.value == tutorialPart3
-            && GameStateHolder.selected.value.first!!.number == 3
-            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-            && GameStateHolder.selected.value.first!!.color == Color.Green
-            && tileDataState.value.number == 3
-            && tileDataState.value.shape == ShapeEnum.TRIANGLE
-            && tileDataState.value.color == Color.Blue
-        ) {
-            GameStateHolder.updateTutorialText(tutorialPart3b)
-        }
-    }
+    GameStateHolder.tutorial.nextStep()
 }
 
 private fun secondTileDoesNotMatch(
@@ -190,18 +159,7 @@ private fun secondTileDoesNotMatch(
 
     runOnMainAfter(2000L) { cardBorderState.value = null }
 
-    if (GameStateHolder.isTutorial()) {
-        if (tutorialTextState.value == tutorialPart2
-            && GameStateHolder.selected.value.first!!.number == 3
-            && GameStateHolder.selected.value.first!!.shape == ShapeEnum.TRIANGLE
-            && GameStateHolder.selected.value.first!!.color == Color.Green
-            && tileDataState.value.number == 1
-            && tileDataState.value.shape == ShapeEnum.CIRCLE
-            && tileDataState.value.color == Color.Blue
-        ) {
-            GameStateHolder.updateTutorialText(tutorialPart3)
-        }
-    }
+    GameStateHolder.tutorial.nextStep()
 }
 
 @Composable

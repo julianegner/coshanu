@@ -12,26 +12,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import ui.Board
 import ui.GameSymbol
 
-const val tutorialPart1 = "Welcome to the Tutorial!\nPlease click on the upper left green Triangle with Number 3."
-const val tutorialPart2 = "you see that the Frame of that Tile is green now.\n" +
-        "Now click on the lower right blue Circle with number 1\n"
-const val tutorialPart3 =
-        "you see that the frame of that tile is red for a moment.\n" +
-        "That is because the Tiles do not fit together.\n" +
-        "For Tiles to fit, the must have the same Color, Shape or Number, therefore the Name CoShaNu.\n" +
-        "Now click on the lower left blue triangle with the Number 3.\n"
-const val tutorialPart3b =
-        "Both Tiles disappear, because this fits.\n" +
-        "Yes, this game was lost.\n" +
-        "But no problem, just click on 'restart Game'\n"
-const val tutorialPart4 = "Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n" +
-        "Now choose the upper left green Triangle with Number 3 and then the yellow Triangle with the Number 3.\n"
-const val tutorialPart5 =
-        "These Tiles are played and only the Blue Tiles are there.\n" +
-        "play both and win!"
-
-const val wholeTutorialText = tutorialPart1 + tutorialPart2 + tutorialPart3 + tutorialPart4 + tutorialPart5
-
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
