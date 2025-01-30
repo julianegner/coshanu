@@ -20,7 +20,8 @@ import util.runOnMainAfter
 @Composable
 fun Board() {
 
-    // todo add tutorial for two elements
+    // todo dark mode?
+    // todo language support?
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
