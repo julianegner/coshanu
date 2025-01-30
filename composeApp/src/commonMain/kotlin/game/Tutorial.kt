@@ -124,7 +124,6 @@ class Tutorial {
     fun endTutorial() {
         activeState.value = false
         currentStepState.value = null
-
     }
 
     fun getCurrentTutorialText(): String {

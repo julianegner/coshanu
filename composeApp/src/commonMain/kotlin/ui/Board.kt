@@ -97,6 +97,7 @@ fun endGame(
     GameStateHolder.gameState.value = GameState.LEVEL_CHANGE
     GameStateHolder.resetBoard()
     GameStateHolder.gameStateText.value = ""
+    GameStateHolder.tutorial.endTutorial()
 }
 
 fun newGame(
