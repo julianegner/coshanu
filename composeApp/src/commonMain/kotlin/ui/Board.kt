@@ -145,7 +145,11 @@ private fun card(
         Card(
             modifier = cardModifier
                 .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
-            backgroundColor = Color.LightGray,
+            backgroundColor = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isAllowedTile(tileDataState.value)) {
+                Color.DarkGray
+            } else {
+                Color.LightGray
+            },
             border = cardBorderState.value
 
         ) {

@@ -1,51 +1,9 @@
 package game
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 
 enum class ShapeEnum {
     CIRCLE, TRIANGLE, SQUARE, PENTAGON, HEXAGON, OKTAGON
-}
-
-data class TileData(
-    val color: Color,
-    val number: Int,
-    val shape: ShapeEnum,
-    var chosenForPlay: Boolean,
-    var played: Boolean,
-    var borderStroke: BorderStroke? = null
-)
-
-fun TileData.match(secondTileData: TileData): Boolean {
-    when (GameStateHolder.gameMode.value) {
-        GameMode.SINGLE_ELEMENT -> {
-            return matchOne(secondTileData)
-        }
-        GameMode.TWO_ELEMENTS -> {
-            return matchTwo(secondTileData)
-        }
-        else -> {
-            // this should never happen
-            throw RuntimeException("GameMode not valid")
-        }
-    }
-}
-
-private fun TileData.matchOne(secondTileData: TileData): Boolean {
-    return ((this.color == secondTileData.color) || (this.shape == secondTileData.shape) || (this.number == secondTileData.number))
-}
-
-private fun TileData.matchTwo(secondTileData: TileData): Boolean {
-    var matchCount = 0
-    if (this.color == secondTileData.color) matchCount++
-    if (this.shape == secondTileData.shape) matchCount++
-    if (this.number == secondTileData.number) matchCount++
-    return (matchCount >= 2)
-}
-
-fun TileData.same(secondTileData: TileData): Boolean {
-    return ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))
 }
 
 class BoardData(

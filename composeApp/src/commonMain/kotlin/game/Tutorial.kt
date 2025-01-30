@@ -44,34 +44,10 @@ class Tutorial {
         when (GameStateHolder.gameMode.value) {
             GameMode.SINGLE_ELEMENT -> {
                 tiles = listOf(
-                    TileData(
-                        color = Color.Green,
-                        shape = ShapeEnum.TRIANGLE,
-                        number = 3,
-                        chosenForPlay = true,
-                        played = false
-                    ),
-                    TileData(
-                        color = Color.Yellow,
-                        shape = ShapeEnum.TRIANGLE,
-                        number = 3,
-                        chosenForPlay = true,
-                        played = false
-                    ),
-                    TileData(
-                        color = Color.Blue,
-                        shape = ShapeEnum.TRIANGLE,
-                        number = 3,
-                        chosenForPlay = true,
-                        played = false
-                    ),
-                    TileData(
-                        color = Color.Blue,
-                        shape = ShapeEnum.CIRCLE,
-                        number = 1,
-                        chosenForPlay = true,
-                        played = false
-                    )
+                    newTileData(Color.Green, ShapeEnum.TRIANGLE, 3),
+                    newTileData(Color.Yellow, ShapeEnum.TRIANGLE, 3),
+                    newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+                    newTileData(Color.Blue, ShapeEnum.CIRCLE, 1)
                 )
                 tutorialSteps = listOf(
                     TutorialStep(1, tutorialPart1, tiles[0]), // #0
@@ -89,6 +65,70 @@ class Tutorial {
             }
             GameMode.TWO_ELEMENTS -> {
                 // todo add tutorial for two elements
+                tiles = listOf(
+                    newTileData(Color.Yellow, ShapeEnum.TRIANGLE, 4),
+                    newTileData(Color.Green, ShapeEnum.SQUARE, 4),
+                    newTileData(Color.Blue, ShapeEnum.HEXAGON, 3),
+                    newTileData(Color.Blue, ShapeEnum.OKTAGON, 1),
+                    newTileData(Color.Blue, ShapeEnum.CIRCLE, 1),
+                    newTileData(Color.Red, ShapeEnum.HEXAGON, 3),
+                    newTileData(Color.Red, ShapeEnum.TRIANGLE, 3),
+                    newTileData(Color.Blue, ShapeEnum.OKTAGON, 4),
+                    newTileData(Color.Yellow, ShapeEnum.TRIANGLE, 2),
+                    newTileData(Color.Blue, ShapeEnum.SQUARE, 4),
+                    newTileData(Color.Green, ShapeEnum.HEXAGON, 4),
+                    newTileData(Color.Green, ShapeEnum.PENTAGON, 2),
+                    newTileData(Color.Yellow, ShapeEnum.PENTAGON, 4),
+                    newTileData(Color.Green, ShapeEnum.SQUARE, 2),
+                    newTileData(Color.Blue, ShapeEnum.PENTAGON, 3),
+                    newTileData(Color.Yellow, ShapeEnum.SQUARE, 4)
+                )
+
+                tutorialSteps = listOf(
+                    TutorialStep(1, "Welcome to the Tutorial!\nPlease click on the upper left ${tiles[0].tutorialString()}.", tiles[0]),
+                    TutorialStep(2, "Now click on the ${tiles[1].tutorialString()} green Square with Number 4 right to the first Tile", tiles[1]),
+                    TutorialStep(3,     "You see that the frame of that tile is red for a moment.\n" +
+                            "That is because the Tiles do not fit together.\n\n" +
+                            "For Tiles to fit, two of the elements Color, Shape or Number must be equal.\n" +
+                            "That's why the Name is CoShaNu.\n" +
+                            "Now click on the lower right ${tiles[15].tutorialString()}.\n", tiles[15]
+                    ),
+                    TutorialStep(4, "Both Tiles disappear, because this fits.\n" +
+                            "Yes, this game was lost.\n" +
+                            "But no problem, just click on 'restart Game'\n", null),
+                    // todo add example for selecting and deselecting an element
+                    // todo show that one element is not enough
+
+                    // todo pass [] to TutorialStep and replace it inside with TileData.tutorialString()
+
+                    TutorialStep(5, "Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n" +
+                            "Now choose the upper left ${tiles[0].tutorialString()} ...\n", tiles[0]),
+                    TutorialStep(6, "now choose the fitting ${tiles[8].tutorialString()}.\n", tiles[8]),
+                    TutorialStep(7, "These Tiles are played - let's play the next pair!\n" +
+                            "Now click on the ${tiles[12].tutorialString()} and ...\n", tiles[12]),
+                    TutorialStep(8, "... the ${tiles[15].tutorialString()}.\n", tiles[15]),
+                    TutorialStep(9, "These Tiles are played - let's play the red pair!\n" +
+                            "Now click on the ${tiles[5].tutorialString()} and ...\n", tiles[5]),
+                    TutorialStep(10, "... the ${tiles[6].tutorialString()}.\n", tiles[6]),
+                    TutorialStep(11, "These Tiles are played - let's play the first green pair!\n" +
+                            "Now click on the ${tiles[1].tutorialString()} and ...\n", tiles[1]),
+                    TutorialStep(12, "... the ${tiles[10].tutorialString()}.\n", tiles[10]),
+                    TutorialStep(13, "These Tiles are played - let's play the green pair!\n" +
+                            "Now click on the ${tiles[11].tutorialString()} and ...\n", tiles[11]),
+                    TutorialStep(14, "... the ${tiles[13].tutorialString()}.\n", tiles[13]),
+                    TutorialStep(15, "These Tiles are played - let's play one of the blue pairs!\n" +
+                            "Now click on the ${tiles[3].tutorialString()} and ...\n", tiles[3]),
+                    TutorialStep(16, "... the ${tiles[4].tutorialString()}.\n", tiles[4]),
+                    TutorialStep(17, "These Tiles are played - let's play the second to last blue pair!\n" +
+                            "Now click on the ${tiles[2].tutorialString()} and ...\n", tiles[2]),
+                    TutorialStep(18, "... the ${tiles[14].tutorialString()}.\n", tiles[14]),
+                    TutorialStep(19, "These Tiles are played - let's play the last pair!\n" +
+                            "Now click on the ${tiles[7].tutorialString()} and ...\n", tiles[7]),
+                    TutorialStep(20, "... the ${tiles[9].tutorialString()}.\n", tiles[9]),
+                    TutorialStep(21, "Congratulations! You have finished the Tutorial.\n" +
+                            "Now you know how to play the game.\n" +
+                            "You can start a new game with the Menu above.", null)
+                )
             }
             else -> {
                 // should not happen
@@ -120,4 +160,13 @@ class Tutorial {
     fun getTileList(): List<TileData> = tiles
 
     fun isTutorial(): Boolean = activeState.value
+
+    private fun newTileData(color: Color, shape: ShapeEnum, number: Int): TileData =
+        TileData(
+            color = color,
+            shape = shape,
+            number = number,
+            chosenForPlay = true,
+            played = false
+        )
 }

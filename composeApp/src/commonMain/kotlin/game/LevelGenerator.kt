@@ -55,46 +55,11 @@ class LevelGenerator {
 
     fun generateTutorial() {
 
-        val board = BoardData(2)
+
+        val board = BoardData(if (GameStateHolder.level.value == 0) {2} else {4})
 
         GameStateHolder.tutorial.startTutorial()
-
         board.tiles = GameStateHolder.tutorial.getTileList()
-
-        println("generateTutorial: ${board.tiles}")
-
-        /*
-        board.tiles = listOf(
-            TileData(
-                color = Color.Green,
-                shape = ShapeEnum.TRIANGLE,
-                number = 3,
-                chosenForPlay = true,
-                played = false
-            ),
-            TileData(
-                color = Color.Yellow,
-                shape = ShapeEnum.TRIANGLE,
-                number = 3,
-                chosenForPlay = true,
-                played = false
-            ),
-            TileData(
-                color = Color.Blue,
-                shape = ShapeEnum.TRIANGLE,
-                number = 3,
-                chosenForPlay = true,
-                played = false
-            ),
-            TileData(
-                color = Color.Blue,
-                shape = ShapeEnum.CIRCLE,
-                number = 1,
-                chosenForPlay = true,
-                played = false
-            )
-        )
-        */
         GameStateHolder.saveNewBoard(board)
     }
 }
