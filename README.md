@@ -9,6 +9,15 @@ Run for web:
 open webapp on browser:
 http://localhost:8080/
 
+generate artifact for web:
+
+```shell
+./gradlew :composeApp:wasmJsBrowserProductionExecutable
+```
+Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
+
+....
+
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
