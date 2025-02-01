@@ -12,6 +12,7 @@ class Tutorial {
 
     private val currentStepState: MutableState<TutorialStep?> = mutableStateOf(null)
     private val activeState: MutableState<Boolean> = mutableStateOf(false)
+
     fun startTutorial() {
         activeState.value = true
         when (GameStateHolder.gameMode.value) {
@@ -32,7 +33,7 @@ class Tutorial {
                             "Now click on the lower left [].\n", tiles[2]),
                     TutorialStep(4, "Both Tiles disappear, because this fits.\n" +
                             "Yes, this game was lost.\n" +
-                            "But no problem, just click on 'restart Game'\n", null),
+                            "But no problem, just click on 'Restart Game'\n", null),
                     TutorialStep(5, "Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n" +
                             "Now choose the upper left [] ...\n", tiles[0]),
                     TutorialStep(6, "Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n" +
@@ -79,7 +80,7 @@ class Tutorial {
                     ),
                     TutorialStep(4, "Both Tiles disappear, because this fits.\n" +
                             "Yes, this game was lost.\n" +
-                            "But no problem, just click on 'restart Game'\n", null),
+                            "But no problem, just click on 'Restart Game'\n", null),
                     // todo add example for selecting and deselecting an element
                     // todo show that one element is not enough
 
@@ -144,6 +145,8 @@ class Tutorial {
     }
 
     fun isAllowedTile(tileData: TileData): Boolean = currentStepState.value?.tile?.same(tileData) ?: false
+
+    fun isRestartAllowed(): Boolean = currentStepState.value?.tile == null
 
     fun getTileList(): List<TileData> = tiles
 

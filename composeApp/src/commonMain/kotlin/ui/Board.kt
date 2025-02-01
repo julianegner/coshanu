@@ -1,5 +1,6 @@
 package ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.unit.dp
 import game.*
 import game.GameStateHolder.gameMode
@@ -21,7 +23,6 @@ import util.runOnMainAfter
 fun Board() {
 
     /* todo
-        add my width of field for tutorial text, so that the game board does not move around
         mark restart game button in tutorial
         dark mode?
         language support?
@@ -47,7 +48,12 @@ fun Board() {
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
-            Button(onClick = { restartGame() }) {
+            Button(border = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isRestartAllowed()) {
+                BorderStroke(2.dp, Color.Green)
+            } else {
+                null
+            },
+                onClick = { restartGame() }) {
                 Text("Restart Game")
             }
         }
