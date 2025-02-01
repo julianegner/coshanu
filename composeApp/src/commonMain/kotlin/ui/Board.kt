@@ -20,8 +20,30 @@ import util.runOnMainAfter
 @Composable
 fun Board() {
 
-    // todo dark mode?
-    // todo language support?
+    /* todo
+        add my width of field for tutorial text, so that the game board does not move around
+        mark restart game button in tutorial
+        dark mode?
+        language support?
+        .
+        generate APK for Android
+        generate for JVM
+        get domain
+        deploy to web
+        deploy to Android (game store)
+        deploy to iOS (app store)
+        deploy to apt
+        deploy to snap
+        deploy to flatpak
+        deploy to mac store
+        deploy to windows store
+        deploy to steam
+        deploy to nintendo
+        deploy to xbox
+        deploy to playstation
+        add GNU license
+        make repository public
+     */
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
@@ -56,7 +78,7 @@ fun Board() {
         Column {
             GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
             Text(
-                modifier = Modifier.padding(horizontal = 20.dp),
+                modifier = Modifier.padding(horizontal = 20.dp).width(400.dp), // todo depends on used device. we may have to shange the apearance of the ttorial text for mobile use
                 text = GameStateHolder.tutorial.getCurrentTutorialText()
             )
         }

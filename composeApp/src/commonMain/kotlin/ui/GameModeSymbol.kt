@@ -1,17 +1,18 @@
 package ui
 
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.unit.dp
 import game.GameMode
 import game.GameStateHolder
 
 @Composable
 fun GameModeSymbol(modifier: Modifier = Modifier) {
 
-    // todo add game mode symbol
     when (GameStateHolder.gameMode.value) {
         GameMode.SINGLE_ELEMENT -> {
             Text("${GameMode.SINGLE_ELEMENT.message} must fit for tiles to match",

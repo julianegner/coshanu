@@ -9,7 +9,7 @@ class LevelGenerator {
         GameStateHolder.resetBoard()
         when(levelNumber) {
             0 -> generateTutorial()
-            10 -> generateTutorial() // todo tutorial for two elements
+            10 -> generateTutorial()
             1,11 -> {
                     val board = BoardData(4)
                     board.tiles = board.tiles
