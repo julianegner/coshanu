@@ -18,6 +18,8 @@ object GameStateHolder {
 
     val tutorial: Tutorial = Tutorial()
 
+    val darkModeState: MutableState<Boolean> = mutableStateOf(false)
+
     fun resetBoard() {
         boardDataState.value.reset()
         listState.value = listOf()
