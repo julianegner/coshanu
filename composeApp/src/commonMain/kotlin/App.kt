@@ -76,15 +76,11 @@ fun Menu() {
 
     Row {
         Text(GameMode.SINGLE_ELEMENT.message, modifier = Modifier.padding(5.dp).width(100.dp))
-        Button(
-            onClick = {
-                GameStateHolder.changeLevel(0)
-            }) { Text("Tutorial") }
-        (1..3).forEach { i ->
+        (0..3).forEach { i ->
             Button(
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(i.toString()) }
+                }) { Text(if (i == 0) "Tutorial" else i.toString()) }
         }
     }
 
@@ -92,23 +88,15 @@ fun Menu() {
 
     Row {
         Text(GameMode.TWO_ELEMENTS.message, modifier = Modifier.padding(5.dp).width(100.dp))
-        Button(
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.White,
-                backgroundColor = if (GameStateHolder.darkModeState.value) LightBlue else Color.Blue
-            ),
-            onClick = {
-                GameStateHolder.changeLevel(10)
-            }) { Text("Tutorial") }
-        (11..13).forEach { i ->
+        (10..13).forEach { i ->
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
+                    contentColor = if (GameStateHolder.darkModeState.value) Color.Black else Color.White,
                     backgroundColor = if (GameStateHolder.darkModeState.value) LightBlue else Color.Blue
                 ),
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(i.toString()) }
+                }) { Text(if (i == 10) "Tutorial" else i.toString()) }
         }
     }
 }

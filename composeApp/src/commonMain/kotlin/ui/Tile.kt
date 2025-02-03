@@ -103,7 +103,8 @@ fun TileText(boardSize: Int,
     Text(
         modifier = Modifier.offset(x = xOffset, y = yOffset),
         text = tileNumber.toString(),
-        fontSize = TextUnit(textSize, TextUnitType.Em)
+        fontSize = TextUnit(textSize, TextUnitType.Em),
+        color = Color.Black
     )
 }
 

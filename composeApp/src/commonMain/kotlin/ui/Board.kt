@@ -25,8 +25,7 @@ fun Board() {
             set initial dark mode depending on system
         .
         block choosing cards when game is lost
-        mark restart game button in tutorial
-        language support?
+        language support / i18n ?
         .
         generate APK for Android
         generate for JVM
