@@ -62,14 +62,6 @@ fun CircleOfTiles() {
             chosenForPlay = true,
             played = false
         )
-        // ,
-        // TileData(
-        //     color = Color.Cyan,
-        //     shape = ShapeEnum.CIRCLE,
-        //     number = 6,
-        //     chosenForPlay = true,
-        //     played = false
-        // )
     )
 
     val radius = 50.dp

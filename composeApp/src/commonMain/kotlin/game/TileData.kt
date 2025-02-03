@@ -44,6 +44,24 @@ fun TileData.match(secondTileData: TileData): Boolean {
     }
 }
 
+fun TileData.getColor(): Color {
+    return if (GameStateHolder.darkModeState.value) {
+        when (this.color) {
+            Color.Blue -> Color(0xAA0000FF)
+            Color.Green -> Color(0xAA00AA00)
+            Color.Red -> Color(0xAAAA0000)
+            Color.Yellow -> Color(0xAAAAAA00)
+            Color.LightGray -> Color.DarkGray
+            Color.DarkGray -> Color(0xAA444444)
+            Color.Magenta -> Color(0xAAAA00AA)
+            Color.Cyan -> Color(0xAA00AAAA)
+            else -> Color.Black
+        }
+    } else {
+        this.color
+    }
+}
+
 private fun TileData.matchOne(secondTileData: TileData): Boolean {
     return ((this.color == secondTileData.color) || (this.shape == secondTileData.shape) || (this.number == secondTileData.number))
 }

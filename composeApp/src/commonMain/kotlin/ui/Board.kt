@@ -23,8 +23,6 @@ fun Board() {
     /* todo
         dark mode
             set initial dark mode depending on system
-            color of two elements level buttons
-            color of symbols depending on dark mode
         .
         block choosing cards when game is lost
         mark restart game button in tutorial
@@ -52,7 +50,10 @@ fun Board() {
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(border = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isRestartAllowed()) {
-                BorderStroke(2.dp, Color.Green)
+                BorderStroke(
+                    2.dp,
+                    if (GameStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
+                )
             } else {
                 null
             },
@@ -74,7 +75,9 @@ fun Board() {
 
     Row() {
         LazyVerticalGrid(
-            modifier = Modifier.size(800.dp).border(width = 1.dp, color = Color.Black),
+            modifier = Modifier.size(800.dp)
+                .border(width = 1.dp, color =
+                if (GameStateHolder.darkModeState.value) Color.LightGray else Color.Black),
             contentPadding = PaddingValues(12.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -178,10 +181,13 @@ private fun card(
         Card(
             modifier = cardModifier
                 .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
-            backgroundColor = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isAllowedTile(tileDataState.value)) {
-                Color.DarkGray
+            backgroundColor = if (
+                    GameStateHolder.tutorial.isTutorial() &&
+                    GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
+                ) {
+                if (GameStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
             } else {
-                Color.LightGray
+                if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
             },
             border = cardBorderState.value
 

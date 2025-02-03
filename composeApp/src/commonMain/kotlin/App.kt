@@ -28,8 +28,9 @@ fun App() {
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
             ) {
-                DarkModeSwitch()
+
                 GameSymbol()
+                DarkModeSwitch()
 
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -87,21 +88,24 @@ fun Menu() {
         }
     }
 
-    val buttonColor = ButtonDefaults.buttonColors(
-        contentColor = Color.White,
-        backgroundColor = Color.Blue
-    )
+    val LightBlue = Color(0xCC3333FF)
 
     Row {
         Text(GameMode.TWO_ELEMENTS.message, modifier = Modifier.padding(5.dp).width(100.dp))
         Button(
-            colors = buttonColor,
+            colors = ButtonDefaults.buttonColors(
+                contentColor = Color.White,
+                backgroundColor = if (GameStateHolder.darkModeState.value) LightBlue else Color.Blue
+            ),
             onClick = {
                 GameStateHolder.changeLevel(10)
             }) { Text("Tutorial") }
         (11..13).forEach { i ->
             Button(
-                colors = buttonColor,
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White,
+                    backgroundColor = if (GameStateHolder.darkModeState.value) LightBlue else Color.Blue
+                ),
                 onClick = {
                     GameStateHolder.changeLevel(i)
                 }) { Text(i.toString()) }

@@ -6,6 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +28,8 @@ fun Tile(tileDataState: MutableState<TileData>,
          displayText: Boolean = true
          ) {
 
+    val color = tileDataState.value.getColor()
+
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> {
             Canvas(
@@ -33,15 +37,15 @@ fun Tile(tileDataState: MutableState<TileData>,
             ) {
                 drawCircle(
                     radius = getCircleRadius(boardSize),
-                    color = tileDataState.value.color)
+                    color = color)
             }
         }
 
-        ShapeEnum.TRIANGLE ->   polygonBox(color = tileDataState.value.color, sides = 3, rotation = 30f, modifier = modifier.offset(y = 20.dp))
-        ShapeEnum.SQUARE ->     polygonBox(color = tileDataState.value.color, sides = 4, rotation = 45f, modifier = modifier)
-        ShapeEnum.PENTAGON ->   polygonBox(color = tileDataState.value.color, sides = 5, rotation = -18f, modifier = modifier)
-        ShapeEnum.HEXAGON ->    polygonBox(color = tileDataState.value.color, sides = 6, rotation = 90f, modifier = modifier)
-        ShapeEnum.OKTAGON ->    polygonBox(color = tileDataState.value.color, sides = 8, rotation = 22.5f, modifier = modifier)
+        ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f, modifier = modifier.offset(y = 20.dp))
+        ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, modifier = modifier)
+        ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, modifier = modifier)
+        ShapeEnum.HEXAGON ->    polygonBox(color = color, sides = 6, rotation = 90f, modifier = modifier)
+        ShapeEnum.OKTAGON ->    polygonBox(color = color, sides = 8, rotation = 22.5f, modifier = modifier)
     }
 
     if (displayText) {
@@ -116,16 +120,14 @@ fun tileSelected(
         // select first Tile
         GameStateHolder.updateSelected(Pair(tileDataState.value, null))
 
-        tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Green)
-        cardBorderState.value = BorderStroke(5.dp, Color.Green)
+        setBorder(tileDataState, cardBorderState, Color.Green)
 
         GameStateHolder.tutorial.nextStep()
 
     } else if (GameStateHolder.selected.value.first == tileDataState.value) {
         // first Tile is deselected by clicking again
         GameStateHolder.resetSelected()
-        tileDataState.value.borderStroke = null
-        cardBorderState.value = null
+        setBorder(tileDataState, cardBorderState, null)
     } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
         secondTileMatchesPlayCards(tileDataState)
     } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
@@ -133,6 +135,30 @@ fun tileSelected(
     }
 
     GameStateHolder.checkGameFinished()
+}
+
+private fun setBorder(
+    tileDataState: MutableState<TileData>,
+    cardBorderState: MutableState<BorderStroke?>,
+    borderColor: Color?
+) {
+    if (borderColor != null) {
+        if (GameStateHolder.darkModeState.value) {
+            val darkModeBorderColor = when (borderColor) {
+                Color.Green -> Color(0xAA00AA00)
+                Color.Red -> Color(0xAAAA0000)
+                else -> borderColor
+            }
+            tileDataState.value.borderStroke = BorderStroke(5.dp, darkModeBorderColor)
+            cardBorderState.value = BorderStroke(5.dp, darkModeBorderColor)
+        } else {
+            tileDataState.value.borderStroke = BorderStroke(5.dp, borderColor)
+            cardBorderState.value = BorderStroke(5.dp, borderColor)
+        }
+    } else {
+        tileDataState.value.borderStroke = null
+        cardBorderState.value = null
+    }
 }
 
 private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
@@ -154,8 +180,7 @@ private fun secondTileDoesNotMatch(
     cardBorderState: MutableState<BorderStroke?>
 ) {
     // second Tile does not match first Tile
-    tileDataState.value.borderStroke = BorderStroke(5.dp, Color.Red)
-    cardBorderState.value = BorderStroke(5.dp, Color.Red)
+    setBorder(tileDataState, cardBorderState, Color.Red)
 
     runOnMainAfter(2000L) { cardBorderState.value = null }
 
