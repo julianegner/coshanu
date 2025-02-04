@@ -22,9 +22,10 @@ fun Board() {
 
     /* todo
         dark mode
-            set initial dark mode depending on system
+            initial dark mode setting depending on system does not work for web
         .
         block choosing cards when game is lost
+        remove not needed printlines
         language support / i18n ?
         .
         generate APK for Android

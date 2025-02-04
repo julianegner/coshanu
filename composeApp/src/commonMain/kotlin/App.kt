@@ -16,12 +16,22 @@ import ui.Board
 import ui.DarkModeSwitch
 import ui.GameSymbol
 
+class AppInitializer(darkTheme: Boolean) {
+    // Code to run only once at the start of the program
+    init {
+        println("AppInitializer init block. darkTheme: $darkTheme")
+        if (darkTheme) {
+            GameStateHolder.darkModeState.value = true
+        }
+
+    }
+}
+
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
-    // if (isSystemInDarkTheme()) {
-    //     GameStateHolder.darkModeState.value = true
-    // }
+    AppInitializer(isSystemInDarkTheme())
+
     MaterialTheme(colors = if (GameStateHolder.darkModeState.value) darkColors() else lightColors()) {
         Scaffold { // Scaffold is needed for the dark mode switch to work
             Row(
