@@ -24,7 +24,6 @@ fun Board() {
         dark mode
             initial dark mode setting depending on system does not work for web
         .
-        block choosing cards when game is lost
         remove not needed printlines
         language support / i18n ?
         .

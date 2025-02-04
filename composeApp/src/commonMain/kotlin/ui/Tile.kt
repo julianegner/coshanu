@@ -116,6 +116,10 @@ fun tileSelected(
         // todo make warning visible
         return
     }
+    if (GameStateHolder.gameState.value == GameState.LOST) {
+        // game is lost, no more tiles can be selected
+        return
+    }
 
     if (GameStateHolder.selected.value.first == null) {
         // select first Tile
