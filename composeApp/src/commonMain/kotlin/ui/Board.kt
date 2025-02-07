@@ -21,10 +21,9 @@ import util.runOnMainAfter
 fun Board() {
 
     /* todo
-        dark mode
-            initial dark mode setting depending on system does not work for web
-        .
         remove not needed printlines
+        .
+        .
         language support / i18n ?
         use standard functions with XML
         -> https://medium.com/@dzenanbecirovicc/compose-multiplatform-localization-ec6745961ddc
