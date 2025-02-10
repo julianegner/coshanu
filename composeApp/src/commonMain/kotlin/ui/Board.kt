@@ -3,7 +3,6 @@ package ui
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -38,6 +37,7 @@ fun Board() {
         generate for JVM
         get domain
         deploy to web
+        add robots.txt for web, so that the search engines can index the site
         deploy to Android (game store)
         deploy to iOS (app store)
         deploy to apt
