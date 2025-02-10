@@ -20,6 +20,9 @@ object GameStateHolder {
 
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
 
+    // todo save language file to GameStateHolder
+    // val language: MutableState<Json> = mutableStateOf(Json(emptyMap()))
+
     fun resetBoard() {
         boardDataState.value.reset()
         listState.value = listOf()
@@ -85,8 +88,13 @@ object GameStateHolder {
 
     fun getGameStateText(): MutableState<String> {
         val text = when (gameState.value) {
-            GameState.RUNNING ->
-                "${gameState.value.message} Remaining tiles: ${remainingTileAmount.value}"
+            GameState.RUNNING -> {
+                if (remainingTileAmount.value == 0) {
+                    GameState.WON.message // before the state is set to Won
+                } else {
+                    "${gameState.value.message} Remaining tiles: ${remainingTileAmount.value}"
+                }
+            }
             else -> gameState.value.message
         }
         gameStateText.value = text
