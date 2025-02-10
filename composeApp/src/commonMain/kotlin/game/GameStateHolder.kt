@@ -20,9 +20,6 @@ object GameStateHolder {
 
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
 
-    // todo save language file to GameStateHolder
-    // val language: MutableState<Json> = mutableStateOf(Json(emptyMap()))
-
     fun resetBoard() {
         boardDataState.value.reset()
         listState.value = listOf()

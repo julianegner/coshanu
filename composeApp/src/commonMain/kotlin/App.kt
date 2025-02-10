@@ -1,17 +1,18 @@
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.greetings
 import game.*
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.Board
 import ui.DarkModeSwitch
 import ui.GameSymbol
@@ -42,6 +43,8 @@ fun App() {
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
             ) {
+
+                Text(stringResource(Res.string.greetings))
 
                 GameSymbol()
                 DarkModeSwitch()
