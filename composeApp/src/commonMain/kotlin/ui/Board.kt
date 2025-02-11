@@ -26,13 +26,7 @@ fun Board() {
         remove not needed printlines
         .
         .
-        language support / i18n ?
-        use standard functions with XML
-        -> https://medium.com/@dzenanbecirovicc/compose-multiplatform-localization-ec6745961ddc
-        build yourself with JSON
-        -> https://stackoverflow.com/questions/77821949/load-local-json-file-in-kotlin-multiplatform-library
-        .
-        composeApp/src/commonMain/composeResources/files
+        bug: red border comes back on when playing other tiles
         .
         .
         .

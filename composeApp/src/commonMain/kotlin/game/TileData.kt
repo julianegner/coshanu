@@ -3,6 +3,7 @@ package game
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.intl.Locale
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
@@ -30,11 +31,28 @@ data class TileData(
     var borderStroke: BorderStroke? = null
 )
 
+/* todo
+localization german
+das grüne Dreieck
+den rote Kreis
+das dunkelgraue Sechseck
+
+-> bei Circle "der", sonst "das"
+-> nach der Farbe immer noch ein "e", bei Circle "en"
+ */
 @Composable
-fun TileData.tutorialString(): String =
-        "${this.color.toName().lowercase()} " +
-        "${stringResource(this.shape.resourceId)} " +
-        "${stringResource(Res.string.with_number)} ${this.number}"
+fun TileData.tutorialString(): String {
+    var colorPrefix = ""
+    var colorPostfix = ""
+    if (Locale.current.language == "de") {
+        colorPrefix = if (this.shape == ShapeEnum.CIRCLE) "den " else "das "
+        colorPostfix = if (this.shape == ShapeEnum.CIRCLE) "en" else "e"
+    }
+
+    return "${colorPrefix}${this.color.toName().lowercase()}${colorPostfix} " +
+            "${stringResource(this.shape.resourceId)} " +
+            "${stringResource(Res.string.with_number)} ${this.number}"
+}
 
 fun TileData.same(secondTileData: TileData): Boolean = ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))
 
