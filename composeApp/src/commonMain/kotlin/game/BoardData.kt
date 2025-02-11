@@ -1,9 +1,17 @@
 package game
 
 import androidx.compose.ui.graphics.Color
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.*
+import org.jetbrains.compose.resources.StringResource
 
-enum class ShapeEnum {
-    CIRCLE, TRIANGLE, SQUARE, PENTAGON, HEXAGON, OKTAGON
+enum class ShapeEnum(val resourceId: StringResource) {
+    CIRCLE(Res.string.circle),
+    TRIANGLE(Res.string.triangle),
+    SQUARE(Res.string.square),
+    PENTAGON(Res.string.pentagon),
+    HEXAGON(Res.string.hexagon),
+    OCTAGON(Res.string.octagon)
 }
 
 class BoardData(
@@ -29,7 +37,7 @@ class BoardData(
             ShapeEnum.SQUARE,
             ShapeEnum.PENTAGON,
             ShapeEnum.HEXAGON,
-            ShapeEnum.OKTAGON
+            ShapeEnum.OCTAGON
         )
         val numbers = (1..maxNumber).toList()
         val boardSize = size

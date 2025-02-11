@@ -8,10 +8,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
-import coshanu.composeapp.generated.resources.greetings
-import coshanu.composeapp.generated.resources.test
+import coshanu.composeapp.generated.resources.title
 import game.*
+import game.GameStateHolder.gameState
+import game.GameStateHolder.remainingTileAmount
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.Board
@@ -44,40 +46,33 @@ fun App() {
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
             ) {
-
-                Text(stringResource(Res.string.greetings))
-
-                Text(stringResource(Res.string.test))
-
                 GameSymbol()
                 DarkModeSwitch()
 
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         modifier = Modifier.padding(vertical = 20.dp),
-                        text = "CoShaNu - Color, Shape, Number",
+                        text = stringResource(Res.string.title),
                         fontSize = TextUnit(2f, TextUnitType.Em)
                     )
 
-                    if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
-                        Text(
-                            modifier = Modifier.padding(vertical = 20.dp),
-                            text = GameStateHolder.gameStateText.value,
-                            fontSize = TextUnit(2f, TextUnitType.Em)
+                    Text(
+                        text = getGameStateText(),
+                        fontSize = TextUnit(
+                            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                                2f
+                            } else {
+                                1.5f
+                            },
+                            TextUnitType.Em
                         )
-                    } else {
-                        Text(
-                            GameStateHolder.gameStateText.value,
-                            fontSize = TextUnit(1.5f, TextUnitType.Em)
-                        )
-                    }
+                    )
 
                     if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
                         Menu()
                     }
 
                     // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
-
 
                     // if level is chosen, display the board
                     if (GameStateHolder.level.value != null) {
@@ -90,24 +85,36 @@ fun App() {
 }
 
 @Composable
+fun getGameStateText(): String = when (gameState.value) {
+    GameState.RUNNING -> {
+        if (remainingTileAmount.value == 0) {
+            stringResource(Res.string.won) // before the state is set to Won
+        } else {
+            "${stringResource(Res.string.running)} ${stringResource(Res.string.remaining_tiles)} ${remainingTileAmount.value}"
+        }
+    }
+    else -> stringResource(gameState.value.resourceId)
+}
+
+@Composable
 fun Menu() {
 
-    Text("Choose a Level:")
+    Text(stringResource(Res.string.choose_level))
 
     Row {
-        Text(GameMode.SINGLE_ELEMENT.message, modifier = Modifier.padding(5.dp).width(100.dp))
+        Text(stringResource(Res.string.single_element), modifier = Modifier.padding(5.dp).width(100.dp))
         (0..3).forEach { i ->
             Button(
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(if (i == 0) "Tutorial" else i.toString()) }
+                }) { Text(if (i == 0) stringResource(Res.string.tutorial) else i.toString()) }
         }
     }
 
     val LightBlue = Color(0xCC3333FF)
 
     Row {
-        Text(GameMode.TWO_ELEMENTS.message, modifier = Modifier.padding(5.dp).width(100.dp))
+        Text(stringResource(Res.string.two_elements), modifier = Modifier.padding(5.dp).width(100.dp))
         (10..13).forEach { i ->
             Button(
                 colors = ButtonDefaults.buttonColors(
@@ -116,7 +123,7 @@ fun Menu() {
                 ),
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(if (i == 10) "Tutorial" else i.toString()) }
+                }) { Text(if (i == 10) stringResource(Res.string.tutorial) else i.toString()) }
         }
     }
 }

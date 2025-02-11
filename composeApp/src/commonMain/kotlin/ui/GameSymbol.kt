@@ -50,7 +50,7 @@ fun CircleOfTiles() {
         ),
         TileData(
             color = Color.DarkGray,
-            shape = ShapeEnum.OKTAGON,
+            shape = ShapeEnum.OCTAGON,
             number = 4,
             chosenForPlay = true,
             played = false

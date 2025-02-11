@@ -1,5 +1,85 @@
 <resources>
     <!-- default language: english -->
-    <string name="greetings">Greetings</string>
-    <string name="test">Testa rossata</string>
+    <string name="title">CoShaNu - Color, Shape, Number</string>
+    <string name="choose_level">Choose a Level:</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+
+    <string name="single_element">Single Element</string>
+    <string name="two_elements">Two Elements</string>
+
+    <string name="single_element_must_fit">Single Element must fit for tiles to match</string>
+    <string name="two_elements_must_fit">Two Elements must fit for tiles to match</string>
+
+    <string name="restart">starting again</string>
+    <string name="starting">starting</string>
+    <string name="won">You Won!!</string>
+    <string name="lost">Sorry, you lost!</string>
+    <string name="running">Running...</string>
+    <string name="level_change">changing level</string>
+
+    <string name="remaining_tiles">Remaining tiles:</string>
+
+    <string name="restart_game">Restart Game</string>
+    <string name="end_game">End Game</string>
+    <string name="start_game">Start Game</string>
+
+    <string name="color_blue">Blue</string>
+
+    <string name="color_green">Green</string>
+    <string name="color_red">Red</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_light_gray">LightGray</string>
+    <string name="color_dark_gray">DarkGray</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_cyan">Cyan</string>
+    <string name="color_unknown">Unknown</string>
+
+    <string name="circle">Circle</string>
+    <string name="triangle">Triangle</string>
+    <string name="square">Square</string>
+    <string name="pentagon">Pentagon</string>
+    <string name="hexagon">Hexagon</string>
+    <string name="octagon">Octagon</string>
+
+    <string name="with_number">with Number</string>
+
+    <string name="tutorial_one_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
+    <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
+    <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\n That is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
+    <string name="tutorial_one_4">Both Tiles disappear, because this fits.\nYes, this game was lost.\nBut no problem, just click on 'Restart Game'</string>
+    <string name="tutorial_one_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
+    <string name="tutorial_one_6">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n... and then the [].</string>
+    <string name="tutorial_one_7">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower left [].</string>
+    <string name="tutorial_one_8">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower right [].</string>
+    <string name="tutorial_one_9">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
+
+    <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
+    <string name="tutorial_two_2">Now click on the [] right to the first Tile</string>
+    <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
+    <string name="tutorial_two_4">Both Tiles disappear, because this fits.\nYes, this game was lost.\nBut no problem, just click on 'Restart Game'</string>
+    <string name="tutorial_two_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
+    <string name="tutorial_two_6">now choose the fitting [].</string>
+    <string name="tutorial_two_7">These Tiles are played - let's play the next pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_8">... the []</string>
+    <string name="tutorial_two_9">These Tiles are played - let's play the red pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_10">... the []</string>
+    <string name="tutorial_two_11">These Tiles are played - let's play the first green pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_12">... the []</string>
+    <string name="tutorial_two_13">These Tiles are played - let's play the green pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_14">... the []</string>
+    <string name="tutorial_two_15">These Tiles are played - let's play one of the blue pairs!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_16">... the []</string>
+    <string name="tutorial_two_17">These Tiles are played - let's play the second to last blue pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_18">... the []</string>
+    <string name="tutorial_two_19">These Tiles are played - let's play the last pair!\nNow click on the [] and ...</string>
+    <string name="tutorial_two_20">... the []</string>
+    <string name="tutorial_two_21">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 </resources>
+
+
+<!--
+stringResource(Res.string.test)
+Text(stringResource(Res.string.test))
+-->

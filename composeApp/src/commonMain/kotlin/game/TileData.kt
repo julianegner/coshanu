@@ -1,19 +1,24 @@
 package game
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.*
+import org.jetbrains.compose.resources.stringResource
 
+@Composable
 fun Color.toName(): String =
     when (this) {
-        Color.Blue -> "Blue"
-        Color.Green -> "Green"
-        Color.Red -> "Red"
-        Color.Yellow -> "Yellow"
-        Color.LightGray -> "LightGray"
-        Color.DarkGray -> "DarkGray"
-        Color.Magenta -> "Magenta"
-        Color.Cyan -> "Cyan"
-        else -> "Unknown"
+        Color.Blue -> stringResource(Res.string.color_blue)
+        Color.Green -> stringResource(Res.string.color_green)
+        Color.Red -> stringResource(Res.string.color_red)
+        Color.Yellow -> stringResource(Res.string.color_yellow)
+        Color.LightGray -> stringResource(Res.string.color_light_gray)
+        Color.DarkGray -> stringResource(Res.string.color_dark_gray)
+        Color.Magenta -> stringResource(Res.string.color_magenta)
+        Color.Cyan -> stringResource(Res.string.color_cyan)
+        else -> stringResource(Res.string.color_unknown)
     }
 
 data class TileData(
@@ -25,7 +30,11 @@ data class TileData(
     var borderStroke: BorderStroke? = null
 )
 
-fun TileData.tutorialString(): String = "${this.color.toName().lowercase()} ${this.shape.name.lowercase()} with Number ${this.number}"
+@Composable
+fun TileData.tutorialString(): String =
+        "${this.color.toName().lowercase()} " +
+        "${stringResource(this.shape.resourceId)} " +
+        "${stringResource(Res.string.with_number)} ${this.number}"
 
 fun TileData.same(secondTileData: TileData): Boolean = ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))
 

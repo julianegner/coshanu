@@ -6,8 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,7 +43,7 @@ fun Tile(tileDataState: MutableState<TileData>,
         ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, modifier = modifier)
         ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, modifier = modifier)
         ShapeEnum.HEXAGON ->    polygonBox(color = color, sides = 6, rotation = 90f, modifier = modifier)
-        ShapeEnum.OKTAGON ->    polygonBox(color = color, sides = 8, rotation = 22.5f, modifier = modifier)
+        ShapeEnum.OCTAGON ->    polygonBox(color = color, sides = 8, rotation = 22.5f, modifier = modifier)
     }
 
     if (displayText) {

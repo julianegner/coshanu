@@ -1,5 +1,6 @@
 package game
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 
@@ -54,8 +55,6 @@ class LevelGenerator {
     }
 
     fun generateTutorial() {
-
-
         val board = BoardData(if (GameStateHolder.level.value == 0) {2} else {4})
 
         GameStateHolder.tutorial.startTutorial()

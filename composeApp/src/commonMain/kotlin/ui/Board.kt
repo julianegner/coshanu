@@ -11,10 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import coshanu.composeapp.generated.resources.Res
 import game.*
 import game.GameStateHolder.gameMode
 import game.GameStateHolder.level
+import org.jetbrains.compose.resources.stringResource
 import util.runOnMainAfter
+import coshanu.composeapp.generated.resources.*
 
 @Composable
 fun Board() {
@@ -64,17 +67,17 @@ fun Board() {
                 null
             },
                 onClick = { restartGame() }) {
-                Text("Restart Game")
+                Text(stringResource(Res.string.restart_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
-                Text("End Game")
+                Text(stringResource(Res.string.end_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(onClick = { newGame() }) {
-                Text("Start Game")
+                Text(stringResource(Res.string.start_game))
             }
         }
     }

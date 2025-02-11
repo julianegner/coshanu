@@ -47,7 +47,6 @@ object GameStateHolder {
 
     fun updateGameState(newState: GameState) {
         gameState.value = newState
-        updateGameStateTextRemainingTileAmount()
         if (newState == GameState.WON) {
             level.value = null
         }
@@ -81,21 +80,6 @@ object GameStateHolder {
 
     fun resetSelected() {
         selected.value = Pair(null, null)
-    }
-
-    fun getGameStateText(): MutableState<String> {
-        val text = when (gameState.value) {
-            GameState.RUNNING -> {
-                if (remainingTileAmount.value == 0) {
-                    GameState.WON.message // before the state is set to Won
-                } else {
-                    "${gameState.value.message} Remaining tiles: ${remainingTileAmount.value}"
-                }
-            }
-            else -> gameState.value.message
-        }
-        gameStateText.value = text
-        return gameStateText
     }
 
     fun checkGameFinished(
@@ -148,10 +132,5 @@ object GameStateHolder {
         boardDataState.value.tiles = listState.value
 
         remainingTileAmount.value -= 2
-        updateGameStateTextRemainingTileAmount()
-    }
-
-    private fun updateGameStateTextRemainingTileAmount() {
-        gameStateText.value = getGameStateText().value
     }
 }
