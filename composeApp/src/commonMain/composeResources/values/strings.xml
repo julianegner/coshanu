@@ -1,0 +1,5 @@
+<resources>
+    <!-- default language: english -->
+    <string name="greetings">Greetings</string>
+    <string name="test">Testa rossata</string>
+</resources>

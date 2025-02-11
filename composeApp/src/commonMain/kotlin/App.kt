@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.greetings
+import coshanu.composeapp.generated.resources.test
 import game.*
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
@@ -45,6 +46,8 @@ fun App() {
             ) {
 
                 Text(stringResource(Res.string.greetings))
+
+                Text(stringResource(Res.string.test))
 
                 GameSymbol()
                 DarkModeSwitch()
