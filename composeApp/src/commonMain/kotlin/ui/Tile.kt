@@ -40,7 +40,7 @@ fun Tile(tileDataState: MutableState<TileData>,
         }
 
         ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f,
-            modifier = modifier.offset(y = if (boardSize < 8) 15.dp else 5.dp)
+            modifier = modifier.offset(y = if (boardSize < 8 || boardSize == 20) 15.dp else 5.dp)
         )
         ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, modifier = modifier)
         ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, modifier = modifier)

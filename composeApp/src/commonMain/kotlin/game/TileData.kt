@@ -79,7 +79,7 @@ fun TileData.getColor(): Color {
             Color.Red -> Color(0xAAAA0000)
             Color.Yellow -> Color(0xAAAAAA00)
             Color.LightGray -> Color.DarkGray
-            Color.DarkGray -> Color(0xAA444444)
+            Color.DarkGray -> Color.LightGray // Color(0xAA444444)
             Color.Magenta -> Color(0xAAAA00AA)
             Color.Cyan -> Color(0xAA00AAAA)
             else -> Color.Black

@@ -27,7 +27,6 @@ fun Board() {
         bug: display on web on mobile device is not correct
             usage of space on mobile is wrong
         .
-        bug: dark mode: tiles in dark gray are not visible in dark mode, because the background color is also dark gray in dark mode
         bug: red border comes back on when playing other tiles
         .
         remove not needed printlines
@@ -50,7 +49,7 @@ fun Board() {
         deploy to mac store
         deploy to windows store
         deploy to steam
-        deploy to nintendo
+        deploy to nintendo ??
         deploy to xbox
         deploy to playstation
         add GNU license

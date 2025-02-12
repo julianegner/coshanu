@@ -93,7 +93,7 @@ fun CircleOfTiles() {
                                 tileDataState = mutableStateOf(element),
                                 cardBorderState = mutableStateOf(null),
                                 modifier = Modifier.size(100.dp)
-                                    .offset(y = -20.dp),
+                                    .offset(y = -5.dp),
                                 boardSize = 12,
                                 displayText = false
                             )
