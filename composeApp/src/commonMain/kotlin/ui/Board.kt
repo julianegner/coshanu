@@ -23,12 +23,18 @@ import coshanu.composeapp.generated.resources.*
 fun Board() {
 
     /* todo
+        bug: display on web on mobile device is not correct
+            number is not centered
+            usage of space on mobile is wrong
+        bug: largest board size: triangle is on the bottom of the card, should be centered
+        bug: number 10 is too far left in levels 2 and 12 (second largest board size)
+        bug: dark mode: tiles in dark gray are not visible in dark mode, because the background color is also dark gray in dark mode
+        bug: red border comes back on when playing other tiles
+        .
         remove not needed printlines
         .
         .
-        bug: display on web on mobile device is not correct
         add language chooser ?
-        bug: red border comes back on when playing other tiles
         .
         .
         .
