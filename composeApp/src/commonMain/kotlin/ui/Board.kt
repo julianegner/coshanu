@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -24,10 +25,8 @@ fun Board() {
 
     /* todo
         bug: display on web on mobile device is not correct
-            number is not centered
             usage of space on mobile is wrong
-        bug: largest board size: triangle is on the bottom of the card, should be centered
-        bug: number 10 is too far left in levels 2 and 12 (second largest board size)
+        .
         bug: dark mode: tiles in dark gray are not visible in dark mode, because the background color is also dark gray in dark mode
         bug: red border comes back on when playing other tiles
         .
@@ -202,8 +201,7 @@ private fun card(
             } else {
                 if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
             },
-            border = cardBorderState.value
-
+            border = cardBorderState.value,
         ) {
             Tile(tileDataState, cardBorderState)
         }

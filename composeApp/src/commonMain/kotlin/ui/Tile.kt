@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -39,7 +39,9 @@ fun Tile(tileDataState: MutableState<TileData>,
             }
         }
 
-        ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f, modifier = modifier.offset(y = 20.dp))
+        ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f,
+            modifier = modifier.offset(y = if (boardSize < 8) 15.dp else 5.dp)
+        )
         ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, modifier = modifier)
         ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, modifier = modifier)
         ShapeEnum.HEXAGON ->    polygonBox(color = color, sides = 6, rotation = 90f, modifier = modifier)
@@ -49,7 +51,7 @@ fun Tile(tileDataState: MutableState<TileData>,
     if (displayText) {
         TileText(
             boardSize,
-            tileDataState.value.number, tileDataState.value.shape == ShapeEnum.TRIANGLE
+            tileDataState.value.number
         )
     }
 }
@@ -65,44 +67,33 @@ fun getCircleRadius(boardSize: Int) = when (boardSize) {
 
 @Composable
 fun TileText(boardSize: Int,
-             tileNumber: Int, isTriangle: Boolean) {
-    var xOffset: Dp
-    var yOffset: Dp
+             tileNumber: Int) {
     var textSize: Float
 
     when (boardSize) {
         2 -> {
-            xOffset = if (tileNumber < 10) {150.dp} else {80.dp}
-            yOffset = if (isTriangle) {140.dp} else {120.dp}
             textSize = 6f
         }
         4 -> {
-            xOffset = if (tileNumber< 10) {70.dp} else {30.dp}
-            yOffset = if (isTriangle) {60.dp} else {50.dp}
             textSize = 4f
         }
         8 -> {
-            xOffset = if (tileNumber < 10) {30.dp} else {20.dp}
-            yOffset = if (isTriangle) {40.dp} else {20.dp}
             textSize = 2f
         }
         12 -> {
-            xOffset = if (tileNumber < 10) {10.dp} else {0.dp}
-            yOffset = if (isTriangle) {20.dp} else {0.dp}
             textSize = 2f
         }
         else -> {
-            xOffset = if (tileNumber < 10) {30.dp} else {0.dp}
-            yOffset = if (isTriangle) {40.dp} else {20.dp}
             textSize = 2f
         }
     }
 
     Text(
-        modifier = Modifier.offset(x = xOffset, y = yOffset),
+        modifier = Modifier.wrapContentHeight(),
         text = tileNumber.toString(),
         fontSize = TextUnit(textSize, TextUnitType.Em),
-        color = Color.Black
+        color = Color.Black,
+        textAlign = TextAlign.Center
     )
 }
 
