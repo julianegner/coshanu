@@ -1,5 +1,6 @@
 package ui
 
+import ScreenType
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -8,7 +9,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -21,11 +21,11 @@ import util.runOnMainAfter
 import coshanu.composeapp.generated.resources.*
 
 @Composable
-fun Board() {
+fun Board(screenType: ScreenType) {
 
     /* todo
-        bug: display on web on mobile device is not correct
-            usage of space on mobile is wrong
+        bug: 2nd german title text too close to the main title text
+        on mobile, put the game status text below the game board
         .
         bug: red border comes back on when playing other tiles
         .
@@ -82,29 +82,42 @@ fun Board() {
         }
     }
 
-    Row() {
-        LazyVerticalGrid(
-            modifier = Modifier
-                .aspectRatio(1f)
-                .size(800.dp)
-                .border(width = 1.dp, color =
+    if (screenType == ScreenType.PORTRAIT) {
+        Column {  // desktop and portrait
+            GridAndTutorial(screenType)
+        }
+    } else {
+        Row { // mobile
+            GridAndTutorial(screenType)
+        }
+    }
+}
+
+@Composable
+fun GridAndTutorial(screenType: ScreenType) {
+    LazyVerticalGrid(
+        modifier = Modifier
+            .aspectRatio(1f)
+            .size(800.dp)
+            .border(width = 1.dp, color =
                 if (GameStateHolder.darkModeState.value) Color.LightGray else Color.Black),
-            contentPadding = PaddingValues(12.dp),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
-        ) {
-            items(GameStateHolder.listState.value.size) { index ->
-                card(GameStateHolder.listState.value.get(index))
-            }
+        contentPadding = PaddingValues(12.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
+    ) {
+        items(GameStateHolder.listState.value.size) { index ->
+            card(GameStateHolder.listState.value.get(index))
         }
-        Column {
-            GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
-            Text(
-                modifier = Modifier.padding(horizontal = 20.dp).width(400.dp), // todo depends on used device. we may have to shange the apearance of the ttorial text for mobile use
-                text = GameStateHolder.tutorial.getCurrentTutorialText()
-            )
-        }
+    }
+    Column(
+        modifier = Modifier.padding( top = if (screenType == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
+    ) {
+        GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
+        Text(
+            modifier = Modifier.padding(horizontal = 20.dp).width(400.dp), // todo depends on used device. we may have to shange the apearance of the ttorial text for mobile use
+            text = GameStateHolder.tutorial.getCurrentTutorialText()
+        )
     }
 }
 

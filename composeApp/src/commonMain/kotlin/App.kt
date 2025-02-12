@@ -18,7 +18,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.Board
 import ui.DarkModeSwitch
-import ui.GameModeSymbol
 import ui.GameSymbol
 
 object AppInitializer {
@@ -36,6 +35,11 @@ object AppInitializer {
     }
 }
 
+enum class ScreenType {
+    PORTRAIT,
+    LANDSCAPE
+}
+
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
@@ -43,41 +47,48 @@ fun App() {
 
     MaterialTheme(colors = if (GameStateHolder.darkModeState.value) darkColors() else lightColors()) {
         Scaffold { // Scaffold is needed for the dark mode switch to work
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 20.dp)
-            ) {
-                GameSymbol()
-                DarkModeSwitch()
+            BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
+                val maxHeight = this.maxHeight
+                val maxWidth = this.maxWidth
 
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        modifier = Modifier.padding(vertical = 20.dp),
-                        text = stringResource(Res.string.title),
-                        fontSize = TextUnit(2f, TextUnitType.Em)
-                    )
+                val screenType = if (maxWidth > maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT }
 
-                    Text(
-                        text = getGameStateText(),
-                        fontSize = TextUnit(
-                            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
-                                2f
-                            } else {
-                                1.5f
-                            },
-                            TextUnitType.Em
+                Row(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                ) {
+                    GameSymbol()
+                    DarkModeSwitch()
+
+                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            modifier = Modifier.padding(vertical = 20.dp),
+                            text = stringResource(Res.string.title),
+                            fontSize = TextUnit(2f, TextUnitType.Em)
                         )
-                    )
 
-                    if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
-                        Menu()
-                    }
+                        Text(
+                            text = getGameStateText(),
+                            fontSize = TextUnit(
+                                if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                                    2f
+                                } else {
+                                    1.5f
+                                },
+                                TextUnitType.Em
+                            )
+                        )
 
-                    // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+                        if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
+                            Menu()
+                        }
 
-                    // if level is chosen, display the board
-                    if (GameStateHolder.level.value != null) {
-                        Board()
+                        // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+
+                        // if level is chosen, display the board
+                        if (GameStateHolder.level.value != null) {
+                            Board(screenType)
+                        }
                     }
                 }
             }
