@@ -1,7 +1,6 @@
 package ui
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,16 +28,15 @@ fun Tile(tileDataState: MutableState<TileData>,
     val color = tileDataState.value.getColor()
 
     when (tileDataState.value.shape) {
-        ShapeEnum.CIRCLE -> {
-            Canvas(
-                modifier = modifier
-            ) {
-                drawCircle(
-                    radius = getCircleRadius(boardSize),
-                    color = color)
-            }
-        }
-
+        ShapeEnum.CIRCLE -> polygonBox(color = color, sides = 1000, rotation = 0f,
+            modifier = when (boardSize) {
+                2 -> modifier.padding(20.dp)
+                4 -> modifier.padding(15.dp)
+                8 -> modifier.padding(5.dp)
+                12 -> modifier.padding(2.dp)
+                20 -> modifier // for the GameSymbol
+                else -> modifier.padding(5.dp)
+            })
         ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f,
             modifier = modifier.offset(y = if (boardSize < 8 || boardSize == 20) 15.dp else 5.dp)
         )

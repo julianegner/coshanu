@@ -18,6 +18,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.Board
 import ui.DarkModeSwitch
+import ui.GameModeSymbol
 import ui.GameSymbol
 
 object AppInitializer {

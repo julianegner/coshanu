@@ -46,6 +46,7 @@
 
     <string name="tutorial_one_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
     <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün.\nJetzt klick auf [] unten rechts</string>
+    <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot.\nDas kommt daher, daß die Karten nicht zusammenpassen.\nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.\nDaher kommt auch der Name CoShaNu (Color, Shape, Number).\nJetzt klick auf [] unten links.</string>
     <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen.\nJa, dieses Spiel ist verloren.\nDas ist aber kein Problem, klick einfach auf 'Spiel neu Starten'</string>
     <string name="tutorial_one_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.\nJetzt wähle [] oben links ...</string>
     <string name="tutorial_one_6">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.\n... und dann [].</string>
