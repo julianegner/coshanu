@@ -26,6 +26,8 @@ fun Board() {
         remove not needed printlines
         .
         .
+        bug: display on web on mobile device is not correct
+        add language chooser ?
         bug: red border comes back on when playing other tiles
         .
         .
@@ -78,7 +80,9 @@ fun Board() {
 
     Row() {
         LazyVerticalGrid(
-            modifier = Modifier.size(800.dp)
+            modifier = Modifier
+                .aspectRatio(1f)
+                .size(800.dp)
                 .border(width = 1.dp, color =
                 if (GameStateHolder.darkModeState.value) Color.LightGray else Color.Black),
             contentPadding = PaddingValues(12.dp),
