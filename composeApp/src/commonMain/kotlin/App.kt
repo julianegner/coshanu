@@ -61,11 +61,17 @@ fun App() {
                     DarkModeSwitch()
 
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            modifier = Modifier.padding(vertical = 20.dp),
-                            text = stringResource(Res.string.title),
-                            fontSize = TextUnit(2f, TextUnitType.Em)
-                        )
+                        Column(modifier = Modifier.padding(vertical = 20.dp)) {
+                            Text(
+                                text = stringResource(Res.string.title),
+                                fontSize = TextUnit(2f, TextUnitType.Em)
+                            )
+                            Text(
+                                modifier = Modifier.align(Alignment.CenterHorizontally),
+                                text = stringResource(Res.string.subtitle),
+                                fontSize = TextUnit(1.8f, TextUnitType.Em)
+                            )
+                        }
 
                         Text(
                             text = getGameStateText(),

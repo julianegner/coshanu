@@ -1,6 +1,7 @@
 <resources>
     <!-- default language: english -->
     <string name="title">CoShaNu - Color, Shape, Number</string>
+    <string name="subtitle"></string>
     <string name="choose_level">Choose a Level:</string>
     <string name="tutorial">Tutorial</string>
     <string name="dark_mode">Dark Mode</string>

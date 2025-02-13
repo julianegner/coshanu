@@ -24,7 +24,6 @@ import coshanu.composeapp.generated.resources.*
 fun Board(screenType: ScreenType) {
 
     /* todo
-        bug: 2nd german title text too close to the main title text
         on mobile, put the game status text below the game board
         .
         bug: red border comes back on when playing other tiles
