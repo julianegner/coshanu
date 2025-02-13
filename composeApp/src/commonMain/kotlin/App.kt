@@ -73,18 +73,6 @@ fun App() {
                             )
                         }
 
-                        Text(
-                            text = getGameStateText(),
-                            fontSize = TextUnit(
-                                if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
-                                    2f
-                                } else {
-                                    1.5f
-                                },
-                                TextUnitType.Em
-                            )
-                        )
-
                         if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
                             Menu()
                         }
@@ -100,18 +88,6 @@ fun App() {
             }
         }
     }
-}
-
-@Composable
-fun getGameStateText(): String = when (gameState.value) {
-    GameState.RUNNING -> {
-        if (remainingTileAmount.value == 0) {
-            stringResource(Res.string.won) // before the state is set to Won
-        } else {
-            "${stringResource(Res.string.running)} ${stringResource(Res.string.remaining_tiles)} ${remainingTileAmount.value}"
-        }
-    }
-    else -> stringResource(gameState.value.resourceId)
 }
 
 @Composable

@@ -11,6 +11,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import game.*
@@ -19,20 +21,18 @@ import game.GameStateHolder.level
 import org.jetbrains.compose.resources.stringResource
 import util.runOnMainAfter
 import coshanu.composeapp.generated.resources.*
+import game.GameStateHolder.gameState
+import game.GameStateHolder.remainingTileAmount
 
 @Composable
 fun Board(screenType: ScreenType) {
 
     /* todo
-        on mobile, put the game status text below the game board
-        .
         bug: red border comes back on when playing other tiles
         .
         remove not needed printlines
         .
-        .
         add language chooser ?
-        .
         .
         .
         generate APK for Android
@@ -110,13 +110,91 @@ fun GridAndTutorial(screenType: ScreenType) {
         }
     }
     Column(
-        modifier = Modifier.padding( top = if (screenType == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
+        modifier = Modifier.padding( start = 20.dp, top = if (screenType == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
     ) {
-        GameModeSymbol(Modifier.padding(horizontal = 20.dp).padding(bottom = 20.dp))
+        GameModeSymbol(Modifier.padding(bottom = 20.dp))
+        GameStateTextElement()
         Text(
-            modifier = Modifier.padding(horizontal = 20.dp).width(400.dp), // todo depends on used device. we may have to shange the apearance of the ttorial text for mobile use
+            modifier = Modifier.padding(top = 10.dp).width(400.dp),
             text = GameStateHolder.tutorial.getCurrentTutorialText()
         )
+    }
+}
+
+@Composable
+fun GameStateTextElement() {
+    Text(
+        text = getGameStateText(),
+        fontSize = TextUnit(
+            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                2f
+            } else {
+                1.5f
+            },
+            TextUnitType.Em
+        )
+    )
+}
+
+@Composable
+fun getGameStateText(): String = when (gameState.value) {
+    GameState.RUNNING -> {
+        if (remainingTileAmount.value == 0) {
+            stringResource(Res.string.won) // before the state is set to Won
+        } else {
+            "${stringResource(Res.string.running)} ${stringResource(Res.string.remaining_tiles)} ${remainingTileAmount.value}"
+        }
+    }
+    else -> stringResource(gameState.value.resourceId)
+}
+
+@Composable
+private fun card(
+    tileData: TileData) {
+    val tileDataState: MutableState<TileData> = remember { mutableStateOf(tileData) }
+
+    val played = remember { mutableStateOf(tileDataState.value.played) }
+
+    if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
+        if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
+            played.value = true
+
+            runOnMainAfter(200L) {
+                GameStateHolder.resetSelected()
+            }
+        }
+    }
+
+    if (GameStateHolder.gameState.value == GameState.RESTART) {
+        played.value = false
+    }
+
+    val cardModifier = Modifier
+        .aspectRatio(1f)
+        .padding(10.dp)
+
+    if (!played.value) {
+        val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
+
+        Card(
+            modifier = cardModifier
+                .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
+            backgroundColor = if (
+                    GameStateHolder.tutorial.isTutorial() &&
+                    GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
+                ) {
+                if (GameStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
+            } else {
+                if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
+            },
+            border = cardBorderState.value,
+        ) {
+            Tile(tileDataState, cardBorderState)
+        }
+    } else {
+        Card(
+            modifier = cardModifier,
+            elevation = 0.dp) {}
     }
 }
 
@@ -170,55 +248,5 @@ fun newGame(
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
-    }
-}
-
-@Composable
-private fun card(
-    tileData: TileData) {
-    val tileDataState: MutableState<TileData> = remember { mutableStateOf(tileData) }
-
-    val played = remember { mutableStateOf(tileDataState.value.played) }
-
-    if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
-        if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
-            played.value = true
-
-            runOnMainAfter(200L) {
-                GameStateHolder.resetSelected()
-            }
-        }
-    }
-
-    if (GameStateHolder.gameState.value == GameState.RESTART) {
-        played.value = false
-    }
-
-    val cardModifier = Modifier
-        .aspectRatio(1f)
-        .padding(10.dp)
-
-    if (!played.value) {
-        val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
-
-        Card(
-            modifier = cardModifier
-                .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
-            backgroundColor = if (
-                    GameStateHolder.tutorial.isTutorial() &&
-                    GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
-                ) {
-                if (GameStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
-            } else {
-                if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
-            },
-            border = cardBorderState.value,
-        ) {
-            Tile(tileDataState, cardBorderState)
-        }
-    } else {
-        Card(
-            modifier = cardModifier,
-            elevation = 0.dp) {}
     }
 }
