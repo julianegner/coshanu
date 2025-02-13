@@ -28,10 +28,6 @@ import game.GameStateHolder.remainingTileAmount
 fun Board(screenType: ScreenType) {
 
     /* todo
-        bug: red border comes back on when playing other tiles
-        .
-        remove not needed printlines
-        .
         add language chooser ?
         .
         .

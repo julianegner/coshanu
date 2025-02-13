@@ -12,8 +12,6 @@ import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.title
 import game.*
-import game.GameStateHolder.gameState
-import game.GameStateHolder.remainingTileAmount
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.Board
@@ -47,6 +45,7 @@ fun App() {
 
     MaterialTheme(colors = if (GameStateHolder.darkModeState.value) darkColors() else lightColors()) {
         Scaffold { // Scaffold is needed for the dark mode switch to work
+            // we need this box to get the screen size
             BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
                 val maxHeight = this.maxHeight
                 val maxWidth = this.maxWidth

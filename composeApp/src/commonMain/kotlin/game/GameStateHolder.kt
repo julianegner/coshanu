@@ -40,7 +40,6 @@ object GameStateHolder {
     }
 
     fun updateBoard(newBoardData: BoardData, newState: GameState) {
-        println("GameStateHolder.updateBoard 2: $newBoardData")
         updateBoard(newBoardData)
         updateGameState(newState)
     }
@@ -64,9 +63,6 @@ object GameStateHolder {
             .filter { it.chosenForPlay }
             .filter { !it.played }
             .size
-
-        println("GameStateHolder.getRemainingTileAmount: $remainingTileAmount ${listState.value}")
-
         return remainingTileAmount
     }
 
@@ -119,8 +115,6 @@ object GameStateHolder {
 
     fun playCard(vararg tileDataArgs: TileData) {
         tileDataArgs.forEach { tileData ->
-            println("GameStateHolder.playCard: $tileData")
-
             val list = listState.value
             list
                 .filter { it.same(tileData) }
