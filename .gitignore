@@ -17,3 +17,5 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 .kotlin
+
+/composeApp/src/commonMain/kotlin/ui/todo.txt
