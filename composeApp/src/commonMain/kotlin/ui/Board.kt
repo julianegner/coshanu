@@ -28,12 +28,13 @@ import game.GameStateHolder.remainingTileAmount
 fun Board(screenType: ScreenType) {
 
     /* todo
+        add tests
         add language chooser ?
         .
         .
         generate APK for Android
         generate for JVM
-        get domain
+        get domain - https://my.nudomain.nu/
         deploy to web
         add robots.txt for web, so that the search engines can index the site
         deploy to Android (game store)

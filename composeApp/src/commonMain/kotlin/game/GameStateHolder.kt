@@ -47,7 +47,9 @@ object GameStateHolder {
     fun updateGameState(newState: GameState) {
         gameState.value = newState
         if (newState == GameState.WON) {
-            level.value = null
+            runOnMainAfter(4000L) {
+                level.value = null
+            }
         }
     }
 
