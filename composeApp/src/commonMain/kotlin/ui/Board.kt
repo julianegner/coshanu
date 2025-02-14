@@ -27,31 +27,6 @@ import game.GameStateHolder.remainingTileAmount
 @Composable
 fun Board(screenType: ScreenType) {
 
-    /* todo
-        add tests
-        add language chooser ?
-        .
-        .
-        generate APK for Android
-        generate for JVM
-        get domain - https://my.nudomain.nu/
-        deploy to web
-        add robots.txt for web, so that the search engines can index the site
-        deploy to Android (game store)
-        deploy to iOS (app store)
-        deploy to apt
-        deploy to snap
-        deploy to flatpak
-        deploy to mac store
-        deploy to windows store
-        deploy to steam
-        deploy to nintendo ??
-        deploy to xbox
-        deploy to playstation
-        add GNU license
-        make repository public
-     */
-
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(border = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isRestartAllowed()) {
