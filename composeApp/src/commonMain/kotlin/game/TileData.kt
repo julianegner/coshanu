@@ -9,6 +9,7 @@ import coshanu.composeapp.generated.resources.*
 import game.enums.GameMode
 import game.enums.ShapeEnum
 import org.jetbrains.compose.resources.stringResource
+import ui.UiStateHolder
 import util.toName
 
 data class TileData(
@@ -61,7 +62,7 @@ fun TileData.match(secondTileData: TileData): Boolean {
 }
 
 fun TileData.getColor(): Color {
-    return if (GameStateHolder.darkModeState.value) {
+    return if (UiStateHolder.darkModeState.value) {
         when (this.color) {
             Color.Blue -> Color(0xAA0000FF)
             Color.Green -> Color(0xAA00AA00)

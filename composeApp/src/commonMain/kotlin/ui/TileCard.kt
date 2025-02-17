@@ -53,9 +53,9 @@ fun TileCard(
                 GameStateHolder.tutorial.isTutorial() &&
                 GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
             ) {
-                if (GameStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
+                if (UiStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
             } else {
-                if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
+                if (UiStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
             },
             border = cardBorderState.value,
         ) {

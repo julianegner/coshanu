@@ -17,6 +17,7 @@ import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
+import ui.UiStateHolder.standardTextStyle
 
 @Composable
 fun Menu() {
@@ -27,9 +28,13 @@ fun Menu() {
         Text(stringResource(Res.string.single_element), modifier = Modifier.padding(5.dp).width(100.dp))
         (0..3).forEach { i ->
             Button(
+                modifier = Modifier.padding(5.dp),
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(if (i == 0) stringResource(Res.string.tutorial) else i.toString()) }
+                }) { Text(
+                // todo one textStyle for computer, one for mobile
+                style = standardTextStyle.value,
+                text = if (i == 0) stringResource(Res.string.tutorial) else i.toString()) }
         }
     }
 
@@ -39,13 +44,15 @@ fun Menu() {
         Text(stringResource(Res.string.two_elements), modifier = Modifier.padding(5.dp).width(100.dp))
         (10..13).forEach { i ->
             Button(
+                modifier = Modifier.padding(5.dp),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = if (GameStateHolder.darkModeState.value) Color.Black else Color.White,
-                    backgroundColor = if (GameStateHolder.darkModeState.value) LightBlue else Color.Blue
+                    contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
+                    backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
                 ),
                 onClick = {
                     GameStateHolder.changeLevel(i)
-                }) { Text(if (i == 10) stringResource(Res.string.tutorial) else i.toString()) }
+                }) { Text(style = standardTextStyle.value,
+                text = if (i == 10) stringResource(Res.string.tutorial) else i.toString()) }
         }
     }
 }

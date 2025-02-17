@@ -15,10 +15,7 @@ import game.enums.GameState
 import game.enums.ScreenType
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
-import ui.Board
-import ui.DarkModeSwitch
-import ui.GameSymbol
-import ui.Menu
+import ui.*
 
 object AppInitializer {
     var called = false
@@ -29,7 +26,7 @@ object AppInitializer {
             called = true
             println("AppInitializer init block. darkTheme: $darkTheme")
             if (darkTheme) {
-                GameStateHolder.darkModeState.value = true
+                UiStateHolder.darkModeState.value = true
             }
         }
     }
@@ -40,11 +37,11 @@ object AppInitializer {
 fun App() {
     AppInitializer.initialize(isSystemInDarkTheme())
 
-    MaterialTheme(colors = if (GameStateHolder.darkModeState.value) darkColors() else lightColors()) {
+    MaterialTheme(colors = if (UiStateHolder.darkModeState.value) darkColors() else lightColors()) {
         Scaffold { // Scaffold is needed for the dark mode switch to work
             // we need this box to get the screen size
             BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
-                GameStateHolder.screenType.value = if (this.maxWidth > this.maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT }
+                UiStateHolder.setScreenType(if (this.maxWidth > this.maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT })
 
                 Row(
                     modifier = Modifier

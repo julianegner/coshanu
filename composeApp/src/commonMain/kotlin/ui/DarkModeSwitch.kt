@@ -10,16 +10,15 @@ import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
 import coshanu.composeapp.generated.resources.light_mode
-import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun DarkModeSwitch() {
     Row() {
         Switch(
-            checked = GameStateHolder.darkModeState.value,
+            checked = UiStateHolder.darkModeState.value,
             onCheckedChange = {
-                GameStateHolder.darkModeState.value = it
+                UiStateHolder.darkModeState.value = it
             },
             colors = SwitchDefaults.colors(
                 checkedThumbColor = Color.DarkGray,
@@ -29,7 +28,7 @@ fun DarkModeSwitch() {
             )
         )
         Text(
-            text = if (GameStateHolder.darkModeState.value) {
+            text = if (UiStateHolder.darkModeState.value) {
                 stringResource(Res.string.dark_mode)
             } else {
                 stringResource(Res.string.light_mode)

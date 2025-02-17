@@ -128,7 +128,7 @@ private fun setBorder(
     borderColor: Color?
 ) {
     if (borderColor != null) {
-        if (GameStateHolder.darkModeState.value) {
+        if (UiStateHolder.darkModeState.value) {
             val darkModeBorderColor = when (borderColor) {
                 Color.Green -> Color(0xAA00AA00)
                 Color.Red -> Color(0xAAAA0000)

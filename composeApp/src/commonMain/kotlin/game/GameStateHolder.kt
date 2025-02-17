@@ -21,9 +21,6 @@ object GameStateHolder {
 
     val tutorial: Tutorial = Tutorial()
 
-    val darkModeState: MutableState<Boolean> = mutableStateOf(false)
-    val screenType: MutableState<ScreenType> = mutableStateOf(ScreenType.LANDSCAPE)
-
     fun resetBoard() {
         boardDataState.value.reset()
         listState.value = listOf()

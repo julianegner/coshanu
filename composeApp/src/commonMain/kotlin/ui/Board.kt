@@ -33,7 +33,7 @@ fun Board() {
             Button(border = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isRestartAllowed()) {
                 BorderStroke(
                     2.dp,
-                    if (GameStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
+                    if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
                 )
             } else {
                 null
@@ -55,7 +55,7 @@ fun Board() {
         }
     }
 
-    if (GameStateHolder.screenType.value == ScreenType.PORTRAIT) {
+    if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
         Column {  // desktop and portrait
             GridAndTutorial()
         }
@@ -73,7 +73,7 @@ fun GridAndTutorial() {
             .aspectRatio(1f)
             .size(800.dp)
             .border(width = 1.dp, color =
-                if (GameStateHolder.darkModeState.value) Color.LightGray else Color.Black),
+                if (UiStateHolder.darkModeState.value) Color.LightGray else Color.Black),
         contentPadding = PaddingValues(12.dp),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -84,7 +84,7 @@ fun GridAndTutorial() {
         }
     }
     Column(
-        modifier = Modifier.padding( start = 20.dp, top = if (GameStateHolder.screenType.value == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
+        modifier = Modifier.padding( start = 20.dp, top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
     ) {
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
