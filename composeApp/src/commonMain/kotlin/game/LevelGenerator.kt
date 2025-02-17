@@ -1,7 +1,5 @@
 package game
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 
 class LevelGenerator {

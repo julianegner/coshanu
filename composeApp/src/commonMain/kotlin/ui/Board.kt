@@ -1,9 +1,7 @@
 package ui
 
-import ScreenType
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -23,6 +21,9 @@ import util.runOnMainAfter
 import coshanu.composeapp.generated.resources.*
 import game.GameStateHolder.gameState
 import game.GameStateHolder.remainingTileAmount
+import game.enums.GameMode
+import game.enums.GameState
+import game.enums.ScreenType
 
 @Composable
 fun Board(screenType: ScreenType) {
@@ -41,7 +42,8 @@ fun Board(screenType: ScreenType) {
                 Text(stringResource(Res.string.restart_game))
             }
         }
-        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
+        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
+                GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
                 Text(stringResource(Res.string.end_game))
             }
@@ -78,7 +80,7 @@ fun GridAndTutorial(screenType: ScreenType) {
         columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
     ) {
         items(GameStateHolder.listState.value.size) { index ->
-            card(GameStateHolder.listState.value.get(index))
+            TileCard(GameStateHolder.listState.value.get(index))
         }
     }
     Column(
@@ -119,57 +121,7 @@ fun getGameStateText(): String = when (gameState.value) {
     }
     else -> stringResource(gameState.value.resourceId)
 }
-
-@Composable
-private fun card(
-    tileData: TileData) {
-    val tileDataState: MutableState<TileData> = remember { mutableStateOf(tileData) }
-
-    val played = remember { mutableStateOf(tileDataState.value.played) }
-
-    if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.second != null) {
-        if (GameStateHolder.selected.value.first!!.same(tileDataState.value) || GameStateHolder.selected.value.second!!.same(tileDataState.value)) {
-            played.value = true
-
-            runOnMainAfter(200L) {
-                GameStateHolder.resetSelected()
-            }
-        }
-    }
-
-    if (GameStateHolder.gameState.value == GameState.RESTART) {
-        played.value = false
-    }
-
-    val cardModifier = Modifier
-        .aspectRatio(1f)
-        .padding(10.dp)
-
-    if (!played.value) {
-        val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
-
-        Card(
-            modifier = cardModifier
-                .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
-            backgroundColor = if (
-                    GameStateHolder.tutorial.isTutorial() &&
-                    GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
-                ) {
-                if (GameStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
-            } else {
-                if (GameStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
-            },
-            border = cardBorderState.value,
-        ) {
-            Tile(tileDataState, cardBorderState)
-        }
-    } else {
-        Card(
-            modifier = cardModifier,
-            elevation = 0.dp) {}
-    }
-}
-
+// todo move the following functions to a separate file (not UI)
 fun restartGame(
 ) {
     GameStateHolder.updateGameState(GameState.RESTART)

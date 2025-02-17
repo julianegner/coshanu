@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
+import game.enums.GameMode
+import game.enums.ShapeEnum
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 

@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.TextUnitType
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.single_element_must_fit
 import coshanu.composeapp.generated.resources.two_elements_must_fit
-import game.GameMode
+import game.enums.GameMode
 import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
 

@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
+import game.enums.GameState
+import game.enums.ShapeEnum
 import util.runOnMainAfter
 
 
@@ -52,15 +54,6 @@ fun Tile(tileDataState: MutableState<TileData>,
             tileDataState.value.number
         )
     }
-}
-
-fun getCircleRadius(boardSize: Int) = when (boardSize) {
-    2 -> 300f
-    4 -> 150f
-    8 -> 70f
-    12 -> 40f
-    20 -> 30f // for the GameSymbol
-    else -> 40f
 }
 
 @Composable

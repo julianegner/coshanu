@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import game.ShapeEnum
+import game.enums.ShapeEnum
 import game.TileData
 import kotlin.math.PI
 

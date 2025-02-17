@@ -2,6 +2,8 @@ package game
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import game.enums.GameMode
+import game.enums.GameState
 import util.runOnMainAfter
 
 object GameStateHolder {

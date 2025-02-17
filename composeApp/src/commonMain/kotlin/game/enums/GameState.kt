@@ -1,4 +1,4 @@
-package game
+package game.enums
 
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*

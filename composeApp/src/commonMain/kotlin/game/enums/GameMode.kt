@@ -1,4 +1,4 @@
-package game
+package game.enums
 
 enum class GameMode(val amount: Int) {
     SINGLE_ELEMENT(1),
