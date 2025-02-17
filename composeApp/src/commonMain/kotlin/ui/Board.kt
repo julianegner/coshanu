@@ -24,6 +24,7 @@ import game.GameStateHolder.remainingTileAmount
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
+import ui.UiStateHolder.standardTextStyle
 
 @Composable
 fun Board() {
@@ -39,18 +40,21 @@ fun Board() {
                 null
             },
                 onClick = { restartGame() }) {
-                Text(stringResource(Res.string.restart_game))
+                Text(style = standardTextStyle.value,
+                    text = stringResource(Res.string.restart_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
                 GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
-                Text(stringResource(Res.string.end_game))
+                Text(style = standardTextStyle.value,
+                    text = stringResource(Res.string.end_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(onClick = { newGame() }) {
-                Text(stringResource(Res.string.start_game))
+                Text(style = standardTextStyle.value,
+                    text = stringResource(Res.string.start_game))
             }
         }
     }
@@ -89,6 +93,7 @@ fun GridAndTutorial() {
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
         Text(
+            style = standardTextStyle.value,
             modifier = Modifier.padding(top = 10.dp).width(400.dp),
             text = GameStateHolder.tutorial.getCurrentTutorialText()
         )
@@ -100,6 +105,7 @@ fun GameStateTextElement() {
     Text(
         text = getGameStateText(),
         fontSize = TextUnit(
+            // todo introduce a text style variable for that in UiStateHolder
             if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
                 2f
             } else {

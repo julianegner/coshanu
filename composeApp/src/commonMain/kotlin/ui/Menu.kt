@@ -22,17 +22,19 @@ import ui.UiStateHolder.standardTextStyle
 @Composable
 fun Menu() {
 
-    Text(stringResource(Res.string.choose_level))
+    Text(style = standardTextStyle.value,
+        text = stringResource(Res.string.choose_level))
 
     Row {
-        Text(stringResource(Res.string.single_element), modifier = Modifier.padding(5.dp).width(100.dp))
+        Text(style = standardTextStyle.value,
+            text = stringResource(Res.string.single_element),
+            modifier = Modifier.padding(5.dp).width(100.dp))
         (0..3).forEach { i ->
             Button(
                 modifier = Modifier.padding(5.dp),
                 onClick = {
                     GameStateHolder.changeLevel(i)
                 }) { Text(
-                // todo one textStyle for computer, one for mobile
                 style = standardTextStyle.value,
                 text = if (i == 0) stringResource(Res.string.tutorial) else i.toString()) }
         }
@@ -41,7 +43,9 @@ fun Menu() {
     val LightBlue = Color(0xCC3333FF)
 
     Row {
-        Text(stringResource(Res.string.two_elements), modifier = Modifier.padding(5.dp).width(100.dp))
+        Text(style = standardTextStyle.value,
+            text = stringResource(Res.string.two_elements),
+            modifier = Modifier.padding(5.dp).width(100.dp))
         (10..13).forEach { i ->
             Button(
                 modifier = Modifier.padding(5.dp),

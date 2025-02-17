@@ -11,6 +11,7 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
 import coshanu.composeapp.generated.resources.light_mode
 import org.jetbrains.compose.resources.stringResource
+import ui.UiStateHolder.standardTextStyle
 
 @Composable
 fun DarkModeSwitch() {
@@ -28,6 +29,7 @@ fun DarkModeSwitch() {
             )
         )
         Text(
+            style = standardTextStyle.value,
             text = if (UiStateHolder.darkModeState.value) {
                 stringResource(Res.string.dark_mode)
             } else {
