@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
+import game.enums.ScreenType
 import util.runOnMainAfter
 
 object GameStateHolder {
@@ -21,6 +22,7 @@ object GameStateHolder {
     val tutorial: Tutorial = Tutorial()
 
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
+    val screenType: MutableState<ScreenType> = mutableStateOf(ScreenType.LANDSCAPE)
 
     fun resetBoard() {
         boardDataState.value.reset()

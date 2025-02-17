@@ -35,8 +35,6 @@ object AppInitializer {
     }
 }
 
-
-
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
@@ -46,10 +44,7 @@ fun App() {
         Scaffold { // Scaffold is needed for the dark mode switch to work
             // we need this box to get the screen size
             BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
-                val maxHeight = this.maxHeight
-                val maxWidth = this.maxWidth
-
-                val screenType = if (maxWidth > maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT }
+                GameStateHolder.screenType.value = if (this.maxWidth > this.maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT }
 
                 Row(
                     modifier = Modifier
@@ -79,7 +74,7 @@ fun App() {
 
                         // if level is chosen, display the board
                         if (GameStateHolder.level.value != null) {
-                            Board(screenType)
+                            Board()
                         }
                     }
                 }

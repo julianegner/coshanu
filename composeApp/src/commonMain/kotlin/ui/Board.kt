@@ -26,7 +26,7 @@ import game.enums.GameState
 import game.enums.ScreenType
 
 @Composable
-fun Board(screenType: ScreenType) {
+fun Board() {
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
@@ -55,19 +55,19 @@ fun Board(screenType: ScreenType) {
         }
     }
 
-    if (screenType == ScreenType.PORTRAIT) {
+    if (GameStateHolder.screenType.value == ScreenType.PORTRAIT) {
         Column {  // desktop and portrait
-            GridAndTutorial(screenType)
+            GridAndTutorial()
         }
     } else {
         Row { // mobile
-            GridAndTutorial(screenType)
+            GridAndTutorial()
         }
     }
 }
 
 @Composable
-fun GridAndTutorial(screenType: ScreenType) {
+fun GridAndTutorial() {
     LazyVerticalGrid(
         modifier = Modifier
             .aspectRatio(1f)
@@ -84,7 +84,7 @@ fun GridAndTutorial(screenType: ScreenType) {
         }
     }
     Column(
-        modifier = Modifier.padding( start = 20.dp, top = if (screenType == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
+        modifier = Modifier.padding( start = 20.dp, top = if (GameStateHolder.screenType.value == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
     ) {
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
