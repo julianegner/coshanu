@@ -26,6 +26,10 @@
     <string name="end_game">Spiel beenden</string>
     <string name="start_game">Spiel starten</string>
 
+    <string name="level">Level</string>
+    <string name="single_element_tutorial">Tutorial für ein Element</string>
+    <string name="two_elements_tutorial">Tutorial für zwei Elemente</string>
+
     <string name="color_blue">Blau</string>
     <string name="color_green">Grün</string>
     <string name="color_red">Rot</string>

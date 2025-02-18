@@ -103,6 +103,7 @@ fun GridAndTutorial() {
             }
         )
     ) {
+        LevelText()
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
         Text(
@@ -112,6 +113,31 @@ fun GridAndTutorial() {
             text = GameStateHolder.tutorial.getCurrentTutorialText()
         )
     }
+}
+
+@Composable
+fun LevelText() {
+    when (GameStateHolder.level.value) {
+        0 -> {
+            Text(
+                text = stringResource(Res.string.single_element_tutorial),
+                fontSize = largerTextSize.value
+            )
+        }
+        10 -> {
+            Text(
+                text = stringResource(Res.string.two_elements_tutorial),
+                fontSize = largerTextSize.value
+            )
+        }
+        else -> {
+            Text(
+                text = stringResource(Res.string.level) + " ${GameStateHolder.level.value}",
+                fontSize = largerTextSize.value
+            )
+        }
+    }
+
 }
 
 @Composable
