@@ -1,11 +1,13 @@
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
@@ -16,6 +18,7 @@ import game.enums.ScreenType
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.*
+import ui.UiStateHolder.screenType
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 
@@ -45,20 +48,33 @@ fun App() {
             BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
                 UiStateHolder.setScreenType(if (this.maxWidth > this.maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT })
 
-                Row(
-                    modifier = Modifier
-                        .padding(horizontal = 20.dp)
-                ) {
-                    // GameSymbol()
-                    // DarkModeSwitch()
+                val verticalScrollModifier = mutableStateOf ( if (screenType.value == ScreenType.LANDSCAPE) Modifier else Modifier.verticalScroll(rememberScrollState()) )
 
-                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Column {
+                    Column(
+                        modifier = verticalScrollModifier.value
+                            .fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp)
+                                .align(Alignment.End)
+                        ) {
+                            //GameSymbol()
+                            DarkModeSwitch()
+                        }
                         Title()
-
-                        if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
+                        if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(
+                                GameState.LOST
+                            ))
+                        ) {
                             Menu()
                         }
-
+                    }
+                    Column(
+                        modifier = verticalScrollModifier.value
+                            .fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
                         // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
 
                         // if level is chosen, display the board
