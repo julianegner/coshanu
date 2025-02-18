@@ -16,6 +16,8 @@ import game.enums.ScreenType
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.*
+import ui.UiStateHolder.subtitleTextSize
+import ui.UiStateHolder.titleTextSize
 
 object AppInitializer {
     var called = false
@@ -47,21 +49,11 @@ fun App() {
                     modifier = Modifier
                         .padding(horizontal = 20.dp)
                 ) {
-                    GameSymbol()
-                    DarkModeSwitch()
+                    // GameSymbol()
+                    // DarkModeSwitch()
 
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Column(modifier = Modifier.padding(vertical = 20.dp)) {
-                            Text(
-                                text = stringResource(Res.string.title),
-                                fontSize = TextUnit(2f, TextUnitType.Em)
-                            )
-                            Text(
-                                modifier = Modifier.align(Alignment.CenterHorizontally),
-                                text = stringResource(Res.string.subtitle),
-                                fontSize = TextUnit(1.8f, TextUnitType.Em)
-                            )
-                        }
+                        Title()
 
                         if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(GameState.LOST))) {
                             Menu()
@@ -77,5 +69,20 @@ fun App() {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun Title() {
+    Column(modifier = Modifier.padding(vertical = 20.dp)) {
+        Text(
+            text = stringResource(Res.string.title),
+            fontSize = titleTextSize.value
+        )
+        Text(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = stringResource(Res.string.subtitle),
+            fontSize = subtitleTextSize.value
+        )
     }
 }

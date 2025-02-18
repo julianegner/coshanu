@@ -11,21 +11,23 @@ import coshanu.composeapp.generated.resources.two_elements_must_fit
 import game.enums.GameMode
 import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
+import ui.UiStateHolder.largerTextSize
 
 @Composable
 fun GameModeSymbol(modifier: Modifier = Modifier) {
 
+    // todo display a symbol for the game mode
     when (GameStateHolder.gameMode.value) {
         GameMode.SINGLE_ELEMENT -> {
             Text(stringResource(Res.string.single_element_must_fit),
                 modifier = modifier,
-                fontSize = TextUnit(1.5f, TextUnitType.Em)
+                fontSize = largerTextSize.value
             )
         }
         GameMode.TWO_ELEMENTS -> {
             Text(stringResource(Res.string.two_elements_must_fit),
                 modifier = modifier,
-                fontSize = TextUnit(1.2f, TextUnitType.Em)
+                fontSize = largerTextSize.value
             )
         }
         else -> {

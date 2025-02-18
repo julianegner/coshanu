@@ -24,7 +24,10 @@ import game.GameStateHolder.remainingTileAmount
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
-import ui.UiStateHolder.standardTextStyle
+import ui.UiStateHolder.largerTextSize
+import ui.UiStateHolder.standardLineHeight
+import ui.UiStateHolder.standardTextSize
+import ui.UiStateHolder.titleTextSize
 
 @Composable
 fun Board() {
@@ -40,20 +43,20 @@ fun Board() {
                 null
             },
                 onClick = { restartGame() }) {
-                Text(style = standardTextStyle.value,
+                Text(fontSize = standardTextSize.value,
                     text = stringResource(Res.string.restart_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
                 GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
-                Text(style = standardTextStyle.value,
+                Text(fontSize = standardTextSize.value,
                     text = stringResource(Res.string.end_game))
             }
         }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(onClick = { newGame() }) {
-                Text(style = standardTextStyle.value,
+                Text(fontSize = standardTextSize.value,
                     text = stringResource(Res.string.start_game))
             }
         }
@@ -74,10 +77,13 @@ fun Board() {
 fun GridAndTutorial() {
     LazyVerticalGrid(
         modifier = Modifier
+            .padding(top = 10.dp)
             .aspectRatio(1f)
             .size(800.dp)
-            .border(width = 1.dp, color =
-                if (UiStateHolder.darkModeState.value) Color.LightGray else Color.Black),
+            .border(
+                width = 1.dp, color =
+                    if (UiStateHolder.darkModeState.value) Color.LightGray else Color.Black
+            ),
         contentPadding = PaddingValues(12.dp),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -88,13 +94,21 @@ fun GridAndTutorial() {
         }
     }
     Column(
-        modifier = Modifier.padding( start = 20.dp, top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) { 20.dp } else { 0.dp } )
+        modifier = Modifier.padding(
+            start = 20.dp,
+            top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
+                20.dp
+            } else {
+                0.dp
+            }
+        )
     ) {
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
         Text(
-            style = standardTextStyle.value,
-            modifier = Modifier.padding(top = 10.dp).width(400.dp),
+            fontSize = standardTextSize.value,
+            lineHeight = standardLineHeight.value,
+            modifier = Modifier.padding(top = 10.dp), //.width(400.dp),
             text = GameStateHolder.tutorial.getCurrentTutorialText()
         )
     }
@@ -104,15 +118,11 @@ fun GridAndTutorial() {
 fun GameStateTextElement() {
     Text(
         text = getGameStateText(),
-        fontSize = TextUnit(
-            // todo introduce a text style variable for that in UiStateHolder
-            if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
-                2f
+        fontSize = if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST)) {
+                titleTextSize.value
             } else {
-                1.5f
-            },
-            TextUnitType.Em
-        )
+                largerTextSize.value
+            }
     )
 }
 
