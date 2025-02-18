@@ -7,6 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.choose_level
@@ -15,8 +17,16 @@ import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
+import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
+import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
+
+fun buttonModifier(level: Int) = Modifier.padding(
+    start = 5.dp,
+    end = if (level % 10 == 0) 20.dp else 5.dp,
+    top = 10.dp)
+    .width(if (level % 10 == 0) menuButtonWidth.value * 2 else menuButtonWidth.value)
 
 @Composable
 fun Menu() {
@@ -25,17 +35,19 @@ fun Menu() {
         Text(
             fontSize = standardTextSize.value,
             text = stringResource(Res.string.choose_level),
+            modifier = Modifier.padding(bottom = 10.dp)
         )
 
         Row {
             Text(
                 fontSize = standardTextSize.value,
+                lineHeight = TextUnit(1.2f, TextUnitType.Em),
                 text = stringResource(Res.string.single_element),
                 modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
             )
             (0..3).forEach { i ->
                 Button(
-                    modifier = Modifier.padding(5.dp),
+                    modifier = buttonModifier(i),
                     onClick = {
                         GameStateHolder.changeLevel(i)
                     }) {
@@ -52,12 +64,13 @@ fun Menu() {
         Row {
             Text(
                 fontSize = standardTextSize.value,
+                lineHeight = TextUnit(1.2f, TextUnitType.Em),
                 text = stringResource(Res.string.two_elements),
                 modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
             )
             (10..13).forEach { i ->
                 Button(
-                    modifier = Modifier.padding(5.dp),
+                    modifier = buttonModifier(i),
                     colors = ButtonDefaults.buttonColors(
                         contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
                         backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue

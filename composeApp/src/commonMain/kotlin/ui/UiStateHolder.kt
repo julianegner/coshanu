@@ -17,6 +17,7 @@ object UiStateHolder {
     val subtitleTextSize: MutableState<TextUnit> = mutableStateOf(TextUnit(1.8f, TextUnitType.Em))
     val largerTextSize: MutableState<TextUnit> = mutableStateOf(TextUnit(1.5f, TextUnitType.Em))
     val menuRowTextWidth: MutableState<Dp> = mutableStateOf(100.dp)
+    val menuButtonWidth: MutableState<Dp> = mutableStateOf(60.dp)
 
     fun setScreenType(newScreenType: ScreenType) {
         screenType.value = newScreenType
@@ -28,6 +29,7 @@ object UiStateHolder {
         subtitleTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.8f, TextUnitType.Em) else TextUnit(2.6f, TextUnitType.Em)
         largerTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.5f, TextUnitType.Em) else TextUnit(3f, TextUnitType.Em)
         menuRowTextWidth.value = if (screenType.value == ScreenType.LANDSCAPE) 100.dp else 200.dp
+        menuButtonWidth.value = if (screenType.value == ScreenType.LANDSCAPE) 60.dp else 100.dp
     }
 
 }
