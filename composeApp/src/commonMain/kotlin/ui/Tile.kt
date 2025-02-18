@@ -51,39 +51,30 @@ fun Tile(tileDataState: MutableState<TileData>,
     if (displayText) {
         TileText(
             boardSize,
-            tileDataState.value.number
+            tileDataState.value.number,
+            if (color == Color.DarkGray || color == Color.Blue) Color.White else if (color == darkmodeBlue) Color.LightGray else Color.Black
         )
     }
 }
 
 @Composable
 fun TileText(boardSize: Int,
-             tileNumber: Int) {
-    var textSize: Float
-
+             tileNumber: Int,
+             textColor: Color) {
+    val textSize: Float =
     when (boardSize) {
-        2 -> {
-            textSize = 6f
-        }
-        4 -> {
-            textSize = 4f
-        }
-        8 -> {
-            textSize = 2f
-        }
-        12 -> {
-            textSize = 2f
-        }
-        else -> {
-            textSize = 2f
-        }
+        2 -> 6f
+        4 -> 4f
+        8 -> 2f
+        12 -> 2f
+        else -> 2f
     }
 
     Text(
         modifier = Modifier.wrapContentHeight(),
         text = tileNumber.toString(),
         fontSize = TextUnit(textSize, TextUnitType.Em),
-        color = Color.Black,
+        color = textColor,
         textAlign = TextAlign.Center
     )
 }
