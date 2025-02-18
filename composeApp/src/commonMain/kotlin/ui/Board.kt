@@ -84,7 +84,23 @@ fun GridAndTutorial() {
             .size(800.dp)
             .border(
                 width = 1.dp, color =
-                    if (UiStateHolder.darkModeState.value) Color.LightGray else Color.Black
+                    if (GameStateHolder.isGameState(GameState.LOST)) {
+                        if (UiStateHolder.darkModeState.value) {
+                            darkmodeRed
+                        } else {
+                            Color.Red
+                        }
+                    // } else if (GameStateHolder.isGameState(GameState.WON)) {
+                    //     if (UiStateHolder.darkModeState.value) {
+                    //         darkmodeGreen
+                    //     } else {
+                    //         Color.Green
+                    //     }
+                    } else
+                        if (UiStateHolder.darkModeState.value)
+                            Color.LightGray
+                        else
+                            Color.Black
             ),
         contentPadding = PaddingValues(12.dp),
         verticalArrangement = Arrangement.SpaceBetween,
