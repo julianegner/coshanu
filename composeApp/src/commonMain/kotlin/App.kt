@@ -79,8 +79,6 @@ fun App() {
                         // if level is chosen, display the board
                         if (GameStateHolder.level.value != null) {
                             Board()
-                        } else {
-                            WonAnimation()
                         }
                     }
                 }

@@ -77,39 +77,47 @@ fun Board() {
 
 @Composable
 fun GridAndTutorial() {
-    LazyVerticalGrid(
-        modifier = Modifier
-            .padding(top = 10.dp)
-            .aspectRatio(1f)
-            .size(800.dp)
-            .border(
-                width = 1.dp, color =
-                    if (GameStateHolder.isGameState(GameState.LOST)) {
-                        if (UiStateHolder.darkModeState.value) {
-                            darkmodeRed
-                        } else {
-                            Color.Red
-                        }
-                    // } else if (GameStateHolder.isGameState(GameState.WON)) {
-                    //     if (UiStateHolder.darkModeState.value) {
-                    //         darkmodeGreen
-                    //     } else {
-                    //         Color.Green
-                    //     }
-                    } else
-                        if (UiStateHolder.darkModeState.value)
-                            Color.LightGray
-                        else
-                            Color.Black
-            ),
-        contentPadding = PaddingValues(12.dp),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
-    ) {
-        items(GameStateHolder.listState.value.size) { index ->
-            TileCard(GameStateHolder.listState.value.get(index))
+    if (GameStateHolder.getRemainingTileAmount() > 0) {
+        LazyVerticalGrid(
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .aspectRatio(1f)
+                .size(800.dp)
+                .border(
+                    width = 1.dp, color =
+                        if (GameStateHolder.isGameState(GameState.LOST)) {
+                            if (UiStateHolder.darkModeState.value) {
+                                darkmodeRed
+                            } else {
+                                Color.Red
+                            }
+                            // } else if (GameStateHolder.isGameState(GameState.WON)) {
+                            //     if (UiStateHolder.darkModeState.value) {
+                            //         darkmodeGreen
+                            //     } else {
+                            //         Color.Green
+                            //     }
+                        } else
+                            if (UiStateHolder.darkModeState.value)
+                                Color.LightGray
+                            else
+                                Color.Black
+                ),
+            contentPadding = PaddingValues(12.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
+        ) {
+            items(GameStateHolder.listState.value.size) { index ->
+                TileCard(GameStateHolder.listState.value.get(index))
+            }
         }
+    } else if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.RUNNING)) {
+        WonAnimation()
+        // Text(
+        //     text = stringResource(Res.string.won),
+        //     fontSize = titleTextSize.value
+        // )
     }
     Column(
         modifier = Modifier.padding(
