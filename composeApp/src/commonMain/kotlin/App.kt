@@ -79,6 +79,10 @@ fun App() {
                         // if level is chosen, display the board
                         if (GameStateHolder.level.value != null) {
                             Board()
+                        } else if (GameStateHolder.isGameState(GameState.WON)) {
+                            WonAnimation()
+                        } else if (GameStateHolder.isGameState(GameState.LOST)) {
+                            LostImage()
                         }
                     }
                 }

@@ -1,15 +1,13 @@
 package ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -26,6 +24,7 @@ import game.GameStateHolder.remainingTileAmount
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
+import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
@@ -114,10 +113,6 @@ fun GridAndTutorial() {
         }
     } else if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.RUNNING)) {
         WonAnimation()
-        // Text(
-        //     text = stringResource(Res.string.won),
-        //     fontSize = titleTextSize.value
-        // )
     }
     Column(
         modifier = Modifier.padding(
@@ -132,6 +127,9 @@ fun GridAndTutorial() {
         LevelText()
         GameModeSymbol(Modifier.padding(bottom = 20.dp))
         GameStateTextElement()
+        if (GameStateHolder.isGameState(GameState.LOST)) {
+            LostImage()
+        }
         Text(
             fontSize = standardTextSize.value,
             lineHeight = standardLineHeight.value,
