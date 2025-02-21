@@ -7,10 +7,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import game.*
@@ -31,11 +28,20 @@ import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
 
 @Composable
+fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
+    painter = painterResource(Res.drawable.Noto_Emoji_Oreo_1f449),
+    contentDescription = null,
+    modifier = Modifier.size(50.dp)
+)
+
+@Composable
 fun Board() {
 
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
         if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
-            Button(border = if (GameStateHolder.tutorial.isTutorial() && GameStateHolder.tutorial.isRestartAllowed()) {
+            if (GameStateHolder.tutorial.isRestartStep()) Fingerpointing()
+
+            Button(border = if (GameStateHolder.tutorial.isRestartStep()) {
                 BorderStroke(
                     2.dp,
                     if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green

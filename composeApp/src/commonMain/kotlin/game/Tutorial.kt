@@ -123,7 +123,7 @@ class Tutorial {
 
     fun isAllowedTile(tileData: TileData): Boolean = currentStepState.value?.tile?.same(tileData) ?: false
 
-    fun isRestartAllowed(): Boolean = currentStepState.value?.tile == null
+    fun isRestartStep(): Boolean = isTutorial() && currentStepState.value?.tile == null && currentStepState.value?.step == 4
 
     fun getTileList(): List<TileData> = tiles
 

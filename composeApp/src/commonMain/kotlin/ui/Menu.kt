@@ -1,6 +1,5 @@
 package ui
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -17,12 +16,10 @@ import coshanu.composeapp.generated.resources.single_element
 import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
-import game.darkmodeRed
 import game.darkmodeYellow
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
-import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 
 fun buttonModifier(level: Int) = Modifier.padding(
@@ -39,6 +36,8 @@ fun Menu() {
     )
     val buttonDefaultColors = ButtonDefaults.buttonColors()
 
+
+
     Column() {
         Text(
             fontSize = standardTextSize.value,
@@ -54,7 +53,7 @@ fun Menu() {
                 modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
             )
 
-                (0..3).forEach { i ->
+            (0..3).forEach { i ->
                 Button(
                     colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else buttonDefaultColors,
                     modifier = buttonModifier(i),
