@@ -64,6 +64,7 @@ fun TileData.match(secondTileData: TileData): Boolean {
 val darkmodeBlue = Color(0xAA0000FF)
 val darkmodeRed = Color(0xAAAA0000)
 val darkmodeGreen = Color(0xAA00AA00)
+val darkmodeYellow = Color(0xAAAAAA00)
 
 fun TileData.getColor(): Color {
     return if (UiStateHolder.darkModeState.value) {
@@ -73,7 +74,7 @@ fun TileData.getColor(): Color {
             Color.Blue -> darkmodeBlue
             Color.Green -> darkmodeGreen
             Color.Red -> darkmodeRed
-            Color.Yellow -> Color(0xAAAAAA00)
+            Color.Yellow -> darkmodeYellow
             Color.LightGray -> Color.DarkGray
             Color.DarkGray -> Color.LightGray // Color(0xAA444444)
             Color.Magenta -> Color(0xAAAA00AA)

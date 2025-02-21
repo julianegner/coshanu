@@ -1,5 +1,6 @@
 package ui
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -16,6 +17,8 @@ import coshanu.composeapp.generated.resources.single_element
 import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
+import game.darkmodeRed
+import game.darkmodeYellow
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
@@ -30,6 +33,11 @@ fun buttonModifier(level: Int) = Modifier.padding(
 
 @Composable
 fun Menu() {
+    val currentLevelButtonColors = ButtonDefaults.buttonColors(
+        contentColor = Color.Black,
+        backgroundColor = darkmodeYellow
+    )
+    val buttonDefaultColors = ButtonDefaults.buttonColors()
 
     Column() {
         Text(
@@ -45,8 +53,10 @@ fun Menu() {
                 text = stringResource(Res.string.single_element),
                 modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
             )
-            (0..3).forEach { i ->
+
+                (0..3).forEach { i ->
                 Button(
+                    colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else buttonDefaultColors,
                     modifier = buttonModifier(i),
                     onClick = {
                         GameStateHolder.changeLevel(i)
@@ -71,10 +81,11 @@ fun Menu() {
             (10..13).forEach { i ->
                 Button(
                     modifier = buttonModifier(i),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
-                        backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
-                    ),
+                    colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else
+                        ButtonDefaults.buttonColors(
+                            contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
+                            backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
+                        ),
                     onClick = {
                         GameStateHolder.changeLevel(i)
                     }) {

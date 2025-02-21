@@ -16,6 +16,7 @@ fun WonAnimation() {
 
     val composition by rememberLottieComposition {
         LottieCompositionSpec.JsonString(
+            // lottie animation from https://lottiefiles.com/
             Res.readBytes("files/lottie_fireworks.json").decodeToString()
         )
     }

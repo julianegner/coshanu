@@ -114,28 +114,30 @@ fun GridAndTutorial() {
     } else if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.RUNNING)) {
         WonAnimation()
     }
-    Column(
-        modifier = Modifier.padding(
-            start = 20.dp,
-            top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
-                20.dp
-            } else {
-                0.dp
+    if (!GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
+        Column(
+            modifier = Modifier.padding(
+                start = 20.dp,
+                top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
+                    20.dp
+                } else {
+                    0.dp
+                }
+            )
+        ) {
+            LevelText()
+            GameModeSymbol(Modifier.padding(bottom = 20.dp))
+            GameStateTextElement()
+            if (GameStateHolder.isGameState(GameState.LOST)) {
+                LostImage()
             }
-        )
-    ) {
-        LevelText()
-        GameModeSymbol(Modifier.padding(bottom = 20.dp))
-        GameStateTextElement()
-        if (GameStateHolder.isGameState(GameState.LOST)) {
-            LostImage()
+            Text(
+                fontSize = standardTextSize.value,
+                lineHeight = standardLineHeight.value,
+                modifier = Modifier.padding(top = 10.dp), //.width(400.dp),
+                text = GameStateHolder.tutorial.getCurrentTutorialText()
+            )
         }
-        Text(
-            fontSize = standardTextSize.value,
-            lineHeight = standardLineHeight.value,
-            modifier = Modifier.padding(top = 10.dp), //.width(400.dp),
-            text = GameStateHolder.tutorial.getCurrentTutorialText()
-        )
     }
 }
 
