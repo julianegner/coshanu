@@ -7,7 +7,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import game.*
@@ -83,35 +86,45 @@ fun Board() {
 @Composable
 fun GridAndTutorial() {
     if (GameStateHolder.getRemainingTileAmount() > 0) {
+        val basegridmodifier = Modifier
+            .padding(top = 10.dp)
+            .aspectRatio(1f)
+            .size(800.dp)
+            .border(
+                width = 1.dp, color =
+                    if (GameStateHolder.isGameState(GameState.LOST)) {
+                        if (UiStateHolder.darkModeState.value) {
+                            darkmodeRed
+                        } else {
+                            Color.Red
+                        }
+                        // } else if (GameStateHolder.isGameState(GameState.WON)) {
+                        //     if (UiStateHolder.darkModeState.value) {
+                        //         darkmodeGreen
+                        //     } else {
+                        //         Color.Green
+                        //     }
+                    } else
+                        if (UiStateHolder.darkModeState.value)
+                            Color.LightGray
+                        else
+                            Color.Black
+            )
+
+
+        val gridmodifier = if (GameStateHolder.isGameState(GameState.LOST)) {
+            basegridmodifier.paint(painterResource(Res.drawable.lost), contentScale = ContentScale.FillBounds)
+        } else {
+            basegridmodifier
+        }
+
         LazyVerticalGrid(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .aspectRatio(1f)
-                .size(800.dp)
-                .border(
-                    width = 1.dp, color =
-                        if (GameStateHolder.isGameState(GameState.LOST)) {
-                            if (UiStateHolder.darkModeState.value) {
-                                darkmodeRed
-                            } else {
-                                Color.Red
-                            }
-                            // } else if (GameStateHolder.isGameState(GameState.WON)) {
-                            //     if (UiStateHolder.darkModeState.value) {
-                            //         darkmodeGreen
-                            //     } else {
-                            //         Color.Green
-                            //     }
-                        } else
-                            if (UiStateHolder.darkModeState.value)
-                                Color.LightGray
-                            else
-                                Color.Black
-                ),
+            modifier = gridmodifier,
             contentPadding = PaddingValues(12.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalArrangement = Arrangement.SpaceBetween,
-            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size)
+            columns = GridCells.Fixed(GameStateHolder.boardDataState.value.size),
+
         ) {
             items(GameStateHolder.listState.value.size) { index ->
                 TileCard(GameStateHolder.listState.value.get(index))
@@ -144,9 +157,6 @@ fun GridAndTutorial() {
 
             GameModeSymbol(Modifier.padding(bottom = 20.dp))
             GameStateTextElement()
-            if (GameStateHolder.isGameState(GameState.LOST)) {
-                LostImage()
-            }
             Text(
                 fontSize = standardTextSize.value,
                 lineHeight = standardLineHeight.value,

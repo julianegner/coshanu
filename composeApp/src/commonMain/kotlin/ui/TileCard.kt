@@ -63,6 +63,7 @@ fun TileCard(
         }
     } else {
         Card(
+            backgroundColor = Color.Transparent,
             modifier = cardModifier,
             elevation = 0.dp) {}
     }
