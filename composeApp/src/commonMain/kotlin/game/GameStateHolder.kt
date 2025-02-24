@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
+import util.Timer
 import util.runOnMainAfter
+import kotlin.time.Duration
 
 object GameStateHolder {
     val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
@@ -20,6 +22,8 @@ object GameStateHolder {
     val remainingTileAmount: MutableState<Int> = mutableStateOf(0)
 
     val tutorial: Tutorial = Tutorial()
+
+    val timer = Timer()
 
     fun resetBoard() {
         boardDataState.value.reset()
@@ -84,16 +88,19 @@ object GameStateHolder {
     fun checkGameFinished(
     ) {
         if ( remainingTileAmount.value == 0) {
+            GameStateHolder.timer.stopTimer()
             if (tutorial.isTutorial()) {
                 runOnMainAfter(5000L) {
                     tutorial.endTutorial()
                     updateGameState(GameState.WON)
+
                 }
             } else {
                 updateGameState(GameState.WON)
             }
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
+            GameStateHolder.timer.stopTimer()
         } else {
             updateGameState(GameState.RUNNING)
         }

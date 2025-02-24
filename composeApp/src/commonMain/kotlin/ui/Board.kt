@@ -26,6 +26,7 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
+import util.Timer
 
 @Composable
 fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
@@ -132,6 +133,9 @@ fun GridAndTutorial() {
             )
         ) {
             LevelText()
+
+            Text(GameStateHolder.timer.durationState().value.toString(), fontSize = standardTextSize.value)
+
             GameModeSymbol(Modifier.padding(bottom = 20.dp))
             GameStateTextElement()
             if (GameStateHolder.isGameState(GameState.LOST)) {
@@ -222,6 +226,7 @@ fun restartGame(
     runOnMainAfter(200L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
     }
+    GameStateHolder.timer.startTimer()
 }
 
 fun endGame(
@@ -231,6 +236,8 @@ fun endGame(
     GameStateHolder.resetBoard()
     GameStateHolder.gameStateText.value = ""
     GameStateHolder.tutorial.endTutorial()
+
+    GameStateHolder.timer.stopTimer()
 }
 
 fun newGame(
@@ -239,12 +246,14 @@ fun newGame(
 
     if (GameStateHolder.level.value !== null) {
         when (GameStateHolder.level.value) {
-            0,1,2,3 -> gameMode.value = GameMode.SINGLE_ELEMENT
-            10,11,12,13 -> gameMode.value = GameMode.TWO_ELEMENTS
+            0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
+            10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
             else -> gameMode.value = GameMode.SINGLE_ELEMENT
         }
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(GameStateHolder.level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
+
+        GameStateHolder.timer.startTimer()
     }
 }
