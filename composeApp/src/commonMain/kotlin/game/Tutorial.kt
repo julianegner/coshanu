@@ -11,7 +11,12 @@ import game.enums.ShapeEnum
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
-data class TutorialStep(val step: Int, val stringId: StringResource, val tile: TileData?)
+data class TutorialStep(
+    val step: Int,
+    val stringId: StringResource,
+    val tile: TileData?,
+    val isRestart: Boolean = false
+    )
 
 class Tutorial {
     private var tutorialSteps: List<TutorialStep> = listOf()
@@ -34,7 +39,7 @@ class Tutorial {
                     TutorialStep(1, Res.string.tutorial_one_1, tiles[0]),
                     TutorialStep(2, Res.string.tutorial_one_2, tiles[3]),
                     TutorialStep(3, Res.string.tutorial_one_3, tiles[2]),
-                    TutorialStep(4, Res.string.tutorial_one_4, null),
+                    TutorialStep(4, Res.string.tutorial_one_4, null, true),
                     TutorialStep(5, Res.string.tutorial_one_5, tiles[0]),
                     TutorialStep(6, Res.string.tutorial_one_6, tiles[1]),
                     TutorialStep(7, Res.string.tutorial_one_7,  tiles[2]),
@@ -67,7 +72,7 @@ class Tutorial {
                     TutorialStep(1, Res.string.tutorial_two_1, tiles[0]),
                     TutorialStep(2, Res.string.tutorial_two_2, tiles[1]),
                     TutorialStep(3, Res.string.tutorial_two_3, tiles[15]),
-                    TutorialStep(4, Res.string.tutorial_two_4, null),
+                    TutorialStep(4, Res.string.tutorial_two_4, null, true),
                     // todo add example for selecting and deselecting an element
                     // todo show that one element is not enough
                     TutorialStep(5, Res.string.tutorial_two_5, tiles[0]),
@@ -123,7 +128,7 @@ class Tutorial {
 
     fun isAllowedTile(tileData: TileData): Boolean = currentStepState.value?.tile?.same(tileData) ?: false
 
-    fun isRestartStep(): Boolean = isTutorial() && currentStepState.value?.tile == null && currentStepState.value?.step == 4
+    fun isRestartStep(): Boolean = isTutorial() && currentStepState.value?.tile == null && currentStepState.value?.isRestart == true
 
     fun getTileList(): List<TileData> = tiles
 
