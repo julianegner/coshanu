@@ -26,7 +26,6 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
-import util.Timer
 
 @Composable
 fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
@@ -132,9 +131,16 @@ fun GridAndTutorial() {
                 }
             )
         ) {
-            LevelText()
-
-            Text(GameStateHolder.timer.durationState().value.toString(), fontSize = standardTextSize.value)
+            Row(modifier =
+                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) {
+                        Modifier.defaultMinSize(400.dp)
+                    } else {
+                        Modifier.fillMaxWidth()
+                    },
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                LevelText()
+                TimerDisplay(Modifier.padding(horizontal = 20.dp))
+            }
 
             GameModeSymbol(Modifier.padding(bottom = 20.dp))
             GameStateTextElement()
