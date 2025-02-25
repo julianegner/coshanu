@@ -94,11 +94,16 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     Board()
                 }
                 GameState.WON -> {
-                    Menu()
+                    if (!GameStateHolder.tutorial.isTutorial()) {
+                        Menu()
+                    }
                     StartButtonRow()
                     GameStateTextElement()
                     TimerDisplay()
                     WonAnimation()
+                    if (GameStateHolder.tutorial.isTutorial()) {
+                        TutorialText()
+                    }
                 }
                 GameState.LOST -> {
                     Menu()

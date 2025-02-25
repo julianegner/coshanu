@@ -90,14 +90,18 @@ object GameStateHolder {
 
         if ( remainingTileAmount.value == 0) {
             timer.stopTimer()
+            updateGameState(GameState.WON)
+            /*
             if (tutorial.isTutorial()) {
                 runOnMainAfter(5000L) {
                     tutorial.endTutorial()
-                    updateGameState(GameState.WON)
+                    // updateGameState(GameState.WON)
                 }
-            } else {
-                updateGameState(GameState.WON)
             }
+            // } else {
+            //     updateGameState(GameState.WON)
+            // }
+             */
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
             timer.stopTimer()

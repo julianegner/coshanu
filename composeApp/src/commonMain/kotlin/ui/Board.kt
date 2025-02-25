@@ -21,6 +21,7 @@ import util.runOnMainAfter
 import coshanu.composeapp.generated.resources.*
 import game.GameStateHolder.gameState
 import game.GameStateHolder.remainingTileAmount
+import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
@@ -259,9 +260,9 @@ fun restartGame(
     println("restartGame:level: ${GameStateHolder.level.value}")
 
     GameStateHolder.tutorial.nextStep()
-    runOnMainAfter(200L) {
+    // runOnMainAfter(200L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
-    }
+    // }
     GameStateHolder.timer.startTimer()
 }
 
@@ -274,6 +275,7 @@ fun endGame(
     GameStateHolder.tutorial.endTutorial()
 
     GameStateHolder.timer.stopTimer()
+    GameStateHolder.tutorial.endTutorial()
 }
 
 fun newGame(
