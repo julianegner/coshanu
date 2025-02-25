@@ -83,6 +83,11 @@ fun tileSelected(
     tileDataState: MutableState<TileData>,
     cardBorderState: MutableState<BorderStroke?>,
 ) {
+    if (GameStateHolder.isGameState(GameState.STARTING)) {
+        GameStateHolder.openMenu()
+        return
+    }
+
     if (GameStateHolder.tutorial.isTutorial() && !GameStateHolder.tutorial.isAllowedTile(tileDataState.value)) {
         // todo make warning visible
         return

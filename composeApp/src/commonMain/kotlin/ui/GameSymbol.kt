@@ -1,12 +1,16 @@
 package ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import game.GameStateHolder
 import game.enums.ShapeEnum
 import game.TileData
 import kotlin.math.PI
@@ -69,53 +73,63 @@ fun CircleOfTiles() {
     val centerY = 100.dp
     val angleStep = 360 / elements.size
 
-    Box(modifier = Modifier.size(50.dp)) {
-        elements.forEachIndexed { index, element ->
-            val angle = toRadians((index * angleStep).toDouble())
-            val xOffset = (radius.value * kotlin.math.cos(angle)).dp
-            val yOffset = (radius.value * kotlin.math.sin(angle)).dp
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .clickable(interactionSource = null, indication = null) {
+            GameStateHolder.openMenu()
+        },
+        Alignment.TopCenter
+        // todo horizontal center
+        //  vertical top
+    ) {
+        Box(modifier = Modifier.size(50.dp)) {
+            elements.forEachIndexed { index, element ->
+                val angle = toRadians((index * angleStep).toDouble())
+                val xOffset = (radius.value * kotlin.math.cos(angle) -100).dp
+                val yOffset = (radius.value * kotlin.math.sin(angle)).dp
 
-            Box(
-                modifier = Modifier
-                    .offset(x = centerX + xOffset, y = centerY + yOffset)
-            ) {
-                Card(
-                    border = null,
-                    elevation = 0.dp,
+                Box(
                     modifier = Modifier
-                        .aspectRatio(1f)
-                        .padding(10.dp)
-                        .size(100.dp)
+                        .offset(x = centerX + xOffset, y = centerY + yOffset)
                 ) {
-                    when (element.shape) {
-                        ShapeEnum.TRIANGLE -> {
-                            Tile(
-                                tileDataState = mutableStateOf(element),
-                                cardBorderState = mutableStateOf(null),
-                                modifier = Modifier.size(100.dp)
-                                    .offset(y = -5.dp),
-                                boardSize = 12,
-                                displayText = false
-                            )
-                        }
+                    Card(
+                        border = null,
+                        elevation = 0.dp,
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .padding(10.dp)
+                            .size(100.dp)
+                    ) {
+                        when (element.shape) {
+                            ShapeEnum.TRIANGLE -> {
+                                Tile(
+                                    tileDataState = mutableStateOf(element),
+                                    cardBorderState = mutableStateOf(null),
+                                    modifier = Modifier.size(100.dp)
+                                        .offset(y = -5.dp),
+                                    boardSize = 12,
+                                    displayText = false
+                                )
+                            }
 
-                        ShapeEnum.CIRCLE -> {
-                            Tile(
-                                tileDataState = mutableStateOf(element),
-                                cardBorderState = mutableStateOf(null),
-                                boardSize = 20,
-                                displayText = false
-                            )
-                        }
+                            ShapeEnum.CIRCLE -> {
+                                Tile(
+                                    tileDataState = mutableStateOf(element),
+                                    cardBorderState = mutableStateOf(null),
+                                    boardSize = 20,
+                                    displayText = false
+                                )
+                            }
 
-                        else -> {
-                            Tile(
-                                tileDataState = mutableStateOf(element),
-                                cardBorderState = mutableStateOf(null),
-                                modifier = Modifier,
-                                boardSize = 12,
-                                displayText = false
-                            )
+                            else -> {
+                                Tile(
+                                    tileDataState = mutableStateOf(element),
+                                    cardBorderState = mutableStateOf(null),
+                                    modifier = Modifier,
+                                    boardSize = 12,
+                                    displayText = false
+                                )
+                            }
                         }
                     }
                 }

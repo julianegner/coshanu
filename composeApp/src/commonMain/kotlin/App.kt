@@ -1,9 +1,11 @@
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,46 +47,77 @@ fun App() {
         Scaffold { // Scaffold is needed for the dark mode switch to work
             // we need this box to get the screen size
             BoxWithConstraints(Modifier.fillMaxSize(), propagateMinConstraints = true) {
-                UiStateHolder.setScreenType(if (this.maxWidth > this.maxHeight) { ScreenType.LANDSCAPE } else { ScreenType.PORTRAIT })
-
-                val verticalScrollModifier = mutableStateOf ( if (screenType.value == ScreenType.LANDSCAPE) Modifier else Modifier.verticalScroll(rememberScrollState()) )
-
-                Column {
-                    Column(
-                        modifier = verticalScrollModifier.value
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(
-                            modifier = Modifier
-                                .padding(horizontal = 20.dp)
-                                .align(Alignment.End)
-                        ) {
-                            //GameSymbol()
-                            DarkModeSwitch()
-                        }
-                        Title()
-                        if (!(GameStateHolder.isGameState(GameState.RUNNING) || GameStateHolder.isGameState(
-                                GameState.LOST
-                            ))
-                        ) {
-                            Menu()
-                        }
+                UiStateHolder.setScreenType(
+                    if (this.maxWidth > this.maxHeight) {
+                        ScreenType.LANDSCAPE
+                    } else {
+                        ScreenType.PORTRAIT
                     }
-                    Column(
-                        modifier = verticalScrollModifier.value
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally) {
-                        // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+                )
 
-                        // if level is chosen, display the board
-                        if (GameStateHolder.level.value != null) {
-                            Board()
-                        } else if (GameStateHolder.isGameState(GameState.WON)) {
-                            WonAnimation()
-                        } else if (GameStateHolder.isGameState(GameState.LOST)) {
-                            LostImage()
-                        }
-                    }
+                val verticalScrollModifier = mutableStateOf(
+                    if (screenType.value == ScreenType.LANDSCAPE) Modifier else Modifier.verticalScroll(
+                        rememberScrollState()
+                    )
+                )
+                Main(verticalScrollModifier)
+            }
+        }
+    }
+}
+
+@Composable
+private fun Main(verticalScrollModifier: MutableState<Modifier>) {
+    Column {
+        Column(
+            modifier = verticalScrollModifier.value
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .align(Alignment.End)
+            ) {
+                //GameSymbol()
+                DarkModeSwitch()
+            }
+            Title()
+        }
+        Column(
+            modifier = verticalScrollModifier.value
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            when (GameStateHolder.gameState.value) {
+                GameState.RUNNING -> {
+                    Board()
+                }
+                GameState.WON -> {
+                    Menu()
+                    StartButtonRow()
+                    GameStateTextElement()
+                    WonAnimation()
+                }
+                GameState.LOST -> {
+                    Menu()
+                    // if (GameStateHolder.tutorial.isRestartStep()) {
+                    //     StartButtonRow()
+                    //     TutorialText()
+                    // }
+                    // LostImage()
+                    Board()
+                }
+                GameState.STARTING -> {
+                    GameSymbol()
+                }
+                GameState.LEVEL_CHANGE -> {
+                    Menu()
+                    StartButtonRow()
+                }
+                GameState.RESTART -> {
+                    Menu()
+                    Board()
                 }
             }
         }
@@ -93,7 +126,11 @@ fun App() {
 
 @Composable
 private fun Title() {
-    Column(modifier = Modifier.padding(vertical = 20.dp)) {
+    Column(modifier = Modifier
+        .clickable(interactionSource = null, indication = null) {
+            GameStateHolder.openMenu()
+        }
+        .padding(vertical = 20.dp)) {
         Text(
             text = stringResource(Res.string.title),
             fontSize = titleTextSize.value

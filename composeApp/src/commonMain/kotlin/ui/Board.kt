@@ -39,38 +39,7 @@ fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File
 
 @Composable
 fun Board() {
-
-    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
-            if (GameStateHolder.tutorial.isRestartStep()) Fingerpointing()
-
-            Button(border = if (GameStateHolder.tutorial.isRestartStep()) {
-                BorderStroke(
-                    2.dp,
-                    if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
-                )
-            } else {
-                null
-            },
-                onClick = { restartGame() }) {
-                Text(fontSize = standardTextSize.value,
-                    text = stringResource(Res.string.restart_game))
-            }
-        }
-        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
-                GameState.RUNNING)) {
-            Button(onClick = { endGame() }) {
-                Text(fontSize = standardTextSize.value,
-                    text = stringResource(Res.string.end_game))
-            }
-        }
-        if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
-            Button(onClick = { newGame() }) {
-                Text(fontSize = standardTextSize.value,
-                    text = stringResource(Res.string.start_game))
-            }
-        }
-    }
+    StartButtonRow()
 
     if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
         Column {  // desktop and portrait
@@ -79,6 +48,52 @@ fun Board() {
     } else {
         Row { // mobile
             GridAndTutorial()
+        }
+    }
+}
+
+@Composable
+fun StartButtonRow() {
+    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+        if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
+            if (GameStateHolder.tutorial.isRestartStep()) Fingerpointing()
+
+            Button(
+                border = if (GameStateHolder.tutorial.isRestartStep()) {
+                    BorderStroke(
+                        2.dp,
+                        if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
+                    )
+                } else {
+                    null
+                },
+                onClick = { restartGame() }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = stringResource(Res.string.restart_game)
+                )
+            }
+        }
+        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
+                GameState.RUNNING
+            )
+        ) {
+            Button(onClick = { endGame() }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = stringResource(Res.string.end_game)
+                )
+            }
+        }
+        if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
+            Button(
+                enabled = GameStateHolder.level.value != null,
+                onClick = { newGame() }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = stringResource(Res.string.start_game)
+                )
+            }
         }
     }
 }
@@ -157,14 +172,19 @@ fun GridAndTutorial() {
 
             GameModeSymbol(Modifier.padding(bottom = 20.dp))
             GameStateTextElement()
-            Text(
-                fontSize = standardTextSize.value,
-                lineHeight = standardLineHeight.value,
-                modifier = Modifier.padding(top = 10.dp), //.width(400.dp),
-                text = GameStateHolder.tutorial.getCurrentTutorialText()
-            )
+            TutorialText()
         }
     }
+}
+
+@Composable
+fun TutorialText() {
+    Text(
+        fontSize = standardTextSize.value,
+        lineHeight = standardLineHeight.value,
+        modifier = Modifier.padding(top = 10.dp),
+        text = GameStateHolder.tutorial.getCurrentTutorialText()
+    )
 }
 
 @Composable

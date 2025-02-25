@@ -64,6 +64,10 @@ object GameStateHolder {
         resetBoard()
     }
 
+    fun openMenu() {
+        changeLevel(level.value ?: 0)
+    }
+
     // this only works at startup
     fun getRemainingTileAmount(): Int {
         val remainingTileAmount =  listState.value
@@ -87,20 +91,21 @@ object GameStateHolder {
 
     fun checkGameFinished(
     ) {
+        println("checkGameFinished:remainingTileAmount: $remainingTileAmount")
+
         if ( remainingTileAmount.value == 0) {
-            GameStateHolder.timer.stopTimer()
+            timer.stopTimer()
             if (tutorial.isTutorial()) {
                 runOnMainAfter(5000L) {
                     tutorial.endTutorial()
                     updateGameState(GameState.WON)
-
                 }
             } else {
                 updateGameState(GameState.WON)
             }
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
-            GameStateHolder.timer.stopTimer()
+            timer.stopTimer()
         } else {
             updateGameState(GameState.RUNNING)
         }
