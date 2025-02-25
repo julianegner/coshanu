@@ -51,11 +51,6 @@ object GameStateHolder {
 
     fun updateGameState(newState: GameState) {
         gameState.value = newState
-        if (newState == GameState.WON) {
-            runOnMainAfter(4000L) {
-                level.value = null
-            }
-        }
     }
 
     fun changeLevel(newLevel: Int) {

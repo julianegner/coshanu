@@ -97,6 +97,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     Menu()
                     StartButtonRow()
                     GameStateTextElement()
+                    TimerDisplay()
                     WonAnimation()
                 }
                 GameState.LOST -> {
