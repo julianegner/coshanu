@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -13,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import game.GameStateHolder
 import game.enums.ShapeEnum
 import game.TileData
+import game.enums.ScreenType
 import kotlin.math.PI
 
 @Composable
@@ -68,9 +70,9 @@ fun CircleOfTiles() {
         )
     )
 
-    val radius = 50.dp
-    val centerX = 100.dp
-    val centerY = 100.dp
+    val radius = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 220.dp
+    val centerX = 0.dp
+    val centerY = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 100.dp else 400.dp
     val angleStep = 360 / elements.size
 
     Box(modifier = Modifier
@@ -79,13 +81,14 @@ fun CircleOfTiles() {
             GameStateHolder.openMenu()
         },
         Alignment.TopCenter
-        // todo horizontal center
-        //  vertical top
     ) {
-        Box(modifier = Modifier.size(50.dp)) {
+        Box(modifier = Modifier
+            .size(
+                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 150.dp)
+        ) {
             elements.forEachIndexed { index, element ->
                 val angle = toRadians((index * angleStep).toDouble())
-                val xOffset = (radius.value * kotlin.math.cos(angle) -100).dp
+                val xOffset = (radius.value * kotlin.math.cos(angle)).dp
                 val yOffset = (radius.value * kotlin.math.sin(angle)).dp
 
                 Box(

@@ -68,62 +68,82 @@ fun App() {
 
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
-    Column {
+    if (GameStateHolder.isGameState(GameState.STARTING)) {
         Column(
-            modifier = verticalScrollModifier.value
-                .fillMaxWidth(),
+            modifier = Modifier.padding(top =
+                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 48.dp else 65.dp
+            ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.End)
-            ) {
-                //GameSymbol()
-                DarkModeSwitch()
-            }
             Title()
+            GameSymbol()
         }
-        Column(
-            modifier = verticalScrollModifier.value
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            when (GameStateHolder.gameState.value) {
-                GameState.RUNNING -> {
-                    Board()
+    } else {
+        Column {
+            Column(
+                modifier = verticalScrollModifier.value
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(horizontal = 20.dp)
+                        .align(Alignment.End)
+                ) {
+                    //GameSymbol()
+                    DarkModeSwitch()
                 }
-                GameState.WON -> {
-                    if (!GameStateHolder.tutorial.isTutorial()) {
+                Title()
+            }
+            Column(
+                modifier = verticalScrollModifier.value
+                    .fillMaxSize(),
+                // .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                when (GameStateHolder.gameState.value) {
+                    GameState.RUNNING -> {
+                        Board()
+                    }
+
+                    GameState.WON -> {
+                        if (!GameStateHolder.tutorial.isTutorial()) {
+                            Menu()
+                        }
+                        StartButtonRow()
+                        GameStateTextElement()
+                        TimerDisplay()
+                        WonAnimation()
+                        if (GameStateHolder.tutorial.isTutorial()) {
+                            TutorialText()
+                        }
+                    }
+
+                    GameState.LOST -> {
                         Menu()
+                        // if (GameStateHolder.tutorial.isRestartStep()) {
+                        //     StartButtonRow()
+                        //     TutorialText()
+                        // }
+                        // LostImage()
+                        Board()
                     }
-                    StartButtonRow()
-                    GameStateTextElement()
-                    TimerDisplay()
-                    WonAnimation()
-                    if (GameStateHolder.tutorial.isTutorial()) {
-                        TutorialText()
+
+                    GameState.STARTING -> {
+                        // nothing. handled above
+                        // todo fixme bug: not shown in portrait mode
+                        // GameSymbol()
                     }
-                }
-                GameState.LOST -> {
-                    Menu()
-                    // if (GameStateHolder.tutorial.isRestartStep()) {
-                    //     StartButtonRow()
-                    //     TutorialText()
-                    // }
-                    // LostImage()
-                    Board()
-                }
-                GameState.STARTING -> {
-                    GameSymbol()
-                }
-                GameState.LEVEL_CHANGE -> {
-                    Menu()
-                    StartButtonRow()
-                }
-                GameState.RESTART -> {
-                    Menu()
-                    Board()
+
+                    GameState.LEVEL_CHANGE -> {
+                        Menu()
+                        StartButtonRow()
+                    }
+
+                    GameState.RESTART -> {
+                        Menu()
+                        Board()
+                    }
                 }
             }
         }
