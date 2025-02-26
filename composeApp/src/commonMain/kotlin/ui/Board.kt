@@ -56,7 +56,9 @@ fun Board() {
 @Composable
 fun StartButtonRow() {
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        if (GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
+        if (GameStateHolder.isGameState(GameState.LOST) ||
+            (GameStateHolder.isGameState(GameState.RUNNING) &&
+                    (!tutorial.isTutorial() || tutorial.isRestartStep()))) {
             if (GameStateHolder.tutorial.isRestartStep()) Fingerpointing()
 
             Button(

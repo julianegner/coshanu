@@ -120,7 +120,9 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     }
 
                     GameState.LOST -> {
-                        Menu()
+                        if (!GameStateHolder.tutorial.isTutorial()) {
+                            Menu()
+                        }
                         // if (GameStateHolder.tutorial.isRestartStep()) {
                         //     StartButtonRow()
                         //     TutorialText()
