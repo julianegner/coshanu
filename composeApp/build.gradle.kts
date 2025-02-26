@@ -81,6 +81,9 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
+        wasmJsMain.dependencies {
+            implementation(npm("ua-parser-js", "2.0.2"))
+        }
     }
 }
 

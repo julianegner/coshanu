@@ -16,6 +16,7 @@ import coshanu.composeapp.generated.resources.title
 import game.*
 import game.enums.GameState
 import game.enums.ScreenType
+import io.ktor.util.Platform
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.*
@@ -68,6 +69,8 @@ fun App() {
 
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
+    // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+
     if (GameStateHolder.isGameState(GameState.STARTING)) {
         Column(
             modifier = Modifier.padding(top =
