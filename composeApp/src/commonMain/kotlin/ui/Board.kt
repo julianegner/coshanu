@@ -270,7 +270,7 @@ fun restartGame(
 
 fun endGame(
 ) {
-    level.value = null
+    // level.value = null
     GameStateHolder.gameState.value = GameState.LEVEL_CHANGE
     GameStateHolder.resetBoard()
     GameStateHolder.gameStateText.value = ""

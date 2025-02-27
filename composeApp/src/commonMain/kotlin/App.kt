@@ -117,6 +117,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         GameStateTextElement()
                         TimerDisplay()
                         WonAnimation()
+                        NextLevelButtonElement()
                         if (GameStateHolder.tutorial.isTutorial()) {
                             TutorialText()
                         }

@@ -49,6 +49,8 @@
 
     <string name="with_number">mit der Nummer</string>
 
+    <string name="next_level">Nächstes Level</string>
+
     <string name="tutorial_one_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
     <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün.\nJetzt klick auf [] unten rechts</string>
     <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot.\nDas kommt daher, daß die Karten nicht zusammenpassen.\nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.\nDaher kommt auch der Name CoShaNu (Color, Shape, Number).\nJetzt klick auf [] unten links.</string>

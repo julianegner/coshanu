@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
+import ui.endGame
 import util.Timer
 import util.runOnMainAfter
 import kotlin.time.Duration
@@ -51,6 +52,20 @@ object GameStateHolder {
 
     fun updateGameState(newState: GameState) {
         gameState.value = newState
+    }
+
+    fun levelUp() {
+        endGame()
+        if (level.value == null) {
+            changeLevel(0)
+        } else {
+            if (level.value!! == 3) { // last level of single element game
+                // first level of two element game (tutorial)
+                changeLevel(10)
+            } else
+                changeLevel(level.value!! + 1)
+        }
+
     }
 
     fun changeLevel(newLevel: Int) {

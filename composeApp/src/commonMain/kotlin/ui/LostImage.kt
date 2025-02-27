@@ -11,7 +11,6 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun LostImage() {
-    // todo ad lost image here
     //  https://medium.com/@abdulbasit5361234/accessing-resources-in-kmp-font-images-strings-f2927c668a88
 
     Image(
