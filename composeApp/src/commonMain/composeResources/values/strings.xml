@@ -54,7 +54,11 @@
     <string name="tutorial_one_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
     <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\n That is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
-    <string name="tutorial_one_4">Both Tiles disappear, because this fits.\nYes, this game was lost.\nBut no problem, just click on 'Restart Game'</string>
+    <string name="tutorial_one_4">Both Tiles disappear, because this fits.
+Yes, this game was lost.
+But no problem, just click on 'Restart Game'
+This restarts the game with the same cards.
+    </string>
     <string name="tutorial_one_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
     <string name="tutorial_one_6">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n... and then the [].</string>
     <string name="tutorial_one_7">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower left [].</string>
@@ -64,7 +68,11 @@
     <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_two_2">Now click on the [] right to the first Tile</string>
     <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
-    <string name="tutorial_two_4">Both Tiles disappear, because this fits.\nYes, this game was lost.\nBut no problem, just click on 'Restart Game'</string>
+    <string name="tutorial_two_4">Both Tiles disappear, because this fits.
+Yes, this game was lost.
+But no problem, just click on 'Restart Game'
+This restarts the game with the same cards.
+    </string>
     <string name="tutorial_two_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
     <string name="tutorial_two_6">now choose the fitting [].</string>
     <string name="tutorial_two_7">These Tiles are played - let's play the next pair!\nNow click on the [] and ...</string>
@@ -83,9 +91,3 @@
     <string name="tutorial_two_20">... the []</string>
     <string name="tutorial_two_21">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 </resources>
-
-
-<!--
-stringResource(Res.string.test)
-Text(stringResource(Res.string.test))
--->

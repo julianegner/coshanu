@@ -51,35 +51,79 @@
 
     <string name="next_level">Nächstes Level</string>
 
-    <string name="tutorial_one_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
-    <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün.\nJetzt klick auf [] unten rechts</string>
-    <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot.\nDas kommt daher, daß die Karten nicht zusammenpassen.\nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.\nDaher kommt auch der Name CoShaNu (Color, Shape, Number).\nJetzt klick auf [] unten links.</string>
-    <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen.\nJa, dieses Spiel ist verloren.\nDas ist aber kein Problem, klick einfach auf 'Spiel neu Starten'</string>
-    <string name="tutorial_one_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.\nJetzt wähle [] oben links ...</string>
-    <string name="tutorial_one_6">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.\n... und dann [].</string>
-    <string name="tutorial_one_7">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.\nJetzt klick auf [] unten links.</string>
-    <string name="tutorial_one_8">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.\nJetzt klick auf [] unten rechts.</string>
-    <string name="tutorial_one_9">Glückwunsch! Du hast das Tutorial abgeschlossen.\nJetzt weißt du, wie man dieses Spiel spielt.\nDu kannst ein neues Spiel im Menü oben starten.</string>
+    <string name="tutorial_one_1">Willkommen beim Tutorial!
+Bitte klick auf [] oben links.
+    </string>
+    <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün.
+Jetzt klick auf [] unten rechts
+    </string>
+    <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot.
+Das kommt daher, daß die Karten nicht zusammenpassen.
+Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
+Daher kommt auch der Name CoShaNu (Color, Shape, Number).
+Jetzt klick auf [] unten links.
+    </string>
+    <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen.
+Ja, dieses Spiel ist verloren.
+Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
+Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
+    </string>
+    <string name="tutorial_one_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
+Jetzt wähle [] oben links ...
+    </string>
+    <string name="tutorial_one_6">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
+... und dann [].
+    </string>
+    <string name="tutorial_one_7">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.
+Jetzt klick auf [] unten links.
+    </string>
+    <string name="tutorial_one_8">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.
+Jetzt klick auf [] unten rechts.
+    </string>
+    <string name="tutorial_one_9">Glückwunsch! Du hast das Tutorial abgeschlossen.
+Jetzt weißt du, wie man dieses Spiel spielt.
+Du kannst ein neues Spiel im Menü oben starten.
+    </string>
 
     <string name="tutorial_two_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
     <string name="tutorial_two_2">Jetzt klick auf [] rechts der ersten Karte</string>
-    <string name="tutorial_two_3">Der Rahmen dieser Karte ist für einen Moment Rot.\nDas kommt daher, daß die Karten nicht zusammenpassen.\nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.\nDaher kommt auch der Name CoShaNu (Color, Shape, Number).\nJetzt klick auf [] unten rechts.</string>
-    <string name="tutorial_two_4">Beide Karten verschwinden, weil sie passen.\nJa, dieses Spiel ist verloren.\nDas ist aber kein Problem, klick einfach auf 'Spiel neu Starten'</string>
-    <string name="tutorial_two_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.\nJetzt wähle [] oben links ...</string>
+    <string name="tutorial_two_3">Der Rahmen dieser Karte ist für einen Moment Rot.
+Das kommt daher, daß die Karten nicht zusammenpassen.
+Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
+Daher kommt auch der Name CoShaNu (Color, Shape, Number).
+Jetzt klick auf [] unten rechts.
+    </string>
+    <string name="tutorial_two_4">Beide Karten verschwinden, weil sie passen.
+        Ja, dieses Spiel ist verloren.
+        Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
+        Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
+    </string>
+    <string name="tutorial_two_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
+Jetzt wähle [] oben links ...</string>
     <string name="tutorial_two_6">Jetzt wähle [].</string>
-    <string name="tutorial_two_7">Diese Karten sind gespielt - spiel das nächste Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_7">Diese Karten sind gespielt - spiel das nächste Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_8">... []</string>
-    <string name="tutorial_two_9">Diese Karten sind gespielt - spiel das rote Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_9">Diese Karten sind gespielt - spiel das rote Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_10">... []</string>
-    <string name="tutorial_two_11">Diese Karten sind gespielt- spiel das erste grüne Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_11">Diese Karten sind gespielt - spiel das erste grüne Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_12">... []</string>
-    <string name="tutorial_two_13">Diese Karten sind gespielt - spiel das zweite grüne Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_13">Diese Karten sind gespielt - spiel das zweite grüne Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_14">... []</string>
-    <string name="tutorial_two_15">Diese Karten sind gespielt - spiel eines der blauen Paare!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_15">Diese Karten sind gespielt - spiel eines der blauen Paare!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_16">... []</string>
-    <string name="tutorial_two_17">Diese Karten sind gespielt - spiel das vorletzte blaue Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_17">Diese Karten sind gespielt - spiel das vorletzte blaue Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_18">... []</string>
-    <string name="tutorial_two_19">Diese Karten sind gespielt - spiel das letzte Paar!\nJetzt klick auf [] und ...</string>
+    <string name="tutorial_two_19">Diese Karten sind gespielt - spiel das letzte Paar!
+Jetzt klick auf [] und ...</string>
     <string name="tutorial_two_20">... []</string>
-    <string name="tutorial_two_21">Glückwunsch! Du hast das Tutorial abgeschlossen.\nJetzt weißt du, wie man dieses Spiel spielt.\nDu kannst ein neues Spiel im Menü oben starten.</string>
+    <string name="tutorial_two_21">Glückwunsch! Du hast das Tutorial abgeschlossen.
+Jetzt weißt du, wie man dieses Spiel spielt.
+Du kannst ein neues Spiel im Menü oben starten.
+    </string>
 </resources>
