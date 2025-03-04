@@ -68,11 +68,11 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            // implementation("io.github.ismai117:kottie")
-
             implementation("io.github.alexzhirkevich:compottie:2.0.0-rc04")
             implementation("io.github.alexzhirkevich:compottie-dot:2.0.0-rc04")
             implementation("io.github.alexzhirkevich:compottie-network:2.0.0-rc04")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
             // This module can cause binary incompatibilities. Please read its description first
             implementation("io.github.alexzhirkevich:compottie-resources:2.0.0-rc04")

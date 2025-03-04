@@ -25,6 +25,7 @@
     <string name="restart_game">Restart Game</string>
     <string name="end_game">End Game</string>
     <string name="start_game">Start Game</string>
+    <string name="save_game">Save Game</string>
 
     <string name="level">Level</string>
     <string name="single_element_tutorial">Tutorial for one element needed</string>

@@ -11,6 +11,7 @@ import game.enums.ShapeEnum
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder
 import util.toName
+import util.toSaveName
 
 data class TileData(
     val color: Color,
@@ -84,6 +85,14 @@ fun TileData.getColor(): Color {
     } else {
         this.color
     }
+}
+
+fun TileData.toSaveString(): String {
+    return this.color.toSaveName() +
+            " ${this.shape.name}" +
+            " ${this.number}" +
+            // " ${if (this.chosenForPlay) "chosen" else ""}" +
+            " ${if (this.played) "played" else ""}"
 }
 
 private fun TileData.matchOne(secondTileData: TileData): Boolean {

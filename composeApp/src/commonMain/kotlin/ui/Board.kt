@@ -25,11 +25,13 @@ import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
+import io.ktor.http.ContentDisposition.Companion.File
 import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
+import util.toClipboard
 
 @Composable
 fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
@@ -59,10 +61,10 @@ fun StartButtonRow() {
         if (GameStateHolder.isGameState(GameState.LOST) ||
             (GameStateHolder.isGameState(GameState.RUNNING) &&
                     (!tutorial.isTutorial() || tutorial.isRestartStep()))) {
-            if (GameStateHolder.tutorial.isRestartStep()) Fingerpointing()
+            if (tutorial.isRestartStep()) Fingerpointing()
 
             Button(
-                border = if (GameStateHolder.tutorial.isRestartStep()) {
+                border = if (tutorial.isRestartStep()) {
                     BorderStroke(
                         2.dp,
                         if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
@@ -90,11 +92,19 @@ fun StartButtonRow() {
         }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(
-                enabled = GameStateHolder.level.value != null,
+                enabled = level.value != null,
                 onClick = { newGame() }) {
                 Text(
                     fontSize = standardTextSize.value,
                     text = stringResource(Res.string.start_game)
+                )
+            }
+        }
+        if (GameStateHolder.isGameState(GameState.RUNNING)) {
+            Button(onClick = { saveGame() }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = stringResource(Res.string.save_game)
                 )
             }
         }
@@ -186,13 +196,13 @@ fun TutorialText() {
         fontSize = standardTextSize.value,
         lineHeight = standardLineHeight.value,
         modifier = Modifier.padding(top = 10.dp),
-        text = GameStateHolder.tutorial.getCurrentTutorialText()
+        text = tutorial.getCurrentTutorialText()
     )
 }
 
 @Composable
 fun LevelText() {
-    when (GameStateHolder.level.value) {
+    when (level.value) {
         0 -> {
             Text(
                 text = stringResource(Res.string.single_element_tutorial),
@@ -207,7 +217,7 @@ fun LevelText() {
         }
         else -> {
             Text(
-                text = stringResource(Res.string.level) + " ${GameStateHolder.level.value}",
+                text = stringResource(Res.string.level) + " ${level.value}",
                 fontSize = largerTextSize.value
             )
         }
@@ -255,13 +265,13 @@ fun restartGame(
 
     board.tiles = tilesForGame
     GameStateHolder.listState.value = tilesForGame
-    GameStateHolder.remainingTileAmount.value = tilesForGame.size
+    remainingTileAmount.value = tilesForGame.size
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
 
-    println("restartGame:level: ${GameStateHolder.level.value}")
+    println("restartGame:level: ${level.value}")
 
-    GameStateHolder.tutorial.nextStep()
+    tutorial.nextStep()
     // runOnMainAfter(200L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
     // }
@@ -271,29 +281,46 @@ fun restartGame(
 fun endGame(
 ) {
     // level.value = null
-    GameStateHolder.gameState.value = GameState.LEVEL_CHANGE
+    gameState.value = GameState.LEVEL_CHANGE
     GameStateHolder.resetBoard()
     GameStateHolder.gameStateText.value = ""
-    GameStateHolder.tutorial.endTutorial()
+    tutorial.endTutorial()
 
     GameStateHolder.timer.stopTimer()
-    GameStateHolder.tutorial.endTutorial()
+    tutorial.endTutorial()
 }
 
 fun newGame(
 ) {
-    println("newGame:level: ${GameStateHolder.level.value}")
+    println("newGame:level: ${level.value}")
 
-    if (GameStateHolder.level.value !== null) {
-        when (GameStateHolder.level.value) {
+    if (level.value !== null) {
+        when (level.value) {
             0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
             10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
             else -> gameMode.value = GameMode.SINGLE_ELEMENT
         }
         GameStateHolder.resetBoard()
-        LevelGenerator().generateLevel(GameStateHolder.level.value!!)
+        LevelGenerator().generateLevel(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
 
         GameStateHolder.timer.startTimer()
     }
+}
+
+fun saveGame() {
+    // todo implement save game
+    // todo save this to clipboard or file
+
+    val saveGameString = """saveGame
+        level: ${level.value}
+        rem. tiles: ${remainingTileAmount.value}
+        timer: ${GameStateHolder.timer.durationState().value}
+        board size: ${GameStateHolder.boardDataState.value.size}
+        board: ${GameStateHolder.boardDataState.value.tiles.map { it.toSaveString() }}
+        )
+        """
+
+    println(saveGameString)
+    saveGameString.toClipboard()
 }

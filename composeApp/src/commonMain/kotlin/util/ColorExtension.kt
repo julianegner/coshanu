@@ -18,3 +18,16 @@ fun Color.toName(): String =
         Color.Cyan -> stringResource(Res.string.color_cyan)
         else -> stringResource(Res.string.color_unknown)
     }
+
+fun Color.toSaveName(): String =
+    when (this) {
+        Color.Blue -> "blue"
+        Color.Green -> "green"
+        Color.Red -> "red"
+        Color.Yellow -> "yellow"
+        Color.LightGray -> "light_gray"
+        Color.DarkGray -> "dark_gray"
+        Color.Magenta -> "magenta"
+        Color.Cyan -> "cyan"
+        else -> "unknown"
+    }
