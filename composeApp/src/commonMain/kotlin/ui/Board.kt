@@ -290,9 +290,10 @@ fun restartGame(
     println("restartGame:level: ${level.value}")
 
     tutorial.nextStep()
-    // runOnMainAfter(200L) {
+    // this slight delay in needed for the tiles of the restarted game to be shown
+    runOnMainAfter(10L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
-    // }
+    }
     GameStateHolder.timer.startTimer()
 }
 
