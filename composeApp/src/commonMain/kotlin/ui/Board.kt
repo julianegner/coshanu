@@ -261,6 +261,12 @@ fun restartGame(
 ) {
     GameStateHolder.updateGameState(GameState.RESTART)
 
+    println("restartGame: ${GameStateHolder.listState.value.size} ${GameStateHolder.listState.value}")
+
+    GameStateHolder.listState.value.forEachIndexed { index, tileData ->
+        println("TEST A: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
+    }
+
     val tilesForGame = GameStateHolder.listState.value
         .filter { tileData -> tileData.chosenForPlay }
 
@@ -276,6 +282,10 @@ fun restartGame(
     remainingTileAmount.value = tilesForGame.size
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
+
+    GameStateHolder.listState.value.forEachIndexed { index, tileData ->
+        println("TEST B: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
+    }
 
     println("restartGame:level: ${level.value}")
 

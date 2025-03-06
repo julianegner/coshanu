@@ -41,6 +41,9 @@ object GameStateHolder {
     }
 
     fun updateBoard(newBoardData: BoardData) {
+
+        println("new boardData equals old boardData ${boardDataState.value !== newBoardData}")
+
         if (boardDataState.value !== newBoardData) {
             boardDataState.value = newBoardData
             listState.value = newBoardData.tiles
@@ -261,7 +264,7 @@ object GameStateHolder {
             val boardData = BoardData(boardSize!!)
             boardData.tiles = tileDataList
             updateBoard(boardData)
-            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST A: tile $index: ${tile.color.toSaveName()} ${tile.shape.name} ${tile.number} ${tile.played}") }
+            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST A: tile $index: ${tile.toReadableString(true)}") }
             GameStateHolder.remainingTileAmount.value = remainingTileAmount!!
             GameStateHolder.updateGameState(GameState.RUNNING)
             val duration = Duration.parse(durationString!!)
@@ -269,7 +272,7 @@ object GameStateHolder {
 
 
             // GameStateHolder.boardDataState.value.tiles.forEach { println("TEST: tile: $it") }
-            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST B: tile $index: ${tile.color.toSaveName()} ${tile.shape.name} ${tile.number} ${tile.played}") }
+            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST B: tile $index: ${tile.toReadableString(true)}") }
         }
     }
 }

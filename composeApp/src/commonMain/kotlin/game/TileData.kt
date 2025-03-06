@@ -95,6 +95,10 @@ fun TileData.toSaveString(): String {
             " ${if (this.played) "played" else ""}"
 }
 
+fun TileData.toReadableString(withPlayed: Boolean = false): String {
+    return "${this.color.toSaveName()} ${this.shape.name} ${this.number} ${if (withPlayed) this.played else ""}"
+}
+
 private fun TileData.matchOne(secondTileData: TileData): Boolean {
     return ((this.color == secondTileData.color) || (this.shape == secondTileData.shape) || (this.number == secondTileData.number))
 }
