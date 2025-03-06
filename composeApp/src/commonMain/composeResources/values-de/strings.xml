@@ -26,6 +26,7 @@
     <string name="end_game">Spiel beenden</string>
     <string name="start_game">Spiel starten</string>
     <string name="save_game">Spiel speichern</string>
+    <string name="load_game">Spiel laden</string>
 
     <string name="level">Level</string>
     <string name="single_element_tutorial">Tutorial für ein Element</string>

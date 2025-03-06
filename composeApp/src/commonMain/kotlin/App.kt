@@ -16,7 +16,6 @@ import coshanu.composeapp.generated.resources.title
 import game.*
 import game.enums.GameState
 import game.enums.ScreenType
-import io.ktor.util.Platform
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.*
@@ -149,6 +148,9 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     GameState.RESTART -> {
                         Menu()
                         Board()
+                    }
+                    GameState.LOAD_GAME -> {
+                        LoadGameInputField()
                     }
                 }
             }

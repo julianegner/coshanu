@@ -99,6 +99,14 @@ fun StartButtonRow() {
                     text = stringResource(Res.string.start_game)
                 )
             }
+
+            Button(
+                onClick = { loadGame() }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = stringResource(Res.string.load_game)
+                )
+            }
         }
         if (GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { saveGame() }) {
@@ -295,16 +303,20 @@ fun newGame(
     println("newGame:level: ${level.value}")
 
     if (level.value !== null) {
-        when (level.value) {
-            0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
-            10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
-            else -> gameMode.value = GameMode.SINGLE_ELEMENT
-        }
+        setGameMode(level.value!!)
         GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
 
         GameStateHolder.timer.startTimer()
+    }
+}
+
+fun setGameMode(level: Int) {
+    when (level) {
+        0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
+        10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
+        else -> gameMode.value = GameMode.SINGLE_ELEMENT
     }
 }
 
@@ -323,4 +335,13 @@ fun saveGame() {
 
     println(saveGameString)
     saveGameString.toClipboard()
+}
+
+fun loadGame() {
+    // todo show input field for inputting load data
+    //  or load from clipboard
+    //  or file
+
+    println("loadGame")
+    GameStateHolder.updateGameState(GameState.LOAD_GAME)
 }

@@ -42,6 +42,12 @@ class Timer {
         durationState.value = duration
     }
 
+    fun startTimerFromSave(duration: Duration) {
+        this.duration = duration
+        durationState.value = duration
+        isRunning = true
+    }
+
     fun durationState(): MutableState<Duration> {
         return durationState
     }

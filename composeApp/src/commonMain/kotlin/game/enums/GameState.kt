@@ -10,5 +10,6 @@ enum class GameState(val resourceId: StringResource) {
     WON(Res.string.won),
     LOST(Res.string.lost),
     RUNNING(Res.string.running),
-    LEVEL_CHANGE(Res.string.level_change)
+    LEVEL_CHANGE(Res.string.level_change),
+    LOAD_GAME(Res.string.load_game)
 }

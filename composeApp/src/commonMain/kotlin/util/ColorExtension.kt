@@ -31,3 +31,16 @@ fun Color.toSaveName(): String =
         Color.Cyan -> "cyan"
         else -> "unknown"
     }
+
+fun stringToColor(colorString: String): Color =
+    when (colorString) {
+        "blue" -> Color.Blue
+        "green" -> Color.Green
+        "red" -> Color.Red
+        "yellow" -> Color.Yellow
+        "light_gray" -> Color.LightGray
+        "dark_gray" -> Color.DarkGray
+        "magenta" -> Color.Magenta
+        "cyan" -> Color.Cyan
+        else -> Color.Unspecified
+    }

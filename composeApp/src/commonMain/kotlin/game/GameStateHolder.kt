@@ -4,10 +4,12 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
-import game.enums.ScreenType
+import game.enums.ShapeEnum
 import ui.endGame
+import ui.setGameMode
 import util.Timer
-import util.runOnMainAfter
+import util.stringToColor
+import util.toSaveName
 import kotlin.time.Duration
 
 object GameStateHolder {
@@ -155,5 +157,119 @@ object GameStateHolder {
         boardDataState.value.tiles = listState.value
 
         remainingTileAmount.value -= 2
+    }
+
+    fun loadGame(gameDataInput: String) {
+        println("loadGame:gameDataInput: $gameDataInput")
+
+        /*
+        saveGame
+        level: 1
+        rem. tiles: 16
+        timer: 11m 36s
+        board size: 4
+        board: [red PENTAGON 4 , yellow OCTAGON 2 , yellow CIRCLE 3 , yellow SQUARE 4 , green CIRCLE 1 , yellow CIRCLE 4 , yellow SQUARE 3 , red PENTAGON 2 , yellow SQUARE 1 , yellow HEXAGON 4 , red TRIANGLE 3 , blue CIRCLE 3 , red OCTAGON 4 , green PENTAGON 3 , red SQUARE 3 , green HEXAGON 4 ]
+        )
+         */
+
+        val gameData = gameDataInput.split("\n")
+
+        var level: Int? = null
+        var remainingTileAmount: Int? = null
+        // var minutes: Int? = null
+        // var seconds: Int? = null
+        var durationString: String? = null
+        var boardSize: Int? = null
+        val tileDataList = mutableListOf<TileData>()
+
+        // todo write a for each loop of gamedata element
+        gameData.forEach { data ->
+            if (data.contains("level:")) {
+                level = data.split(":")[1].trim().toInt()
+            }
+            if (data.contains("rem. tiles:")) {
+                remainingTileAmount = data.split(":")[1].trim().toInt()
+            }
+            if (data.contains("timer:")) {
+                durationString = data.split(":")[1].trim()
+                // minutes = time.split("m")[0].trim().toInt()
+                // seconds = time.split("m")[1].split("s")[0].trim().toInt()
+            }
+            if (data.contains("board size:")) {
+                boardSize = data.split(":")[1].trim().toInt()
+            }
+            if (data.contains("board:")) {
+                val board = data.split(":")[1].trim().trim('[', ']').trim()
+                val tiles = board.split(",")
+
+
+                println("TEST: import save: tiles: ${tiles.size}")
+
+                tiles.forEach { tile ->
+                    val tileData = tile.trim().split(" ")
+                    tileDataList.add(
+                        TileData(
+                            color = stringToColor(tileData[0]),
+                            shape = ShapeEnum.valueOf(tileData[1]),
+                            number = tileData[2].toInt(),
+                            chosenForPlay = true,
+                            played = tile.contains("played")
+                        )
+                    )
+                }
+
+                println("TEST: import save: tileDataList: ${tileDataList.size}")
+            }
+        }
+
+        // changeLevel(level)
+        // remainingTileAmount.value
+        // timer.startTimer(Duration.minutes(minutes.toDouble()) + Duration.seconds(seconds.toDouble()))
+
+
+        // val boardData = BoardData(boardSize!!)
+        // boardData.tiles = tileDataList
+        // updateBoard(boardData)
+
+        println(    "TEST: loadGame: \n" +
+                    "level: $level\n" +
+                    "remainingTileAmount: $remainingTileAmount\n" +
+                    "durationString: $durationString\n" +
+                    // "minutes: $minutes\n" +
+                    // "seconds: $seconds\n" +
+                    "boardSize: $boardSize\n" +
+                    "tileDataList: $tileDataList\n"
+        )
+
+        // todo set the correct game states and then set the game state to running
+
+        if (level != null && remainingTileAmount != null
+            // && minutes != null && seconds != null
+            && durationString != null
+            && boardSize != null) {
+            // loadGame(level, remainingTileAmount, minutes, seconds, boardSize, tileDataList)
+            changeLevel(level!!)
+            setGameMode(GameStateHolder.level.value!!)
+            GameStateHolder.resetBoard()
+
+
+            // GameStateHolder.remainingTileAmount.value = remainingTileAmount!!
+            // timer.startTimer(Duration.minutes(minutes.toDouble()) + Duration.seconds(seconds.toDouble()))
+
+            println("TEST gamemode: ${GameStateHolder.gameMode.value}")
+
+            val boardData = BoardData(boardSize!!)
+            boardData.tiles = tileDataList
+            updateBoard(boardData)
+            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST A: tile $index: ${tile.color.toSaveName()} ${tile.shape.name} ${tile.number} ${tile.played}") }
+            GameStateHolder.remainingTileAmount.value = remainingTileAmount!!
+            GameStateHolder.updateGameState(GameState.RUNNING)
+            val duration = Duration.parse(durationString!!)
+            GameStateHolder.timer.startTimerFromSave(duration)
+
+
+            // GameStateHolder.boardDataState.value.tiles.forEach { println("TEST: tile: $it") }
+            GameStateHolder.boardDataState.value.tiles.forEachIndexed { index, tile -> println("TEST B: tile $index: ${tile.color.toSaveName()} ${tile.shape.name} ${tile.number} ${tile.played}") }
+        }
     }
 }
