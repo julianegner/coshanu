@@ -48,6 +48,14 @@ kotlin {
                     }
                 }
             }
+            testTask {
+                useKarma {
+                    // useFirefox()
+                    useChromium()
+                    // useChrome()
+                    // useChromeHeadless()
+                }
+            }
         }
         binaries.executable()
     }
@@ -83,6 +91,10 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation(npm("ua-parser-js", "2.0.2"))
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
