@@ -1,8 +1,7 @@
 package game
 
 import game.enums.GameMode
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 class LevelGeneratorTest {
 
@@ -16,6 +15,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.SINGLE_ELEMENT,GameStateHolder.gameMode.value)
         assertEquals(2, GameStateHolder.boardDataState.value.size)
         assertEquals(4, GameStateHolder.boardDataState.value.tiles.size)
+        assertTrue { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level1() {
@@ -25,6 +25,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.SINGLE_ELEMENT,GameStateHolder.gameMode.value)
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level2() {
@@ -34,6 +35,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.SINGLE_ELEMENT,GameStateHolder.gameMode.value)
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level3() {
@@ -43,6 +45,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.SINGLE_ELEMENT,GameStateHolder.gameMode.value)
         assertEquals(8, GameStateHolder.boardDataState.value.size)
         assertEquals(64, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
 
     @Test
@@ -53,6 +56,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.TWO_ELEMENTS,GameStateHolder.gameMode.value)
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+        assertTrue { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level11() {
@@ -62,6 +66,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.TWO_ELEMENTS,GameStateHolder.gameMode.value)
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level12() {
@@ -71,6 +76,7 @@ class LevelGeneratorTest {
         assertEquals(GameMode.TWO_ELEMENTS,GameStateHolder.gameMode.value)
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
     @Test
     fun level13() {
@@ -80,5 +86,6 @@ class LevelGeneratorTest {
         assertEquals(GameMode.TWO_ELEMENTS,GameStateHolder.gameMode.value)
         assertEquals(8, GameStateHolder.boardDataState.value.size)
         assertEquals(64, GameStateHolder.boardDataState.value.tiles.size)
+        assertFalse { GameStateHolder.tutorial.isTutorial() }
     }
 }

@@ -8,6 +8,7 @@ class LevelGenerator {
 
         GameStateHolder.resetBoard()
         setGameMode(levelNumber!!)
+        GameStateHolder.tutorial.endTutorial()
         when(levelNumber) {
             0 -> generateTutorial()
             10 -> generateTutorial()
