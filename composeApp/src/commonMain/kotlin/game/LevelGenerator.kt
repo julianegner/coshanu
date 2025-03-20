@@ -1,11 +1,13 @@
 package game
 
 import androidx.compose.ui.graphics.Color
+import ui.setGameMode
 
 class LevelGenerator {
     fun generateLevel(levelNumber: Int) {
 
         GameStateHolder.resetBoard()
+        setGameMode(levelNumber!!)
         when(levelNumber) {
             0 -> generateTutorial()
             10 -> generateTutorial()

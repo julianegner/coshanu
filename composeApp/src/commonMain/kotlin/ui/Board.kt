@@ -314,8 +314,6 @@ fun newGame(
     println("newGame:level: ${level.value}")
 
     if (level.value !== null) {
-        setGameMode(level.value!!)
-        GameStateHolder.resetBoard()
         LevelGenerator().generateLevel(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
 
