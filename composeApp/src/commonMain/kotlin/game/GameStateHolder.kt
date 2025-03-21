@@ -147,7 +147,9 @@ object GameStateHolder {
         return false
     }
 
-    fun playCard(vararg tileDataArgs: TileData) {
+    fun playCard(first: TileData, second: TileData) {
+        val tileDataArgs: List<TileData> = listOf(first, second)
+
         tileDataArgs.forEach { tileData ->
             val list = listState.value
             list
