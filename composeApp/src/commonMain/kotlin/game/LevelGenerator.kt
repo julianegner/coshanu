@@ -3,6 +3,11 @@ package game
 import androidx.compose.ui.graphics.Color
 import ui.setGameMode
 
+// todo the generation of a level is split between
+//  this level generator and the class BoardData
+//  it should be moved to this class
+//  and the class BoardData should only hold Data
+
 class LevelGenerator {
     fun generateLevel(levelNumber: Int) {
 

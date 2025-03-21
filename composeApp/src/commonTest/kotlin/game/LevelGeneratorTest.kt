@@ -7,6 +7,8 @@ class LevelGeneratorTest {
 
     val levelGenerator = LevelGenerator()
 
+    // todo add tests to check if the generated level is solvable
+
     @Test
     fun level0() {
         GameStateHolder.level.value = 0
@@ -16,6 +18,7 @@ class LevelGeneratorTest {
         assertEquals(2, GameStateHolder.boardDataState.value.size)
         assertEquals(4, GameStateHolder.boardDataState.value.tiles.size)
         assertTrue { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level1() {
@@ -26,6 +29,7 @@ class LevelGeneratorTest {
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level2() {
@@ -36,6 +40,7 @@ class LevelGeneratorTest {
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level3() {
@@ -46,6 +51,7 @@ class LevelGeneratorTest {
         assertEquals(8, GameStateHolder.boardDataState.value.size)
         assertEquals(64, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
 
     @Test
@@ -57,6 +63,7 @@ class LevelGeneratorTest {
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
         assertTrue { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level11() {
@@ -67,6 +74,7 @@ class LevelGeneratorTest {
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level12() {
@@ -77,6 +85,7 @@ class LevelGeneratorTest {
         assertEquals(4, GameStateHolder.boardDataState.value.size)
         assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
     @Test
     fun level13() {
@@ -87,5 +96,6 @@ class LevelGeneratorTest {
         assertEquals(8, GameStateHolder.boardDataState.value.size)
         assertEquals(64, GameStateHolder.boardDataState.value.tiles.size)
         assertFalse { GameStateHolder.tutorial.isTutorial() }
+        assertFalse { GameStateHolder.lostGame() }
     }
 }

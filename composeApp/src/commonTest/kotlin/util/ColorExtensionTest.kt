@@ -1,5 +1,7 @@
 package util
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.intl.Locale
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -23,6 +25,13 @@ class ColorExtensionTest {
         colorStrings.forEach { colorString ->
             assertEquals(colorString, stringToColor(colorString).toSaveName())
         }
+    }
+
+    @Test
+    fun test2() {
+        assertEquals("de", Locale.current.language)
+
+        // assertEquals("Blau", Color.Blue.toName())
     }
 
     /*
