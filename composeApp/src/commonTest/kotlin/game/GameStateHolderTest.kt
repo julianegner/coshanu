@@ -91,7 +91,77 @@ class GameStateHolderTest {
             board: [red PENTAGON 4 , yellow OCTAGON 2 , yellow CIRCLE 3 , yellow SQUARE 4 , green CIRCLE 1 , yellow CIRCLE 4 , yellow SQUARE 3 , red PENTAGON 2 , yellow SQUARE 1 , yellow HEXAGON 4 , red TRIANGLE 3 , blue CIRCLE 3 , red OCTAGON 4 , green PENTAGON 3 , red SQUARE 3 , green HEXAGON 4 ]
         """.trimIndent()
         GameStateHolder.loadGame(gameDataInput)
-        // Add assertions based on the expected state of the game
+
+        assertEquals(1, GameStateHolder.level.value)
+        assertEquals(16, GameStateHolder.remainingTileAmount.value)
+        assertEquals(4, GameStateHolder.boardDataState.value.size)
+        assertEquals(16, GameStateHolder.boardDataState.value.tiles.size)
+
+        // check if tiles are correctly loaded
+        val tile = GameStateHolder.boardDataState.value.tiles[0]
+        assertEquals(Color.Red, tile.color)
+        assertEquals(ShapeEnum.PENTAGON, tile.shape)
+        assertEquals(4, tile.number)
+        val tile1 = GameStateHolder.boardDataState.value.tiles[1]
+        assertEquals(Color.Yellow, tile1.color)
+        assertEquals(ShapeEnum.OCTAGON, tile1.shape)
+        assertEquals(2, tile1.number)
+        val tile2 = GameStateHolder.boardDataState.value.tiles[2]
+        assertEquals(Color.Yellow, tile2.color)
+        assertEquals(ShapeEnum.CIRCLE, tile2.shape)
+        assertEquals(3, tile2.number)
+        val tile3 = GameStateHolder.boardDataState.value.tiles[3]
+        assertEquals(Color.Yellow, tile3.color)
+        assertEquals(ShapeEnum.SQUARE, tile3.shape)
+        assertEquals(4, tile3.number)
+        val tile4 = GameStateHolder.boardDataState.value.tiles[4]
+        assertEquals(Color.Green, tile4.color)
+        assertEquals(ShapeEnum.CIRCLE, tile4.shape)
+        assertEquals(1, tile4.number)
+        val tile5 = GameStateHolder.boardDataState.value.tiles[5]
+        assertEquals(Color.Yellow, tile5.color)
+        assertEquals(ShapeEnum.CIRCLE, tile5.shape)
+        assertEquals(4, tile5.number)
+        val tile6 = GameStateHolder.boardDataState.value.tiles[6]
+        assertEquals(Color.Yellow, tile6.color)
+        assertEquals(ShapeEnum.SQUARE, tile6.shape)
+        assertEquals(3, tile6.number)
+        val tile7 = GameStateHolder.boardDataState.value.tiles[7]
+        assertEquals(Color.Red, tile7.color)
+        assertEquals(ShapeEnum.PENTAGON, tile7.shape)
+        assertEquals(2, tile7.number)
+        val tile8 = GameStateHolder.boardDataState.value.tiles[8]
+        assertEquals(Color.Yellow, tile8.color)
+        assertEquals(ShapeEnum.SQUARE, tile8.shape)
+        assertEquals(1, tile8.number)
+        val tile9 = GameStateHolder.boardDataState.value.tiles[9]
+        assertEquals(Color.Yellow, tile9.color)
+        assertEquals(ShapeEnum.HEXAGON, tile9.shape)
+        assertEquals(4, tile9.number)
+        val tile10 = GameStateHolder.boardDataState.value.tiles[10]
+        assertEquals(Color.Red, tile10.color)
+        assertEquals(ShapeEnum.TRIANGLE, tile10.shape)
+        assertEquals(3, tile10.number)
+        val tile11 = GameStateHolder.boardDataState.value.tiles[11]
+        assertEquals(Color.Blue, tile11.color)
+        assertEquals(ShapeEnum.CIRCLE, tile11.shape)
+        assertEquals(3, tile11.number)
+        val tile12 = GameStateHolder.boardDataState.value.tiles[12]
+        assertEquals(Color.Red, tile12.color)
+        assertEquals(ShapeEnum.OCTAGON, tile12.shape)
+        assertEquals(4, tile12.number)
+        val tile13 = GameStateHolder.boardDataState.value.tiles[13]
+        assertEquals(Color.Green, tile13.color)
+        assertEquals(ShapeEnum.PENTAGON, tile13.shape)
+        assertEquals(3, tile13.number)
+        val tile14 = GameStateHolder.boardDataState.value.tiles[14]
+        assertEquals(Color.Red, tile14.color)
+        assertEquals(ShapeEnum.SQUARE, tile14.shape)
+        assertEquals(3, tile14.number)
+        val tile15 = GameStateHolder.boardDataState.value.tiles[15]
+        assertEquals(Color.Green, tile15.color)
+        assertEquals(ShapeEnum.HEXAGON, tile15.shape)
+        assertEquals(4, tile15.number)
     }
 
     @Test
