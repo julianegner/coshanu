@@ -197,4 +197,20 @@ class GameStateHolderTest {
         GameStateHolder.updateBoard(boardData)
         assertEquals(boardData, GameStateHolder.boardDataState.value)
     }
+
+    @Test
+    fun testLevelUp() {
+        GameStateHolder.levelUp()
+        assertEquals(2, GameStateHolder.level.value)
+    }
+
+    @Test
+    fun testSaveNewBoard() {
+        val boardData = BoardData(4)
+        val tile = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = false)
+        boardData.tiles = listOf(tile)
+        GameStateHolder.saveNewBoard(boardData)
+        assertEquals(boardData, GameStateHolder.boardDataState.value)
+    }
+
 }
