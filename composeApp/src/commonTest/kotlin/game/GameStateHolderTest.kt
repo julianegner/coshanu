@@ -1,6 +1,7 @@
 package game
 
 import androidx.compose.ui.graphics.Color
+import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ShapeEnum
 import kotlin.test.Test
@@ -46,17 +47,62 @@ class GameStateHolderTest {
     }
 
     @Test
-    fun testCheckGameFinished() {
+    fun testCheckGameFinished_Won() {
         // Assuming remainingTileAmount and other states are set up
+
+        GameStateHolder.remainingTileAmount.value = 0
         GameStateHolder.checkGameFinished()
-        // Add assertions based on the expected game state
+        assertEquals(GameState.WON, GameStateHolder.gameState.value)
     }
+
+    val tilesForLost = listOf(
+        TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = true),
+        TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = true),
+        TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = true),
+        TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 4, chosenForPlay = true, played = true),
+        TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 5, chosenForPlay = true, played = false),
+        TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 6, chosenForPlay = true, played = false),
+        TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 7, chosenForPlay = true, played = false),
+        TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 8, chosenForPlay = true, played = false)
+    )
 
     @Test
     fun testLostGame() {
-        // Assuming listState is initialized with some values
+        GameStateHolder.listState.value = tilesForLost
+
+        GameStateHolder.gameMode.value = GameMode.SINGLE_ELEMENT
         val result = GameStateHolder.lostGame()
-        // Add assertions based on the expected result
+        assertTrue(result, "lostGame() should return true")
+    }
+
+    @Test
+    fun testCheckGameFinished_Lost() {
+        GameStateHolder.listState.value = tilesForLost
+
+        GameStateHolder.remainingTileAmount.value = 4
+        GameStateHolder.gameMode.value = GameMode.SINGLE_ELEMENT
+        GameStateHolder.checkGameFinished()
+        assertEquals(GameState.LOST, GameStateHolder.gameState.value)
+    }
+
+    val tilesForRunning= listOf(
+        TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = true),
+        TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = false),
+        TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = false),
+        TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 4, chosenForPlay = true, played = false),
+        TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 5, chosenForPlay = true, played = true),
+        TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 6, chosenForPlay = true, played = false),
+        TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 7, chosenForPlay = true, played = false),
+        TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 8, chosenForPlay = true, played = false)
+    )
+
+    @Test
+    fun testCheckGameFinished_Running() {
+        GameStateHolder.listState.value = tilesForRunning
+        GameStateHolder.remainingTileAmount.value = 6
+        GameStateHolder.gameMode.value = GameMode.SINGLE_ELEMENT
+        GameStateHolder.checkGameFinished()
+        assertEquals(GameState.RUNNING, GameStateHolder.gameState.value)
     }
 
     val tile1 = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = false)
@@ -212,5 +258,4 @@ class GameStateHolderTest {
         GameStateHolder.saveNewBoard(boardData)
         assertEquals(boardData, GameStateHolder.boardDataState.value)
     }
-
 }
