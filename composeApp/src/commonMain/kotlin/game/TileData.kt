@@ -22,6 +22,15 @@ data class TileData(
     var borderStroke: BorderStroke? = null
 )
 
+fun newTileData(color: Color, shape: ShapeEnum, number: Int): TileData =
+    TileData(
+        color = color,
+        shape = shape,
+        number = number,
+        chosenForPlay = true,
+        played = false
+    )
+
 /*
 localization german
 das grüne Dreieck

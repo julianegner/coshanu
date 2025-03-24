@@ -134,12 +134,8 @@ class Tutorial {
 
     fun isTutorial(): Boolean = activeState.value
 
-    private fun newTileData(color: Color, shape: ShapeEnum, number: Int): TileData =
-        TileData(
-            color = color,
-            shape = shape,
-            number = number,
-            chosenForPlay = true,
-            played = false
-        )
+    // needed for testing
+    fun getTutorialSteps(): List<TutorialStep> = tutorialSteps
+    // needed for testing
+    fun getCurrentStep(): TutorialStep? = currentStepState.value
 }
