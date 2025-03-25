@@ -34,7 +34,7 @@ fun newTileData(color: Color, shape: ShapeEnum, number: Int): TileData =
 /*
 localization german
 das grüne Dreieck
-den rote Kreis
+den roten Kreis
 das dunkelgraue Sechseck
 
 -> bei Circle "der", sonst "das"
@@ -42,6 +42,9 @@ das dunkelgraue Sechseck
  */
 @Composable
 fun TileData.tutorialString(): String {
+
+    // todo add this to the localization file, have it empty for english and only fill it for german
+    //  we need different strings for circle and the other shapes
     var colorPrefix = ""
     var colorPostfix = ""
     if (Locale.current.language == "de") {
