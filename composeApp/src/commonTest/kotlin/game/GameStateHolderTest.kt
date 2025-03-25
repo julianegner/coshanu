@@ -56,7 +56,7 @@ class GameStateHolderTest {
         assertEquals(GameState.WON, GameStateHolder.gameState.value)
     }
 
-    val tilesForLost = listOf(
+    private val tilesForLost = listOf(
         TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = true),
         TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = true),
         TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = true),
@@ -86,7 +86,7 @@ class GameStateHolderTest {
         assertEquals(GameState.LOST, GameStateHolder.gameState.value)
     }
 
-    val tilesForRunning= listOf(
+    private val tilesForRunning= listOf(
         TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = true),
         TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = false),
         TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = false),
@@ -106,14 +106,14 @@ class GameStateHolderTest {
         assertEquals(GameState.RUNNING, GameStateHolder.gameState.value)
     }
 
-    val tile1 = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = false)
-    val tile2 = TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = false)
-    val tile3 = TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = false)
-    val tile4 = TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 4, chosenForPlay = true, played = false)
-    val tile5 = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 5, chosenForPlay = true, played = false)
-    val tile6 = TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 6, chosenForPlay = true, played = false)
-    val tile7 = TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 7, chosenForPlay = true, played = false)
-    val tile8 = TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 8, chosenForPlay = true, played = false)
+    private val tile1 = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 1, chosenForPlay = true, played = false)
+    private val tile2 = TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 2, chosenForPlay = true, played = false)
+    private val tile3 = TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 3, chosenForPlay = true, played = false)
+    private val tile4 = TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 4, chosenForPlay = true, played = false)
+    private val tile5 = TileData(color = Color.Red, shape = ShapeEnum.CIRCLE, number = 5, chosenForPlay = true, played = false)
+    private val tile6 = TileData(color = Color.Blue, shape = ShapeEnum.SQUARE, number = 6, chosenForPlay = true, played = false)
+    private val tile7 = TileData(color = Color.Green, shape = ShapeEnum.HEXAGON, number = 7, chosenForPlay = true, played = false)
+    private val tile8 = TileData(color = Color.Yellow, shape = ShapeEnum.TRIANGLE, number = 8, chosenForPlay = true, played = false)
 
     @Test
     fun testPlayCard() {
@@ -125,7 +125,7 @@ class GameStateHolderTest {
         assertEquals(6, GameStateHolder.remainingTileAmount.value)
 
         // be aware that playCard does not test if the cards match.
-        // Thats done in Tile.secondTileMatchesPlayCards()
+        // That is done in Tile.secondTileMatchesPlayCards()
     }
 
     @Test
