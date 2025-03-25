@@ -1,7 +1,6 @@
 package game
 
 import androidx.compose.ui.graphics.Color
-import ui.setGameMode
 
 // todo the generation of a level is split between
 //  this level generator and the class BoardData
