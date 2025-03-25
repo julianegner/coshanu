@@ -13,6 +13,7 @@ class GameStateHolderTest {
 
     @Test
     fun testChangeLevel() {
+        GameStateHolder.level.value = null
         GameStateHolder.openMenu()
         assertEquals(0, GameStateHolder.level.value)
         GameStateHolder.changeLevel(5)
