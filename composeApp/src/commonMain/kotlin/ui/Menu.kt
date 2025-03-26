@@ -36,8 +36,6 @@ fun Menu() {
     )
     val buttonDefaultColors = ButtonDefaults.buttonColors()
 
-
-
     Column() {
         Text(
             fontSize = standardTextSize.value,
