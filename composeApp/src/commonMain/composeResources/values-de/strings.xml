@@ -42,6 +42,21 @@
     <string name="color_cyan">Cyan</string>
     <string name="color_unknown">Unbekannt</string>
 
+    <string name="color_prefix">das</string>
+    <string name="color_prefix_circle">den</string>
+    <string name="color_postfix">e</string>
+    <string name="color_postfix_circle">en</string>
+
+    /*
+    localization german
+    das grüne Dreieck
+    den roten Kreis
+    das dunkelgraue Sechseck
+
+    -> when Circle "der", else "das"
+    -> after the color always "e", only when Circle "en"
+    */
+
     <string name="circle">Kreis</string>
     <string name="triangle">Dreieck</string>
     <string name="square">Quadrat</string>
@@ -63,6 +78,7 @@ Jetzt klick auf [] unten rechts
 Das kommt daher, daß die Karten nicht zusammenpassen.
 Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
 Daher kommt auch der Name CoShaNu (Color, Shape, Number).
+
 Jetzt klick auf [] unten links.
     </string>
     <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen.
@@ -93,12 +109,13 @@ Du kannst ein neues Spiel im Menü oben starten.
 Das kommt daher, daß die Karten nicht zusammenpassen.
 Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
 Daher kommt auch der Name CoShaNu (Color, Shape, Number).
+
 Jetzt klick auf [] unten rechts.
     </string>
     <string name="tutorial_two_4">Beide Karten verschwinden, weil sie passen.
-        Ja, dieses Spiel ist verloren.
-        Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
-        Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
+Ja, dieses Spiel ist verloren.
+Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
+Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
     </string>
     <string name="tutorial_two_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
 Jetzt wähle [] oben links ...</string>

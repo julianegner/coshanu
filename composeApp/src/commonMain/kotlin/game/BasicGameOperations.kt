@@ -16,9 +16,9 @@ fun restartGame(
 
     println("restartGame: ${GameStateHolder.listState.value.size} ${GameStateHolder.listState.value}")
 
-    GameStateHolder.listState.value.forEachIndexed { index, tileData ->
-        println("TEST A: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
-    }
+    // GameStateHolder.listState.value.forEachIndexed { index, tileData ->
+    //     println("TEST A: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
+    // }
 
     val tilesForGame = GameStateHolder.listState.value
         .filter { tileData -> tileData.chosenForPlay }
@@ -36,17 +36,18 @@ fun restartGame(
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
 
-    GameStateHolder.listState.value.forEachIndexed { index, tileData ->
-        println("TEST B: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
-    }
+    // GameStateHolder.listState.value.forEachIndexed { index, tileData ->
+    //     println("TEST B: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
+    // }
 
     println("restartGame:level: ${level.value}")
 
-    tutorial.nextStep()
     // this slight delay in needed for the tiles of the restarted game to be shown
     runOnMainAfter(10L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
     }
+    tutorial.nextStep()
+
     GameStateHolder.timer.startTimer()
 }
 

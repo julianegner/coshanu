@@ -42,6 +42,11 @@
     <string name="color_cyan">Cyan</string>
     <string name="color_unknown">Unknown</string>
 
+    <string name="color_prefix">the</string>
+    <string name="color_prefix_circle">the</string>
+    <string name="color_postfix"></string>
+    <string name="color_postfix_circle"></string>
+
     <string name="circle">Circle</string>
     <string name="triangle">Triangle</string>
     <string name="square">Square</string>
@@ -62,13 +67,13 @@ But no problem, just click on 'Restart Game'
 This restarts the game with the same cards.
     </string>
     <string name="tutorial_one_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
-    <string name="tutorial_one_6">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n... and then the [].</string>
+    <string name="tutorial_one_6">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n... and then [].</string>
     <string name="tutorial_one_7">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower left [].</string>
     <string name="tutorial_one_8">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower right [].</string>
     <string name="tutorial_one_9">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 
     <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
-    <string name="tutorial_two_2">Now click on the [] right to the first Tile</string>
+    <string name="tutorial_two_2">Now click on [] right to the first Tile</string>
     <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
     <string name="tutorial_two_4">Both Tiles disappear, because this fits.
 Yes, this game was lost.
@@ -77,19 +82,19 @@ This restarts the game with the same cards.
     </string>
     <string name="tutorial_two_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
     <string name="tutorial_two_6">now choose the fitting [].</string>
-    <string name="tutorial_two_7">These Tiles are played - let's play the next pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_8">... the []</string>
-    <string name="tutorial_two_9">These Tiles are played - let's play the red pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_10">... the []</string>
-    <string name="tutorial_two_11">These Tiles are played - let's play the first green pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_12">... the []</string>
-    <string name="tutorial_two_13">These Tiles are played - let's play the green pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_14">... the []</string>
-    <string name="tutorial_two_15">These Tiles are played - let's play one of the blue pairs!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_16">... the []</string>
-    <string name="tutorial_two_17">These Tiles are played - let's play the second to last blue pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_18">... the []</string>
-    <string name="tutorial_two_19">These Tiles are played - let's play the last pair!\nNow click on the [] and ...</string>
-    <string name="tutorial_two_20">... the []</string>
+    <string name="tutorial_two_7">These Tiles are played - let's play the next pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_8">... []</string>
+    <string name="tutorial_two_9">These Tiles are played - let's play the red pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_10">... []</string>
+    <string name="tutorial_two_11">These Tiles are played - let's play the first green pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_12">... []</string>
+    <string name="tutorial_two_13">These Tiles are played - let's play the green pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_14">... []</string>
+    <string name="tutorial_two_15">These Tiles are played - let's play one of the blue pairs!\nNow click on [] and ...</string>
+    <string name="tutorial_two_16">... []</string>
+    <string name="tutorial_two_17">These Tiles are played - let's play the second to last blue pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_18">... []</string>
+    <string name="tutorial_two_19">These Tiles are played - let's play the last pair!\nNow click on [] and ...</string>
+    <string name="tutorial_two_20">... []</string>
     <string name="tutorial_two_21">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 </resources>

@@ -110,12 +110,21 @@ class Tutorial {
 
     @Composable
     fun getCurrentTutorialText(): String {
-        val text = currentStepState.value?.stringId?.let { stringResource(it) } ?: ""
-        return if (currentStepState.value?.tile == null) {
+        val stringResourceId = currentStepState.value?.stringId
+
+        // todo this only works for the first step after restart if these printlns are here ...
+        println("getCurrentTutorialText: ${currentStepState.value} ${stringResourceId}")
+        val text = stringResourceId?.let { stringResource(it) } ?: ""
+        println("getCurrentTutorialText / text: $text")
+        println("one: ${Res.string.tutorial_one_5} ${stringResource(Res.string.tutorial_one_5)}")
+        println("two: ${Res.string.tutorial_two_5} ${stringResource(Res.string.tutorial_two_5)}")
+        val returnText =  if (currentStepState.value?.tile == null) {
             text
         } else {
             text.replace("[]", currentStepState.value?.tile?.tutorialString() ?: "")
         }
+        println("getCurrentTutorialText / returnText: $returnText")
+        return returnText
     }
 
     // todo remove tutorialSteps.step - its a list (??)
@@ -123,6 +132,7 @@ class Tutorial {
         if (activeState.value && currentStepState.value != null) {
             val nextStep = currentStepState.value!!.step + 1
             currentStepState.value = tutorialSteps.find { it.step == nextStep }
+            println("nextStep: ${currentStepState.value}")
         }
     }
 
