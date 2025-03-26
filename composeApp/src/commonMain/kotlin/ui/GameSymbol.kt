@@ -1,10 +1,8 @@
 package ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -13,8 +11,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.GameStateHolder
 import game.enums.ShapeEnum
-import game.TileData
 import game.enums.ScreenType
+import game.newTileData
 import kotlin.math.PI
 
 @Composable
@@ -26,48 +24,12 @@ fun GameSymbol() {
 fun CircleOfTiles() {
 
     val elements = listOf(
-        TileData(
-            color = Color.Blue,
-            shape = ShapeEnum.TRIANGLE,
-            number = 3,
-            chosenForPlay = true,
-            played = false
-        ),
-        TileData(
-            color = Color.Red,
-            shape = ShapeEnum.CIRCLE,
-            number = 1,
-            chosenForPlay = true,
-            played = false
-        ),
-        TileData(
-            color = Color.Cyan,
-            shape = ShapeEnum.SQUARE,
-            number = 2,
-            chosenForPlay = true,
-            played = false
-        ),
-        TileData(
-            color = Color.Green,
-            shape = ShapeEnum.HEXAGON,
-            number = 3,
-            chosenForPlay = true,
-            played = false
-        ),
-        TileData(
-            color = Color.DarkGray,
-            shape = ShapeEnum.OCTAGON,
-            number = 4,
-            chosenForPlay = true,
-            played = false
-        ),
-        TileData(
-            color = Color.Magenta,
-            shape = ShapeEnum.PENTAGON,
-            number = 5,
-            chosenForPlay = true,
-            played = false
-        )
+        newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+        newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
+        newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
+        newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
+        newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
+        newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
     )
 
     val radius = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 220.dp

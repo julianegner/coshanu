@@ -5,11 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ShapeEnum
-import ui.endGame
-import ui.setGameMode
 import util.Timer
 import util.stringToColor
-import util.toSaveName
 import kotlin.time.Duration
 
 object GameStateHolder {
@@ -147,7 +144,9 @@ object GameStateHolder {
         return false
     }
 
-    fun playCard(vararg tileDataArgs: TileData) {
+    fun playCard(first: TileData, second: TileData) {
+        val tileDataArgs: List<TileData> = listOf(first, second)
+
         tileDataArgs.forEach { tileData ->
             val list = listState.value
             list

@@ -48,12 +48,21 @@ kotlin {
                     }
                 }
             }
+            testTask {
+                useKarma {
+                    // useFirefox()
+                    useChromium()
+                    // useChrome()
+                    // useChromeHeadless()
+                }
+            }
         }
         binaries.executable()
     }
 
     sourceSets {
         val desktopMain by getting
+        val desktopTest by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
@@ -83,6 +92,17 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation(npm("ua-parser-js", "2.0.2"))
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+        }
+
+        // Adds the desktop test dependency
+        desktopTest.dependencies {
+            implementation(compose.desktop.currentOs)
         }
     }
 }

@@ -9,6 +9,12 @@ Run for web:
 open webapp on browser:
 http://localhost:8080/
 
+Test for web:
+
+```shell
+./gradlew wasmJsBrowserTest
+```
+
 generate artifact for web:
 
 ```shell

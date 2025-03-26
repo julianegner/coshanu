@@ -51,6 +51,10 @@ class Timer {
     fun durationState(): MutableState<Duration> {
         return durationState
     }
+
+    fun isRunning(): Boolean {
+        return isRunning
+    }
 }
 
 
