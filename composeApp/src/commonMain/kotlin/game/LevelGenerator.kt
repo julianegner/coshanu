@@ -19,12 +19,13 @@ class LevelGenerator {
             else -> GameStateHolder.saveNewBoard(createBoard(size = levelNumber * 4, maxNumber = 2 * levelNumber, colors = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
         }
     }
-    private fun createBoard(size: Int, maxNumber: Int, colors: List<Color>): BoardData {
+    // non-private to allow testing
+    fun createBoard(size: Int, maxNumber: Int, colors: List<Color>): BoardData {
         val tiles = selectTilesForGame(size, maxNumber, colors)
         return BoardData(size, maxNumber, colors, tiles)
     }
 
-    private fun selectTilesForGame(size: Int, maxNumber: Int, colors: List<Color>): List<TileData> {
+    fun selectTilesForGame(size: Int, maxNumber: Int, colors: List<Color>): List<TileData> {
         if (size == 0) return listOf()
         val shapes = listOf(ShapeEnum.CIRCLE, ShapeEnum.TRIANGLE, ShapeEnum.SQUARE, ShapeEnum.PENTAGON, ShapeEnum.HEXAGON, ShapeEnum.OCTAGON)
         val numbers = (1..maxNumber).toList()
