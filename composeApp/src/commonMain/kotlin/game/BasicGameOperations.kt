@@ -16,10 +16,6 @@ fun restartGame(
 
     println("restartGame: ${GameStateHolder.listState.value.size} ${GameStateHolder.listState.value}")
 
-    // GameStateHolder.listState.value.forEachIndexed { index, tileData ->
-    //     println("TEST A: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
-    // }
-
     val tilesForGame = GameStateHolder.listState.value
         .filter { tileData -> tileData.chosenForPlay }
 
@@ -36,10 +32,6 @@ fun restartGame(
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
 
-    // GameStateHolder.listState.value.forEachIndexed { index, tileData ->
-    //     println("TEST B: $index ${tileData.toReadableString()} ${tileData.played} ${tileData.chosenForPlay}")
-    // }
-
     println("restartGame:level: ${level.value}")
 
     // this slight delay in needed for the tiles of the restarted game to be shown
@@ -53,7 +45,6 @@ fun restartGame(
 
 fun endGame(
 ) {
-    // level.value = null
     gameState.value = GameState.LEVEL_CHANGE
     GameStateHolder.resetBoard()
     GameStateHolder.gameStateText.value = ""
@@ -86,6 +77,7 @@ fun setGameMode(level: Int) {
 fun saveGame() {
     // todo implement save game
     // todo save this to clipboard or file
+    // todo add version of game data
 
     val saveGameString = """saveGame
         level: ${level.value}

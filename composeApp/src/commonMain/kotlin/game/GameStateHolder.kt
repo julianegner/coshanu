@@ -164,6 +164,7 @@ object GameStateHolder {
     fun loadGame(gameDataInput: String) {
         println("loadGame:gameDataInput: $gameDataInput")
 
+        // todo add version of game data
         /*
         saveGame
         level: 1
