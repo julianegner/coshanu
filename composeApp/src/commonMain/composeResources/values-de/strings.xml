@@ -145,4 +145,12 @@ Jetzt klick auf [] und ...</string>
 Jetzt weißt du, wie man dieses Spiel spielt.
 Du kannst ein neues Spiel im Menü oben starten.
     </string>
+
+    <!--
+Dear translators, please put your name here.
+If you add/ change a translation, please add your name here.
+example:
+<string name="translator">Aaron Beman, Cecil Dallas</string>
+-->
+    <string name="translator">Julian Egner</string>
 </resources>

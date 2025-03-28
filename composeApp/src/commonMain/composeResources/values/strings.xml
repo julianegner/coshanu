@@ -97,4 +97,12 @@ This restarts the game with the same cards.
     <string name="tutorial_two_19">These Tiles are played - let's play the last pair!\nNow click on [] and ...</string>
     <string name="tutorial_two_20">... []</string>
     <string name="tutorial_two_21">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
+
+    <!--
+    Dear translators, please put your name here.
+    If you add/ change a translation, please add your name here.
+    example:
+    <string name="translator">Aaron Beman, Cecil Dallas</string>
+    -->
+    <string name="translator">Julian Egner</string>
 </resources>
