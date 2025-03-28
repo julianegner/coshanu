@@ -23,6 +23,8 @@ import ui.UiStateHolder.screenType
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 
+val gameSaveAndLoadOption = false
+
 object AppInitializer {
     var called = false
 

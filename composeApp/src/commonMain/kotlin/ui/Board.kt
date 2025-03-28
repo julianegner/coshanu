@@ -21,6 +21,7 @@ import game.GameStateHolder.remainingTileAmount
 import game.GameStateHolder.tutorial
 import game.enums.GameState
 import game.enums.ScreenType
+import gameSaveAndLoadOption
 import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
@@ -73,10 +74,7 @@ fun StartButtonRow() {
                 )
             }
         }
-        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(
-                GameState.RUNNING
-            )
-        ) {
+        if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { endGame() }) {
                 Text(
                     fontSize = standardTextSize.value,
@@ -93,16 +91,17 @@ fun StartButtonRow() {
                     text = stringResource(Res.string.start_game)
                 )
             }
-
-            Button(
-                onClick = { loadGame() }) {
-                Text(
-                    fontSize = standardTextSize.value,
-                    text = stringResource(Res.string.load_game)
-                )
+            if (gameSaveAndLoadOption) {
+                Button(
+                    onClick = { loadGame() }) {
+                    Text(
+                        fontSize = standardTextSize.value,
+                        text = stringResource(Res.string.load_game)
+                    )
+                }
             }
         }
-        if (GameStateHolder.isGameState(GameState.RUNNING)) {
+        if (gameSaveAndLoadOption && GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(onClick = { saveGame() }) {
                 Text(
                     fontSize = standardTextSize.value,
