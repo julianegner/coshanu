@@ -32,8 +32,6 @@ fun restartGame(
 
     GameStateHolder.updateBoard(board, GameState.RESTART)
 
-    println("restartGame:level: ${level.value}")
-
     // this slight delay in needed for the tiles of the restarted game to be shown
     runOnMainAfter(10L) {
         GameStateHolder.updateGameState(GameState.RUNNING)
@@ -97,6 +95,5 @@ fun loadGame() {
     //  or load from clipboard
     //  or file
 
-    println("loadGame")
     GameStateHolder.updateGameState(GameState.LOAD_GAME)
 }

@@ -39,8 +39,6 @@ object GameStateHolder {
 
     fun updateBoard(newBoardData: BoardData) {
 
-        println("new boardData equals old boardData ${boardDataState.value !== newBoardData}")
-
         if (boardDataState.value !== newBoardData) {
             boardDataState.value = newBoardData
             listState.value = newBoardData.tiles
@@ -103,22 +101,9 @@ object GameStateHolder {
 
     fun checkGameFinished(
     ) {
-        println("checkGameFinished:remainingTileAmount: $remainingTileAmount")
-
         if ( remainingTileAmount.value == 0) {
             timer.stopTimer()
             updateGameState(GameState.WON)
-            /*
-            if (tutorial.isTutorial()) {
-                runOnMainAfter(5000L) {
-                    tutorial.endTutorial()
-                    // updateGameState(GameState.WON)
-                }
-            }
-            // } else {
-            //     updateGameState(GameState.WON)
-            // }
-             */
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
             timer.stopTimer()
