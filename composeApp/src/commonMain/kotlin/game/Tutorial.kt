@@ -110,6 +110,10 @@ class Tutorial {
 
     @Composable
     fun getCurrentTutorialText(): String {
+        // only fetch tutorial text if tutorial is active
+        if (!activeState.value) {
+            return ""
+        }
         val stringResourceId = currentStepState.value?.stringId
 
         // todo this only works for the first step after restart if these printlns are here ...
