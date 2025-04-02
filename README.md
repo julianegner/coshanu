@@ -1,7 +1,33 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+This is the Repository for the game CoShaNu, a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+It is deployed at https://cosha.nu
 
-Run for web:
+# CoShaNu
+The Game CoShaNu lets you select pairs of cards where the elements Color, Shape or Number are the same. The game is over when all pairs are found.
+There are two game modes, the simpler where one of color shape and number must be equal and the more complex where two must be equal.
+Also, a timer runs, you can try to be faster to make the game more challenging.
 
+# Kotlin Multiplatform
+The project is a Kotlin Multiplatform project and has some solutions ypu might find interesting.
+As the code is licensed unter MIT license, you can use it for your own projects, even commercial ones.
+
+Interesting solutions are:
+- scrolling (see composeApp/src/commonMain/kotlin/App.kt and look for verticalScrollModifier)
+- timer (see composeApp/src/commonMain/kotlin/util/Timer.kt)
+- Polygon (see composeApp/src/commonMain/kotlin/ui/Polygon.kt and composeApp/src/commonMain/kotlin/ui/Tile.kt)
+- Dark Mode (see ui/DarkModeSwitch.kt and usage of UiStateHolder.darkModeState.value)
+- State Holders for changing game states and ui states at runtime (see composeApp/src/commonMain/kotlin/game/GameStateHolder.kt and composeApp/src/commonMain/kotlin/ui/UiState.kt)
+- Localisation (see composeApp/src/commonMain/resources/strings) and usage by stringResource(Res.string.myString)
+- usage of lottie animation (see composeApp/src/commonMain/kotlin/ui/WonAnimation.kt)
+- usage of image resources (search for "painterResource(Res.drawable.lost)" in LostImage.kt and Board.kt)
+- usage of expect/actual for platform specific code (see composeApp/src/commonMain/kotlin/util/Platform.kt and i.e. composeApp/src/androidMain/kotlin/util/Platform.kt)
+- usable Weblink in Text (see composeApp/src/commonMain/kotlin/ui/TextLink.kt and util/util.kt for callUrl (expect/actual))
+- toClipboard (see composeApp/src/commonMain/kotlin/util/Clipboard.kt and Clipboard.kt in the platform specific folders)
+- enums with localised strings (see composeApp/src/commonMain/kotlin/game/enums/GameState.kt)
+- run after delay (see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt)
+
+# Development
+
+- Run for web:
 ```shell
 ./gradlew :composeApp:wasmJsBrowserDevelopmentRun
 ```
@@ -9,23 +35,18 @@ Run for web:
 open webapp on browser:
 http://localhost:8080/
 
-Test for web:
-
+- Test for web:
 ```shell
 ./gradlew wasmJsBrowserTest
 ```
 
-generate artifact for web:
-
+- generate artifact for web:
 ```shell
 ./gradlew :composeApp:wasmJsBrowserProductionExecutable
 ```
 Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
 
-....
-
-after adding new (string) resources, run:
-
+- after adding new (string) resources, run:
 ```shell
  ./gradlew build
 ```
@@ -45,9 +66,5 @@ after adding new (string) resources, run:
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
 [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
 [Kotlin/Wasm](https://kotl.in/wasm/)…
-
-**Note:** Compose/Web is Experimental and may be changed at any time. Use it only for evaluation purposes.
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
