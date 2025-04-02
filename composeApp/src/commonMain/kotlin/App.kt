@@ -16,7 +16,6 @@ import coshanu.composeapp.generated.resources.title
 import game.*
 import game.enums.GameState
 import game.enums.ScreenType
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.*
 import ui.UiStateHolder.screenType
@@ -40,7 +39,6 @@ object AppInitializer {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
     AppInitializer.initialize(isSystemInDarkTheme())
@@ -58,9 +56,9 @@ fun App() {
                 )
 
                 val verticalScrollModifier = mutableStateOf(
-                    if (screenType.value == ScreenType.LANDSCAPE) Modifier else Modifier.verticalScroll(
+                    if (UiStateHolder.displayInfoArea.value || screenType.value == ScreenType.PORTRAIT) Modifier.verticalScroll(
                         rememberScrollState()
-                    )
+                    ) else Modifier
                 )
                 Main(verticalScrollModifier)
             }
@@ -70,15 +68,17 @@ fun App() {
 
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
-    // Text(getPlatform().name, modifier = Modifier.padding(vertical = 5.dp))
+    if (UiStateHolder.displayInfoArea.value) {
+        InfoAreaWrapper(verticalScrollModifier.value)
+    } else if (GameStateHolder.isGameState(GameState.STARTING)) {
 
-    if (GameStateHolder.isGameState(GameState.STARTING)) {
         Column(
             modifier = Modifier.padding(top =
                 if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 48.dp else 65.dp
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            InfoAreaWrapper(verticalScrollModifier.value)
             Title()
             GameSymbol()
         }
@@ -90,11 +90,17 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(horizontal = 20.dp)
-                        .align(Alignment.End)
                 ) {
                     //GameSymbol()
+                    InfoSymbol(
+                        Modifier
+                            .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+                            .padding(10.dp)
+                    )
                     DarkModeSwitch()
                 }
                 Title()

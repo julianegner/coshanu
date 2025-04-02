@@ -146,11 +146,45 @@ Jetzt weißt du, wie man dieses Spiel spielt.
 Du kannst ein neues Spiel im Menü oben starten.
     </string>
 
+    <!-- info area -->
+    <string name="info_area_title">Information</string>
+    <string name="general_information_title">Allgemeine Informationen</string>
+    <string name="general_information_text">CoShaNu ist ein Spiel, bei dem es darum geht, Paare von Karten zu entfernen, bei denen Farbe, Form oder Nummer übereinstimmen.
+Es gibt zwei Spielarten, bei dem einfacheren muss nur ein Element gleich sein und bei dem komplexeren müssen zwei Elemente gleich sein.
+Spiel das Tutorial um zu lernen, wie man das Spiel spielt.
+
+Das Spiel ist in Kotlin multiplatform mit Jetpack Compose geschrieben und unterstützt verschiedene Sprachen und Plattformen.
+
+Es ist Open Source (MIT-Lizenz), sodass du Funktionen und Code-Snippets für deine eigenen Projekte verwenden kannst.
+Beiträge und Übersetzungen sind willkommen.</string>
+    <string name="license_title">Lizenz</string>
+    <string name="general_license_info">Das Spiel ist unter der MIT-Lizenz lizenziert.</string>
+    <!-- info for translation: the license text itself is in english, so please add "(english)" to this translated string -->
+    <string name="license_details_link_text">Lizenzdetails (Englisch)</string>
+    <string name="code_title">Code</string>
+    <string name="code_info">Der Code ist auf GitHub verfügbar. Siehe:</string>
+    <string name="platform_availability_title">Plattformverfügbarkeit</string>
+    <string name="platform_availability_info">Das Spiel ist auf den folgenden Plattformen verfügbar:</string>
+    <string name="platform">Plattform</string>
+    <string name="link">Link</string>
+    <string name="localization_title">Lokalisierung</string>
+    <string name="localization_info">Das Spiel ist in einigen Sprachen verfügbar.</string>
+    <string name="translators_prefix">Übersetzer für</string>
+    <string name="contribute_title">Beitragen</string>
+    <string name="contribute_info">Das Spiel ist Open Source und Beiträge sind willkommen.
+Du kannst zum Spiel beitragen, indem du Übersetzungen hinzufügst, Fehler behebst oder neue Features hinzufügst.
+Bitte kontaktiere mich über GitHub, wenn du beitragen möchtest.
+
+Wenn du das Spiel übersetzen möchtest, kannst du die Übersetzungsdatei hier herunterladen:</string>
+    <string name="contribute_translation_mail">Du kannst mir die übersetzte Datei per E-Mail senden:</string>
+
+
     <!--
 Dear translators, please put your name here.
 If you add/ change a translation, please add your name here.
 example:
 <string name="translator">Aaron Beman, Cecil Dallas</string>
 -->
+    <string name="language_name">Deutsch</string>
     <string name="translator">Julian Egner</string>
 </resources>

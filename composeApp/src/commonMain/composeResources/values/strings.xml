@@ -1,3 +1,9 @@
+<!--
+Dear translators, to add a translation, copy this file to a new file with the language code in the path.
+For example, for german, the path is composeApp/src/commonMain/composeResources/values-de/strings.xml
+Then translate the strings in the new file.
+When using multiline strings, please be aware that all line breaks and indentation are displayed
+-->
 <resources>
     <!-- default language: english -->
     <string name="title">CoShaNu - Color, Shape, Number</string>
@@ -98,11 +104,48 @@ This restarts the game with the same cards.
     <string name="tutorial_two_20">... []</string>
     <string name="tutorial_two_21">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 
+
+    <!-- info area -->
+    <string name="info_area_title">Information</string>
+    <string name="general_information_title">General Information</string>
+    <string name="general_information_text">CoShaNu is a game where you remove pairs of cards where the color, the shape or the number are the same.
+There are two game modes, the simpler where one of color shape and number must be equal and the more complex where two must be equal.
+Play the tutorial to learn how to play the game.
+
+The game was written in Kotlin multiplatform with Jetpack Compose.
+The game is available in different languages and on different platforms.
+
+It is open source (MIT license), so you can use functions and code snippets for your own projects.
+Contributions and translations are welcome.</string>
+    <string name="license_title">License</string>
+    <string name="general_license_info">The game is licensed under the MIT license.</string>
+    <!-- info for translation: the license text itself is in english, so please add "(english)" to this translated string -->
+    <string name="license_details_link_text">license details</string>
+    <string name="code_title">Code</string>
+    <string name="code_info">The code is available on GitHub. See:</string>
+    <string name="platform_availability_title">Platform availability</string>
+    <string name="platform_availability_info">The game is available on the following platforms:</string>
+    <string name="platform">Platform</string>
+    <string name="link">Link</string>
+    <string name="localization_title">Localization</string>
+    <string name="localization_info">The game is available some languages.</string>
+    <string name="translators_prefix">Translator(s) for</string>
+    <string name="contribute_title">Contribute</string>
+    <string name="contribute_info">The game is open source and contributions are welcome.
+You can contribute to the game by adding translations, fixing bugs or adding new features.
+Please contact me via github if you want to contribute.
+
+If you want to translate the game, you can download the translation file here:</string>
+    <string name="contribute_translation_mail">You can send me the translated file by mail to</string>
+
+
+
     <!--
     Dear translators, please put your name here.
     If you add/ change a translation, please add your name here.
     example:
     <string name="translator">Aaron Beman, Cecil Dallas</string>
     -->
+    <string name="language_name">English</string>
     <string name="translator">Julian Egner</string>
 </resources>

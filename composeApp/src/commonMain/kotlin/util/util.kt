@@ -11,3 +11,5 @@ fun runOnMainAfter(interval: Long, runnable: () -> Unit): Job {
         runnable()
     }
 }
+
+expect fun callUrl(url: String)

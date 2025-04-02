@@ -24,6 +24,12 @@ Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionEx
 
 ....
 
+after adding new (string) resources, run:
+
+```shell
+ ./gradlew build
+```
+
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
