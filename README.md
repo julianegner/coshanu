@@ -43,6 +43,8 @@ http://localhost:8080/
 - generate artifact for web:
 ```shell
 ./gradlew :composeApp:wasmJsBrowserProductionExecutable
+
+./gradlew :composeApp:wasmJsBrowserDistribution
 ```
 Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
 

@@ -105,7 +105,7 @@ private fun PlatformOverviewTable() {
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Web", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
-            TextLink("cosha.nu")
+            TextLink(url = "https://cosha.nu", text = "cosha.nu")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Android", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
