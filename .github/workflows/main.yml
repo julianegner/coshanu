@@ -1,0 +1,21 @@
+name: Deploy Web App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Publish Web App
+        uses: openMF/KMP-web-publish-action@v1.0.0
+        with:
+          web_package_name: 'coshanu'
