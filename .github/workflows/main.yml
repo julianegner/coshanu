@@ -46,7 +46,7 @@ jobs:
       - name: "📤 Upload GitHub Pages artifact"
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./coshanu/composeApp/build/dist/wasmJs/productionExecutable
+          path: ./composeApp/build/dist/wasmJs/productionExecutable
 
       # 7. Deploy to GitHub Pages
       - name: "🚀 Deploy to GitHub Pages"
