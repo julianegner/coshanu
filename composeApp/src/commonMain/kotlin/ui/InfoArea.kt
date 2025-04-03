@@ -129,7 +129,7 @@ private fun PlatformOverviewTable() {
 }
 
 @Composable
-fun ImpressumWrapper(modifier: Modifier = Modifier) {
+fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
     // Impressum for web only
     if ("Web with Kotlin/Wasm" != getPlatform().name) {
         return
@@ -142,7 +142,7 @@ fun ImpressumWrapper(modifier: Modifier = Modifier) {
         if (UiStateHolder.displayImpressum.value) {
             Column (modifier = Modifier.border(1.dp, Color.Gray).padding(10.dp)) {
                 Row (
-                    modifier = Modifier.fillMaxWidth(0.5f),
+                    modifier = rowModifier,
                     horizontalArrangement = Arrangement.End
                 ) {
                     closingX { UiStateHolder.displayImpressum.value = false }
@@ -150,8 +150,9 @@ fun ImpressumWrapper(modifier: Modifier = Modifier) {
                 Impressum()
             }
         } else {
-            Text("Impressum",
-                Modifier
+            Text(text = "Impressum",
+                fontSize = standardTextSize.value,
+                modifier = Modifier
                     .clickable(onClick = { UiStateHolder.displayImpressum.value = true })
             )
         }
