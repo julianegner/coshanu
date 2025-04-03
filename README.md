@@ -70,3 +70,18 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 [Kotlin/Wasm](https://kotl.in/wasm/)…
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+
+# deployment
+
+There are not many web hosters that support wasm at the moment, but github pages is one of them.
+
+### Github pages
+repository must be public or paid
+
+### deploy kotlin/wasm to github pages
+https://medium.com/@schott12521/deploy-kotlin-mutliplatform-wasmjs-to-github-pages-fe295d8b420f
+
+See: https://github.com/julianegner/coshanu/blob/main/.github/workflows/main.yml
+
+### Use your own Domain  for github pages
+https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a

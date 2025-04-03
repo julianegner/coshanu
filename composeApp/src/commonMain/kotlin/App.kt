@@ -71,7 +71,6 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     if (UiStateHolder.displayInfoArea.value) {
         InfoAreaWrapper(verticalScrollModifier.value)
     } else if (GameStateHolder.isGameState(GameState.STARTING)) {
-
         Column(
             modifier = Modifier.padding(top =
                 if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 48.dp else 65.dp
@@ -82,6 +81,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             Title()
             GameSymbol()
         }
+        ImpressumWrapper()
     } else {
         Column {
             Column(
@@ -101,6 +101,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
                             .padding(10.dp)
                     )
+                    ImpressumWrapper()
                     DarkModeSwitch()
                 }
                 Title()

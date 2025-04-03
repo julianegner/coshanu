@@ -19,6 +19,7 @@ object UiStateHolder {
     val menuRowTextWidth: MutableState<Dp> = mutableStateOf(100.dp)
     val menuButtonWidth: MutableState<Dp> = mutableStateOf(60.dp)
     val displayInfoArea: MutableState<Boolean> = mutableStateOf(false)
+    val displayImpressum: MutableState<Boolean> = mutableStateOf(false)
 
     fun setScreenType(newScreenType: ScreenType) {
         screenType.value = newScreenType

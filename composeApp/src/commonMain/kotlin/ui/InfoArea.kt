@@ -90,8 +90,21 @@ fun InfoArea() {
         TextLink("https://github.com/julianegner/coshanu/blob/main/composeApp/src/commonMain/composeResources/values/strings.xml")
         Text(stringResource(Res.string.contribute_translation_mail), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         TextLink(url = "mailto:admin@cosha.nu", text = "admin@cosha.nu")
+
+        Impressum()
     }
     closingX { UiStateHolder.displayInfoArea.value = false }
+}
+
+// this is for legal reasons. Should not be needed, as its a non-commercial website, but better safe than sorry
+@Composable
+private fun Impressum() {
+    BulletPoint("Impressum")
+    Text("Julian Egner\nWeissstrasse 18\n53123 Bonn\nGermany", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+    Row {
+        Text("mail: ", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+        TextLink(url = "mailto:admin@cosha.nu", text = "admin@cosha.nu")
+    }
 }
 
 @Composable
@@ -112,6 +125,36 @@ private fun PlatformOverviewTable() {
             Text("Work in progress", fontSize = standardTextSize.value)
         }
         // Add more rows as needed
+    }
+}
+
+@Composable
+fun ImpressumWrapper(modifier: Modifier = Modifier) {
+    // Impressum for web only
+    if ("Web with Kotlin/Wasm" != getPlatform().name) {
+        return
+    }
+    Row (
+        verticalAlignment = Alignment.Bottom,
+        horizontalArrangement = Arrangement.Center
+    )
+    {
+        if (UiStateHolder.displayImpressum.value) {
+            Column (modifier = Modifier.border(1.dp, Color.Gray).padding(10.dp)) {
+                Row (
+                    modifier = Modifier.fillMaxWidth(0.5f),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    closingX { UiStateHolder.displayImpressum.value = false }
+                }
+                Impressum()
+            }
+        } else {
+            Text("Impressum",
+                Modifier
+                    .clickable(onClick = { UiStateHolder.displayImpressum.value = true })
+            )
+        }
     }
 }
 
