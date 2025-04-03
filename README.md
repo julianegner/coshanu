@@ -48,6 +48,20 @@ http://localhost:8080/
 ```
 Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
 
+*** JVM
+- generate jar for JVM:
+```shell
+./gradlew :composeApp:desktopJar
+```
+Find the generated artifact `composeApp/build/libs/composeApp-desktop.jar`
+
+*** Android
+- generate apk for Android:
+```shell
+./gradlew assembleRelease
+```
+Find the generated artifact `composeApp/build/outputs/apk/release/composeApp-release-unsigned.apk`
+
 - after adding new (string) resources, run:
 ```shell
  ./gradlew build
