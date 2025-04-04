@@ -99,3 +99,6 @@ See: https://github.com/julianegner/coshanu/blob/main/.github/workflows/main.yml
 
 ### Use your own Domain  for github pages
 https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a
+
+to see if changes you made to your domain at your webhoster are propagated worldwide:
+https://www.whatsmydns.net
