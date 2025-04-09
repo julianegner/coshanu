@@ -92,17 +92,20 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = if ("Web with Kotlin/Wasm" == getPlatform().name) Arrangement.SpaceBetween else Arrangement.End,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp)
                 ) {
                     //GameSymbol()
-                    InfoSymbol(
-                        Modifier
-                            .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
-                            .padding(10.dp)
-                    )
+
+                    if ("Web with Kotlin/Wasm" == getPlatform().name) {
+                        InfoSymbol(
+                            Modifier
+                                .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+                                .padding(10.dp)
+                        )
+                    }
                     ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     DarkModeSwitch()
                 }
