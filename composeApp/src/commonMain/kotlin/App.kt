@@ -80,6 +80,11 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             InfoAreaWrapper(verticalScrollModifier.value)
             Title()
             GameSymbol()
+
+            // uncomment this to show the sticker image which can be used to print stickers
+            // not for production, only to get the sticker image
+            // comment GameSymbol() out for this to be visible
+            // StickerImage()
         }
         ImpressumWrapper(if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) Modifier.fillMaxWidth(0.5f) else Modifier.fillMaxWidth())
     } else {
