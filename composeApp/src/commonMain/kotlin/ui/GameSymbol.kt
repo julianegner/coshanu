@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import game.GameStateHolder
+import game.TileData
 import game.enums.ShapeEnum
 import game.enums.ScreenType
 import game.newTileData
@@ -17,27 +18,25 @@ import kotlin.math.PI
 
 @Composable
 fun GameSymbol() {
-    CircleOfTiles()
-}
-
-@Composable
-fun CircleOfTiles() {
-
-    val elements = listOf(
+    CircleOfTiles(listOf(
         newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
         newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
         newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
         newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
         newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
         newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
-    )
+    ))
+}
+
+@Composable
+fun CircleOfTiles( elements: List<TileData>, modifier: Modifier = Modifier) {
 
     val radius = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 220.dp
     val centerX = 0.dp
     val centerY = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 100.dp else 400.dp
     val angleStep = 360 / elements.size
 
-    Box(modifier = Modifier
+    Box(modifier = modifier
         .fillMaxSize()
         .clickable(interactionSource = null, indication = null) {
             GameStateHolder.openMenu()
@@ -60,6 +59,7 @@ fun CircleOfTiles() {
                     Card(
                         border = null,
                         elevation = 0.dp,
+                        backgroundColor = Color.Transparent,
                         modifier = Modifier
                             .aspectRatio(1f)
                             .padding(10.dp)
