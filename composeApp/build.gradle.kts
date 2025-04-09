@@ -19,9 +19,7 @@ kotlin {
             executable()
         }
     }
-}
 
-kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {

@@ -53,11 +53,21 @@ run desktop application:
 ```shell
 ./gradlew :composeApp:runDistributable
 ```
-- generate jar for JVM:
+
+generate uber/fat jar:
+```shell
+./gradlew :composeApp:packageUberJarForCurrentOS
+```
+Find the generated artifact in `composeApp/build/compose/jars/`
+
+run it with 
+```shell
+java -jar composeApp/build/compose/jars/de.julianegner.coshanu-linux-x64-1.0.0.jar
+``` 
+
+- generate jar for JVM: (NOT Working!!)
 ```shell
 ./gradlew :composeApp:desktopJar
-
-
 
 ```
 Find the generated artifact `composeApp/build/libs/composeApp-desktop.jar`
