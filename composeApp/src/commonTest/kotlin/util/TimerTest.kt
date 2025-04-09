@@ -1,5 +1,10 @@
 package util
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
@@ -15,6 +20,18 @@ class TimerTest {
         )
     }
      */
+
+    @kotlinx.coroutines.ExperimentalCoroutinesApi
+    @BeforeTest
+    fun setUp() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+    }
+
+    @kotlinx.coroutines.ExperimentalCoroutinesApi
+    @AfterTest
+    fun tearDown() {
+        Dispatchers.resetMain()
+    }
 
     @Test
     fun shouldBeRunningAfterStarted() {

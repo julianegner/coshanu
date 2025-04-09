@@ -9,19 +9,26 @@ import game.TileData
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ShapeEnum
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import kotlin.test.*
 
 class TileTest {
 
+    @kotlinx.coroutines.ExperimentalCoroutinesApi
     @BeforeTest
     fun setUp() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
         GameStateHolder.resetBoard()
         GameStateHolder.gameMode.value = GameMode.SINGLE_ELEMENT
         GameStateHolder.gameState.value = GameState.RUNNING
+    }
+
+    @kotlinx.coroutines.ExperimentalCoroutinesApi
+    @AfterTest
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test

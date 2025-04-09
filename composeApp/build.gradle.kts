@@ -12,10 +12,20 @@ plugins {
 }
 
 kotlin {
+    //macosX64("native") { // on macOS
+        // linuxX64("native") // on Linux
+    mingwX64("native") {// on Windows
+        binaries {
+            executable()
+        }
+    }
+}
+
+kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -29,6 +39,9 @@ kotlin {
             isStatic = true
         }
     }
+
+
+
 
     jvm("desktop")
 
@@ -88,7 +101,16 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
+            implementation(kotlin("stdlib"))
+            // implementation("org.jetbrains.compose.runtime:runtime:1.4.0")
+            // implementation("org.jetbrains.compose.ui:ui:1.4.0")
+            // implementation("org.jetbrains.compose.foundation:foundation:1.4.0")
+            // implementation("org.jetbrains.compose.material:material:1.4.0")
+            // implementation("org.jetbrains.compose.desktop:desktop:1.0.0")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
+
         }
 
         commonTest.dependencies {
@@ -100,6 +122,8 @@ kotlin {
         // Adds the desktop test dependency
         desktopTest.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.kotlin.test)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
         }
     }
 }
@@ -126,8 +150,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -137,12 +161,18 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "de.julianegner.coshanu.MainKt"
+        mainClass = "MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             packageName = "de.julianegner.coshanu"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "MainKt"
     }
 }

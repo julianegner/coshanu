@@ -49,11 +49,22 @@ http://localhost:8080/
 Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
 
 *** JVM
+run desktop application:
+```shell
+./gradlew :composeApp:runDistributable
+```
 - generate jar for JVM:
 ```shell
 ./gradlew :composeApp:desktopJar
+
+
+
 ```
 Find the generated artifact `composeApp/build/libs/composeApp-desktop.jar`
+run it with 
+```shell
+java -jar composeApp-desktop.jar
+```
 
 *** Android
 - generate apk for Android:
