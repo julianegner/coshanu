@@ -63,6 +63,13 @@ fun App() {
     }
 }
 
+val isPlatformWasm = ("Web with Kotlin/Wasm" == getPlatform().name)
+// set to false for creating a deployable zip file for itch.io with
+// ./gradlew :composeApp:wasmJsBrowserDistribution
+// find created files in composeApp/build/dist/wasmJsBrowser/productionExecutable/
+// zip it and upload to itch.io
+val withImpressum = true
+
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     if (UiStateHolder.displayInfoArea.value) {
@@ -92,14 +99,14 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
-                    horizontalArrangement = if ("Web with Kotlin/Wasm" == getPlatform().name) Arrangement.SpaceBetween else Arrangement.End,
+                    horizontalArrangement = if (isPlatformWasm) Arrangement.SpaceBetween else Arrangement.End,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 20.dp)
                 ) {
                     //GameSymbol()
 
-                    if ("Web with Kotlin/Wasm" == getPlatform().name) {
+                    if (isPlatformWasm) {
                         InfoSymbol(
                             Modifier
                                 .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
