@@ -20,20 +20,21 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
+import isPlatformWasm
 import game.enums.ScreenType
-import getPlatform
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
+import withImpressum
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
 
 @Composable
 fun InfoAreaWrapper(modifier: Modifier = Modifier) {
     // Info area for web only
-    if ("Web with Kotlin/Wasm" != getPlatform().name) {
+    if (!isPlatformWasm) {
         return
     }
     Row (
@@ -91,7 +92,9 @@ fun InfoArea() {
         Text(stringResource(Res.string.contribute_translation_mail), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         TextLink(url = "mailto:admin@cosha.nu", text = "admin@cosha.nu")
 
-        Impressum()
+        if (withImpressum) {
+            Impressum()
+        }
     }
     closingX { UiStateHolder.displayInfoArea.value = false }
 }
@@ -131,7 +134,7 @@ private fun PlatformOverviewTable() {
 @Composable
 fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
     // Impressum for web only
-    if ("Web with Kotlin/Wasm" != getPlatform().name) {
+    if (!isPlatformWasm or !withImpressum) {
         return
     }
     Row (
