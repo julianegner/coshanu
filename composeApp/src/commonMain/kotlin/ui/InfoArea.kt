@@ -124,6 +124,10 @@ private fun PlatformOverviewTable() {
             TextLink(url = "https://cosha.nu", text = "cosha.nu")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
+            Text("itch.io", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            TextLink(url = "https://jegner.itch.io/coshanu", text = "itch.io")
+        }
+        Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Android", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             Text("Work in progress", fontSize = standardTextSize.value)
         }
