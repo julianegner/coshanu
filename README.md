@@ -65,15 +65,28 @@ run it with
 java -jar composeApp/build/compose/jars/de.julianegner.coshanu-linux-x64-1.0.0.jar
 ``` 
 
-- generate jar for JVM: (NOT Working!!)
+*** generate jar for JVM: (NOT Working!!)
 ```shell
 ./gradlew :composeApp:desktopJar
-
 ```
 Find the generated artifact `composeApp/build/libs/composeApp-desktop.jar`
 run it with 
 ```shell
 java -jar composeApp-desktop.jar
+```
+
+*** Debian and compatible Linux
+- generate debian package:
+```shell
+./gradlew :composeApp:packageDeb
+``` 
+location of .deb file:
+```shell
+composeApp/build/compose/binaries/main/deb/de.julianegner.coshanu_1.0.0_amd64.deb
+```
+install:
+```shell
+sudo apt install ./de.julianegner.coshanu_1.0.0_amd64.deb
 ```
 
 *** Android
