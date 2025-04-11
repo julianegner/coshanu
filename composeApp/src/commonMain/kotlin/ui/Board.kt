@@ -23,6 +23,8 @@ import game.enums.GameState
 import game.enums.ScreenType
 import gameSaveAndLoadOption
 import getPlatform
+import isPlatformAndroid
+import landscapeOrAndroid
 import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
@@ -32,7 +34,7 @@ import ui.UiStateHolder.titleTextSize
 @Composable
 fun Fingerpointing() =
     //android does not support SVGs
-    if (getPlatform().name.startsWith("Android")) {
+    if (isPlatformAndroid) {
         Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
             painter = painterResource(Res.drawable.Noto_Emoji_Fingerpointing),
             contentDescription = null,
@@ -131,6 +133,7 @@ fun GridAndTutorial() {
             .aspectRatio(1f)
             .size(800.dp)
             .border(
+
                 width = 1.dp, color =
                     if (GameStateHolder.isGameState(GameState.LOST)) {
                         if (UiStateHolder.darkModeState.value) {
@@ -145,10 +148,13 @@ fun GridAndTutorial() {
                         //         Color.Green
                         //     }
                     } else
-                        if (UiStateHolder.darkModeState.value)
-                            Color.LightGray
+                        if (isPlatformAndroid)
+                            Color.Transparent
                         else
-                            Color.Black
+                            if (UiStateHolder.darkModeState.value)
+                                Color.LightGray
+                            else
+                                Color.Black
             )
 
 
@@ -185,7 +191,7 @@ fun GridAndTutorial() {
             )
         ) {
             Row(modifier =
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) {
+                if (landscapeOrAndroid) {
                         Modifier.defaultMinSize(400.dp)
                     } else {
                         Modifier.fillMaxWidth()

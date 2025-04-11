@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import game.*
 import game.enums.GameState
 import game.enums.ShapeEnum
+import isPlatformAndroid
 import util.runOnMainAfter
 
 
@@ -62,13 +63,22 @@ fun TileText(boardSize: Int,
              tileNumber: Int,
              textColor: Color) {
     val textSize: Float =
-    when (boardSize) {
-        2 -> 6f
-        4 -> 4f
-        8 -> 2f
-        12 -> 2f
-        else -> 2f
-    }
+        if (isPlatformAndroid)
+            when (boardSize) {
+                2 -> 12f
+                4 -> 8f
+                8 -> 4f
+                12 -> 4f
+                else -> 4f
+            }
+        else
+            when (boardSize) {
+                2 -> 6f
+                4 -> 4f
+                8 -> 2f
+                12 -> 2f
+                else -> 2f
+            }
 
     Text(
         modifier = Modifier.wrapContentHeight(),

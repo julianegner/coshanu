@@ -17,6 +17,7 @@ import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
 import game.darkmodeYellow
+import isPlatformAndroid
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
@@ -40,15 +41,25 @@ fun Menu() {
         Text(
             fontSize = standardTextSize.value,
             text = stringResource(Res.string.choose_level),
-            modifier = Modifier.padding(bottom = 10.dp)
+            modifier =
+                if (isPlatformAndroid)
+                    Modifier
+                else
+                    Modifier.padding(bottom = 10.dp)
         )
+
+        val elementTextModifier =
+            if (isPlatformAndroid)
+                Modifier.padding(top = 25.dp).width(menuRowTextWidth.value)
+            else
+                Modifier.padding(5.dp).width(menuRowTextWidth.value)
 
         Row {
             Text(
                 fontSize = standardTextSize.value,
                 lineHeight = TextUnit(1.2f, TextUnitType.Em),
                 text = stringResource(Res.string.single_element),
-                modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
+                modifier = elementTextModifier
             )
 
             (0..3).forEach { i ->
@@ -73,7 +84,7 @@ fun Menu() {
                 fontSize = standardTextSize.value,
                 lineHeight = TextUnit(1.2f, TextUnitType.Em),
                 text = stringResource(Res.string.two_elements),
-                modifier = Modifier.padding(5.dp).width(menuRowTextWidth.value)
+                modifier = elementTextModifier
             )
             (10..13).forEach { i ->
                 Button(

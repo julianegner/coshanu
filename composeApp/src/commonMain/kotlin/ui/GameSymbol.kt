@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.dp
 import game.GameStateHolder
 import game.TileData
 import game.enums.ShapeEnum
-import game.enums.ScreenType
 import game.newTileData
 import kotlin.math.PI
+import landscapeOrAndroid
 
 @Composable
 fun GameSymbol() {
@@ -30,10 +30,9 @@ fun GameSymbol() {
 
 @Composable
 fun CircleOfTiles( elements: List<TileData>, modifier: Modifier = Modifier) {
-
-    val radius = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 220.dp
+    val radius = if (landscapeOrAndroid) 50.dp else 220.dp
     val centerX = 0.dp
-    val centerY = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 100.dp else 400.dp
+    val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
     val angleStep = 360 / elements.size
 
     Box(modifier = modifier
@@ -45,7 +44,7 @@ fun CircleOfTiles( elements: List<TileData>, modifier: Modifier = Modifier) {
     ) {
         Box(modifier = Modifier
             .size(
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 50.dp else 150.dp)
+                if (landscapeOrAndroid) 50.dp else 150.dp)
         ) {
             elements.forEachIndexed { index, element ->
                 val angle = toRadians((index * angleStep).toDouble())

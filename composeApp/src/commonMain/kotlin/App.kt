@@ -53,22 +53,20 @@ fun App() {
                 )
 
                 val verticalScrollModifier = mutableStateOf(
-                    if (UiStateHolder.displayInfoArea.value || screenType.value == ScreenType.PORTRAIT) Modifier.verticalScroll(
-                        rememberScrollState()
-                    ) else Modifier
+                    if (
+                        UiStateHolder.displayInfoArea.value ||
+                        isPlatformAndroid ||
+                        screenType.value == ScreenType.PORTRAIT
+                    )
+                        Modifier.verticalScroll( rememberScrollState())
+                    else
+                        Modifier
                 )
                 Main(verticalScrollModifier)
             }
         }
     }
 }
-
-val isPlatformWasm = ("Web with Kotlin/Wasm" == getPlatform().name)
-// set to false for creating a deployable zip file for itch.io with
-// ./gradlew :composeApp:wasmJsBrowserDistribution
-// find created files in composeApp/build/dist/wasmJsBrowser/productionExecutable/
-// zip it and upload to itch.io
-val withImpressum = true
 
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {

@@ -66,7 +66,7 @@ When using multiline strings, please be aware that all line breaks and indentati
 
     <string name="tutorial_one_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
-    <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\n That is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
+    <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
     <string name="tutorial_one_4">Both Tiles disappear, because this fits.
 Yes, this game was lost.
 But no problem, just click on 'Restart Game'

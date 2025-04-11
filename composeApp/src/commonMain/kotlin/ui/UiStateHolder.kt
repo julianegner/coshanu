@@ -7,6 +7,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.enums.ScreenType
+import isPlatformAndroid
+import landscapeOrAndroid
 
 object UiStateHolder {
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
@@ -27,11 +29,13 @@ object UiStateHolder {
         //  https://www.npmjs.com/package/ua-parser-js for web
         standardTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1f, TextUnitType.Em) else TextUnit(2.4f, TextUnitType.Em)
         standardLineHeight.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.5f, TextUnitType.Em) else TextUnit(1.5f, TextUnitType.Em)
-        titleTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(2f, TextUnitType.Em) else TextUnit(3.2f, TextUnitType.Em)
-        subtitleTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.8f, TextUnitType.Em) else TextUnit(2.6f, TextUnitType.Em)
+        titleTextSize.value = if (isPlatformAndroid) TextUnit(5f, TextUnitType.Em) else
+            if (screenType.value == ScreenType.LANDSCAPE) TextUnit(2f, TextUnitType.Em) else TextUnit(3.2f, TextUnitType.Em)
+        subtitleTextSize.value = if (isPlatformAndroid) TextUnit(4f, TextUnitType.Em) else
+            if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.8f, TextUnitType.Em) else TextUnit(2.6f, TextUnitType.Em)
         largerTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.5f, TextUnitType.Em) else TextUnit(3f, TextUnitType.Em)
-        menuRowTextWidth.value = if (screenType.value == ScreenType.LANDSCAPE) 100.dp else 200.dp
-        menuButtonWidth.value = if (screenType.value == ScreenType.LANDSCAPE) 60.dp else 100.dp
+        menuRowTextWidth.value = if (isPlatformAndroid) 50.dp else if (screenType.value == ScreenType.LANDSCAPE) 100.dp else 200.dp
+        menuButtonWidth.value = if (isPlatformAndroid) 50.dp else if (screenType.value == ScreenType.LANDSCAPE) 60.dp else 100.dp
     }
 
 }
