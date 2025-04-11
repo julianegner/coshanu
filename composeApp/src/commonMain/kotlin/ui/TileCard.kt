@@ -15,6 +15,7 @@ import game.enums.GameState
 import game.GameStateHolder
 import game.TileData
 import game.same
+import isPlatformAndroid
 import util.runOnMainAfter
 
 @Composable
@@ -39,9 +40,22 @@ fun TileCard(
         played.value = false
     }
 
+    val boardSize = GameStateHolder.boardDataState.value.size
+
     val cardModifier = Modifier
         .aspectRatio(1f)
-        .padding(10.dp)
+        .padding(
+            if (isPlatformAndroid)
+                // set padding between the cards by the board size
+                when (boardSize) {
+                    2 -> 10.dp
+                    4 -> 8.dp
+                    8 -> 5.dp
+                    12 -> 2.dp
+                    else -> 0.dp
+                }
+            else
+                10.dp)
 
     if (!played.value) {
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
