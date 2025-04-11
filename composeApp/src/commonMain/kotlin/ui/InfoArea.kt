@@ -128,7 +128,7 @@ private fun PlatformOverviewTable() {
             TextLink(url = "https://jegner.itch.io/coshanu", text = "itch.io")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
-            Text("Android", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            Text("Android (14 or later)", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             Text("Work in progress", fontSize = standardTextSize.value)
         }
         // Add more rows as needed
