@@ -22,6 +22,7 @@ import game.GameStateHolder.tutorial
 import game.enums.GameState
 import game.enums.ScreenType
 import gameSaveAndLoadOption
+import getPlatform
 import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
@@ -29,11 +30,21 @@ import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
 
 @Composable
-fun Fingerpointing() = Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
-    painter = painterResource(Res.drawable.Noto_Emoji_Oreo_1f449),
-    contentDescription = null,
-    modifier = Modifier.size(50.dp)
-)
+fun Fingerpointing() =
+    //android does not support SVGs
+    if (getPlatform().name.startsWith("Android")) {
+        Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
+            painter = painterResource(Res.drawable.Noto_Emoji_Fingerpointing),
+            contentDescription = null,
+            modifier = Modifier.size(50.dp)
+        )
+    } else {
+        Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
+        painter = painterResource(Res.drawable.Noto_Emoji_Oreo_1f449),
+        contentDescription = null,
+        modifier = Modifier.size(50.dp)
+        )
+    }
 
 @Composable
 fun Board() {
