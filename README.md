@@ -95,7 +95,7 @@ sudo apt install --reinstall ./coshanu_1.0.0_amd64.deb
 ```shell
 ./gradlew assembleRelease
 ```
-Find the generated artifact `composeApp/build/outputs/apk/release/composeApp-release-unsigned.apk`
+Find the generated artifact `composeApp/build/outputs/apk/release/coshanu-release.apk`
 
 ### rebuild
 - after adding new (string) resources, run:
