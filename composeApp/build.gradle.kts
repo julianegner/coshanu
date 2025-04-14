@@ -3,6 +3,14 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import java.util.Properties
+
+val localProperties = file("../local.properties")
+val properties = if (localProperties.exists()) {
+    Properties().apply { load(localProperties.inputStream()) }
+} else {
+    null
+}
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -142,14 +150,31 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("coshanu-android-release.jks")
+            storePassword = properties?.getProperty("storePassword") ?: ""
+            keyAlias = "coshanu-android"
+            keyPassword = properties?.getProperty("keyPassword") ?: ""
+        }
+    }
+
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+    applicationVariants.all {
+        outputs.all {
+            val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+            output.outputFileName = "coshanu-${buildType.name}.apk"
+        }
     }
 }
 
