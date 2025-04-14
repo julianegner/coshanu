@@ -83,11 +83,11 @@ java -jar composeApp-desktop.jar
 ``` 
 location of .deb file:
 ```shell
-composeApp/build/compose/binaries/main/deb/de.julianegner.coshanu_1.0.0_amd64.deb
+composeApp/build/compose/binaries/main/deb/coshanu_1.0.0_amd64.deb
 ```
 install:
 ```shell
-sudo apt install ./de.julianegner.coshanu_1.0.0_amd64.deb
+sudo apt install --reinstall ./coshanu_1.0.0_amd64.deb
 ```
 
 ### Android
