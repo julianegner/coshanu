@@ -112,10 +112,16 @@ private fun Impressum() {
 
 @Composable
 private fun PlatformOverviewTable() {
-    val modifier = Modifier.width( if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 300.dp else 600.dp)
+    val modifier = Modifier
+        .width( if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 400.dp else 600.dp)
+        .bottomLine()
+
     val horizontalArrangement = Arrangement.SpaceBetween
-    Column (modifier = Modifier.padding(top = 10.dp)) {
-        Row (modifier = modifier.padding(bottom = 5.dp), horizontalArrangement = horizontalArrangement) {
+    Column (
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = Modifier.padding(top = 10.dp)
+        ) {
+        Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text(stringResource(Res.string.platform), fontWeight = FontWeight.Bold, fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             Text(stringResource(Res.string.link), fontWeight = FontWeight.Bold, fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         }
@@ -128,7 +134,19 @@ private fun PlatformOverviewTable() {
             TextLink(url = "https://jegner.itch.io/coshanu", text = "itch.io")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
-            Text("Android (14 or later)", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            Text("Android apk\n(sideloading needed)", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            Text("Work in progress", fontSize = standardTextSize.value)
+        }
+        Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
+            Text("Java Virtual Machine Jar", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            Text("Work in progress", fontSize = standardTextSize.value)
+        }
+        Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
+            Text("Debian, Ubuntu, Mint\n.deb install file", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            Text("Work in progress", fontSize = standardTextSize.value)
+        }
+        Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
+            Text("Windows executable", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             Text("Work in progress", fontSize = standardTextSize.value)
         }
         // Add more rows as needed
