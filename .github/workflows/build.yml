@@ -34,37 +34,12 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:wasmJsBrowserDistribution
-      #- name: Debug Wasm Build Path
-      #  run: ls -R build/dist/wasmJs/productionExecutable/
-      - name: Debug Wasm Build Path
-        run: |
-          echo "Checking Wasm build directory..."
-          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
-      - name: Debug Wasm Build Path (2)
-        run: |
-          echo "Checking Wasm build directory..."
-          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
 
       - name: Install zip
         uses: montudor/action-zip@v1
-
       - name: Zip wasm folder
         run: zip -qq -r coshanu_wasm.zip productionExecutable
         working-directory: /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs
-
-      #- name: Zip wasm folder Test
-      #  uses: montudor/action-zip@v1
-      #  with:
-      #    args: zip -r coshanu_wasm.zip /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable
-          # -qq
-      # zip -r foo.zip dir_path
-      #- name: Zip wasm folder
-      #  uses: montudor/action-zip@v1
-      #  with:
-      #    args: zip -r /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/coshanu_wasm.zip /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable
-          # -qq
 #      - name: Tar Artifact
 #        run: tar -czf coshanu.nodejs.tgz build/dist/wasmJs/productionExecutable/
       - name: Debug Wasm Build Path (2)
@@ -111,7 +86,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jvm-build
-          # todo replace the version number with a variable
           path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/jars/coshanu-linux-x64-*.jar
 
   build_macos:
@@ -153,6 +127,7 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseDeb
+      # todo remove
       - name: Debug Linux Build Path
         run: |
           echo "Checking Linux build directory..."
@@ -163,8 +138,7 @@ jobs:
         with:
           name: linux-build
           path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/coshanu_*_amd64.deb
-          #     /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/coshanu_1.0.0-1_amd64.deb
-# todo add also a build for msi (microsoft installer) for windows
+
   build_windows:
     runs-on: windows-latest
     steps:
@@ -179,8 +153,7 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseExe
-      #- name: Debug Windows Build Path
-      #  run: dir build\bin\mingwX64\releaseExecutable\
+      # todo remove
       - name: Debug Windows Build Path
         run: dir D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\
       - name: Upload Windows Build
@@ -188,8 +161,8 @@ jobs:
         with:
           name: windows-build
           path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-*.exe
-          # D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-1.0.0.exe
 
+  # todo add also a build for msi (microsoft installer) for windows
   # todo add build android apk
 
   release:
@@ -202,50 +175,57 @@ jobs:
       - "build_windows"
     runs-on: ubuntu-latest
     steps:
+      # remove debug
+      #- name: Debug Uploaded Artifacts
+      #  run: ls -R /home/runner/work/coshanu/coshanu/composeApp/build/-
+      #- name: List Available Artifacts
+      #  run: ls -R build/
       - name: List Available Artifacts
-        run: ls -R build/
+        run: |
+          echo "Checking build directory..."
+          ls -R build/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
 
       - name: Download Wasm Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: wasm-build
           path: build/wasm
 
       - name: Download JVM Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: jvm-build
           path: build/jvm
 
       - name: Download MacOS Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: macos-build
           path: build/macos
 
       - name: Download Linux Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: linux-build
           path: build/linux
 
       - name: Download Windows Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: windows-build
           path: build/windows
 
-      - name: Rename Releases
-        run: |
-          mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
-          mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
+      #- name: Rename Releases
+      #  run: mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
+          # mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
 
       - name: Make Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/compose/binaries/main/deb/coshanu_amd64.deb
-            build/macos-build/coshanu.macos.bin
-            build/windows-build/coshanu.exe
-            build/jvm-build/coshanu-*.zip
-            build/wasm-build/coshanu_wasm.zip
+            /home/runner/work/coshanu/coshanu/build/linux/*
+            /home/runner/work/coshanu/coshanu/build/macos/*
+            /home/runner/work/coshanu/coshanu/build/windows/*
+            /home/runner/work/coshanu/coshanu/build/jvm/*
+            /home/runner/work/coshanu/coshanu/build/wasm/*
