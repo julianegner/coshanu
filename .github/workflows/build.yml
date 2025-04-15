@@ -1,0 +1,156 @@
+# copied from https://github.com/championswimmer/ParkingLot-LLD-Kotlin-MPP/blob/main/.github/workflows/build.yml
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
+name: Build (and Release)
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:  # Allow manual triggering
+
+permissions:
+  contents: write
+
+jobs:
+  build_wasm_js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: wasmJsBrowserDistribution
+      - name: Zip wasm folder
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r coshanu_wasm.zip build/dist/wasmJs/productionExecutable/
+#      - name: Tar Artifact
+#        run: tar -czf coshanu.nodejs.tgz build/dist/wasmJs/productionExecutable/
+      - name: Upload wasm Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: wasm-build
+          path: coshanu_wasm.zip
+
+  build_jvm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: :composeApp:packageUberJarForCurrentOS
+      - name: Upload JVM Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: jvm-build
+          path: build/compose/jars/coshanu-linux-x64-*.jar
+
+  build_macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: :composeApp:packageReleaseDmg
+      - name: Upload MacOS Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-build
+# fixme correct path
+          path: build/bin/macosX64/releaseExecutable/coshanu.kexe
+
+  build_linux_deb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: :composeApp:packageReleaseDeb
+      - name: Upload Linux Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-build
+          path: build/compose/binaries/main/deb/coshanu_*_amd64.deb
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: :composeApp:packageReleaseExe
+      - name: Upload Windows Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-build
+          path: build/bin/mingwX64/releaseExecutable/coshanu.exe
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - "build_wasm_js"
+      - "build_jvm"
+      - "build_macos"
+      - "build_linux_deb"
+      - "build_windows"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Builds
+        uses: actions/download-artifact@v3
+        with:
+          path: build
+      - name: Rename Releases
+        run: |
+          mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
+          mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
+      - name: Make Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/compose/binaries/main/deb/coshanu_amd64.deb
+            build/macos-build/coshanu.macos.bin
+            build/windows-build/coshanu.exe
+            build/jvm-build/coshanu-*.zip
+            build/wasm-build/coshanu_wasm.zip
