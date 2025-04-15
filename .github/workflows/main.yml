@@ -2,9 +2,9 @@
 name: Deploy WasmJS App to GitHub Pages
 
 on:
-  push:
-    branches:
-      - main  # Trigger the workflow on pushes to the main branch
+  #push:
+  #  branches:
+  #    - main  # Trigger the workflow on pushes to the main branch
   workflow_dispatch:  # Allow manual triggering
 
 permissions:

@@ -33,18 +33,50 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-          arguments: wasmJsBrowserDistribution
-      - name: Zip wasm folder
+          arguments: :composeApp:wasmJsBrowserDistribution
+      #- name: Debug Wasm Build Path
+      #  run: ls -R build/dist/wasmJs/productionExecutable/
+      - name: Debug Wasm Build Path
+        run: |
+          echo "Checking Wasm build directory..."
+          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
+      - name: Debug Wasm Build Path (2)
+        run: |
+          echo "Checking Wasm build directory..."
+          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
+
+      - name: Install zip
         uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r coshanu_wasm.zip build/dist/wasmJs/productionExecutable/
+
+      - name: Zip wasm folder
+        run: zip -qq -r coshanu_wasm.zip productionExecutable
+        working-directory: /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs
+
+      #- name: Zip wasm folder Test
+      #  uses: montudor/action-zip@v1
+      #  with:
+      #    args: zip -r coshanu_wasm.zip /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable
+          # -qq
+      # zip -r foo.zip dir_path
+      #- name: Zip wasm folder
+      #  uses: montudor/action-zip@v1
+      #  with:
+      #    args: zip -r /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/coshanu_wasm.zip /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/productionExecutable
+          # -qq
 #      - name: Tar Artifact
 #        run: tar -czf coshanu.nodejs.tgz build/dist/wasmJs/productionExecutable/
+      - name: Debug Wasm Build Path (2)
+        run: |
+          echo "Checking Wasm build directory..."
+          ls -R / || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
       - name: Upload wasm Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: wasm-build
-          path: coshanu_wasm.zip
+          path: /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/coshanu_wasm.zip
 
   build_jvm:
     runs-on: ubuntu-latest
@@ -60,11 +92,27 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageUberJarForCurrentOS
+      - name: Debug JVM Build Path
+        run: |
+          echo "Checking JVM build directory..."
+          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/compose/jars/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
+      - name: Debug JVM Build Path (2)
+        run: |
+          echo "Checking JVM build directory..."
+          ls -R ./composeApp/build/compose/jars/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
+      - name: Debug JVM Build Path (3)
+        run: |
+          echo "Checking JVM build directory..."
+          ls -R ./build/compose/jars/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
       - name: Upload JVM Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: jvm-build
-          path: build/compose/jars/coshanu-linux-x64-*.jar
+          # todo replace the version number with a variable
+          path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/jars/coshanu-linux-x64-*.jar
 
   build_macos:
     runs-on: macos-latest
@@ -80,12 +128,16 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseDmg
+      - name: Debug MacOS Build Path
+        run: |
+          echo "Checking MacOS build directory..."
+          ls -R /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/app || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
       - name: Upload MacOS Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: macos-build
-# fixme correct path
-          path: build/bin/macosX64/releaseExecutable/coshanu.kexe
+          path: /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/app
 
   build_linux_deb:
     runs-on: ubuntu-latest
@@ -101,12 +153,18 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseDeb
+      - name: Debug Linux Build Path
+        run: |
+          echo "Checking Linux build directory..."
+          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/ || echo "Directory does not exist or is empty."
+          echo "Debugging complete."
       - name: Upload Linux Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: linux-build
-          path: build/compose/binaries/main/deb/coshanu_*_amd64.deb
-
+          path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/coshanu_*_amd64.deb
+          #     /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/coshanu_1.0.0-1_amd64.deb
+# todo add also a build for msi (microsoft installer) for windows
   build_windows:
     runs-on: windows-latest
     steps:
@@ -121,11 +179,18 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseExe
+      #- name: Debug Windows Build Path
+      #  run: dir build\bin\mingwX64\releaseExecutable\
+      - name: Debug Windows Build Path
+        run: dir D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\
       - name: Upload Windows Build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: build/bin/mingwX64/releaseExecutable/coshanu.exe
+          path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-*.exe
+          # D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-1.0.0.exe
+
+  # todo add build android apk
 
   release:
     if: startsWith(github.ref, 'refs/tags/')
@@ -137,14 +202,44 @@ jobs:
       - "build_windows"
     runs-on: ubuntu-latest
     steps:
-      - name: Download Builds
+      - name: List Available Artifacts
+        run: ls -R build/
+
+      - name: Download Wasm Build
         uses: actions/download-artifact@v3
         with:
-          path: build
+          name: wasm-build
+          path: build/wasm
+
+      - name: Download JVM Build
+        uses: actions/download-artifact@v3
+        with:
+          name: jvm-build
+          path: build/jvm
+
+      - name: Download MacOS Build
+        uses: actions/download-artifact@v3
+        with:
+          name: macos-build
+          path: build/macos
+
+      - name: Download Linux Build
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-build
+          path: build/linux
+
+      - name: Download Windows Build
+        uses: actions/download-artifact@v3
+        with:
+          name: windows-build
+          path: build/windows
+
       - name: Rename Releases
         run: |
           mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
           mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
+
       - name: Make Release
         uses: softprops/action-gh-release@v1
         with:

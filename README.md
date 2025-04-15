@@ -103,6 +103,27 @@ Find the generated artifact `composeApp/build/outputs/apk/release/coshanu-releas
  ./gradlew build
 ```
 
+## Release
+
+### 1. set Tag in build.gradle.kts
+```
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+            packageName = "coshanu"
+            packageVersion = "1.0.0"
+        }
+```
+
+### 2. set git version tag
+```
+    git tag -a v1.0.0 -m "Release version 1.0.0"
+```
+### 3. push code and tag to remote
+```
+    git push origin --tags
+```
+This pushes the tag to the remote repository and the release will be build by github actions.
+
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:

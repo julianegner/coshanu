@@ -108,11 +108,6 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(kotlin("stdlib"))
-            // implementation("org.jetbrains.compose.runtime:runtime:1.4.0")
-            // implementation("org.jetbrains.compose.ui:ui:1.4.0")
-            // implementation("org.jetbrains.compose.foundation:foundation:1.4.0")
-            // implementation("org.jetbrains.compose.material:material:1.4.0")
-            // implementation("org.jetbrains.compose.desktop:desktop:1.0.0")
 
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
