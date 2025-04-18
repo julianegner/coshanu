@@ -10,10 +10,10 @@
 name: Build (and Release)
 
 on:
-  push:
-    branches: [ "main" ]
-    tags:
-      - "v*.*.*"
+  #push:
+  #  branches: [ "main" ]
+  #  tags:
+  #    - "v*.*.*"
   workflow_dispatch:  # Allow manual triggering
 
 permissions:
@@ -216,7 +216,8 @@ jobs:
           name: windows-build
           path: build/windows
 
-      #- name: Rename Releases
+      - name: Rename Releases
+        run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
       #  run: mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
           # mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
 

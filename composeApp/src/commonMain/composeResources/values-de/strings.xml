@@ -148,6 +148,7 @@ Du kannst ein neues Spiel im Menü oben starten.
 
     <!-- info area -->
     <string name="info_area_title">Information</string>
+    <string name="version">Version</string>
     <string name="general_information_title">Allgemeine Informationen</string>
     <string name="general_information_text">CoShaNu ist ein Spiel, bei dem es darum geht, Paare von Karten zu entfernen, bei denen Farbe, Form oder Nummer übereinstimmen.
 Es gibt zwei Spielarten, bei dem einfacheren muss nur ein Element gleich sein und bei dem komplexeren müssen zwei Elemente gleich sein.

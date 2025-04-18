@@ -19,6 +19,7 @@ import ui.UiStateHolder.screenType
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 
+val programVersion = "1.0.0"
 val gameSaveAndLoadOption = false
 
 object AppInitializer {

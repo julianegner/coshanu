@@ -107,6 +107,7 @@ This restarts the game with the same cards.
 
     <!-- info area -->
     <string name="info_area_title">Information</string>
+    <string name="version">Version</string>
     <string name="general_information_title">General Information</string>
     <string name="general_information_text">CoShaNu is a game where you remove pairs of cards where the color, the shape or the number are the same.
 There are two game modes, the simpler where one of color shape and number must be equal and the more complex where two must be equal.

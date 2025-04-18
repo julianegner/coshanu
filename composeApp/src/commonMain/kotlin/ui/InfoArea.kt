@@ -23,6 +23,7 @@ import coshanu.composeapp.generated.resources.*
 import isPlatformWasm
 import game.enums.ScreenType
 import org.jetbrains.compose.resources.stringResource
+import programVersion
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
@@ -67,6 +68,8 @@ fun InfoArea() {
         .padding(top = 20.dp, bottom = 20.dp)
     ) {
         Text("${stringResource(Res.string.info_area_title)}\n", fontSize = subtitleTextSize.value)
+
+        Text("${stringResource(Res.string.version)}: ${programVersion}", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         // information
         BulletPoint(stringResource(Res.string.general_information_title))
         Text(stringResource(Res.string.general_information_text), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
@@ -113,7 +116,7 @@ private fun Impressum() {
 @Composable
 private fun PlatformOverviewTable() {
     val modifier = Modifier
-        .width( if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 400.dp else 600.dp)
+        .width( if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 400.dp else 700.dp)
         .bottomLine()
 
     val horizontalArrangement = Arrangement.SpaceBetween
@@ -133,21 +136,24 @@ private fun PlatformOverviewTable() {
             Text("itch.io", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             TextLink(url = "https://jegner.itch.io/coshanu", text = "itch.io")
         }
+
+        // ${programVersion}
+
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Android apk\n(sideloading needed)", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
             Text("Work in progress", fontSize = standardTextSize.value)
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Java Virtual Machine Jar", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
-            Text("Work in progress", fontSize = standardTextSize.value)
+            TextLink(url = "https://github.com/julianegner/coshanu/releases/download/v${programVersion}/coshanu-linux-x64-${programVersion}.jar", text = "download")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Debian, Ubuntu, Mint\n.deb install file", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
-            Text("Work in progress", fontSize = standardTextSize.value)
+            TextLink(url = "https://github.com/julianegner/coshanu/releases/download/v${programVersion}/coshanu_${programVersion}-1_amd64.deb", text = "download")
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Windows executable", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
-            Text("Work in progress", fontSize = standardTextSize.value)
+            TextLink(url = "https://github.com/julianegner/coshanu/releases/download/v${programVersion}/coshanu-${programVersion}.exe", text = "download")
         }
         // Add more rows as needed
     }
