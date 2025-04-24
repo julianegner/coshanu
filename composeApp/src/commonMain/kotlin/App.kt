@@ -6,6 +6,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
@@ -19,7 +21,7 @@ import ui.UiStateHolder.screenType
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 
-val programVersion = "1.0.0"
+val programVersion = "1.0.1"
 val gameSaveAndLoadOption = false
 
 object AppInitializer {
@@ -109,10 +111,11 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         InfoSymbol(
                             Modifier
                                 .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+                                .pointerHoverIcon(PointerIcon.Hand)
                                 .padding(10.dp)
                         )
+                        ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
-                    ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     DarkModeSwitch()
                 }
                 Title()
@@ -184,7 +187,9 @@ private fun Title() {
         .clickable(interactionSource = null, indication = null) {
             GameStateHolder.openMenu()
         }
+        .pointerHoverIcon(PointerIcon.Hand)
         .padding(vertical = 20.dp)) {
+
         Text(
             text = stringResource(Res.string.title),
             fontSize = titleTextSize.value

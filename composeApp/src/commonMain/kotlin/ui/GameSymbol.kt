@@ -8,6 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import game.GameStateHolder
 import game.TileData
@@ -18,14 +20,23 @@ import landscapeOrAndroid
 
 @Composable
 fun GameSymbol() {
-    CircleOfTiles(listOf(
-        newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
-        newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
-        newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
-        newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
-        newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
-        newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
-    ))
+    CircleOfTiles(
+        elements = listOf(
+            newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+            newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
+            newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
+            newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
+            newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
+            newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
+        ),
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .clickable(interactionSource = null, indication = null) {
+                GameStateHolder.openMenu()
+            }
+            .pointerHoverIcon(PointerIcon.Hand)
+    )
 }
 
 @Composable
@@ -35,11 +46,7 @@ fun CircleOfTiles( elements: List<TileData>, modifier: Modifier = Modifier) {
     val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
     val angleStep = 360 / elements.size
 
-    Box(modifier = modifier
-        .fillMaxSize()
-        .clickable(interactionSource = null, indication = null) {
-            GameStateHolder.openMenu()
-        },
+    Box(modifier = modifier,
         Alignment.TopCenter
     ) {
         Box(modifier = Modifier

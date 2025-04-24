@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -53,6 +55,7 @@ fun InfoAreaWrapper(modifier: Modifier = Modifier) {
             InfoSymbol(
                 Modifier
                     .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+                    .pointerHoverIcon(PointerIcon.Hand)
                     .padding(10.dp)
             )
         }
@@ -185,6 +188,7 @@ fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
                 fontSize = standardTextSize.value,
                 modifier = Modifier
                     .clickable(onClick = { UiStateHolder.displayImpressum.value = true })
+                    .pointerHoverIcon(PointerIcon.Hand)
             )
         }
     }
@@ -203,6 +207,7 @@ private fun closingX(onClick: () -> Unit) {
         color = Color.Gray,
         modifier = Modifier
             .clickable(onClick = onClick)
+            .pointerHoverIcon(PointerIcon.Hand)
             .padding(20.dp)
     )
 }
@@ -241,9 +246,10 @@ private fun LicenseDetailArea() {
                 textDecoration = TextDecoration.Underline
             ),
             fontSize = standardTextSize.value,
-            modifier = Modifier.clickable {
-                displayLicenseDetails.value = true
-            })
+            modifier = Modifier
+                .clickable { displayLicenseDetails.value = true }
+                .pointerHoverIcon(PointerIcon.Hand)
+        )
     } else {
         Box(
             modifier = Modifier

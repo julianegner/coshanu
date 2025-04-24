@@ -6,6 +6,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
@@ -26,7 +28,8 @@ fun DarkModeSwitch() {
                 checkedTrackColor = Color.LightGray,
                 uncheckedThumbColor = Color.DarkGray,
                 uncheckedTrackColor = Color.LightGray
-            )
+            ),
+            modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)
         )
         Text(
             fontSize = standardTextSize.value,

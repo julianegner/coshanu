@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import game.enums.GameState
 import game.GameStateHolder
@@ -61,8 +63,16 @@ fun TileCard(
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
 
         Card(
-            modifier = cardModifier
-                .clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
+            // only clickable if not tutorial or tutorial and allowed tile
+            modifier = if (GameStateHolder.isGameState(GameState.RUNNING) &&
+                (!GameStateHolder.tutorial.isTutorial() || GameStateHolder.tutorial.isAllowedTile(tileDataState.value))
+                ) {
+                cardModifier
+                    .clickable(onClick = { tileSelected(tileDataState, cardBorderState) })
+                    .pointerHoverIcon(PointerIcon.Hand)
+            } else {
+                cardModifier
+            },
             backgroundColor = if (
                 GameStateHolder.tutorial.isTutorial() &&
                 GameStateHolder.tutorial.isAllowedTile(tileDataState.value)

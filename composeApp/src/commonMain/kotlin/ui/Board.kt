@@ -9,6 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
@@ -80,6 +82,7 @@ fun StartButtonRow() {
                 } else {
                     null
                 },
+                modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
                 onClick = { restartGame() }) {
                 Text(
                     fontSize = standardTextSize.value,
@@ -88,7 +91,10 @@ fun StartButtonRow() {
             }
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
-            Button(onClick = { endGame() }) {
+            Button(
+                    onClick = { endGame() },
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)
+                ) {
                 Text(
                     fontSize = standardTextSize.value,
                     text = stringResource(Res.string.end_game)
@@ -98,6 +104,7 @@ fun StartButtonRow() {
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(
                 enabled = level.value != null,
+                modifier = if (level.value != null) Modifier.pointerHoverIcon(PointerIcon.Hand) else Modifier,
                 onClick = { newGame() }) {
                 Text(
                     fontSize = standardTextSize.value,
@@ -106,6 +113,7 @@ fun StartButtonRow() {
             }
             if (gameSaveAndLoadOption) {
                 Button(
+                    modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
                     onClick = { loadGame() }) {
                     Text(
                         fontSize = standardTextSize.value,
@@ -115,7 +123,10 @@ fun StartButtonRow() {
             }
         }
         if (gameSaveAndLoadOption && GameStateHolder.isGameState(GameState.RUNNING)) {
-            Button(onClick = { saveGame() }) {
+            Button(
+                onClick = { saveGame() },
+                 modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+            ) {
                 Text(
                     fontSize = standardTextSize.value,
                     text = stringResource(Res.string.save_game)
