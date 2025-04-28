@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.*
@@ -33,16 +34,7 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
         GameMode.SINGLE_ELEMENT -> {
 
             Row {
-                Card(
-                    modifier = Modifier
-                        .rotate(20f)
-                        .height(30.dp)
-                        .aspectRatio(0.5f)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
-                        .border(1.dp, color = androidx.compose.ui.graphics.Color.Red, shape = RoundedCornerShape(5.dp)),
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) { Text("1", textAlign = TextAlign.Center) }
+                CardSymbol(20f, "1")
                 Text(
                     stringResource(Res.string.single_element_must_fit),
                     modifier = modifier.padding(start = 15.dp),
@@ -52,27 +44,8 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
         }
         GameMode.TWO_ELEMENTS -> {
             Row {
-                Card(
-                    modifier = Modifier
-                        .rotate(-20f)
-                        .height(30.dp)
-                        .aspectRatio(0.5f)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
-                        .border(1.dp, color = androidx.compose.ui.graphics.Color.Red, shape = RoundedCornerShape(5.dp)),
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) { Text("1", textAlign = TextAlign.Center) }
-
-                Card(
-                    modifier = Modifier
-                        .rotate(20f)
-                        .height(30.dp)
-                        .aspectRatio(0.5f)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
-                        .border(1.dp, color = androidx.compose.ui.graphics.Color.Red, shape = RoundedCornerShape(5.dp)),
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) { Text("2", textAlign = TextAlign.Center) }
+                CardSymbol(-20f, "1")
+                CardSymbol(20f, "2")
 
                 Text(stringResource(Res.string.two_elements_must_fit),
                     modifier = modifier.padding(start = 15.dp),
@@ -82,27 +55,8 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
         }
         GameMode.TWO_ELEMENTS_WITH_TIMER -> {
             Row {
-                Card(
-                    modifier = Modifier
-                        .rotate(-20f)
-                        .height(30.dp)
-                        .aspectRatio(0.5f)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
-                        .border(1.dp, color = androidx.compose.ui.graphics.Color.Red, shape = RoundedCornerShape(5.dp)),
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) { Text("1", textAlign = TextAlign.Center) }
-
-                Card(
-                    modifier = Modifier
-                        .rotate(20f)
-                        .height(30.dp)
-                        .aspectRatio(0.5f)
-                        .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
-                        .border(1.dp, color = androidx.compose.ui.graphics.Color.Red, shape = RoundedCornerShape(5.dp)),
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) { Text("2", textAlign = TextAlign.Center) }
+                CardSymbol(-20f, "1")
+                CardSymbol(20f, "2")
 
                 Image( // source: https://iconduck.com/icons/157837/stopwatch
                     painter = painterResource(Res.drawable.stopwatch),
@@ -126,4 +80,18 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
             // not yet chosen, do nothing
         }
     }
+}
+
+@Composable
+private fun CardSymbol(rotate: Float = 0f, text: String) {
+    Card(
+        modifier = Modifier
+            .rotate(rotate)
+            .height(30.dp)
+            .aspectRatio(0.5f)
+            .shadow(elevation = 4.dp, shape = RoundedCornerShape(5.dp))
+            .border(1.dp, color = Color.Red, shape = RoundedCornerShape(5.dp)),
+        shape = RoundedCornerShape(5.dp),
+
+        ) { Text(text, textAlign = TextAlign.Center) }
 }
