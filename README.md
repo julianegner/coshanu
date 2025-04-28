@@ -160,3 +160,7 @@ https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a
 
 to see if changes you made to your domain at your webhoster are propagated worldwide:
 https://www.whatsmydns.net
+
+
+...
+stopwatch.png (MIT license) from https://iconduck.com/icons/157837/stopwatch
