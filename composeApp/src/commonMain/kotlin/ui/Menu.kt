@@ -2,6 +2,7 @@ package ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +21,7 @@ import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
 import game.darkmodeYellow
 import isPlatformAndroid
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
@@ -38,7 +40,6 @@ fun Menu() {
         contentColor = Color.Black,
         backgroundColor = darkmodeYellow
     )
-    val buttonDefaultColors = ButtonDefaults.buttonColors()
 
     Column() {
         Text(
@@ -57,54 +58,55 @@ fun Menu() {
             else
                 Modifier.padding(5.dp).width(menuRowTextWidth.value)
 
-        Row {
-            Text(
-                fontSize = standardTextSize.value,
-                lineHeight = TextUnit(1.2f, TextUnitType.Em),
-                text = stringResource(Res.string.single_element),
-                modifier = elementTextModifier
-            )
-
-            (0..3).forEach { i ->
-                Button(
-                    colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else buttonDefaultColors,
-                    modifier = buttonModifier(i),
-                    onClick = {
-                        GameStateHolder.changeLevel(i)
-                    }) {
-                    Text(
-                        fontSize = standardTextSize.value,
-                        text = if (i == 0) stringResource(Res.string.tutorial) else i.toString()
-                    )
-                }
-            }
-        }
+        MenuRow(
+            levelTypeStringResource = Res.string.single_element,
+            levels = (0..3),
+            elementTextModifier = elementTextModifier,
+            currentLevelButtonColors = currentLevelButtonColors,
+            buttonColors = ButtonDefaults.buttonColors()
+        )
 
         val LightBlue = Color(0xCC3333FF)
-
-        Row {
-            Text(
-                fontSize = standardTextSize.value,
-                lineHeight = TextUnit(1.2f, TextUnitType.Em),
-                text = stringResource(Res.string.two_elements),
-                modifier = elementTextModifier
+        MenuRow(
+            levelTypeStringResource = Res.string.two_elements,
+            levels = (10..13),
+            elementTextModifier = elementTextModifier,
+            currentLevelButtonColors = currentLevelButtonColors,
+            buttonColors = ButtonDefaults.buttonColors(
+                contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
+                backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
             )
-            (10..13).forEach { i ->
-                Button(
-                    modifier = buttonModifier(i),
-                    colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else
-                        ButtonDefaults.buttonColors(
-                            contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
-                            backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
-                        ),
-                    onClick = {
-                        GameStateHolder.changeLevel(i)
-                    }) {
-                    Text(
-                        fontSize = standardTextSize.value,
-                        text = if (i == 10) stringResource(Res.string.tutorial) else i.toString()
-                    )
-                }
+        )
+    }
+}
+
+@Composable
+private fun MenuRow(
+    levelTypeStringResource: StringResource,
+    levels: IntRange,
+    elementTextModifier: Modifier,
+    currentLevelButtonColors: ButtonColors,
+    buttonColors: ButtonColors
+) {
+    Row {
+        Text(
+            fontSize = standardTextSize.value,
+            lineHeight = TextUnit(1.2f, TextUnitType.Em),
+            text = stringResource(levelTypeStringResource),
+            modifier = elementTextModifier
+        )
+
+        levels.forEach { i ->
+            Button(
+                colors = if (GameStateHolder.level.value == i) currentLevelButtonColors else buttonColors,
+                modifier = buttonModifier(i),
+                onClick = {
+                    GameStateHolder.changeLevel(i)
+                }) {
+                Text(
+                    fontSize = standardTextSize.value,
+                    text = if (i % 10 == 0) stringResource(Res.string.tutorial) else i.toString()
+                )
             }
         }
     }
