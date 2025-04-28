@@ -20,7 +20,9 @@ import org.jetbrains.compose.resources.stringResource
 import coshanu.composeapp.generated.resources.*
 import game.GameStateHolder.gameState
 import game.GameStateHolder.remainingTileAmount
+import game.GameStateHolder.timer
 import game.GameStateHolder.tutorial
+import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
 import gameSaveAndLoadOption
@@ -32,6 +34,7 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun Fingerpointing() =
@@ -210,10 +213,25 @@ fun GridAndTutorial() {
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 LevelText()
                 TimerDisplay(Modifier.padding(horizontal = 20.dp))
+                if (GameStateHolder.gameMode.value == GameMode.TWO_ELEMENTS_WITH_TIMER) {
+                    CountdownTimerDisplay(Modifier.padding(horizontal = 20.dp))
+                }
             }
 
             GameModeSymbol(Modifier.padding(bottom = 20.dp))
             GameStateTextElement()
+
+            if (GameStateHolder.gameMode.value == GameMode.TWO_ELEMENTS_WITH_TIMER &&
+                GameStateHolder.isGameState(GameState.LOST) &&
+                GameStateHolder.totalAllowedTime.value - timer.durationState().value == 0.seconds
+                ) {
+                Text(
+                    modifier = Modifier.padding(10.dp),
+                    text = stringResource(Res.string.time_is_up),
+                    fontSize = largerTextSize.value,
+                    color = Color.Red
+                )
+            }
             TutorialText()
         }
     }

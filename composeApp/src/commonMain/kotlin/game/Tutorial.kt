@@ -48,7 +48,7 @@ class Tutorial {
                     // todo add example for selecting and deselecting an element
                 )
             }
-            GameMode.TWO_ELEMENTS -> {
+            GameMode.TWO_ELEMENTS, GameMode.TWO_ELEMENTS_WITH_TIMER -> {
                 tiles = listOf(
                     newTileData(Color.Yellow, ShapeEnum.TRIANGLE, 4),
                     newTileData(Color.Green, ShapeEnum.SQUARE, 4),
@@ -69,7 +69,13 @@ class Tutorial {
                 )
 
                 tutorialSteps = listOf(
-                    TutorialStep(1, Res.string.tutorial_two_1, tiles[0]),
+
+                    TutorialStep(1,
+                        if (GameStateHolder.gameMode.value == GameMode.TWO_ELEMENTS_WITH_TIMER) {
+                            Res.string.tutorial_two_1_with_timer
+                        } else {
+                            Res.string.tutorial_two_1
+                        }, tiles[0]),
                     TutorialStep(2, Res.string.tutorial_two_2, tiles[1]),
                     TutorialStep(3, Res.string.tutorial_two_3, tiles[15]),
                     TutorialStep(4, Res.string.tutorial_two_4, null, true),

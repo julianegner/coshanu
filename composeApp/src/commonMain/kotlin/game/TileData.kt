@@ -50,7 +50,7 @@ fun TileData.match(secondTileData: TileData): Boolean {
         GameMode.SINGLE_ELEMENT -> {
             return matchOne(secondTileData)
         }
-        GameMode.TWO_ELEMENTS -> {
+        GameMode.TWO_ELEMENTS, GameMode.TWO_ELEMENTS_WITH_TIMER -> {
             return matchTwo(secondTileData)
         }
         else -> {

@@ -11,11 +11,10 @@ class LevelGenerator {
         setGameMode(levelNumber)
         GameStateHolder.tutorial.endTutorial()
         when(levelNumber) {
-            0 -> generateTutorial()
-            10 -> generateTutorial()
-            1,11 -> GameStateHolder.saveNewBoard(createBoard(4, 4, listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
-            2,12 -> GameStateHolder.saveNewBoard(createBoard(size = 4, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
-            3,13 -> GameStateHolder.saveNewBoard(createBoard(size = 8, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
+            0, 10, 20 -> generateTutorial()
+            1, 11, 21 -> GameStateHolder.saveNewBoard(createBoard(4, 4, listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
+            2, 12, 22 -> GameStateHolder.saveNewBoard(createBoard(size = 4, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
+            3, 13, 23 -> GameStateHolder.saveNewBoard(createBoard(size = 8, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
             else -> GameStateHolder.saveNewBoard(createBoard(size = levelNumber * 4, maxNumber = 2 * levelNumber, colors = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
         }
     }
@@ -36,6 +35,7 @@ class LevelGenerator {
             when (GameStateHolder.gameMode.value) {
                 GameMode.SINGLE_ELEMENT -> findPair(possibleTiles)
                 GameMode.TWO_ELEMENTS -> findPairTwoMatchingElements(possibleTiles)
+                GameMode.TWO_ELEMENTS_WITH_TIMER -> findPairTwoMatchingElements(possibleTiles)
                 else -> throw RuntimeException("GameMode not valid")
             }
         }

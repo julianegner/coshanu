@@ -3,11 +3,10 @@ package ui
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.single_element_must_fit
 import coshanu.composeapp.generated.resources.two_elements_must_fit
+import coshanu.composeapp.generated.resources.time_is_running
 import game.enums.GameMode
 import game.GameStateHolder
 import org.jetbrains.compose.resources.stringResource
@@ -26,6 +25,16 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
         }
         GameMode.TWO_ELEMENTS -> {
             Text(stringResource(Res.string.two_elements_must_fit),
+                modifier = modifier,
+                fontSize = largerTextSize.value
+            )
+        }
+        GameMode.TWO_ELEMENTS_WITH_TIMER -> {
+            Text(stringResource(Res.string.two_elements_must_fit),
+                modifier = modifier,
+                fontSize = largerTextSize.value
+            )
+            Text(stringResource(Res.string.time_is_running),
                 modifier = modifier,
                 fontSize = largerTextSize.value
             )

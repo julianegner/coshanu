@@ -14,7 +14,7 @@ import ui.UiStateHolder.standardTextSize
 
 @Composable
 fun NextLevelButtonElement() {
-    if (GameStateHolder.level.value!! < 13) {
+    if (GameStateHolder.level.value!! < 23) {
         Button(
             onClick = { GameStateHolder.levelUp() },
             modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)

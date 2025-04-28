@@ -4,11 +4,13 @@ import game.GameStateHolder.gameMode
 import game.GameStateHolder.gameState
 import game.GameStateHolder.level
 import game.GameStateHolder.remainingTileAmount
+import game.GameStateHolder.totalAllowedTime
 import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
 import util.runOnMainAfter
 import util.toClipboard
+import kotlin.time.Duration.Companion.seconds
 
 fun restartGame(
 ) {
@@ -38,6 +40,7 @@ fun restartGame(
     }
     tutorial.nextStep()
 
+    GameStateHolder.resetTotalAllowedTime()
     GameStateHolder.timer.startTimer()
 }
 
@@ -61,6 +64,7 @@ fun newGame(
         GameStateHolder.updateGameState(GameState.RUNNING)
 
         GameStateHolder.timer.startTimer()
+        GameStateHolder.resetTotalAllowedTime()
     }
 }
 
@@ -68,6 +72,7 @@ fun setGameMode(level: Int) {
     when (level) {
         0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
         10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
+        20, 21, 22, 23 -> gameMode.value = GameMode.TWO_ELEMENTS_WITH_TIMER
         else -> gameMode.value = GameMode.SINGLE_ELEMENT
     }
 }

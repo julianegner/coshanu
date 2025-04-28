@@ -8,6 +8,7 @@ import game.enums.ShapeEnum
 import util.Timer
 import util.stringToColor
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 object GameStateHolder {
     val boardDataState: MutableState<BoardData> = mutableStateOf(BoardData(1))
@@ -24,6 +25,7 @@ object GameStateHolder {
     val tutorial: Tutorial = Tutorial()
 
     val timer = Timer()
+    val totalAllowedTime: MutableState<Duration> = mutableStateOf(60.seconds)
 
     fun resetBoard() {
         boardDataState.value.reset()
@@ -62,6 +64,9 @@ object GameStateHolder {
             if (level.value!! == 3) { // last level of single element game
                 // first level of two element game (tutorial)
                 changeLevel(10)
+            } else if (level.value!! == 13) { // last level of two element game
+                // first level of two element plus timer game (tutorial)
+                changeLevel(20)
             } else
                 changeLevel(level.value!! + 1)
         }
@@ -144,6 +149,14 @@ object GameStateHolder {
         boardDataState.value.tiles = listState.value
 
         remainingTileAmount.value -= 2
+    }
+
+    fun addTimeToTimer() {
+        totalAllowedTime.value += 10.seconds
+    }
+
+    fun resetTotalAllowedTime() {
+        totalAllowedTime.value = 60.seconds
     }
 
     fun loadGame(gameDataInput: String) {

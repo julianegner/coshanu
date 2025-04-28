@@ -162,6 +162,7 @@ private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
     second.played = true
     GameStateHolder.updateSelected(Pair(first, second))
     GameStateHolder.playCard(first, second)
+    GameStateHolder.addTimeToTimer() // only relevant for game with timer
 
     GameStateHolder.tutorial.nextStep()
 }
