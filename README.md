@@ -7,7 +7,7 @@ There are two game modes, the simpler where one of color shape and number must b
 Also, a timer runs, you can try to be faster to make the game more challenging.
 
 # Kotlin Multiplatform
-The project is a Kotlin Multiplatform project and has some solutions ypu might find interesting.
+The project is a Kotlin Multiplatform project and has some solutions you might find interesting.
 As the code is licensed unter MIT license, you can use it for your own projects, even commercial ones.
 
 Interesting solutions are:
@@ -24,6 +24,7 @@ Interesting solutions are:
 - toClipboard (see composeApp/src/commonMain/kotlin/util/Clipboard.kt and Clipboard.kt in the platform specific folders)
 - enums with localised strings (see composeApp/src/commonMain/kotlin/game/enums/GameState.kt)
 - run after delay (see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt)
+- show app loading info in wasm web page (see composeApp/src/wasmJsMain/resources/index.html and composeApp/src/wasmJsMain/kotlin/main.kt)
 
 # Development
 
