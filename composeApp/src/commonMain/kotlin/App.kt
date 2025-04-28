@@ -13,6 +13,7 @@ import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.title
 import game.*
+import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
 import org.jetbrains.compose.resources.stringResource
@@ -137,7 +138,12 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         }
                         StartButtonRow()
                         GameStateTextElement()
-                        TimerDisplay()
+                        Row(modifier = Modifier.padding(top = 10.dp)) {
+                            TimerDisplay()
+                            if (GameStateHolder.gameMode.value == GameMode.TWO_ELEMENTS_WITH_TIMER) {
+                                CountdownTimerDisplay(modifier = Modifier.padding(start = 10.dp))
+                            }
+                        }
                         WonAnimation()
                         NextLevelButtonElement()
                         if (GameStateHolder.tutorial.isTutorial()) {

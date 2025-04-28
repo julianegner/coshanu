@@ -13,6 +13,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.choose_level
 import coshanu.composeapp.generated.resources.single_element
@@ -75,6 +76,18 @@ fun Menu() {
             buttonColors = ButtonDefaults.buttonColors(
                 contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
                 backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
+            )
+        )
+
+        val LightLightBlue = Color(0xEE5533FF)
+        MenuRow(
+            levelTypeStringResource = Res.string.two_elements_with_timer,
+            levels = (20..23),
+            elementTextModifier = elementTextModifier,
+            currentLevelButtonColors = currentLevelButtonColors,
+            buttonColors = ButtonDefaults.buttonColors(
+                contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
+                backgroundColor = if (UiStateHolder.darkModeState.value) LightLightBlue else LightBlue
             )
         )
     }

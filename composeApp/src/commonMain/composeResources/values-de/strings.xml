@@ -9,9 +9,12 @@
 
     <string name="single_element">Ein Element</string>
     <string name="two_elements">Zwei Elemente</string>
+    <string name="two_elements_with_timer">Zwei Elemente mit Timer</string>
 
     <string name="single_element_must_fit">Ein Element muss passen</string>
     <string name="two_elements_must_fit">Zwei Elemente müssen passen</string>
+    <string name="time_is_running">Die Zeit läuft! Mehr Zeit gibt es für Auswahl passender Karten.</string>
+    <string name="time_is_up">Die Zeit ist um!</string>
 
     <string name="restart">Neustart</string>
     <string name="starting">Starten</string>
@@ -103,6 +106,7 @@ Jetzt weißt du, wie man dieses Spiel spielt.
 Du kannst ein neues Spiel im Menü oben starten.
     </string>
 
+    <string name="tutorial_two_1_with_timer">Willkommen beim Tutorial!\nIn dieser Variante spielst du gegen die Zeit.\nFür jedes gewählte Paar Karten gibt es 10 Sekunden extra.\nBitte klick auf [] oben links..</string>
     <string name="tutorial_two_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
     <string name="tutorial_two_2">Jetzt klick auf [] rechts der ersten Karte</string>
     <string name="tutorial_two_3">Der Rahmen dieser Karte ist für einen Moment Rot.

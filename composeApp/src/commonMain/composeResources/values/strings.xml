@@ -15,9 +15,12 @@ When using multiline strings, please be aware that all line breaks and indentati
 
     <string name="single_element">Single Element</string>
     <string name="two_elements">Two Elements</string>
+    <string name="two_elements_with_timer">Two Elements with Timer</string>
 
     <string name="single_element_must_fit">Single Element must fit for tiles to match</string>
     <string name="two_elements_must_fit">Two Elements must fit for tiles to match</string>
+    <string name="time_is_running">Time is running. Get more time by selecting fitting cards.</string>
+    <string name="time_is_up">Time is up!</string>
 
     <string name="restart">starting again</string>
     <string name="starting">starting</string>
@@ -78,6 +81,7 @@ This restarts the game with the same cards.
     <string name="tutorial_one_8">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower right [].</string>
     <string name="tutorial_one_9">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 
+    <string name="tutorial_two_1_with_timer">Welcome to the Tutorial!\nIn this variant, you have to play against the time.\nFor every fitting pair you select, you will get 10 seconds.\nPlease click on the upper left [].</string>
     <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_two_2">Now click on [] right to the first Tile</string>
     <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
