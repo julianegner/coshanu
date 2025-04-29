@@ -106,7 +106,12 @@ Find the generated artifact `composeApp/build/outputs/apk/release/coshanu-releas
 
 ## Release
 
-### 1. set Tag in build.gradle.kts
+### 1. set version in App.kt
+```
+    val programVersion = "1.0.0"
+```
+
+### 2. set Tag in build.gradle.kts
 ```
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
@@ -115,15 +120,20 @@ Find the generated artifact `composeApp/build/outputs/apk/release/coshanu-releas
         }
 ```
 
-### 2. set git version tag
+### 3. set git version tag
 ```
     git tag -a v1.0.0 -m "Release version 1.0.0"
 ```
-### 3. push code and tag to remote
+### 4. push code and tag to remote
 ```
     git push origin --tags
 ```
 This pushes the tag to the remote repository and the release will be build by github actions.
+
+### 5. create release on github
+run github action 
+  Build (and Release)
+
 
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
@@ -173,5 +183,6 @@ composeApp/src/commonMain/composeResources/drawable
 composeApp/src/commonMain/composeResources/files
 - lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
 
+## Info
 Info: create a new KMP project
 https://kmp.jetbrains.com/
