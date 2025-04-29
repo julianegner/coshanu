@@ -6,6 +6,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
@@ -75,7 +76,14 @@ fun App() {
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     if (UiStateHolder.displayInfoArea.value) {
-        InfoAreaWrapper(verticalScrollModifier.value)
+        Row (
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = verticalScrollModifier.value.fillMaxSize().border(1.dp, Color.Gray)
+        )
+        {
+            InfoArea()
+        }
     } else if (GameStateHolder.isGameState(GameState.STARTING)) {
         Column(
             modifier = Modifier.padding(top =
@@ -83,9 +91,28 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            InfoAreaWrapper(verticalScrollModifier.value)
-            Title()
+            if (isPlatformWasm) {
+                Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    InfoSymbol(
+                        Modifier
+                            .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+                            .pointerHoverIcon(PointerIcon.Hand)
+                            .padding(10.dp)
+                    )
+                    Title()
+                    DarkModeSwitch()
+                }
+            } else {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    DarkModeSwitch()
+                }
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    Title()
+                }
+            }
             GameSymbol()
+
+            // todo display dark mode switch in a row with info area icon and title
 
             // uncomment this to show the sticker image which can be used to print stickers
             // not for production, only to get the sticker image

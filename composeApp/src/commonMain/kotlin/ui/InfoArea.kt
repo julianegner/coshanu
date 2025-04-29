@@ -35,34 +35,6 @@ import withImpressum
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
 
 @Composable
-fun InfoAreaWrapper(modifier: Modifier = Modifier) {
-    // Info area for web only
-    if (!isPlatformWasm) {
-        return
-    }
-    Row (
-        verticalAlignment = Alignment.Top,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = if (UiStateHolder.displayInfoArea.value)
-                        modifier.fillMaxSize().border(1.dp, Color.Gray)
-                    else
-                        modifier.fillMaxWidth()
-    )
-    {
-        if (UiStateHolder.displayInfoArea.value) {
-            InfoArea()
-        } else {
-            InfoSymbol(
-                Modifier
-                    .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
-                    .pointerHoverIcon(PointerIcon.Hand)
-                    .padding(10.dp)
-            )
-        }
-    }
-}
-
-@Composable
 fun InfoArea() {
     InfoSymbol(Modifier.padding(20.dp))
     Column (modifier = Modifier
