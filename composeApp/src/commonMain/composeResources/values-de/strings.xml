@@ -71,97 +71,44 @@
 
     <string name="next_level">Nächstes Level</string>
 
-    <string name="tutorial_one_1">Willkommen beim Tutorial!
-Bitte klick auf [] oben links.
-    </string>
-    <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün.
-Jetzt klick auf [] unten rechts
-    </string>
-    <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot.
-Das kommt daher, daß die Karten nicht zusammenpassen.
-Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
-Daher kommt auch der Name CoShaNu (Color, Shape, Number).
-
-Jetzt klick auf [] unten links.
-    </string>
-    <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen.
-Ja, dieses Spiel ist verloren.
-Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
-Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
-    </string>
-    <string name="tutorial_one_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
-Jetzt wähle [] oben links ...
-    </string>
-    <string name="tutorial_one_6">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
-... und dann [].
-    </string>
-    <string name="tutorial_one_7">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.
-Jetzt klick auf [] unten links.
-    </string>
-    <string name="tutorial_one_8">Diese Karten sind gespielt und nur noch Blaue Karten bleiben.
-Jetzt klick auf [] unten rechts.
-    </string>
-    <string name="tutorial_one_9">Glückwunsch! Du hast das Tutorial abgeschlossen.
-Jetzt weißt du, wie man dieses Spiel spielt.
-Du kannst ein neues Spiel im Menü oben starten.
-    </string>
+    <string name="tutorial_one_1">Willkommen beim Tutorial! \nBitte klick auf [] oben links.</string>
+    <string name="tutorial_one_2">Der Rahmen dieser Karte ist jetzt Grün. \nJetzt klick auf [] unten rechts</string>
+    <string name="tutorial_one_3">Der Rahmen dieser Karte ist für einen Moment Rot. \nDas kommt daher, daß die Karten nicht zusammenpassen. \nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben. \nDaher kommt auch der Name CoShaNu (Color, Shape, Number). \n \nJetzt klick auf [] unten links.</string>
+    <string name="tutorial_one_4">Beide Karten verschwinden, weil sie passen. \nJa, dieses Spiel ist verloren. \nDas ist aber kein Problem, klick einfach auf 'Spiel neu Starten' \nDadurch wird das Spiel mit den gleichen Karten neu gestartet.</string>
+    <string name="tutorial_one_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt. \nJetzt wähle [] oben links ...</string>
+    <string name="tutorial_one_6">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt. \n... und dann [].</string>
+    <string name="tutorial_one_7">Diese Karten sind gespielt und nur noch Blaue Karten bleiben. \nJetzt klick auf [] unten links.</string>
+    <string name="tutorial_one_8">Diese Karten sind gespielt und nur noch Blaue Karten bleiben. \nJetzt klick auf [] unten rechts.</string>
+    <string name="tutorial_one_9">Glückwunsch! Du hast das Tutorial abgeschlossen. \nJetzt weißt du, wie man dieses Spiel spielt. \nDu kannst ein neues Spiel im Menü oben starten.</string>
 
     <string name="tutorial_two_1_with_timer">Willkommen beim Tutorial!\nIn dieser Variante spielst du gegen die Zeit.\nFür jedes gewählte Paar Karten gibt es 10 Sekunden extra.\nBitte klick auf [] oben links..</string>
     <string name="tutorial_two_1">Willkommen beim Tutorial!\nBitte klick auf [] oben links.</string>
     <string name="tutorial_two_2">Jetzt klick auf [] rechts der ersten Karte</string>
-    <string name="tutorial_two_3">Der Rahmen dieser Karte ist für einen Moment Rot.
-Das kommt daher, daß die Karten nicht zusammenpassen.
-Damit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben.
-Daher kommt auch der Name CoShaNu (Color, Shape, Number).
-
-Jetzt klick auf [] unten rechts.
-    </string>
-    <string name="tutorial_two_4">Beide Karten verschwinden, weil sie passen.
-Ja, dieses Spiel ist verloren.
-Das ist aber kein Problem, klick einfach auf 'Spiel neu Starten'
-Dadurch wird das Spiel mit den gleichen Karten neu gestartet.
-    </string>
-    <string name="tutorial_two_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt.
-Jetzt wähle [] oben links ...</string>
+    <string name="tutorial_two_3">Der Rahmen dieser Karte ist für einen Moment Rot. \nDas kommt daher, daß die Karten nicht zusammenpassen. \nDamit sie passen, müssen sie die gleiche Farbe, Form oder Zahl haben. \nDaher kommt auch der Name CoShaNu (Color, Shape, Number). \n \nJetzt klick auf [] unten rechts.</string>
+    <string name="tutorial_two_4">Beide Karten verschwinden, weil sie passen. \nJa, dieses Spiel ist verloren. \nDas ist aber kein Problem, klick einfach auf 'Spiel neu Starten' \nDadurch wird das Spiel mit den gleichen Karten neu gestartet.</string>
+    <string name="tutorial_two_5">Dein Ziel ist, alle Karten zu entfernen. Aber pass auf, daß du nicht die falschen entfernst, wie eben gezeigt. \nJetzt wähle [] oben links ...</string>
     <string name="tutorial_two_6">Jetzt wähle [].</string>
-    <string name="tutorial_two_7">Diese Karten sind gespielt - spiel das nächste Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_7">Diese Karten sind gespielt - spiel das nächste Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_8">... []</string>
-    <string name="tutorial_two_9">Diese Karten sind gespielt - spiel das rote Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_9">Diese Karten sind gespielt - spiel das rote Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_10">... []</string>
-    <string name="tutorial_two_11">Diese Karten sind gespielt - spiel das erste grüne Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_11">Diese Karten sind gespielt - spiel das erste grüne Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_12">... []</string>
-    <string name="tutorial_two_13">Diese Karten sind gespielt - spiel das zweite grüne Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_13">Diese Karten sind gespielt - spiel das zweite grüne Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_14">... []</string>
-    <string name="tutorial_two_15">Diese Karten sind gespielt - spiel eines der blauen Paare!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_15">Diese Karten sind gespielt - spiel eines der blauen Paare! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_16">... []</string>
-    <string name="tutorial_two_17">Diese Karten sind gespielt - spiel das vorletzte blaue Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_17">Diese Karten sind gespielt - spiel das vorletzte blaue Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_18">... []</string>
-    <string name="tutorial_two_19">Diese Karten sind gespielt - spiel das letzte Paar!
-Jetzt klick auf [] und ...</string>
+    <string name="tutorial_two_19">Diese Karten sind gespielt - spiel das letzte Paar! \nJetzt klick auf [] und ...</string>
     <string name="tutorial_two_20">... []</string>
-    <string name="tutorial_two_21">Glückwunsch! Du hast das Tutorial abgeschlossen.
-Jetzt weißt du, wie man dieses Spiel spielt.
-Du kannst ein neues Spiel im Menü oben starten.
-    </string>
+    <string name="tutorial_two_21">Glückwunsch! Du hast das Tutorial abgeschlossen. \nJetzt weißt du, wie man dieses Spiel spielt. \nDu kannst ein neues Spiel im Menü oben starten.</string>
 
     <!-- info area -->
     <string name="info_area_title">Information</string>
     <string name="version">Version</string>
     <string name="general_information_title">Allgemeine Informationen</string>
-    <string name="general_information_text">CoShaNu ist ein Spiel, bei dem es darum geht, Paare von Karten zu entfernen, bei denen Farbe, Form oder Nummer übereinstimmen.
-Es gibt zwei Spielarten, bei dem einfacheren muss nur ein Element gleich sein und bei dem komplexeren müssen zwei Elemente gleich sein.
-Spiel das Tutorial um zu lernen, wie man das Spiel spielt.
-
-Das Spiel ist in Kotlin multiplatform mit Jetpack Compose geschrieben und unterstützt verschiedene Sprachen und Plattformen.
-
-Es ist Open Source (MIT-Lizenz), sodass du Funktionen und Code-Snippets für deine eigenen Projekte verwenden kannst.
-Beiträge und Übersetzungen sind willkommen.</string>
+    <string name="general_information_text">CoShaNu ist ein Spiel, bei dem es darum geht, Paare von Karten zu entfernen, bei denen Farbe, Form oder Nummer übereinstimmen. \nEs gibt zwei Spielarten, bei dem einfacheren muss nur ein Element gleich sein und bei dem komplexeren müssen zwei Elemente gleich sein. \nSpiel das Tutorial um zu lernen, wie man das Spiel spielt. \n \nDas Spiel ist in Kotlin multiplatform mit Jetpack Compose geschrieben und unterstützt verschiedene Sprachen und Plattformen. \n \nEs ist Open Source (MIT-Lizenz), sodass du Funktionen und Code-Snippets für deine eigenen Projekte verwenden kannst. \nBeiträge und Übersetzungen sind willkommen.</string>
     <string name="license_title">Lizenz</string>
     <string name="general_license_info">Das Spiel ist unter der MIT-Lizenz lizenziert.</string>
     <!-- info for translation: the license text itself is in english, so please add "(english)" to this translated string -->
@@ -176,13 +123,8 @@ Beiträge und Übersetzungen sind willkommen.</string>
     <string name="localization_info">Das Spiel ist in einigen Sprachen verfügbar.</string>
     <string name="translators_prefix">Übersetzer für</string>
     <string name="contribute_title">Beitragen</string>
-    <string name="contribute_info">Das Spiel ist Open Source und Beiträge sind willkommen.
-Du kannst zum Spiel beitragen, indem du Übersetzungen hinzufügst, Fehler behebst oder neue Features hinzufügst.
-Bitte kontaktiere mich über GitHub, wenn du beitragen möchtest.
-
-Wenn du das Spiel übersetzen möchtest, kannst du die Übersetzungsdatei hier herunterladen:</string>
+    <string name="contribute_info">Das Spiel ist Open Source und Beiträge sind willkommen. \nDu kannst zum Spiel beitragen, indem du Übersetzungen hinzufügst, Fehler behebst oder neue Features hinzufügst. \nBitte kontaktiere mich über GitHub, wenn du beitragen möchtest. \n \nWenn du das Spiel übersetzen möchtest, kannst du die Übersetzungsdatei hier herunterladen:</string>
     <string name="contribute_translation_mail">Du kannst mir die übersetzte Datei per E-Mail senden:</string>
-
 
     <!--
 Dear translators, please put your name here.

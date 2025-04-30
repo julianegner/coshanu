@@ -9,19 +9,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
-import coshanu.composeapp.generated.resources.*
 import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.subtitle
 import coshanu.composeapp.generated.resources.title
 import game.*
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
-import org.jetbrains.compose.resources.stringResource
 import ui.*
 import ui.UiStateHolder.screenType
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
+
+import com.hyperether.resources.AppLocale
+import com.hyperether.resources.stringResource
+import com.hyperether.resources.currentLanguage
+
+/*
+stringResource
+AppLocale
+currentLanguage
+ */
 
 val programVersion = "1.1.0"
 val gameSaveAndLoadOption = false
@@ -37,6 +47,17 @@ object AppInitializer {
             if (darkTheme) {
                 UiStateHolder.darkModeState.value = true
             }
+
+            setAppLocale()
+        }
+    }
+
+    // Set the language based on the system locale
+    private fun setAppLocale() {
+        when (Locale.current) {
+            Locale("de") -> currentLanguage.value = AppLocale.DE
+            Locale("en") -> currentLanguage.value = AppLocale.DEFAULT
+            else -> currentLanguage.value = AppLocale.DEFAULT
         }
     }
 }
@@ -145,6 +166,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
                     DarkModeSwitch()
+                    LanguageChooser()
                 }
                 Title()
             }
@@ -233,4 +255,14 @@ private fun Title() {
             fontSize = subtitleTextSize.value
         )
     }
+}
+
+@Composable
+fun LanguageChooser() {
+    Button(onClick = {
+        currentLanguage.value = AppLocale.DEFAULT
+    }) { Text("EN")}
+    Button(onClick = {
+        currentLanguage.value = AppLocale.DE
+    }) { Text("DE")}
 }

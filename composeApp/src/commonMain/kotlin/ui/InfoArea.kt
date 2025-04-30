@@ -24,7 +24,7 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
 import isPlatformWasm
 import game.enums.ScreenType
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import programVersion
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize

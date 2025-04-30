@@ -17,6 +17,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    id("com.hyperether.localization") version "1.0.0"
 }
 
 kotlin {
@@ -82,6 +83,12 @@ kotlin {
     sourceSets {
         val desktopMain by getting
         val desktopTest by getting
+        sourceSets["commonMain"].kotlin.srcDirs(
+            File(
+                layout.buildDirectory.get().asFile.path,
+                "generated/compose/resourceGenerator/kotlin/commonCustomResClass"
+            )
+        )
 
         androidMain.dependencies {
             implementation(compose.preview)

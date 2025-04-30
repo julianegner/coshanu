@@ -22,7 +22,7 @@ import coshanu.composeapp.generated.resources.two_elements_must_fit
 import game.enums.GameMode
 import game.GameStateHolder
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import ui.UiStateHolder.largerTextSize
 
 

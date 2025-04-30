@@ -9,7 +9,7 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.next_level
 import game.GameStateHolder
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import ui.UiStateHolder.standardTextSize
 
 @Composable
