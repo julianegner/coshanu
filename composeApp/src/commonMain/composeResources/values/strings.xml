@@ -70,11 +70,7 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="tutorial_one_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
     <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
-    <string name="tutorial_one_4">Both Tiles disappear, because this fits.
-Yes, this game was lost.
-But no problem, just click on 'Restart Game'
-This restarts the game with the same cards.
-    </string>
+    <string name="tutorial_one_4">Both Tiles disappear, because this fits. \nYes, this game was lost. \nBut no problem, just click on 'Restart Game' \nThis restarts the game with the same cards.</string>
     <string name="tutorial_one_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
     <string name="tutorial_one_6">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\n... and then [].</string>
     <string name="tutorial_one_7">These Tiles are played and only the Blue Tiles are there.\nNow click on the lower left [].</string>
@@ -85,11 +81,7 @@ This restarts the game with the same cards.
     <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
     <string name="tutorial_two_2">Now click on [] right to the first Tile</string>
     <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
-    <string name="tutorial_two_4">Both Tiles disappear, because this fits.
-Yes, this game was lost.
-But no problem, just click on 'Restart Game'
-This restarts the game with the same cards.
-    </string>
+    <string name="tutorial_two_4">Both Tiles disappear, because this fits. \nYes, this game was lost. \nBut no problem, just click on 'Restart Game' \nThis restarts the game with the same cards.</string>
     <string name="tutorial_two_5">Your goal to win is to remove all Tiles. But be careful to not remove the wrong ones, as shown before.\nNow choose the upper left [] ...</string>
     <string name="tutorial_two_6">now choose the fitting [].</string>
     <string name="tutorial_two_7">These Tiles are played - let's play the next pair!\nNow click on [] and ...</string>
@@ -113,15 +105,7 @@ This restarts the game with the same cards.
     <string name="info_area_title">Information</string>
     <string name="version">Version</string>
     <string name="general_information_title">General Information</string>
-    <string name="general_information_text">CoShaNu is a game where you remove pairs of cards where the color, the shape or the number are the same.
-There are two game modes, the simpler where one of color shape and number must be equal and the more complex where two must be equal.
-Play the tutorial to learn how to play the game.
-
-The game was written in Kotlin multiplatform with Jetpack Compose.
-The game is available in different languages and on different platforms.
-
-It is open source (MIT license), so you can use functions and code snippets for your own projects.
-Contributions and translations are welcome.</string>
+    <string name="general_information_text">CoShaNu is a game where you remove pairs of cards where the color, the shape or the number are the same. \nThere are two game modes, the simpler where one of color shape and number must be equal and the more complex where two must be equal. \nPlay the tutorial to learn how to play the game. \n \nThe game was written in Kotlin multiplatform with Jetpack Compose. \nThe game is available in different languages and on different platforms. \n \nIt is open source (MIT license), so you can use functions and code snippets for your own projects. \nContributions and translations are welcome.</string>
     <string name="license_title">License</string>
     <string name="general_license_info">The game is licensed under the MIT license.</string>
     <!-- info for translation: the license text itself is in english, so please add "(english)" to this translated string -->
@@ -136,14 +120,8 @@ Contributions and translations are welcome.</string>
     <string name="localization_info">The game is available some languages.</string>
     <string name="translators_prefix">Translator(s) for</string>
     <string name="contribute_title">Contribute</string>
-    <string name="contribute_info">The game is open source and contributions are welcome.
-You can contribute to the game by adding translations, fixing bugs or adding new features.
-Please contact me via github if you want to contribute.
-
-If you want to translate the game, you can download the translation file here:</string>
+    <string name="contribute_info">The game is open source and contributions are welcome. \nYou can contribute to the game by adding translations, fixing bugs or adding new features. \nPlease contact me via github if you want to contribute. \n \nIf you want to translate the game, you can download the translation file here:</string>
     <string name="contribute_translation_mail">You can send me the translated file by mail to</string>
-
-
 
     <!--
     Dear translators, please put your name here.

@@ -3,7 +3,7 @@ package util
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import coshanu.composeapp.generated.resources.*
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 
 @Composable
 fun Color.toName(): String =

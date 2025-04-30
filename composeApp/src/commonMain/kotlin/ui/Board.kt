@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import game.*
 import game.GameStateHolder.level
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.*
 import game.GameStateHolder.gameState
 import game.GameStateHolder.remainingTileAmount

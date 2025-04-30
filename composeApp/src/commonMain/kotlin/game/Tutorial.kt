@@ -9,7 +9,7 @@ import coshanu.composeapp.generated.resources.*
 import game.enums.GameMode
 import game.enums.ShapeEnum
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 
 data class TutorialStep(
     val step: Int,

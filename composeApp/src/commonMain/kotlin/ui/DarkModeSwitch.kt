@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
 import coshanu.composeapp.generated.resources.light_mode
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import ui.UiStateHolder.standardTextSize
 
 @Composable

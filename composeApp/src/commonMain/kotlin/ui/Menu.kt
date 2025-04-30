@@ -23,7 +23,7 @@ import game.GameStateHolder
 import game.darkmodeYellow
 import isPlatformAndroid
 import org.jetbrains.compose.resources.StringResource
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
 import ui.UiStateHolder.standardTextSize

@@ -8,7 +8,7 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
 import game.enums.GameMode
 import game.enums.ShapeEnum
-import org.jetbrains.compose.resources.stringResource
+import com.hyperether.resources.stringResource
 import ui.UiStateHolder
 import util.toName
 import util.toSaveName
