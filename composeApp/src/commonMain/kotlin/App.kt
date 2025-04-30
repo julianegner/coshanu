@@ -27,12 +27,6 @@ import com.hyperether.resources.AppLocale
 import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 
-/*
-stringResource
-AppLocale
-currentLanguage
- */
-
 val programVersion = "1.1.0"
 val gameSaveAndLoadOption = false
 
@@ -121,11 +115,17 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             .padding(10.dp)
                     )
                     Title()
-                    DarkModeSwitch()
+                    Column {
+                        DarkModeSwitch()
+                        LanguageChooser()
+                    }
                 }
             } else {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    DarkModeSwitch()
+                    Column {
+                        DarkModeSwitch()
+                        LanguageChooser()
+                    }
                 }
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                     Title()
@@ -165,8 +165,10 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         )
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
-                    DarkModeSwitch()
-                    LanguageChooser()
+                    Column {
+                        DarkModeSwitch()
+                        LanguageChooser()
+                    }
                 }
                 Title()
             }
@@ -255,14 +257,4 @@ private fun Title() {
             fontSize = subtitleTextSize.value
         )
     }
-}
-
-@Composable
-fun LanguageChooser() {
-    Button(onClick = {
-        currentLanguage.value = AppLocale.DEFAULT
-    }) { Text("EN")}
-    Button(onClick = {
-        currentLanguage.value = AppLocale.DE
-    }) { Text("DE")}
 }

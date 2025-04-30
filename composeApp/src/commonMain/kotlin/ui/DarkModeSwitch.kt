@@ -13,6 +13,7 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
 import coshanu.composeapp.generated.resources.light_mode
 import com.hyperether.resources.stringResource
+import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 
 @Composable
@@ -33,6 +34,7 @@ fun DarkModeSwitch() {
         )
         Text(
             fontSize = standardTextSize.value,
+            lineHeight = standardLineHeight.value,
             text = if (UiStateHolder.darkModeState.value) {
                 stringResource(Res.string.dark_mode)
             } else {
