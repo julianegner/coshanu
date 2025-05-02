@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
@@ -22,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.AppLocale
 import com.hyperether.resources.*
@@ -73,11 +76,20 @@ fun LanguageChooser() {
 
 @Composable
 private fun languageFlagAndName(appLocale: AppLocale) {
+    val imageModifier = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE)
+        Modifier
+            .padding(start = 10.dp, top = 5.dp)
+    else
+        Modifier
+            .padding(start = 10.dp, top = 20.dp)
+            .width(60.dp)
+            .height(30.dp)
+
     Image(
         imageVector = FlagKit.getFlag(countryCode = countrycode(appLocale))!!,
         contentDescription = "Flag",
-        modifier = Modifier
-            .padding(start = 10.dp, top = 5.dp)
+        contentScale = ContentScale.FillBounds,
+        modifier = imageModifier
             .border(1.dp, Color.Gray)
     )
     Text(
