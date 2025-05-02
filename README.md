@@ -25,6 +25,8 @@ Interesting solutions are:
 - enums with localised strings (see composeApp/src/commonMain/kotlin/game/enums/GameState.kt)
 - run after delay (see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt)
 - show app loading info in wasm web page (see composeApp/src/wasmJsMain/resources/index.html and composeApp/src/wasmJsMain/kotlin/main.kt)
+- change language at runtime (see composeApp/src/commonMain/kotlin/App.kt and composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt)
+needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
 
 # Development
 
