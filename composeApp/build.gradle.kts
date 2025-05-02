@@ -111,6 +111,8 @@ kotlin {
 
             // This module can cause binary incompatibilities. Please read its description first
             implementation("io.github.alexzhirkevich:compottie-resources:2.0.0-rc04")
+
+            implementation("dev.carlsen.flagkit:flagkit:1.1.0")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

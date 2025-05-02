@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
@@ -21,12 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.hyperether.resources.AppLocale
 import com.hyperether.resources.*
 import game.enums.ScreenType
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
+import dev.carlsen.flagkit.FlagKit
+
 
 @Composable
 fun LanguageChooser() {
@@ -43,12 +46,9 @@ fun LanguageChooser() {
             .border(BorderStroke(1.dp, Color.LightGray), RoundedCornerShape(4.dp))
             .clickable { expanded.value = !expanded.value },
     ) {
-        Text(
-            text = languageLabel(currentLanguage.value),
-            fontSize = standardTextSize.value,
-            lineHeight = standardLineHeight.value,
-            modifier = Modifier.padding(start = 10.dp)
-        )
+        Row {
+            languageFlagAndName(currentLanguage.value)
+        }
         Icon(
             Icons.Filled.ArrowDropDown, "contentDescription",
             Modifier.align(Alignment.CenterEnd)
@@ -64,14 +64,28 @@ fun LanguageChooser() {
                         expanded.value = false
                     }
                 ) {
-                    Text(
-                        text = languageLabel(selectionOption),
-                        fontSize = standardTextSize.value
-                        )
+                    languageFlagAndName(selectionOption)
                 }
             }
         }
     }
+}
+
+@Composable
+private fun languageFlagAndName(appLocale: AppLocale) {
+    Image(
+        imageVector = FlagKit.getFlag(countryCode = countrycode(appLocale))!!,
+        contentDescription = "Flag",
+        modifier = Modifier
+            .padding(start = 10.dp, top = 5.dp)
+            .border(1.dp, Color.Gray)
+    )
+    Text(
+        text = languageLabel(appLocale),
+        fontSize = standardTextSize.value,
+        lineHeight = standardLineHeight.value,
+        modifier = Modifier.padding(start = 10.dp)
+    )
 }
 
 private fun getLanguageName(locale: AppLocale): String {
@@ -85,4 +99,4 @@ private fun getLanguageName(locale: AppLocale): String {
 }
 
 private fun languageLabel(locale: AppLocale): String = getLanguageName(locale) + if (locale.name == "DEFAULT") " (EN)" else " (${locale.name})"
-
+private fun countrycode(locale: AppLocale): String = if (locale.name == "DEFAULT") "GB" else locale.name.uppercase()
