@@ -26,7 +26,6 @@ import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ScreenType
 import gameSaveAndLoadOption
-import getPlatform
 import isPlatformAndroid
 import landscapeOrAndroid
 import org.jetbrains.compose.resources.painterResource

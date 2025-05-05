@@ -123,6 +123,10 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="contribute_info">The game is open source and contributions are welcome. \nYou can contribute to the game by adding translations, fixing bugs or adding new features. \nPlease contact me via github if you want to contribute. \n \nIf you want to translate the game, you can download the translation file here:</string>
     <string name="contribute_translation_mail">You can send me the translated file by mail to</string>
 
+
+    <string name="settings">Settings</string>
+    <string name="reset_settings">reset settings</string>
+
     <!--
     Dear translators, please put your name here.
     If you add/ change a translation, please add your name here.

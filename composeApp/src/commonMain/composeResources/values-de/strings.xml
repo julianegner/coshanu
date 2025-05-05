@@ -126,6 +126,10 @@
     <string name="contribute_info">Das Spiel ist Open Source und Beiträge sind willkommen. \nDu kannst zum Spiel beitragen, indem du Übersetzungen hinzufügst, Fehler behebst oder neue Features hinzufügst. \nBitte kontaktiere mich über GitHub, wenn du beitragen möchtest. \n \nWenn du das Spiel übersetzen möchtest, kannst du die Übersetzungsdatei hier herunterladen:</string>
     <string name="contribute_translation_mail">Du kannst mir die übersetzte Datei per E-Mail senden:</string>
 
+
+    <string name="settings">Einstellungen</string>
+    <string name="reset_settings">Einstellungen zurücksetzen</string>
+
     <!--
 Dear translators, please put your name here.
 If you add/ change a translation, please add your name here.

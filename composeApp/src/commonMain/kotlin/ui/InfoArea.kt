@@ -172,7 +172,7 @@ fun BulletPoint(text: String) {
 }
 
 @Composable
-private fun closingX(onClick: () -> Unit) {
+fun closingX(onClick: () -> Unit) {
     Text(
         text = "X",
         fontSize = titleTextSize.value,

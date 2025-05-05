@@ -181,6 +181,7 @@ composeApp/src/commonMain/composeResources/drawable
 - lost.png generated (https://iconscout.com/licenses#iconscout) https://iconscout.com/ai/illustration-generator
 - Noto_Emoji_Fingerpointing.png (Apache License, Version 2.0) from https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
 - stopwatch.png (MIT license) from https://iconduck.com/icons/157837/stopwatch
+- setting.png (Apache License, Version 2.0) from https://iconduck.com/icons/56992/setting
 
 composeApp/src/commonMain/composeResources/files
 - lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg

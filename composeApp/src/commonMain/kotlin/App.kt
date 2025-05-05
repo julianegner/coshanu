@@ -139,17 +139,11 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             .padding(10.dp)
                     )
                     Title()
-                    Column {
-                        DarkModeSwitch()
-                        LanguageChooser()
-                    }
+                    SettingsAreaWrapper()
                 }
             } else {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    Column {
-                        DarkModeSwitch()
-                        LanguageChooser()
-                    }
+                    SettingsAreaWrapper()
                 }
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                     Title()
@@ -176,7 +170,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     horizontalArrangement = if (isPlatformWasm) Arrangement.SpaceBetween else Arrangement.End,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
+                        .padding(start = 20.dp)
                 ) {
                     //GameSymbol()
 
@@ -189,10 +183,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         )
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
-                    Column {
-                        DarkModeSwitch()
-                        LanguageChooser()
-                    }
+                    SettingsAreaWrapper()
                 }
                 Title()
             }
