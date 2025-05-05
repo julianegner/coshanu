@@ -139,6 +139,12 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             .padding(10.dp)
                     )
                     Title()
+                    if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE ||
+                        !UiStateHolder.displaySettingsArea.value) {
+                        SettingsAreaWrapper()
+                    }
+                }
+                if (UiStateHolder.displaySettingsArea.value && UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
                     SettingsAreaWrapper()
                 }
             } else {

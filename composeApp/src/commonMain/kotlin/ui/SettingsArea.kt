@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -52,7 +53,6 @@ fun SettingsAreaWrapper() {
                         ),
                         modifier = Modifier
                             .padding(start = 5.dp, top = 10.dp)
-                            // todo different size for mobile
                             .size(40.dp)
                     )
                     Text("", modifier = Modifier.fillMaxWidth(0.2f)) // just an invisible placeholder
@@ -76,7 +76,6 @@ fun SettingsAreaWrapper() {
                 ),
                 modifier = Modifier
                     .padding(start = 5.dp, top = 10.dp, end = 10.dp)
-                    // todo different size for mobile
                     .size(40.dp)
                     .clickable(onClick = { UiStateHolder.displaySettingsArea.value = true })
                     .pointerHoverIcon(PointerIcon.Hand)
