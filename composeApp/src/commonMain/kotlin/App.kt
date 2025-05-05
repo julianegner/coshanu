@@ -26,9 +26,15 @@ import ui.UiStateHolder.titleTextSize
 import com.hyperether.resources.AppLocale
 import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
+import com.russhwolf.settings.Settings
 
 val programVersion = "1.1.0"
 val gameSaveAndLoadOption = false
+
+val settings: Settings = Settings()
+val DARK_MODE = "dark_mode"
+val SOUND_ACTIVE = "sound_active"
+val CUSTOM_LOCALE = "custom_locale"
 
 object AppInitializer {
     var called = false
@@ -42,13 +48,31 @@ object AppInitializer {
                 UiStateHolder.darkModeState.value = true
             }
 
-            setAppLocale()
+            setAppLocale(Locale.current)
+
+            setSettingsFromSavedSettings()
         }
     }
 
+    private fun setSettingsFromSavedSettings() {
+        // Only override if set in settings
+        if (settings.hasKey(DARK_MODE)) {
+            UiStateHolder.darkModeState.value = settings.getBoolean(DARK_MODE, false)
+            println("set dark mode from settings: ${UiStateHolder.darkModeState.value}")
+        }
+
+        if (settings.hasKey(CUSTOM_LOCALE)) {
+            val localeFromSettings = settings.getString(CUSTOM_LOCALE, "en")
+            setAppLocale(Locale(localeFromSettings))
+            println("set locale from settings: $localeFromSettings")
+        }
+
+        UiStateHolder.soundActive.value = settings.getBoolean(SOUND_ACTIVE, true)
+    }
+
     // Set the language based on the system locale
-    private fun setAppLocale() {
-        when (Locale.current) {
+    private fun setAppLocale(locale: Locale) {
+        when (locale) {
             Locale("de") -> currentLanguage.value = AppLocale.DE
             Locale("en") -> currentLanguage.value = AppLocale.DEFAULT
             else -> currentLanguage.value = AppLocale.DEFAULT

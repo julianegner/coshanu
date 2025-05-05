@@ -1,5 +1,6 @@
 package ui
 
+import CUSTOM_LOCALE
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,6 +33,7 @@ import game.enums.ScreenType
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import dev.carlsen.flagkit.FlagKit
+import settings
 
 
 @Composable
@@ -65,6 +67,7 @@ fun LanguageChooser() {
                     onClick = {
                         currentLanguage.value = selectionOption
                         expanded.value = false
+                        settings.putString(CUSTOM_LOCALE, selectionOption.name)
                     }
                 ) {
                     languageFlagAndName(selectionOption)

@@ -1,5 +1,6 @@
 package ui
 
+import DARK_MODE
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -13,6 +14,7 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
 import coshanu.composeapp.generated.resources.light_mode
 import com.hyperether.resources.stringResource
+import settings
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 
@@ -22,7 +24,7 @@ fun DarkModeSwitch() {
         Switch(
             checked = UiStateHolder.darkModeState.value,
             onCheckedChange = {
-                UiStateHolder.darkModeState.value = it
+                UiStateHolder.setDarkModeState(it)
             },
             colors = SwitchDefaults.colors(
                 checkedThumbColor = Color.DarkGray,

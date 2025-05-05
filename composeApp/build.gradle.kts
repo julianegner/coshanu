@@ -113,6 +113,7 @@ kotlin {
             implementation("io.github.alexzhirkevich:compottie-resources:2.0.0-rc04")
 
             implementation("dev.carlsen.flagkit:flagkit:1.1.0")
+            implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

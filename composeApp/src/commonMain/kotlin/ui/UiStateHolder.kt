@@ -1,5 +1,7 @@
 package ui
 
+import DARK_MODE
+import SOUND_ACTIVE
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
@@ -8,7 +10,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.enums.ScreenType
 import isPlatformAndroid
-import landscapeOrAndroid
+import settings
 
 object UiStateHolder {
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
@@ -22,6 +24,7 @@ object UiStateHolder {
     val menuButtonWidth: MutableState<Dp> = mutableStateOf(60.dp)
     val displayInfoArea: MutableState<Boolean> = mutableStateOf(false)
     val displayImpressum: MutableState<Boolean> = mutableStateOf(false)
+    val soundActive: MutableState<Boolean> = mutableStateOf(true)
 
     fun setScreenType(newScreenType: ScreenType) {
         screenType.value = newScreenType
@@ -36,6 +39,18 @@ object UiStateHolder {
         largerTextSize.value = if (screenType.value == ScreenType.LANDSCAPE) TextUnit(1.5f, TextUnitType.Em) else TextUnit(3f, TextUnitType.Em)
         menuRowTextWidth.value = if (isPlatformAndroid) 50.dp else if (screenType.value == ScreenType.LANDSCAPE) 100.dp else 200.dp
         menuButtonWidth.value = if (isPlatformAndroid) 50.dp else if (screenType.value == ScreenType.LANDSCAPE) 60.dp else 100.dp
+    }
+
+    fun setDarkModeState(value: Boolean) {
+        darkModeState.value = value
+        // Save to settings
+        settings.putBoolean(DARK_MODE, value)
+    }
+
+    fun setSoundActive(value: Boolean) {
+        soundActive.value = value
+        // Save to settings
+        settings.putBoolean(SOUND_ACTIVE, value)
     }
 
 }
