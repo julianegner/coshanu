@@ -3,6 +3,7 @@ package ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -10,16 +11,48 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.hyperether.resources.stringResource
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.click_anywhere
+import coshanu.composeapp.generated.resources.tap_anywhere
 import game.GameStateHolder
 import game.TileData
+import game.enums.ScreenType
 import game.enums.ShapeEnum
 import game.newTileData
+import isClickPlatform
 import kotlin.math.PI
 import landscapeOrAndroid
+import ui.UiStateHolder.standardTextSize
+
 
 @Composable
 fun GameSymbol() {
+
+    val hintTextResource = if (isClickPlatform) {
+        Res.string.click_anywhere
+
+    } else {
+        Res.string.tap_anywhere
+    }
+
+    Text(
+        text = stringResource(hintTextResource),
+        fontSize = standardTextSize.value,
+        fontStyle = FontStyle.Italic,
+        textAlign = TextAlign.Center,
+        modifier = Modifier
+            .offset(y =
+                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE)
+                    250.dp
+                else
+                820.dp
+                    // 500.dp - 500 is inside of the circle
+            )
+    )
     CircleOfTiles(
         elements = listOf(
             newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
@@ -40,7 +73,8 @@ fun GameSymbol() {
 }
 
 @Composable
-fun CircleOfTiles( elements: List<TileData>, modifier: Modifier = Modifier) {
+fun CircleOfTiles(elements: List<TileData>,
+                  modifier: Modifier = Modifier) {
     val radius = if (landscapeOrAndroid) 50.dp else 220.dp
     val centerX = 0.dp
     val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
