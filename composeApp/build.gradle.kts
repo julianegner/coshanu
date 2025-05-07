@@ -122,6 +122,7 @@ kotlin {
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
 
             implementation("br.com.devsrsouza.compose.icons:octicons:1.1.1")
+            implementation(libs.lexilabs.basic.sound)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
