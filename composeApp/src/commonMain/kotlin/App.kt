@@ -51,6 +51,7 @@ object AppInitializer {
             setAppLocale(Locale.current)
 
             setSettingsFromSavedSettings()
+
         }
     }
 
@@ -139,6 +140,16 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             .padding(10.dp)
                     )
                     Title()
+
+                    Button(onClick = {
+                        val soundBoard = SoundBoard("")
+                        soundBoard.click()
+                    },
+                        modifier = Modifier.width(30.dp).height(20.dp)
+                    ) {
+                        Text("Click me")
+                    }
+
                     if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE ||
                         !UiStateHolder.displaySettingsArea.value) {
                         SettingsAreaWrapper()

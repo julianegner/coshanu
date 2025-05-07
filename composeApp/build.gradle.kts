@@ -114,6 +114,7 @@ kotlin {
 
             implementation("dev.carlsen.flagkit:flagkit:1.1.0")
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
+            implementation(libs.lexilabs.basic.sound)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
