@@ -1,8 +1,8 @@
 <resources>
     <string name="title">CoShaNu - Color, Shape, Number</string>
     <string name="subtitle">Farbe, Form und Nummer</string>
-    <string name="click_anywhere">klick zum Starten</string>
-    <string name="tap_anywhere">tap zum Starten</string>
+    <string name="click_anywhere">klick irgendwo zum Starten</string>
+    <string name="tap_anywhere">tippe irgendwo zum Starten</string>
     <string name="choose_level">Wähle ein Level:</string>
 
     <string name="tutorial">Tutorial</string>
