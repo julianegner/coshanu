@@ -105,7 +105,14 @@ Find the generated artifact `composeApp/build/outputs/apk/release/coshanu-releas
 ```shell
  ./gradlew build
 ```
+## adding a language/localisation
+- add a new folder inside of `composeApp/src/commonMain/composeResources with the name values-<language code> (e.g. values-de for german)
+- add a new file `strings.xml` inside of the new folder
+- add the new strings to the new file (you can copy the existing string data from an existing file and change the values)
+- run `./gradlew clean` to remove the old resources
+- run `./gradlew build` or `/gradlew :composeApp:wasmJsBrowserDevelopmentRun` or other run to generate the new resources
 
+The new language will be available in the app, including in the language chooser.
 ## Release
 
 ### 1. set version in App.kt
