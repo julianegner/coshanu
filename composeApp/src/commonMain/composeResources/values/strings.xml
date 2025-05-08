@@ -135,6 +135,5 @@ When using multiline strings, please be aware that all line breaks and indentati
     example:
     <string name="translator">Aaron Beman, Cecil Dallas</string>
     -->
-    <string name="language_name">English</string>
     <string name="translator">Julian Egner</string>
 </resources>

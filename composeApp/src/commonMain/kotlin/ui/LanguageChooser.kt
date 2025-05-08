@@ -103,11 +103,5 @@ private fun languageFlagAndName(appLocale: AppLocale) {
     )
 }
 
-private fun getLanguageName(locale: AppLocale): String {
-    // return locale.displayName // language name in english
-
-    return LocalizedStrings.get("language_name", locale)
-}
-
-private fun languageLabel(locale: AppLocale): String = getLanguageName(locale) + if (locale.name == "DEFAULT") " (EN)" else " (${locale.name})"
+private fun languageLabel(locale: AppLocale): String = "${locale.nativeName} (${locale.code})"
 private fun countrycode(locale: AppLocale): String = if (locale.name == "DEFAULT") "GB" else locale.name.uppercase()

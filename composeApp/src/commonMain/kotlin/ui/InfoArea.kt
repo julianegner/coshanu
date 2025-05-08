@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
+import com.hyperether.resources.currentLanguage
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
 import isPlatformWasm
@@ -62,7 +63,7 @@ fun InfoArea() {
         // localization
         BulletPoint(stringResource(Res.string.localization_title))
         Text(stringResource(Res.string.localization_info), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
-        Text("${stringResource(Res.string.translators_prefix)} ${stringResource(Res.string.language_name)}: ${stringResource(Res.string.translator)}", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+        Text("${stringResource(Res.string.translators_prefix)} ${currentLanguage.value.nativeName}: ${stringResource(Res.string.translator)}", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         // contribute
         BulletPoint(stringResource(Res.string.contribute_title))
         Text(stringResource(Res.string.contribute_info), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)

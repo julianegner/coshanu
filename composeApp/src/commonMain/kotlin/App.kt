@@ -70,7 +70,6 @@ object AppInitializer {
         UiStateHolder.soundActive.value = settings.getBoolean(SOUND_ACTIVE, true)
     }
 
-    // Set the language based on the system locale
     private fun setAppLocale(locale: Locale) {
         currentLanguage.value = AppLocale.findByCode(locale.language)
     }

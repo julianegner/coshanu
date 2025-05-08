@@ -138,6 +138,5 @@ If you add/ change a translation, please add your name here.
 example:
 <string name="translator">Aaron Beman, Cecil Dallas</string>
 -->
-    <string name="language_name">Deutsch</string>
     <string name="translator">Julian Egner</string>
 </resources>
