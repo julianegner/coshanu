@@ -17,7 +17,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    id("com.hyperether.localization") version "1.0.0"
+    id("com.hyperether.localization") version "1.1.0"
 }
 
 kotlin {

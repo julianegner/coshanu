@@ -104,13 +104,9 @@ private fun languageFlagAndName(appLocale: AppLocale) {
 }
 
 private fun getLanguageName(locale: AppLocale): String {
-    val languageName =
-        when (locale) {
-            AppLocale.DEFAULT -> StringsDefault.strings["language_name"]
-            AppLocale.DE -> StringsDe.strings["language_name"]
-            else -> StringsDefault.strings["language_name"]
-        }
-    return languageName!!
+    // return locale.displayName // language name in english
+
+    return LocalizedStrings.get("language_name", locale)
 }
 
 private fun languageLabel(locale: AppLocale): String = getLanguageName(locale) + if (locale.name == "DEFAULT") " (EN)" else " (${locale.name})"

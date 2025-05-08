@@ -72,11 +72,7 @@ object AppInitializer {
 
     // Set the language based on the system locale
     private fun setAppLocale(locale: Locale) {
-        when (locale) {
-            Locale("de") -> currentLanguage.value = AppLocale.DE
-            Locale("en") -> currentLanguage.value = AppLocale.DEFAULT
-            else -> currentLanguage.value = AppLocale.DEFAULT
-        }
+        currentLanguage.value = AppLocale.findByCode(locale.language)
     }
 }
 
