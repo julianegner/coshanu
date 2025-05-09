@@ -27,13 +27,18 @@ Interesting solutions are:
 - show app loading info in wasm web page (see composeApp/src/wasmJsMain/resources/index.html and composeApp/src/wasmJsMain/kotlin/main.kt)
 - change language at runtime (see composeApp/src/commonMain/kotlin/App.kt and composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt)
 needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
+- pass withImpressum parameter to the app (see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt)
 
 # Development
 
 ### Web
 - Run for web:
 ```shell
-./gradlew :composeApp:wasmJsBrowserDevelopmentRun
+./gradlew clean :composeApp:wasmJsBrowserDevelopmentRun
+```
+with Impressum:
+```shell
+./gradlew clean :composeApp:wasmJsBrowserDevelopmentRun -PwithImpressum=true
 ```
 
 open webapp on browser:
@@ -48,7 +53,9 @@ http://localhost:8080/
 ```shell
 ./gradlew :composeApp:wasmJsBrowserProductionExecutable
 
-./gradlew :composeApp:wasmJsBrowserDistribution
+./gradlew clean :composeApp:wasmJsBrowserDistribution
+
+./gradlew clean :composeApp:wasmJsBrowserDistribution -PwithImpressum=true
 ```
 Find the generated artifact in `composeApp/build/dist/wasmJsBrowser/productionExecutable/`
 

@@ -31,7 +31,7 @@ import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
-import withImpressum
+import WithImpressum.withImpressum
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
 
