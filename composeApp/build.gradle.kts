@@ -20,6 +20,8 @@ plugins {
     id("com.hyperether.localization") version "1.1.1"
 }
 
+val withImpressum: Boolean = project.findProperty("withImpressum")?.toString()?.toBoolean() ?: false
+
 kotlin {
     //macosX64("native") { // on macOS
         // linuxX64("native") // on Linux
@@ -47,9 +49,6 @@ kotlin {
         }
     }
 
-
-
-
     jvm("desktop")
 
     @OptIn(ExperimentalWasmDsl::class)
@@ -59,7 +58,7 @@ kotlin {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
-                outputFileName = "composeApp.js" // must be named like this, otherwiese its not working
+                outputFileName = "composeApp.js" // must be named like this, otherwise it's not working
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     static = (static ?: mutableListOf()).apply {
                         // Serve sources to debug inside browser
@@ -84,6 +83,7 @@ kotlin {
         val desktopMain by getting
         val desktopTest by getting
         sourceSets["commonMain"].kotlin.srcDirs(
+            "build/generated/kotlin",
             File(
                 layout.buildDirectory.get().asFile.path,
                 "generated/compose/resourceGenerator/kotlin/commonCustomResClass"
@@ -205,4 +205,24 @@ tasks.withType<Jar> {
     }
 }
 
+tasks.register("generateWithImpressumConstant") {
+    val outputDir = File(layout.buildDirectory.get().asFile.path, "generated/kotlin")
+    outputs.dir(outputDir)
+    doLast {
+        val file = File(outputDir, "WithImpressum.kt")
+        println("withImpressum: $withImpressum")
+        println("writing file: $file")
+        file.parentFile.mkdirs()
+        file.writeText(
+            """
+            object WithImpressum {
+                const val withImpressum: Boolean = $withImpressum
+            }
+            """.trimIndent()
+        )
+    }
+}
 
+tasks.named("generateTranslateFile").configure {
+    dependsOn("generateWithImpressumConstant")
+}
