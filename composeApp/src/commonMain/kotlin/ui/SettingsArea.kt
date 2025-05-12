@@ -16,6 +16,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
@@ -31,6 +34,7 @@ import ui.UiStateHolder.standardTextSize
 import util.colorFilter
 import util.onClick
 import util.runOnMainAfter
+import util.tooltip
 
 @Composable
 fun SettingsAreaWrapper() {
@@ -73,6 +77,11 @@ fun SettingsAreaWrapper() {
                 contentDescription = null,
                 colorFilter = colorFilter(Color.Gray),
                 modifier = Modifier
+                    .tooltip(
+                        stringResource(Res.string.settings),
+                        // todo offset for mobile
+                        offset = DpOffset(x = (-80).dp, y = 10.dp)
+                        )
                     .padding(start = 5.dp, top = 10.dp, end = 10.dp)
                     .size(40.dp)
                     .onClick(onClick = { UiStateHolder.displaySettingsArea.value = true })
