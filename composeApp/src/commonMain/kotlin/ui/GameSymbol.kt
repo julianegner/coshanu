@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
@@ -27,6 +28,7 @@ import kotlin.math.PI
 import landscapeOrAndroid
 import ui.UiStateHolder.standardTextSize
 import util.clickableHoverIcon
+import util.tooltip
 
 
 @Composable
@@ -64,6 +66,8 @@ fun GameSymbol() {
         ),
         modifier =
         Modifier
+            // todo offset for mobile
+            .tooltip(stringResource(hintTextResource), DpOffset(x = 70.dp, y = 150.dp))
             .fillMaxSize()
             .clickable(interactionSource = null, indication = null) {
                 GameStateHolder.openMenu()
