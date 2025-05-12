@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.subtitle
@@ -26,6 +27,8 @@ import com.hyperether.resources.AppLocale
 import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
+import coshanu.composeapp.generated.resources.info_area_title
+import util.tooltip
 import util.clickableHoverIcon
 import util.onClick
 
@@ -142,11 +145,21 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (isPlatformWasm) {
-                Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    InfoSymbol(infoSymbolModifier)
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Row { // todo this row is needed for the tooltip to work properly
+                        InfoSymbol(
+                            infoSymbolModifier
+                                // todo offset for mobile
+                                .tooltip(
+                                    stringResource(Res.string.info_area_title),
+                                    DpOffset(x = 70.dp, y = 50.dp)
+                                )
+                        )
+                    }
                     Title()
                     if (isLandscape ||
-                        !UiStateHolder.displaySettingsArea.value) {
+                        !UiStateHolder.displaySettingsArea.value
+                    ) {
                         SettingsAreaWrapper()
                     }
                 }
@@ -180,7 +193,14 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     //GameSymbol()
 
                     if (isPlatformWasm) {
-                        InfoSymbol(infoSymbolModifier)
+                        InfoSymbol(
+                            infoSymbolModifier
+                                // todo offset for mobile
+                                .tooltip(
+                                    stringResource(Res.string.info_area_title),
+                                    DpOffset(x = 70.dp, y = 50.dp)
+                                )
+                        )
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
                     SettingsAreaWrapper()
