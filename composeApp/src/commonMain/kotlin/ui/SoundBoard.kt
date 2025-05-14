@@ -4,27 +4,35 @@ import app.lexilabs.basic.sound.AudioByte
 import coshanu.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
-// import <your_package>.generated.resources.Res
-// import org.jetbrains.compose.resources.Resource.Res
-
 /*
-todo get sound files and try the sound board
-when running, use the exisiting switch befor running any sounds
+Mouse Click Sound.mp3 by Pixeliota -- https://freesound.org/s/678248/ -- License: Creative Commons 0
  */
+enum class SoundBytes(val soundResourceUri: String) {
+    CLICK("files/678248__pixeliota__mouse-click-sound.mp3"),
+    FANFARE("files/fanfare.mp3") // this does not exist (yet)
+}
+
+// todo rename to sound, make it a singleton
+// todo add appropriate sounds
+    // todo add sound on win
+    // todo add sound on loose
+    // todo add sound on start game, depending on game mode
+
+
 
 @OptIn(ExperimentalResourceApi::class)
 class SoundBoard(platformContext: Any) {
     //
-    private val audioByte: AudioByte = AudioByte()
+    private val audioByte = AudioByte()
 
-    private val click: Any = audioByte.load(platformContext, Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3"))
-    private val fanfare: Any = audioByte.load(platformContext, Res.getUri("files/fanfare.mp3"))
+    fun play(sound: SoundBytes) {
+        if (UiStateHolder.soundActive.value) {
+            audioByte.play(audioByte.load("", Res.getUri(sound.soundResourceUri)))
+        }
+    }
 
-    fun click() = if (UiStateHolder.soundActive.value) { audioByte.play(click) } else { }
-    fun fanfare() = if (UiStateHolder.soundActive.value) { audioByte.play(fanfare) } else { }
+
     fun release() = audioByte.release()
 }
 
-/*
-Mouse Click Sound.mp3 by Pixeliota -- https://freesound.org/s/678248/ -- License: Creative Commons 0
- */
+
