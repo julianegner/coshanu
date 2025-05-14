@@ -8,6 +8,7 @@
     <string name="tutorial">Tutorial</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
+    <string name="sound">Ton</string>
 
     <string name="single_element">Ein Element</string>
     <string name="two_elements">Zwei Elemente</string>

@@ -93,6 +93,7 @@ private fun SettingsArea() {
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         DarkModeSwitch()
+        SoundSwitch()
         LanguageChooser()
 
         Button(onClick = {
