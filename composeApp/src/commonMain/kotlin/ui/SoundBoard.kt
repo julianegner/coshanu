@@ -20,8 +20,8 @@ class SoundBoard(platformContext: Any) {
     private val click: Any = audioByte.load(platformContext, Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3"))
     private val fanfare: Any = audioByte.load(platformContext, Res.getUri("files/fanfare.mp3"))
 
-    fun click() = audioByte.play(click)
-    fun fanfare() = audioByte.play(fanfare)
+    fun click() = if (UiStateHolder.soundActive.value) { audioByte.play(click) } else { }
+    fun fanfare() = if (UiStateHolder.soundActive.value) { audioByte.play(fanfare) } else { }
     fun release() = audioByte.release()
 }
 

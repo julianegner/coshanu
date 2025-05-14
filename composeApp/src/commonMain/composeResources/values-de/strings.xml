@@ -15,6 +15,7 @@
     <string name="color_option_description">Du kannst hier die Farben abschalten und durch Pattern ersetzen.</string>
     <string name="card_tooltip_active">Karten mit Tooltips</string>
     <string name="card_tooltip_inactive">Karten ohne Tooltips</string>
+    <string name="sound">Ton</string>
 
     <string name="single_element">Ein Element</string>
     <string name="two_elements">Zwei Elemente</string>

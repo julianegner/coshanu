@@ -21,6 +21,7 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="color_option_description">You can disable the colors and replace them with patterns.</string>
     <string name="card_tooltip_active">with card tooltips</string>
     <string name="card_tooltip_inactive">without card tooltips</string>
+    <string name="sound">Sound</string>
 
     <string name="single_element">Single Element</string>
     <string name="two_elements">Two Elements</string>

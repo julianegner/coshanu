@@ -105,6 +105,7 @@ private fun SettingsArea() {
             uncheckedText = stringResource(Res.string.light_mode),
             onCheckedChange = { UiStateHolder.setDarkModeState(it) }
         )
+        SoundSwitch()
         LanguageChooser()
         GenericSwitch(
             state = UiStateHolder.colorActive,
