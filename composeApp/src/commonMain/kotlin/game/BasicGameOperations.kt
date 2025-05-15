@@ -8,6 +8,8 @@ import game.GameStateHolder.totalAllowedTime
 import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
+import ui.SoundBytes
+import ui.UiStateHolder
 import util.runOnMainAfter
 import util.toClipboard
 import kotlin.time.Duration.Companion.seconds
@@ -62,6 +64,12 @@ fun newGame(
     if (level.value !== null) {
         LevelGenerator().generateLevel(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
+        when (GameStateHolder.gameMode.value) {
+            GameMode.SINGLE_ELEMENT -> UiStateHolder.sound.play(SoundBytes.START_GAME_SINGLE_ELEMENT)
+            GameMode.TWO_ELEMENTS -> UiStateHolder.sound.play(SoundBytes.START_GAME_TWO_ELEMENTS)
+            GameMode.TWO_ELEMENTS_WITH_TIMER -> UiStateHolder.sound.play(SoundBytes.START_GAME_TWO_ELEMENTS_WITH_TIMER)
+            else -> {}
+        }
 
         GameStateHolder.timer.startTimer()
         GameStateHolder.resetTotalAllowedTime()
