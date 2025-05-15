@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ShapeEnum
+import ui.SoundBytes
+import ui.UiStateHolder
 import util.Timer
 import util.stringToColor
 import kotlin.time.Duration
@@ -104,9 +106,11 @@ object GameStateHolder {
         if ( remainingTileAmount.value == 0) {
             timer.stopTimer()
             updateGameState(GameState.WON)
+            UiStateHolder.sound.play(SoundBytes.WON)
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
             timer.stopTimer()
+            UiStateHolder.sound.play(SoundBytes.LOST)
         } else {
             updateGameState(GameState.RUNNING)
         }

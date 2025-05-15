@@ -5,6 +5,8 @@ import game.GameStateHolder.level
 import game.GameStateHolder.remainingTileAmount
 import game.GameStateHolder.tutorial
 import game.enums.GameState
+import ui.SoundBytes
+import ui.UiStateHolder
 import util.runOnMainAfter
 import util.toClipboard
 
@@ -58,6 +60,12 @@ fun newGame(
     if (level.value !== null) {
         LevelGenerator().generateLevel(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
+        when (GameStateHolder.gameMode.value) {
+            GameMode.SINGLE_ELEMENT -> UiStateHolder.sound.play(SoundBytes.START_GAME_SINGLE_ELEMENT)
+            GameMode.TWO_ELEMENTS -> UiStateHolder.sound.play(SoundBytes.START_GAME_TWO_ELEMENTS)
+            GameMode.TWO_ELEMENTS_WITH_TIMER -> UiStateHolder.sound.play(SoundBytes.START_GAME_TWO_ELEMENTS_WITH_TIMER)
+            else -> {}
+        }
 
         GameStateHolder.timer.startTimer()
         GameStateHolder.resetTotalAllowedTime()

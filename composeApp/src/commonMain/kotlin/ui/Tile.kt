@@ -165,6 +165,7 @@ private fun setBorder(
 
 private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
     // second Tile does match first Tile, both are played
+    UiStateHolder.sound.play(SoundBytes.CONFIRM)
     GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
 
     val first = GameStateHolder.selected.value.first!!
@@ -183,8 +184,8 @@ private fun secondTileDoesNotMatch(
     cardBorderState: MutableState<BorderStroke?>
 ) {
     // second Tile does not match first Tile
+    UiStateHolder.sound.play(SoundBytes.DENY)
     setBorder(tileDataState, cardBorderState, Color.Red)
-
     runOnMainAfter(2000L) { cardBorderState.value = null }
 
     GameStateHolder.tutorial.nextStep()
