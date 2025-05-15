@@ -27,6 +27,7 @@ object UiStateHolder {
     val displaySettingsArea: MutableState<Boolean> = mutableStateOf(false)
     val displayStickerArea: MutableState<Boolean> = mutableStateOf(false)
     val soundActive: MutableState<Boolean> = mutableStateOf(true)
+    val sound = SoundBoard("")
 
     fun setScreenType(newScreenType: ScreenType) {
         screenType.value = newScreenType

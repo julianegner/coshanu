@@ -4,6 +4,8 @@ import app.lexilabs.basic.sound.AudioByte
 import coshanu.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
+// https://github.com/LexiLabs-App/basic-sound
+
 /*
 Mouse Click Sound.mp3 by Pixeliota -- https://freesound.org/s/678248/ -- License: Creative Commons 0
  */
@@ -12,7 +14,6 @@ enum class SoundBytes(val soundResourceUri: String) {
     FANFARE("files/fanfare.mp3") // this does not exist (yet)
 }
 
-// todo rename to sound, make it a singleton
 // todo add appropriate sounds
     // todo add sound on win
     // todo add sound on loose
@@ -22,7 +23,7 @@ enum class SoundBytes(val soundResourceUri: String) {
 
 @OptIn(ExperimentalResourceApi::class)
 class SoundBoard(platformContext: Any) {
-    //
+    // todo replace AudioByte with SoundBoard
     private val audioByte = AudioByte()
 
     fun play(sound: SoundBytes) {
