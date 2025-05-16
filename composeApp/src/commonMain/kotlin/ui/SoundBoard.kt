@@ -31,7 +31,25 @@ enum class SoundBytes(val soundResourceUri: String) {
 
 @OptIn(ExperimentalResourceApi::class)
 class SoundBoard(platformContext: Any) {
-    // todo replace AudioByte with SoundBoard
+            /*
+                private val platform = Platform()
+
+    private val thrustSounds: List<Audio> = listOf(
+        Audio(platform.context, Res.getUri("files/thrust-low.mp3")),
+        Audio(platform.context, Res.getUri("files/thrust-mid.mp3")),
+        Audio(platform.context, Res.getUri("files/thrust-high.mp3"))
+    )
+             */
+
+    /*
+    val resource = Res.getUri("files/ringtone.wav")
+// You can pass your Context
+val audio = Audio(context, resource) // loads the audio file
+audio.play() // plays the audio immediately upon execution
+     */
+
+    // todo replace AudioByte with SoundBoard because AudioByte has a memory leak
+    // AudioByte' is deprecated. AudioByte greedily eats up memory. Switch to the newer channel-based implementation, SoundBoard(context = Any?).
     private val audioByte = AudioByte()
 
     fun play(sound: SoundBytes) {
