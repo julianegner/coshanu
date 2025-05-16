@@ -118,6 +118,7 @@ object GameStateHolder {
             UiStateHolder.sound.play(SoundBytes.LOST)
         } else {
             updateGameState(GameState.RUNNING)
+            UiStateHolder.sound.play(SoundBytes.CONFIRM)
         }
     }
 

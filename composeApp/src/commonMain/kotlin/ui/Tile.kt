@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import game.*
+import game.GameStateHolder.lostGame
+import game.GameStateHolder.remainingTileAmount
 import game.enums.GameState
 import game.enums.ShapeEnum
 import isPlatformAndroid
@@ -124,8 +126,6 @@ fun tileSelected(
     } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
         secondTileDoesNotMatch(tileDataState, cardBorderState)
     }
-
-    GameStateHolder.checkGameFinished()
 }
 
 private fun setBorder(
@@ -152,9 +152,9 @@ private fun setBorder(
     }
 }
 
+// second Tile does match first Tile, both are played
 private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
-    // second Tile does match first Tile, both are played
-    UiStateHolder.sound.play(SoundBytes.CONFIRM)
+
     GameStateHolder.updateSelected(Pair(GameStateHolder.selected.value.first, tileDataState.value))
 
     val first = GameStateHolder.selected.value.first!!
@@ -165,14 +165,15 @@ private fun secondTileMatchesPlayCards(tileDataState: MutableState<TileData>) {
     GameStateHolder.playCard(first, second)
     GameStateHolder.addTimeToTimer() // only relevant for game with timer
 
+    GameStateHolder.checkGameFinished()
     GameStateHolder.tutorial.nextStep()
 }
 
+// second Tile does not match first Tile
 private fun secondTileDoesNotMatch(
     tileDataState: MutableState<TileData>,
     cardBorderState: MutableState<BorderStroke?>
 ) {
-    // second Tile does not match first Tile
     UiStateHolder.sound.play(SoundBytes.DENY)
     setBorder(tileDataState, cardBorderState, Color.Red)
     runOnMainAfter(2000L) { cardBorderState.value = null }
