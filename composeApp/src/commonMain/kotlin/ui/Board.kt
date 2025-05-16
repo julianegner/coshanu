@@ -84,7 +84,10 @@ fun StartButtonRow() {
                     null
                 },
                 modifier = Modifier.clickableHoverIcon(),
-                onClick = { restartGame() }) {
+                onClick = {
+                    UiStateHolder.sound.play(SoundBytes.CLICK)
+                    restartGame()
+                }) {
                 Text(
                     fontSize = standardTextSize.value,
                     text = stringResource(Res.string.restart_game)
@@ -93,7 +96,10 @@ fun StartButtonRow() {
         }
         if (GameStateHolder.isGameState(GameState.WON) || GameStateHolder.isGameState(GameState.LOST) || GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(
-                    onClick = { endGame() },
+                    onClick = {
+                        UiStateHolder.sound.play(SoundBytes.CLICK)
+                        endGame()
+                    },
                     modifier = Modifier.clickableHoverIcon()
                 ) {
                 Text(
@@ -128,8 +134,11 @@ fun StartButtonRow() {
         }
         if (gameSaveAndLoadOption && GameStateHolder.isGameState(GameState.RUNNING)) {
             Button(
-                onClick = { saveGame() },
-                 modifier = Modifier.clickableHoverIcon(),
+                onClick = {
+                    UiStateHolder.sound.play(SoundBytes.CLICK)
+                    saveGame()
+                },
+                modifier = Modifier.clickableHoverIcon(),
             ) {
                 Text(
                     fontSize = standardTextSize.value,
