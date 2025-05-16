@@ -133,18 +133,19 @@ fun tileSelected(
     if (GameStateHolder.selected.value.first == null) {
         // select first Tile
         GameStateHolder.updateSelected(Pair(tileDataState.value, null))
-
         setBorder(tileDataState, cardBorderState, Color.Green)
-
+        UiStateHolder.sound.play(SoundBytes.CLICK)
         GameStateHolder.tutorial.nextStep()
-
     } else if (GameStateHolder.selected.value.first == tileDataState.value) {
         // first Tile is deselected by clicking again
         GameStateHolder.resetSelected()
         setBorder(tileDataState, cardBorderState, null)
+        UiStateHolder.sound.play(SoundBytes.CLICK)
     } else if (GameStateHolder.selected.value.first != null && GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
+        // play two matching cards
         secondTileMatchesPlayCards(tileDataState)
     } else if (GameStateHolder.selected.value.first != null && !GameStateHolder.selected.value.first!!.match(tileDataState.value)) {
+        // play two non-matching cards
         secondTileDoesNotMatch(tileDataState, cardBorderState)
     }
 }

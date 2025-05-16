@@ -115,6 +115,7 @@ private fun MenuRow(
                 modifier = buttonModifier(i),
                 onClick = {
                     GameStateHolder.changeLevel(i)
+                    UiStateHolder.sound.play(SoundBytes.CLICK)
                 }) {
                 Text(
                     fontSize = standardTextSize.value,
