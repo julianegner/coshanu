@@ -155,7 +155,7 @@ https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a
 to see if changes you made to your domain at your webhoster are propagated worldwide:
 https://www.whatsmydns.net
 
-## used images
+## images, animations and sounds
 composeApp/src/commonMain/composeResources/drawable
 - icon.png self-made, so MIT license
 - lost.png generated (https://iconscout.com/licenses#iconscout) https://iconscout.com/ai/illustration-generator
@@ -183,6 +183,16 @@ https://www.remove.bg/de/upload
 
 composeApp/src/commonMain/composeResources/files
 - lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
+
+- Mouse Click Sound.mp3 by Pixeliota -- https://freesound.org/s/678248/ -- License: Creative Commons 0
+- result-7.mp3 by DZeDeNZ -- https://freesound.org/s/522246/ -- License: Creative Commons 0
+- CONFIRM_SOUND.mp3 by ciapaqua -- https://freesound.org/s/637109/ -- License: Creative Commons 0
+- DENY_SOUND.mp3 by ciapaqua -- https://freesound.org/s/637108/ -- License: Creative Commons 0
+- Pot falling to the floor by oldhiccup -- https://freesound.org/s/689494/ -- License: Creative Commons 0
+- Card Sounds.mp3 by henrygillard -- https://freesound.org/s/575387/ -- License: Creative Commons 0
+- card-flipping-75622 (1)-[AudioTrimmer.com] by ajaysingh318 -- https://freesound.org/s/793598/ -- License: Creative Commons 0
+- D3_cards mixing.mp3 by Iamgiorgio -- https://freesound.org/s/371349/ -- License: Creative Commons 0
+
 
 
 # Development
