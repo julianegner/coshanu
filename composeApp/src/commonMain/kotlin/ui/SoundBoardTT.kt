@@ -1,6 +1,8 @@
 package ui
 
-import app.lexilabs.basic.sound.AudioByte
+import app.lexilabs.basic.sound.SoundBoard
+import app.lexilabs.basic.sound.SoundByte
+import app.lexilabs.basic.sound.play
 import coshanu.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
@@ -30,24 +32,46 @@ enum class SoundBytes(val soundResourceUri: String) {
 }
 
 @OptIn(ExperimentalResourceApi::class)
-class SoundBoard(platformContext: Any) {
-            /*
-                private val platform = Platform()
+class SoundBoardTT(val context: Any) {
 
-    private val thrustSounds: List<Audio> = listOf(
-        Audio(platform.context, Res.getUri("files/thrust-low.mp3")),
-        Audio(platform.context, Res.getUri("files/thrust-mid.mp3")),
-        Audio(platform.context, Res.getUri("files/thrust-high.mp3"))
-    )
-             */
+    val soundBoard = SoundBoard(this.context)
+
+    init {
+        SoundBytes.entries.forEach { sound ->
+            println("adding sound file: ${sound.soundResourceUri}")
+            soundBoard.load(
+                SoundByte(
+                    name = sound.name,
+                    localPath = Res.getUri(sound.soundResourceUri)
+                )
+            )
+        }
+        soundBoard.powerUp()
+    }
+
+    fun play(sound: SoundBytes) {
+
+        // todo begin remove
+        /*
+        println("play load sounds")
+        soundBoard.load(
+            SoundByte(
+                name = "click",
+                localPath = Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3")
+            )
+        )
+        println("play powerup")
+        soundBoard.powerUp()
+        println("play sound")
+         */
+        // todo end remove
+
+        soundBoard.mixer.play(sound.name)
+    }
+
+    // fun powerDown() = soundBoard.powerDown()
 
     /*
-    val resource = Res.getUri("files/ringtone.wav")
-// You can pass your Context
-val audio = Audio(context, resource) // loads the audio file
-audio.play() // plays the audio immediately upon execution
-     */
-
     // todo replace AudioByte with SoundBoard because AudioByte has a memory leak
     // AudioByte' is deprecated. AudioByte greedily eats up memory. Switch to the newer channel-based implementation, SoundBoard(context = Any?).
     private val audioByte = AudioByte()
@@ -60,6 +84,7 @@ audio.play() // plays the audio immediately upon execution
 
 
     fun release() = audioByte.release()
+     */
 }
 
 
