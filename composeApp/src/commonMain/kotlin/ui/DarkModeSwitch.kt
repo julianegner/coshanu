@@ -7,8 +7,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.dark_mode
@@ -17,6 +15,7 @@ import com.hyperether.resources.stringResource
 import settings
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
+import util.clickableHoverIcon
 
 @Composable
 fun DarkModeSwitch() {
@@ -32,7 +31,7 @@ fun DarkModeSwitch() {
                 uncheckedThumbColor = Color.DarkGray,
                 uncheckedTrackColor = Color.LightGray
             ),
-            modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)
+            modifier = Modifier.clickableHoverIcon()
         )
         Text(
             fontSize = standardTextSize.value,

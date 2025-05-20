@@ -11,8 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +30,7 @@ import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 import WithImpressum.withImpressum
+import util.clickableHoverIcon
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
 
@@ -161,7 +160,7 @@ fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
                 fontSize = standardTextSize.value,
                 modifier = Modifier
                     .clickable(onClick = { UiStateHolder.displayImpressum.value = true })
-                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickableHoverIcon()
             )
         }
     }
@@ -180,7 +179,7 @@ fun closingX(onClick: () -> Unit) {
         color = Color.Gray,
         modifier = Modifier
             .clickable(onClick = onClick)
-            .pointerHoverIcon(PointerIcon.Hand)
+            .clickableHoverIcon()
             .padding(20.dp)
     )
 }
@@ -221,7 +220,7 @@ private fun LicenseDetailArea() {
             fontSize = standardTextSize.value,
             modifier = Modifier
                 .clickable { displayLicenseDetails.value = true }
-                .pointerHoverIcon(PointerIcon.Hand)
+                .clickableHoverIcon()
         )
     } else {
         Box(

@@ -8,9 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import game.GameStateHolder
+import util.clickableHoverIcon
 
 @Composable
 fun LoadGameInputField() {
@@ -25,7 +24,7 @@ fun LoadGameInputField() {
 
     Button(
         enabled = textState.value.isNotEmpty(),
-        modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
+        modifier = Modifier.clickableHoverIcon(),
         onClick = { GameStateHolder.loadGame(textState.value) }) {
         Text("Load Game")
     }

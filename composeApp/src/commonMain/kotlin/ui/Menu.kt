@@ -8,8 +8,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -27,13 +25,14 @@ import com.hyperether.resources.stringResource
 import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
 import ui.UiStateHolder.standardTextSize
+import util.clickableHoverIcon
 
 fun buttonModifier(level: Int) = Modifier.padding(
     start = 5.dp,
     end = if (level % 10 == 0) 20.dp else 5.dp,
     top = 10.dp)
     .width(if (level % 10 == 0) menuButtonWidth.value * 2 else menuButtonWidth.value)
-    .pointerHoverIcon(PointerIcon.Hand)
+    .clickableHoverIcon()
 
 @Composable
 fun Menu() {
