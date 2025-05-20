@@ -17,6 +17,7 @@ import game.TileData
 import game.same
 import isPlatformAndroid
 import util.clickableHoverIcon
+import util.onClick
 import util.runOnMainAfter
 
 @Composable
@@ -67,8 +68,7 @@ fun TileCard(
                 (!GameStateHolder.tutorial.isTutorial() || GameStateHolder.tutorial.isAllowedTile(tileDataState.value))
                 ) {
                 cardModifier
-                    .clickable(onClick = { tileSelected(tileDataState, cardBorderState) })
-                    .clickableHoverIcon()
+                    .onClick(onClick = { tileSelected(tileDataState, cardBorderState) })
             } else {
                 cardModifier
             },

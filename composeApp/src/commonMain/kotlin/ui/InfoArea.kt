@@ -31,6 +31,7 @@ import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 import WithImpressum.withImpressum
 import util.clickableHoverIcon
+import util.onClick
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
 
@@ -159,8 +160,7 @@ fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
             Text(text = "Impressum",
                 fontSize = standardTextSize.value,
                 modifier = Modifier
-                    .clickable(onClick = { UiStateHolder.displayImpressum.value = true })
-                    .clickableHoverIcon()
+                    .onClick(onClick = { UiStateHolder.displayImpressum.value = true })
             )
         }
     }
@@ -178,8 +178,7 @@ fun closingX(onClick: () -> Unit) {
         fontSize = titleTextSize.value,
         color = Color.Gray,
         modifier = Modifier
-            .clickable(onClick = onClick)
-            .clickableHoverIcon()
+            .onClick(onClick = onClick)
             .padding(20.dp)
     )
 }
@@ -219,8 +218,7 @@ private fun LicenseDetailArea() {
             ),
             fontSize = standardTextSize.value,
             modifier = Modifier
-                .clickable { displayLicenseDetails.value = true }
-                .clickableHoverIcon()
+                .onClick { displayLicenseDetails.value = true }
         )
     } else {
         Box(

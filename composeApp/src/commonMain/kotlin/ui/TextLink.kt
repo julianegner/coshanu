@@ -1,6 +1,5 @@
 package ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import util.callUrl
-import util.clickableHoverIcon
+import util.onClick
 
 @Composable
 fun TextLink(
@@ -24,8 +23,6 @@ fun TextLink(
             textDecoration = TextDecoration.Underline
         ),
         fontSize = fontSize,
-        modifier = Modifier
-            .clickable{callUrl(url)}
-            .clickableHoverIcon()
+        modifier = Modifier.onClick{callUrl(url)}
     )
 }

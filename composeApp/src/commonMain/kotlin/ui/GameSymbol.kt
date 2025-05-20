@@ -48,7 +48,7 @@ fun GameSymbol() {
                 if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE)
                     250.dp
                 else
-                820.dp
+                    820.dp
                     // 500.dp - 500 is inside of the circle
             )
     )
