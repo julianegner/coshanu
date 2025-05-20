@@ -10,14 +10,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import game.enums.GameState
 import game.GameStateHolder
 import game.TileData
 import game.same
 import isPlatformAndroid
+import util.clickableHoverIcon
 import util.runOnMainAfter
 
 @Composable
@@ -69,7 +68,7 @@ fun TileCard(
                 ) {
                 cardModifier
                     .clickable(onClick = { tileSelected(tileDataState, cardBorderState) })
-                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickableHoverIcon()
             } else {
                 cardModifier
             },

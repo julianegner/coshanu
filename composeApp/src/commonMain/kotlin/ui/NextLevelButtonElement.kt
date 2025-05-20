@@ -4,20 +4,19 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.next_level
 import game.GameStateHolder
 import com.hyperether.resources.stringResource
 import ui.UiStateHolder.standardTextSize
+import util.clickableHoverIcon
 
 @Composable
 fun NextLevelButtonElement() {
     if (GameStateHolder.level.value!! < 23) {
         Button(
             onClick = { GameStateHolder.levelUp() },
-            modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)
+            modifier = Modifier.clickableHoverIcon()
         ) {
             Text(
                 fontSize = standardTextSize.value,

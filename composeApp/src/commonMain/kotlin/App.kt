@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
@@ -27,6 +25,7 @@ import com.hyperether.resources.AppLocale
 import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
+import util.clickableHoverIcon
 
 val programVersion = "1.1.0"
 val gameSaveAndLoadOption = false
@@ -109,6 +108,12 @@ fun App() {
 
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
+    val infoSymbolModifier = Modifier
+        .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
+        .clickableHoverIcon()
+        .padding(10.dp)
+
+
     if (UiStateHolder.displayInfoArea.value) {
         Row (
             verticalAlignment = Alignment.Top,
@@ -127,12 +132,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         ) {
             if (isPlatformWasm) {
                 Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    InfoSymbol(
-                        Modifier
-                            .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
-                            .pointerHoverIcon(PointerIcon.Hand)
-                            .padding(10.dp)
-                    )
+                    InfoSymbol(infoSymbolModifier)
                     Title()
                     if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE ||
                         !UiStateHolder.displaySettingsArea.value) {
@@ -176,12 +176,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     //GameSymbol()
 
                     if (isPlatformWasm) {
-                        InfoSymbol(
-                            Modifier
-                                .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
-                                .pointerHoverIcon(PointerIcon.Hand)
-                                .padding(10.dp)
-                        )
+                        InfoSymbol(infoSymbolModifier)
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
                     SettingsAreaWrapper()
@@ -260,7 +255,7 @@ private fun Title() {
         .clickable(interactionSource = null, indication = null) {
             GameStateHolder.openMenu()
         }
-        .pointerHoverIcon(PointerIcon.Hand)
+        .clickableHoverIcon()
         .padding(vertical = 20.dp)) {
 
         Text(

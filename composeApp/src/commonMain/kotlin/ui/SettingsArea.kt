@@ -16,8 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
@@ -29,6 +27,7 @@ import settings
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
+import util.clickableHoverIcon
 
 @Composable
 fun SettingsAreaWrapper() {
@@ -78,7 +77,7 @@ fun SettingsAreaWrapper() {
                     .padding(start = 5.dp, top = 10.dp, end = 10.dp)
                     .size(40.dp)
                     .clickable(onClick = { UiStateHolder.displaySettingsArea.value = true })
-                    .pointerHoverIcon(PointerIcon.Hand)
+                    .clickableHoverIcon()
             )
         }
     }
