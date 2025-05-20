@@ -26,6 +26,7 @@ import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
 import util.clickableHoverIcon
+import util.onClick
 
 val programVersion = "1.1.0"
 val gameSaveAndLoadOption = false
@@ -109,8 +110,7 @@ fun App() {
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     val infoSymbolModifier = Modifier
-        .clickable(onClick = { UiStateHolder.displayInfoArea.value = true })
-        .clickableHoverIcon()
+        .onClick(onClick = { UiStateHolder.displayInfoArea.value = true })
         .padding(10.dp)
 
 
@@ -118,7 +118,9 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         Row (
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = verticalScrollModifier.value.fillMaxSize().border(1.dp, Color.Gray)
+            modifier = verticalScrollModifier.value
+                .fillMaxSize()
+                .border(1.dp, Color.Gray)
         )
         {
             InfoArea()

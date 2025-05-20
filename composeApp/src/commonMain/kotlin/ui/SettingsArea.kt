@@ -28,6 +28,7 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import util.clickableHoverIcon
+import util.onClick
 
 @Composable
 fun SettingsAreaWrapper() {
@@ -76,8 +77,7 @@ fun SettingsAreaWrapper() {
                 modifier = Modifier
                     .padding(start = 5.dp, top = 10.dp, end = 10.dp)
                     .size(40.dp)
-                    .clickable(onClick = { UiStateHolder.displaySettingsArea.value = true })
-                    .clickableHoverIcon()
+                    .onClick(onClick = { UiStateHolder.displaySettingsArea.value = true })
             )
         }
     }
