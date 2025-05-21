@@ -44,9 +44,13 @@ with Impressum:
 open webapp on browser:
 http://localhost:8080/
 
-- Test for web:
+- Tests:
 ```shell
+./gradlew clean
 ./gradlew wasmJsBrowserTest
+./gradlew desktopTest
+./gradlew deviceAndroidTest
+./gradlew iosX64Test
 ```
 
 - generate artifact for web:
