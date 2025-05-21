@@ -22,9 +22,9 @@ import game.GameStateHolder.timer
 import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
-import game.enums.ScreenType
 import gameSaveAndLoadOption
 import isPlatformAndroid
+import isPortrait
 import landscapeOrAndroid
 import org.jetbrains.compose.resources.painterResource
 import ui.UiStateHolder.largerTextSize
@@ -55,7 +55,7 @@ fun Fingerpointing() =
 fun Board() {
     StartButtonRow()
 
-    if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
+    if (isPortrait) {
         Column {  // desktop and portrait
             GridAndTutorial()
         }
@@ -195,7 +195,7 @@ fun GridAndTutorial() {
         Column(
             modifier = Modifier.padding(
                 start = 20.dp,
-                top = if (UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
+                top = if (isPortrait) {
                     20.dp
                 } else {
                     0.dp
