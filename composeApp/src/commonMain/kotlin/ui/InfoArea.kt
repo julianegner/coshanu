@@ -22,7 +22,6 @@ import com.hyperether.resources.currentLanguage
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.*
 import isPlatformWasm
-import game.enums.ScreenType
 import com.hyperether.resources.stringResource
 import programVersion
 import ui.UiStateHolder.standardLineHeight
@@ -30,7 +29,7 @@ import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 import WithImpressum.withImpressum
-import util.clickableHoverIcon
+import isLandscape
 import util.onClick
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
@@ -92,7 +91,7 @@ private fun Impressum() {
 @Composable
 private fun PlatformOverviewTable() {
     val modifier = Modifier
-        .width( if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 400.dp else 700.dp)
+        .width( if (isLandscape) 400.dp else 700.dp)
         .bottomLine()
 
     val horizontalArrangement = Arrangement.SpaceBetween

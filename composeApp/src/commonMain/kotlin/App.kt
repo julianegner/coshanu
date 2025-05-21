@@ -128,7 +128,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     } else if (GameStateHolder.isGameState(GameState.STARTING)) {
         Column(
             modifier = Modifier.padding(top =
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 48.dp else 65.dp
+                if (isLandscape) 48.dp else 65.dp
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -136,12 +136,12 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     InfoSymbol(infoSymbolModifier)
                     Title()
-                    if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE ||
+                    if (isLandscape ||
                         !UiStateHolder.displaySettingsArea.value) {
                         SettingsAreaWrapper()
                     }
                 }
-                if (UiStateHolder.displaySettingsArea.value && UiStateHolder.screenType.value == ScreenType.PORTRAIT) {
+                if (UiStateHolder.displaySettingsArea.value && isPortrait) {
                     SettingsAreaWrapper()
                 }
             } else {
@@ -161,7 +161,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             // comment GameSymbol() out for this to be visible
             // StickerImage()
         }
-        ImpressumWrapper(if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) Modifier.fillMaxWidth(0.5f) else Modifier.fillMaxWidth())
+        ImpressumWrapper(if (isLandscape) Modifier.fillMaxWidth(0.5f) else Modifier.fillMaxWidth())
     } else {
         Column {
             Column(

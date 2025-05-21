@@ -18,10 +18,10 @@ import coshanu.composeapp.generated.resources.click_anywhere
 import coshanu.composeapp.generated.resources.tap_anywhere
 import game.GameStateHolder
 import game.TileData
-import game.enums.ScreenType
 import game.enums.ShapeEnum
 import game.newTileData
 import isClickPlatform
+import isLandscape
 import kotlin.math.PI
 import landscapeOrAndroid
 import ui.UiStateHolder.standardTextSize
@@ -45,7 +45,7 @@ fun GameSymbol() {
         textAlign = TextAlign.Center,
         modifier = Modifier
             .offset(y =
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE)
+                if (isLandscape)
                     250.dp
                 else
                     820.dp

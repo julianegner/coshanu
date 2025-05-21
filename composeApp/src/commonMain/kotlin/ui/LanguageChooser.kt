@@ -29,10 +29,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.AppLocale
 import com.hyperether.resources.*
-import game.enums.ScreenType
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import dev.carlsen.flagkit.FlagKit
+import isLandscape
 import settings
 
 
@@ -44,8 +44,8 @@ fun LanguageChooser() {
         contentAlignment = Alignment.CenterStart,
         modifier = Modifier
             .size(
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 150.dp else 300.dp,
-                if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE) 32.dp else 70.dp
+                if (isLandscape) 150.dp else 300.dp,
+                if (isLandscape) 32.dp else 70.dp
             )
             .clip(RoundedCornerShape(4.dp))
             .border(BorderStroke(1.dp, Color.LightGray), RoundedCornerShape(4.dp))
@@ -79,7 +79,7 @@ fun LanguageChooser() {
 
 @Composable
 private fun languageFlagAndName(appLocale: AppLocale) {
-    val imageModifier = if (UiStateHolder.screenType.value == ScreenType.LANDSCAPE)
+    val imageModifier = if (isLandscape)
         Modifier
             .padding(start = 10.dp, top = 5.dp)
     else
