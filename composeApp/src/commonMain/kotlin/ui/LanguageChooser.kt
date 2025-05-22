@@ -14,10 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +31,9 @@ import ui.UiStateHolder.standardTextSize
 import dev.carlsen.flagkit.FlagKit
 import isLandscape
 import settings
+import compose.icons.Octicons
+import compose.icons.octicons.TriangleDown24
+import util.colorFilter
 
 
 @Composable
@@ -44,7 +44,7 @@ fun LanguageChooser() {
         contentAlignment = Alignment.CenterStart,
         modifier = Modifier
             .size(
-                if (isLandscape) 150.dp else 300.dp,
+                if (isLandscape) 180.dp else 300.dp,
                 if (isLandscape) 32.dp else 70.dp
             )
             .clip(RoundedCornerShape(4.dp))
@@ -54,9 +54,13 @@ fun LanguageChooser() {
         Row {
             languageFlagAndName(currentLanguage.value)
         }
-        Icon(
-            Icons.Filled.ArrowDropDown, "contentDescription",
-            Modifier.align(Alignment.CenterEnd)
+        Image(
+            imageVector = Octicons.TriangleDown24,
+            contentDescription = "triangle down",
+            modifier = Modifier
+                .padding(start = 10.dp)
+                .align(Alignment.CenterEnd),
+            colorFilter = colorFilter(Color.Gray)
         )
         DropdownMenu(
             expanded = expanded.value,

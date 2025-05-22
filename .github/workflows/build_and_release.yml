@@ -42,11 +42,6 @@ jobs:
         working-directory: /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs
 #      - name: Tar Artifact
 #        run: tar -czf coshanu.nodejs.tgz build/dist/wasmJs/productionExecutable/
-      - name: Debug Wasm Build Path (2)
-        run: |
-          echo "Checking Wasm build directory..."
-          ls -R / || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
       - name: Upload wasm Build
         uses: actions/upload-artifact@v4
         with:
@@ -67,21 +62,6 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageUberJarForCurrentOS
-      - name: Debug JVM Build Path
-        run: |
-          echo "Checking JVM build directory..."
-          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/compose/jars/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
-      - name: Debug JVM Build Path (2)
-        run: |
-          echo "Checking JVM build directory..."
-          ls -R ./composeApp/build/compose/jars/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
-      - name: Debug JVM Build Path (3)
-        run: |
-          echo "Checking JVM build directory..."
-          ls -R ./build/compose/jars/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
       - name: Upload JVM Build
         uses: actions/upload-artifact@v4
         with:
@@ -102,11 +82,6 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseDmg
-      - name: Debug MacOS Build Path
-        run: |
-          echo "Checking MacOS build directory..."
-          ls -R /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/app || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
       - name: Upload MacOS Build
         uses: actions/upload-artifact@v4
         with:
@@ -122,17 +97,31 @@ jobs:
         with:
           java-version: '24'
           distribution: 'temurin'
+
+      # todo remove
+      - name: Check for proguard file
+        run: |
+          ls -l ./composeApp
+          cat composeApp/proguard-rules.pro || echo "composeApp/proguard-rules.pro not found"
+
+      # todo remove
+      #- name: Print ProGuard configuration
+      #  uses: gradle/gradle-build-action@v2
+      #  with:
+      #    gradle-version: current
+      #    arguments: :composeApp:assembleRelease --info
+      # todo remove
+      #- name: Print ProGuard configuration
+      #  run: ./gradlew :composeApp:assembleRelease --info --build-cache
+
+        #with:
+        #  cache-enabled: true
+
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseDeb
-      # todo remove
-      - name: Debug Linux Build Path
-        run: |
-          echo "Checking Linux build directory..."
-          ls -R /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/ || echo "Directory does not exist or is empty."
-          echo "Debugging complete."
       - name: Upload Linux Build
         uses: actions/upload-artifact@v4
         with:
@@ -153,17 +142,38 @@ jobs:
         with:
           gradle-version: current
           arguments: :composeApp:packageReleaseExe
-      # todo remove
-      - name: Debug Windows Build Path
-        run: dir D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\
       - name: Upload Windows Build
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
           path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-*.exe
 
+  build_apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 24
+        uses: actions/setup-java@v3
+        with:
+          java-version: '24'
+          distribution: 'temurin'
+      - name: Download Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > composeApp/coshanu-android-release.jks
+      - name: Verify Keystore
+        run: ls -la composeApp/coshanu-android-release.jks
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: current
+          arguments: :composeApp:packageReleaseApk
+      - name: Upload Apk Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-build
+          path: ''
+
   # todo add also a build for msi (microsoft installer) for windows
-  # todo add build android apk
 
   release:
     if: startsWith(github.ref, 'refs/tags/')
@@ -173,6 +183,7 @@ jobs:
       - "build_macos"
       - "build_linux_deb"
       - "build_windows"
+      - "build_apk"
     runs-on: ubuntu-latest
     steps:
       # remove debug
@@ -216,6 +227,11 @@ jobs:
           name: windows-build
           path: build/windows
 
+      - name: Download Apk Build
+        uses: actions/download-artifact@v4
+        with:
+          name: apk-build
+
       - name: Rename Releases
         run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
       #  run: mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
@@ -230,3 +246,4 @@ jobs:
             /home/runner/work/coshanu/coshanu/build/windows/*
             /home/runner/work/coshanu/coshanu/build/jvm/*
             /home/runner/work/coshanu/coshanu/build/wasm/*
+            /home/runner/work/coshanu/coshanu/build/apk/*

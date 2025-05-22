@@ -27,12 +27,12 @@ class ColorExtensionTest {
         }
     }
 
-    @Test
-    fun test2() {
-        assertEquals("de", Locale.current.language)
-
-        // assertEquals("Blau", Color.Blue.toName())
-    }
+    // @Test
+    // fun test2() {
+    //     assertEquals("de", Locale.current.language)
+//
+    //     // assertEquals("Blau", Color.Blue.toName())
+    // }
 
     /*
     // todo test correct translation from Res

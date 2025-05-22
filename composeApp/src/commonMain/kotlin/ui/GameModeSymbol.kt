@@ -24,6 +24,7 @@ import game.GameStateHolder
 import org.jetbrains.compose.resources.painterResource
 import com.hyperether.resources.stringResource
 import ui.UiStateHolder.largerTextSize
+import util.colorFilter
 
 
 @Composable
@@ -62,10 +63,7 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
                     painter = painterResource(Res.drawable.stopwatch),
                     contentDescription = null,
                     modifier = Modifier.padding(start = 5.dp, top = 10.dp).size(20.dp),
-                    colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                        color = androidx.compose.ui.graphics.Color.Red
-                    )
-
+                    colorFilter = colorFilter(Color.Red)
                 )
                 Text(stringResource(Res.string.two_elements_must_fit),
                     modifier = modifier.padding(start = 15.dp),

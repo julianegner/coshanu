@@ -12,6 +12,12 @@ val properties = if (localProperties.exists()) {
     null
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
@@ -114,6 +120,8 @@ kotlin {
 
             implementation("dev.carlsen.flagkit:flagkit:1.1.0")
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
+
+            implementation("br.com.devsrsouza.compose.icons:octicons:1.1.1")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -121,7 +129,7 @@ kotlin {
 
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
-
+            // implementation("com.guardsquare:proguard-gradle:7.7.0")
         }
 
         commonTest.dependencies {
@@ -148,11 +156,12 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.1"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/MANIFEST.MF"
         }
     }
     signingConfigs {

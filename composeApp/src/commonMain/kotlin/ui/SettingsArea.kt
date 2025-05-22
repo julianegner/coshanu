@@ -28,6 +28,7 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import util.clickableHoverIcon
+import util.colorFilter
 import util.onClick
 
 @Composable
@@ -48,9 +49,7 @@ fun SettingsAreaWrapper() {
                     Image( // source: https://iconduck.com/icons/56992/setting
                         painter = painterResource(Res.drawable.setting),
                         contentDescription = null,
-                        colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                            color = Color.Gray
-                        ),
+                        colorFilter = colorFilter(Color.Gray),
                         modifier = Modifier
                             .padding(start = 5.dp, top = 10.dp)
                             .size(40.dp)
@@ -71,9 +70,7 @@ fun SettingsAreaWrapper() {
             Image( // source: https://iconduck.com/icons/56992/setting
                 painter = painterResource(Res.drawable.setting),
                 contentDescription = null,
-                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                    color = Color.Gray
-                ),
+                colorFilter = colorFilter(Color.Gray),
                 modifier = Modifier
                     .padding(start = 5.dp, top = 10.dp, end = 10.dp)
                     .size(40.dp)
