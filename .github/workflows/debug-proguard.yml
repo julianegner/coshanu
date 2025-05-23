@@ -1,8 +1,11 @@
 name: debug proguard
+# on:
+#  push:
+#    branches:
+#      - '**'
+
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch:  # Allow manual triggering
 
 permissions:
   contents: write
