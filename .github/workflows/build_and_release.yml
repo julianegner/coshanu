@@ -81,12 +81,14 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-          arguments: :composeApp:packageReleaseDmg
+          # use :composeApp:packageReleaseDmg for release
+          arguments: :composeApp:packageDmg
       - name: Upload MacOS Build
         uses: actions/upload-artifact@v4
         with:
           name: macos-build
-          path: /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/app
+          # use /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/app for release
+          path: /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main/app
 
   build_linux_deb:
     runs-on: ubuntu-latest
@@ -97,36 +99,16 @@ jobs:
         with:
           java-version: '24'
           distribution: 'temurin'
-
-      # todo remove
-      - name: Check for proguard file
-        run: |
-          ls -l ./composeApp
-          cat composeApp/proguard-rules.pro || echo "composeApp/proguard-rules.pro not found"
-
-      # todo remove
-      #- name: Print ProGuard configuration
-      #  uses: gradle/gradle-build-action@v2
-      #  with:
-      #    gradle-version: current
-      #    arguments: :composeApp:assembleRelease --info
-      # todo remove
-      #- name: Print ProGuard configuration
-      #  run: ./gradlew :composeApp:assembleRelease --info --build-cache
-
-        #with:
-        #  cache-enabled: true
-
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-          arguments: :composeApp:packageReleaseDeb
+          arguments: :composeApp:packageDeb
       - name: Upload Linux Build
         uses: actions/upload-artifact@v4
         with:
           name: linux-build
-          path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main-release/deb/coshanu_*_amd64.deb
+          path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main/deb/coshanu_*_amd64.deb
 
   build_windows:
     runs-on: windows-latest
@@ -141,12 +123,12 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-          arguments: :composeApp:packageReleaseExe
+          arguments: :composeApp:packageExe
       - name: Upload Windows Build
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main-release\exe\coshanu-*.exe
+          path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main\exe\coshanu-*.exe
 
   build_apk:
     runs-on: ubuntu-latest
