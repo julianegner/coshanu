@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
@@ -78,13 +79,58 @@ fun CircleOfTiles(elements: List<TileData>,
     val centerX = 0.dp
     val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
     val angleStep = 360 / elements.size
+    val elementSize = if (landscapeOrAndroid) 50.dp else 100.dp
 
+    CircleOfTilesBox(
+        elements = elements,
+        radius = radius,
+        centerX = centerX,
+        centerY = centerY,
+        angleStep = angleStep,
+        elementSize = elementSize,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun CircleOfTiles(elements: List<TileData>,
+                  radius: Dp,
+                  centerX: Dp = 0.dp,
+                  centerY: Dp = 0.dp,
+                  elementSize: Dp = 100.dp,
+                  modifier: Modifier = Modifier) {
+    // val radius = if (landscapeOrAndroid) 50.dp else 220.dp
+    // val centerX = 0.dp
+    // val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
+    val angleStep = 360 / elements.size
+    // val elementSize = if (landscapeOrAndroid) 50.dp else 100.dp
+
+    CircleOfTilesBox(
+        elements = elements,
+        radius = radius,
+        centerX = centerX,
+        centerY = centerY,
+        angleStep = angleStep,
+        elementSize = elementSize,
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun CircleOfTilesBox(
+    elements: List<TileData>,
+    radius: androidx.compose.ui.unit.Dp,
+    centerX: androidx.compose.ui.unit.Dp,
+    centerY: androidx.compose.ui.unit.Dp,
+    angleStep: Int,
+    elementSize: androidx.compose.ui.unit.Dp,
+    modifier: Modifier = Modifier
+) {
     Box(modifier = modifier,
         Alignment.TopCenter
     ) {
         Box(modifier = Modifier
-            .size(
-                if (landscapeOrAndroid) 50.dp else 150.dp)
+            .size( size = elementSize)
         ) {
             elements.forEachIndexed { index, element ->
                 val angle = toRadians((index * angleStep).toDouble())

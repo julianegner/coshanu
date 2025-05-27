@@ -113,8 +113,10 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         .onClick(onClick = { UiStateHolder.displayInfoArea.value = true })
         .padding(10.dp)
 
-
-    if (UiStateHolder.displayInfoArea.value) {
+    // todo add navigation to access this without chnaging the code
+    if (false) { // set to true to show the sticker image
+        StickerImage()
+    } else if (UiStateHolder.displayInfoArea.value) {
         Row (
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -153,13 +155,6 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 }
             }
             GameSymbol()
-
-            // todo display dark mode switch in a row with info area icon and title
-
-            // uncomment this to show the sticker image which can be used to print stickers
-            // not for production, only to get the sticker image
-            // comment GameSymbol() out for this to be visible
-            // StickerImage()
         }
         ImpressumWrapper(if (isLandscape) Modifier.fillMaxWidth(0.5f) else Modifier.fillMaxWidth())
     } else {
