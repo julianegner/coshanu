@@ -20,6 +20,6 @@ captures
 
 /composeApp/src/commonMain/kotlin/ui/todo.txt
 /composeApp/coshanu-android-release.jks
-/composeApp/coshanu-apk-secret.txt
-/composeApp/coshanu-apk-encoded-secret.txt
 /composeApp/coshanu-android-release.jks.base64
+/composeApp/coshanu-apk-encoded-secret.txt
+/composeApp/coshanu-apk-secret.txt

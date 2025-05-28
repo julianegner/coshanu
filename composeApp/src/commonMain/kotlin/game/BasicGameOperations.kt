@@ -5,6 +5,7 @@ import game.GameStateHolder.level
 import game.GameStateHolder.remainingTileAmount
 import game.GameStateHolder.tutorial
 import game.enums.GameState
+import game.enums.GameMode
 import ui.SoundBytes
 import ui.UiStateHolder
 import util.runOnMainAfter
