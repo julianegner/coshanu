@@ -58,6 +58,8 @@ object AppInitializer {
             setAppLocale(Locale.current)
 
             setSettingsFromSavedSettings()
+
+            println("platform: ${getPlatform().name}")
         }
     }
 

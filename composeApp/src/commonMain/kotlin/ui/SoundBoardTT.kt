@@ -4,7 +4,13 @@ import app.lexilabs.basic.sound.SoundBoard
 import app.lexilabs.basic.sound.SoundByte
 import app.lexilabs.basic.sound.play
 import coshanu.composeapp.generated.resources.Res
+import isPlatformJava
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+
+import java.util.jar.JarFile
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Clip
+import java.io.BufferedInputStream
 
 // https://github.com/LexiLabs-App/basic-sound
 
@@ -39,15 +45,58 @@ class SoundBoardTT(val context: Any) {
     init {
         SoundBytes.entries.forEach { sound ->
             println("adding sound file: ${sound.soundResourceUri}")
+            println("local path: ${Res.getUri(sound.soundResourceUri)}")
             soundBoard.load(
                 SoundByte(
                     name = sound.name,
+                    // localPath = "/composeResources/coshanu.composeapp.generated.resources/" + sound.soundResourceUri
                     localPath = Res.getUri(sound.soundResourceUri)
+                    // localPath = "/composeResources/coshanu.composeApp.generated.resources/files/678248__pixeliota__mouse-click-sound.mp3"
                 )
             )
         }
-        soundBoard.powerUp()
+        try {
+            soundBoard.powerUp()
+        } catch (e: Exception) {
+            println("Error powering up sound board: ${e.message}")
+            e.printStackTrace()
+        }
+
     }
+
+fun playAudioFromJar(jarFilePathWithEntry: String) {
+    try {
+        val parts = jarFilePathWithEntry.split("!")
+        if (parts.size != 2) {
+            println("Invalid JAR file path format: $jarFilePathWithEntry")
+            return
+        }
+
+        val jarFilePath = parts[0].substringAfter("jar:file:")
+        val entryPath = parts[1].removePrefix("/")
+
+        val jarFile = JarFile(jarFilePath)
+        val jarEntry = jarFile.getJarEntry(entryPath)
+        if (jarEntry == null) {
+            println("File not found in JAR: $entryPath")
+            return
+        } else {
+            println("Found entry in JAR: $entryPath")
+        }
+
+        val inputStream = BufferedInputStream(jarFile.getInputStream(jarEntry))
+        val audioInputStream = AudioSystem.getAudioInputStream(inputStream)
+
+        val clip: Clip = AudioSystem.getClip()
+        clip.open(audioInputStream)
+        clip.start()
+        println("Playing audio: $entryPath")
+        Thread.sleep(clip.microsecondLength / 1000)
+    } catch (e: Exception) {
+        println("Error playing audio: ${e.message}")
+        e.printStackTrace()
+    }
+}
 
     fun play(sound: SoundBytes) {
 
@@ -66,7 +115,24 @@ class SoundBoardTT(val context: Any) {
          */
         // todo end remove
 
-        soundBoard.mixer.play(sound.name)
+        // soundBoard.mixer.setVolume(sound.name, 1.0f) // Set volume to 100%
+        if (isPlatformJava) {
+            // val path = "/home/jegner/javaProjects/noncustomer/coshanu/composeApp/build/compose/binaries/main/app/coshanu/lib/app/composeApp-desktop-94b0f8699f72398d1cdb3f8ee263eaf7.jar"
+            // val fileName = "/composeResources/coshanu.composeapp.generated.resources/files/678248__pixeliota__mouse-click-sound.mp3"
+            // val jar: JarFile = JarFile(path)
+            // val jen: JarEntry?
+            // jen = JarEntry(fileName)
+            // val audioInputStream = AudioSystem.getAudioInputStream(jar.getInputStream(jen))
+
+           // Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3")
+
+            // soundBoard.mixer.
+            // soundBoard.mixer.play(sound.name)
+
+            playAudioFromJar(Res.getUri(sound.soundResourceUri))
+        } else {
+            soundBoard.mixer.play(sound.name)
+        }
     }
 
     // fun powerDown() = soundBoard.powerDown()
