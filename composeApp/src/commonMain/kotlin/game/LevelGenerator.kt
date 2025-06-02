@@ -12,9 +12,9 @@ class LevelGenerator {
         GameStateHolder.tutorial.endTutorial()
         when(levelNumber) {
             0, 10, 20 -> generateTutorial()
-            1, 11, 21 -> GameStateHolder.saveNewBoard(createBoard(4, 4, listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
-            2, 12, 22 -> GameStateHolder.saveNewBoard(createBoard(size = 4, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
-            3, 13, 23 -> GameStateHolder.saveNewBoard(createBoard(size = 8, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
+            1, 11, 21, 24 -> GameStateHolder.saveNewBoard(createBoard(4, 4, listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
+            2, 12, 22, 25 -> GameStateHolder.saveNewBoard(createBoard(size = 4, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
+            3, 13, 23, 26 -> GameStateHolder.saveNewBoard(createBoard(size = 8, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
             else -> GameStateHolder.saveNewBoard(createBoard(size = levelNumber * 4, maxNumber = 2 * levelNumber, colors = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
         }
     }

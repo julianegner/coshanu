@@ -81,7 +81,7 @@ fun Menu() {
         val LightLightBlue = Color(0xEE5533FF)
         MenuRow(
             levelTypeStringResource = Res.string.two_elements_with_timer,
-            levels = (20..23),
+            levels = (20..26),
             elementTextModifier = elementTextModifier,
             currentLevelButtonColors = currentLevelButtonColors,
             buttonColors = ButtonDefaults.buttonColors(

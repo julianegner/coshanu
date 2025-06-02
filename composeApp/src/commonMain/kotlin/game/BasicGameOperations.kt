@@ -4,7 +4,6 @@ import game.GameStateHolder.gameMode
 import game.GameStateHolder.gameState
 import game.GameStateHolder.level
 import game.GameStateHolder.remainingTileAmount
-import game.GameStateHolder.totalAllowedTime
 import game.GameStateHolder.tutorial
 import game.enums.GameMode
 import game.enums.GameState
@@ -61,6 +60,7 @@ fun newGame(
 
     if (level.value !== null) {
         LevelGenerator().generateLevel(level.value!!)
+        setCountdownTimerValues(level.value!!)
         GameStateHolder.updateGameState(GameState.RUNNING)
 
         GameStateHolder.timer.startTimer()
@@ -68,11 +68,28 @@ fun newGame(
     }
 }
 
+private fun setCountdownTimerValues(level: Int) {
+    when (level) {
+        in 20 ..23 -> {
+            GameStateHolder.addTime.value = 10.seconds
+            GameStateHolder.startTime.value = 60.seconds
+        }
+        in 24..26 -> {
+            GameStateHolder.addTime.value = 5.seconds
+            GameStateHolder.startTime.value = 30.seconds
+        }
+        else -> {
+            GameStateHolder.addTime.value = 10.seconds
+            GameStateHolder.startTime.value = 60.seconds
+        }
+    }
+}
+
 fun setGameMode(level: Int) {
     when (level) {
-        0, 1, 2, 3 -> gameMode.value = GameMode.SINGLE_ELEMENT
-        10, 11, 12, 13 -> gameMode.value = GameMode.TWO_ELEMENTS
-        20, 21, 22, 23 -> gameMode.value = GameMode.TWO_ELEMENTS_WITH_TIMER
+        in 0..3 -> gameMode.value = GameMode.SINGLE_ELEMENT
+        in 10..13 -> gameMode.value = GameMode.TWO_ELEMENTS
+        in 20..26 -> gameMode.value = GameMode.TWO_ELEMENTS_WITH_TIMER
         else -> gameMode.value = GameMode.SINGLE_ELEMENT
     }
 }
