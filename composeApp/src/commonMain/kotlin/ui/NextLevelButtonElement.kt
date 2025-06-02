@@ -13,7 +13,7 @@ import util.clickableHoverIcon
 
 @Composable
 fun NextLevelButtonElement() {
-    if (GameStateHolder.level.value!! < 23) {
+    if (GameStateHolder.level.value!! < 26) {
         Button(
             onClick = { GameStateHolder.levelUp() },
             modifier = Modifier.clickableHoverIcon()
