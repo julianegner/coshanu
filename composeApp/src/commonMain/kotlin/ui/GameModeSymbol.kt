@@ -24,6 +24,7 @@ import game.GameStateHolder
 import org.jetbrains.compose.resources.painterResource
 import com.hyperether.resources.stringResource
 import ui.UiStateHolder.largerTextSize
+import ui.UiStateHolder.standardTextSize
 import util.colorFilter
 
 
@@ -65,6 +66,11 @@ fun GameModeSymbol(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(start = 5.dp, top = 10.dp).size(20.dp),
                     colorFilter = colorFilter(Color.Red)
                 )
+                Text("${GameStateHolder.startTime.value}/${GameStateHolder.addTime.value}",
+                    modifier = Modifier.padding(start = 5.dp, top = 10.dp),
+                    fontSize = standardTextSize.value
+                )
+
                 Text(stringResource(Res.string.two_elements_must_fit),
                     modifier = modifier.padding(start = 15.dp),
                     fontSize = largerTextSize.value
