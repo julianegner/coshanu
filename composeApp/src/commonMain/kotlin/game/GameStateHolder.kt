@@ -25,7 +25,9 @@ object GameStateHolder {
     val tutorial: Tutorial = Tutorial()
 
     val timer = Timer()
-    val totalAllowedTime: MutableState<Duration> = mutableStateOf(60.seconds)
+    val addTime: MutableState<Duration> = mutableStateOf(10.seconds)
+    val startTime: MutableState<Duration> = mutableStateOf(60.seconds)
+    val totalAllowedTime: MutableState<Duration> = mutableStateOf(startTime.value)
 
     fun resetBoard() {
         boardDataState.value.reset()
@@ -152,11 +154,11 @@ object GameStateHolder {
     }
 
     fun addTimeToTimer() {
-        totalAllowedTime.value += 10.seconds
+        totalAllowedTime.value += addTime.value
     }
 
     fun resetTotalAllowedTime() {
-        totalAllowedTime.value = 60.seconds
+        totalAllowedTime.value = startTime.value
     }
 
     fun loadGame(gameDataInput: String) {
