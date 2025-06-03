@@ -94,6 +94,7 @@ fun App() {
                 val verticalScrollModifier = mutableStateOf(
                     if (
                         UiStateHolder.displayInfoArea.value ||
+                        UiStateHolder.displayStickerArea.value ||
                         isPlatformAndroid ||
                         screenType.value == ScreenType.PORTRAIT
                     )
@@ -113,9 +114,10 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         .onClick(onClick = { UiStateHolder.displayInfoArea.value = true })
         .padding(10.dp)
 
-    // todo add navigation to access this without chnaging the code
-    if (false) { // set to true to show the sticker image
-        StickerImage()
+    // todo add navigation to access this without changing the code
+    // UiStateHolder.displayStickerArea.value = true // set to true to show the sticker image
+    if (UiStateHolder.displayStickerArea.value) {
+        StickerImage(verticalScrollModifier)
     } else if (UiStateHolder.displayInfoArea.value) {
         Row (
             verticalAlignment = Alignment.Top,

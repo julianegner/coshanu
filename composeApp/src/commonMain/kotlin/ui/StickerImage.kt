@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
@@ -24,23 +25,36 @@ val tileListForSticker = listOf(
     newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
 )
 
-val textColorForSticker = Color.White
-val backgroundColorForSticker = Color.Black
+// val textColorForSticker = Color.White
+// val backgroundColorForSticker = Color.Black
+
+val textColorForSticker = Color.Black
+val backgroundColorForSticker = Color.White
 /*
 creating images for stickers
  */
 @Composable
-fun StickerImage() {
+fun StickerImage(verticalScrollModifier: MutableState<Modifier>) {
     UiStateHolder.darkModeState.value = false
 
-    Column {
+    Column(
+        modifier = verticalScrollModifier.value
+            .fillMaxSize()) {
+
         StickerRectangle()
         Spacer(Modifier.height(10.dp))
         StickerRectangleWithExtraText2()
         Spacer(Modifier.height(10.dp))
-        // StickerRectangleWithExtraText()
-        // Spacer(Modifier.height(10.dp))
+        StickerRectangleWithExtraText()
+        Spacer(Modifier.height(10.dp))
         StickerRound()
+        Spacer(Modifier.height(10.dp))
+        StickerRound("play")
+        Spacer(Modifier.height(10.dp))
+        StickerRound2()
+        Spacer(Modifier.height(10.dp))
+        StickerRound2("play")
+
     }
 }
 
@@ -148,7 +162,18 @@ private fun StickerRectangleWithExtraText2() {
 }
 
 @Composable
-fun StickerRound() {
+fun StickerRound(extraText: String? = null) {
+    if (extraText != null) {
+        Text(
+            text = extraText,
+            color = textColorForSticker,
+            fontSize = TextUnit(1.2f, TextUnitType.Em),
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier
+                .absoluteOffset(x = 240.dp, y = 135.dp)
+                .zIndex(1f)
+        )
+    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -164,6 +189,63 @@ fun StickerRound() {
         )
         CircleOfTiles(
             elements = tileListForSticker,
+            radius = 100.dp,
+            centerX = 200.dp,
+            centerY = 200.dp,
+            elementSize = 75.dp,
+            modifier = Modifier
+                .width(150.dp)
+                .height(100.dp)
+                .offset(x = (-150).dp, y = (-80).dp)
+        )
+    }
+}
+
+/*
+        elements = listOf(
+            newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+            newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
+            newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
+            newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
+            newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
+            newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
+ */
+
+@Composable
+fun StickerRound2(extraText: String? = null) {
+    if (extraText != null) {
+        Text(
+            text = extraText,
+            color = textColorForSticker,
+            fontSize = TextUnit(1.2f, TextUnitType.Em),
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier
+                .absoluteOffset(x = 240.dp, y = 135.dp)
+                .zIndex(1f)
+        )
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+            .background(backgroundColorForSticker)
+
+    ) {
+        Text(
+            text = "cosha.nu",
+            color = textColorForSticker,
+            fontSize = TextUnit(2f, TextUnitType.Em),
+            modifier = Modifier.absoluteOffset(x = 196.dp, y = 140.dp)
+        )
+        CircleOfTiles(
+            elements = listOf(
+                newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+                newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
+                newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
+                newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
+                newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
+                newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
+            ),
             radius = 100.dp,
             centerX = 200.dp,
             centerY = 200.dp,
