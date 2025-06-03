@@ -206,7 +206,6 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                             }
                         }
                         WonAnimation()
-                        NextLevelButtonElement()
                         if (GameStateHolder.tutorial.isTutorial()) {
                             TutorialText()
                         }

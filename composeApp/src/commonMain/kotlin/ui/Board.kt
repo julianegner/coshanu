@@ -102,6 +102,9 @@ fun StartButtonRow() {
                 )
             }
         }
+        if (GameStateHolder.isGameState(GameState.WON)) {
+            NextLevelButtonElement()
+        }
         if (GameStateHolder.isGameState(GameState.LEVEL_CHANGE)) {
             Button(
                 enabled = level.value != null,
