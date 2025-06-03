@@ -130,30 +130,30 @@ jobs:
           name: windows-build
           path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main\exe\coshanu-*.exe
 
-  build_apk:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 24
-        uses: actions/setup-java@v3
-        with:
-          java-version: '24'
-          distribution: 'temurin'
-      - name: Download Keystore
-        run: |
-          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > composeApp/coshanu-android-release.jks
-      - name: Verify Keystore
-        run: ls -la composeApp/coshanu-android-release.jks
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: current
-          arguments: :composeApp:packageReleaseApk
-      - name: Upload Apk Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk-build
-          path: ''
+#  build_apk:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Set up JDK 24
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '24'
+#          distribution: 'temurin'
+#      - name: Download Keystore
+#        run: |
+#          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 --decode > composeApp/coshanu-android-release.jks
+#      - name: Verify Keystore
+#        run: ls -la composeApp/coshanu-android-release.jks
+#      - name: Build with Gradle
+#        uses: gradle/gradle-build-action@v2
+#        with:
+#          gradle-version: current
+#          arguments: :composeApp:packageReleaseApk
+#      - name: Upload Apk Build
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: apk-build
+#          path: ''
 
   # todo add also a build for msi (microsoft installer) for windows
 
@@ -165,7 +165,7 @@ jobs:
       - "build_macos"
       - "build_linux_deb"
       - "build_windows"
-      - "build_apk"
+#      - "build_apk"
     runs-on: ubuntu-latest
     steps:
       # remove debug
@@ -209,10 +209,10 @@ jobs:
           name: windows-build
           path: build/windows
 
-      - name: Download Apk Build
-        uses: actions/download-artifact@v4
-        with:
-          name: apk-build
+      #- name: Download Apk Build
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: apk-build
 
       - name: Rename Releases
         run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
@@ -228,4 +228,4 @@ jobs:
             /home/runner/work/coshanu/coshanu/build/windows/*
             /home/runner/work/coshanu/coshanu/build/jvm/*
             /home/runner/work/coshanu/coshanu/build/wasm/*
-            /home/runner/work/coshanu/coshanu/build/apk/*
+#            /home/runner/work/coshanu/coshanu/build/apk/*
