@@ -16,6 +16,7 @@ object GameStateHolder {
 
     val gameState: MutableState<GameState> = mutableStateOf(GameState.STARTING)
     val level: MutableState<Int?> = mutableStateOf(null)
+    val currentLevel: MutableState<Level?> = mutableStateOf(null)
     val gameMode: MutableState<GameMode?> = mutableStateOf(null)
 
     val selected: MutableState<Pair<TileData?, TileData?>> = mutableStateOf(Pair(null, null))
@@ -60,19 +61,11 @@ object GameStateHolder {
 
     fun levelUp() {
         endGame()
-        if (level.value == null) {
+        if (currentLevel.value == null) {
             changeLevel(0)
         } else {
-            if (level.value!! == 3) { // last level of single element game
-                // first level of two element game (tutorial)
-                changeLevel(10)
-            } else if (level.value!! == 13) { // last level of two element game
-                // first level of two element plus timer game (tutorial)
-                changeLevel(20)
-            } else
-                changeLevel(level.value!! + 1)
+            changeLevel(currentLevel.value!!.getNextLevel())
         }
-
     }
 
     fun changeLevel(newLevel: Int) {
@@ -252,7 +245,8 @@ object GameStateHolder {
             && boardSize != null) {
             // loadGame(level, remainingTileAmount, minutes, seconds, boardSize, tileDataList)
             changeLevel(level!!)
-            setGameMode(GameStateHolder.level.value!!)
+            // setGameMode(GameStateHolder.level.value!!)
+            // todo set game mode based on level
             GameStateHolder.resetBoard()
 
 

@@ -13,7 +13,8 @@ import util.clickableHoverIcon
 
 @Composable
 fun NextLevelButtonElement() {
-    if (GameStateHolder.level.value!! < 26) {
+    val currentLevel = GameStateHolder.currentLevel.value
+    if (currentLevel != null && !currentLevel.isMaximumLevel) {
         Button(
             onClick = { GameStateHolder.levelUp() },
             modifier = Modifier.clickableHoverIcon()

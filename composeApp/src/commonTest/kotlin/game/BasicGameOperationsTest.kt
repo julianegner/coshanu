@@ -44,15 +44,6 @@ class BasicGameOperationsTest {
         assertTrue(GameStateHolder.listState.value.isNotEmpty())
     }
 
-    @Test
-    fun testSetGameMode() {
-        setGameMode(1)
-        assertEquals(GameMode.SINGLE_ELEMENT, GameStateHolder.gameMode.value)
-
-        setGameMode(10)
-        assertEquals(GameMode.TWO_ELEMENTS, GameStateHolder.gameMode.value)
-    }
-
     // @Test
     // fun testSaveGame() {
     //     // This test would need to check the clipboard content or file content
