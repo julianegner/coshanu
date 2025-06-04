@@ -95,12 +95,6 @@ jobs:
           # use :composeApp:packageReleaseDmg for release
           arguments: :composeApp:packageDmg
 
-      - name: Install zip
-        uses: montudor/action-zip@v1
-      - name: Zip MacOS folder
-        run: zip -qq -r coshanu_macos.zip coshanu.app/Contents
-        working-directory: /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main/app
-
       - name: Upload MacOS Build
         uses: actions/upload-artifact@v4
         with:
@@ -235,6 +229,17 @@ jobs:
       #    name: apk-build
       - name: Display downloaded files
         run: ls -R build
+
+      - name: Install zip
+        uses: montudor/action-zip@v1
+      - name: Zip MacOS folder
+        run: zip -qq -r coshanu_macos.zip coshanu.app/Contents
+        working-directory: /home/runner/work/coshanu/coshanu/build/macos/
+
+      # todo pack
+      # /home/runner/work/coshanu/coshanu/build/macos/coshanu.app/Contents
+      # into
+      # /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
 
       #- name: Rename Releases
       #  run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
