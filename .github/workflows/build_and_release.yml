@@ -20,7 +20,16 @@ permissions:
   contents: write
 
 jobs:
+  check_version_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Version Tag
+        run: |
+          echo "Version tag detected: ${{ github.ref }}"
+    if: startsWith(github.ref, 'refs/tags/')
+
   build_wasm_js:
+    needs: check_version_tag
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -49,6 +58,7 @@ jobs:
           path: /home/runner/work/coshanu/coshanu/composeApp/build/dist/wasmJs/coshanu_wasm.zip
 
   build_jvm:
+    needs: check_version_tag
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -69,6 +79,7 @@ jobs:
           path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/jars/coshanu-linux-x64-*.jar
 
   build_macos:
+    needs: check_version_tag
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
@@ -91,6 +102,7 @@ jobs:
           path: /Users/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main/app
 
   build_linux_deb:
+    needs: check_version_tag
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -111,6 +123,7 @@ jobs:
           path: /home/runner/work/coshanu/coshanu/composeApp/build/compose/binaries/main/deb/coshanu_*_amd64.deb
 
   build_windows:
+    needs: check_version_tag
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -131,6 +144,7 @@ jobs:
           path: D:\a\coshanu\coshanu\composeApp\build\compose\binaries\main\exe\coshanu-*.exe
 
 #  build_apk:
+#    needs: check_version_tag
 #    runs-on: ubuntu-latest
 #    steps:
 #      - uses: actions/checkout@v3
@@ -158,8 +172,8 @@ jobs:
   # todo add also a build for msi (microsoft installer) for windows
 
   release:
-    if: startsWith(github.ref, 'refs/tags/')
     needs:
+      - "check_version_tag"
       - "build_wasm_js"
       - "build_jvm"
       - "build_macos"
@@ -213,9 +227,11 @@ jobs:
       #  uses: actions/download-artifact@v4
       #  with:
       #    name: apk-build
+      - name: Display downloaded files
+        run: ls -R build
 
-      - name: Rename Releases
-        run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
+      #- name: Rename Releases
+      #  run: mv /home/runner/work/coshanu/coshanu/build/macos/macos-build.zip /home/runner/work/coshanu/coshanu/build/macos/coshanu-macos.zip
       #  run: mv build/compose/binaries/main/deb/coshanu_*_amd64.deb build/compose/binaries/main/deb/coshanu_amd64.deb
           # mv build/macos-build/coshanu.kexe build/macos-build/coshanu.macos.bin
 
