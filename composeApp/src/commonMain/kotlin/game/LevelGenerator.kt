@@ -5,19 +5,13 @@ import game.enums.GameMode
 import game.enums.ShapeEnum
 
 class LevelGenerator {
-    fun generateLevel(levelNumber: Int) {
 
+    fun generateLevel(levelNumber: Int) {
         GameStateHolder.resetBoard()
-        setGameMode(levelNumber)
         GameStateHolder.tutorial.endTutorial()
-        when(levelNumber) {
-            0, 10, 20 -> generateTutorial()
-            1, 11, 21, 24 -> GameStateHolder.saveNewBoard(createBoard(4, 4, listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
-            2, 12, 22, 25 -> GameStateHolder.saveNewBoard(createBoard(size = 4, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
-            3, 13, 23, 26 -> GameStateHolder.saveNewBoard(createBoard(size = 8, maxNumber = 10, colors = listOf(Color.Green, Color.Red, Color.Blue, Color.Yellow, Color.DarkGray, Color.Magenta, Color.Cyan)))
-            else -> GameStateHolder.saveNewBoard(createBoard(size = levelNumber * 4, maxNumber = 2 * levelNumber, colors = listOf(Color.Blue, Color.Green, Color.Yellow, Color.Red)))
-        }
+        GameStateHolder.currentLevel.value = Level(levelNumber)
     }
+
     // non-private to allow testing
     fun createBoard(size: Int, maxNumber: Int, colors: List<Color>): BoardData {
         val tiles = selectTilesForGame(size, maxNumber, colors)
@@ -62,8 +56,8 @@ class LevelGenerator {
         return possibleTiles
     }
 
-    fun generateTutorial() {
-        val board = BoardData(if (GameStateHolder.level.value == 0) {2} else {4})
+    fun generateTutorial(boardSize: Int) {
+        val board = BoardData(boardSize)
 
         GameStateHolder.tutorial.startTutorial()
         board.tiles = GameStateHolder.tutorial.getTileList()
