@@ -28,6 +28,8 @@ Interesting solutions are:
 - change language at runtime (see composeApp/src/commonMain/kotlin/App.kt and composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt)
 needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
 - pass withImpressum parameter to the app (see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt)
+- usage of Snackbar, including closing after defined time (see App.kt/App() and SettingsArea.kt/SettingsArea())
+- usage of extension functions and values for colors (see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
 
 # Development
 
