@@ -2,17 +2,17 @@ package ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,14 +22,15 @@ import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.reset_settings
 import coshanu.composeapp.generated.resources.setting
 import coshanu.composeapp.generated.resources.settings
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import settings
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
-import util.clickableHoverIcon
 import util.colorFilter
 import util.onClick
+import util.runOnMainAfter
 
 @Composable
 fun SettingsAreaWrapper() {
@@ -54,13 +55,13 @@ fun SettingsAreaWrapper() {
                             .padding(start = 5.dp, top = 10.dp)
                             .size(40.dp)
                     )
-                    Text("", modifier = Modifier.fillMaxWidth(0.2f)) // just an invisible placeholder
+                    Spacer(modifier = Modifier.fillMaxWidth(0.2f))
                     Text(stringResource(Res.string.settings),
                         fontSize = largerTextSize.value,
                         lineHeight = standardLineHeight.value,
                         modifier = Modifier.padding(top = 10.dp)
                     )
-                    Text("", modifier = Modifier.fillMaxWidth(0.2f)) // just an invisible placeholder
+                    Spacer(modifier = Modifier.fillMaxWidth(0.2f))
 
                     closingX { UiStateHolder.displaySettingsArea.value = false }
                 }
@@ -82,11 +83,20 @@ fun SettingsAreaWrapper() {
 
 @Composable
 private fun SettingsArea() {
-    Column ( verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    val coroutineScope = rememberCoroutineScope()
+
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         DarkModeSwitch()
         LanguageChooser()
 
-        Button(onClick = { settings.clear() }) {
+        Button(onClick = {
+            settings.clear()
+            coroutineScope.launch {
+                // remove snackbar after 5 seconds
+                runOnMainAfter(5000) { UiStateHolder.snackbarHost.value.currentSnackbarData?.dismiss() }
+                UiStateHolder.snackbarHost.value.showSnackbar("Settings cleared successfully")
+            }
+        }) {
             Text(
                 stringResource(Res.string.reset_settings),
                 fontSize = standardTextSize.value,
