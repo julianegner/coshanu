@@ -92,9 +92,9 @@ private fun SettingsArea() {
         Button(onClick = {
             settings.clear()
             coroutineScope.launch {
-                // remove snackbar after 5 seconds
-                runOnMainAfter(5000) { UiStateHolder.snackbarHost.value.currentSnackbarData?.dismiss() }
+                // show snackbar and schedule its removal after 5 seconds
                 UiStateHolder.snackbarHost.value.showSnackbar("Settings cleared successfully")
+                runOnMainAfter(5000) { UiStateHolder.snackbarHost.value.currentSnackbarData?.dismiss() }
             }
         }) {
             Text(
