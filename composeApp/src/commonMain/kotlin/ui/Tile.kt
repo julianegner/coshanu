@@ -17,8 +17,9 @@ import game.*
 import game.enums.GameState
 import game.enums.ShapeEnum
 import isPlatformAndroid
+import util.modeDependantColor
 import util.runOnMainAfter
-
+import util.darkmodeBlue
 
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
@@ -28,7 +29,7 @@ fun Tile(tileDataState: MutableState<TileData>,
          displayText: Boolean = true
          ) {
 
-    val color = tileDataState.value.getColor()
+    val color = tileDataState.value.color.modeDependantColor
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> polygonBox(color = color, sides = 1000, rotation = 0f,
@@ -134,18 +135,8 @@ private fun setBorder(
     borderColor: Color?
 ) {
     if (borderColor != null) {
-        if (UiStateHolder.darkModeState.value) {
-            val darkModeBorderColor = when (borderColor) {
-                Color.Green -> Color(0xAA00AA00)
-                Color.Red -> Color(0xAAAA0000)
-                else -> borderColor
-            }
-            tileDataState.value.borderStroke = BorderStroke(5.dp, darkModeBorderColor)
-            cardBorderState.value = BorderStroke(5.dp, darkModeBorderColor)
-        } else {
-            tileDataState.value.borderStroke = BorderStroke(5.dp, borderColor)
-            cardBorderState.value = BorderStroke(5.dp, borderColor)
-        }
+        tileDataState.value.borderStroke = BorderStroke(5.dp, borderColor.modeDependantColor)
+        cardBorderState.value = BorderStroke(5.dp, borderColor.modeDependantColor)
     } else {
         tileDataState.value.borderStroke = null
         cardBorderState.value = null

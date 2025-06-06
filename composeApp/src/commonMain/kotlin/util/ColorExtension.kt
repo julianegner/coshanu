@@ -4,6 +4,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import coshanu.composeapp.generated.resources.*
 import com.hyperether.resources.stringResource
+import ui.UiStateHolder
+
+val darkmodeBlue = Color(0xAA0000FF)
+val darkmodeRed = Color(0xAAAA0000)
+val darkmodeGreen = Color(0xAA00AA00)
+val darkmodeYellow = Color(0xAAAAAA00)
+val darkmodeLinkBlue = Color(0xAA00FFFF)
+val lightBlue = Color(0xCC3333FF)
+val lightLightBlue = Color(0xEE5533FF)
+
+val Color.modeDependantColor: Color
+    get() =
+        if (UiStateHolder.darkModeState.value) {
+            when (this) {
+                Color.Blue -> darkmodeBlue
+                Color.Green -> darkmodeGreen
+                Color.Red -> darkmodeRed
+                Color.Yellow -> darkmodeYellow
+                Color.LightGray -> Color.DarkGray
+                Color.DarkGray -> Color.LightGray
+                Color.Magenta -> Color(0xAAAA00AA)
+                Color.Cyan -> Color(0xAA00AAAA)
+                Color.Black -> Color.LightGray
+                else -> Color.Black
+            }
+        } else {
+            this
+        }
 
 @Composable
 fun Color.toName(): String =

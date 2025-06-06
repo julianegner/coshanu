@@ -30,6 +30,8 @@ import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 import WithImpressum.withImpressum
 import isLandscape
+import util.darkmodeLinkBlue
+import util.modeDependantColor
 import util.onClick
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
@@ -205,14 +207,12 @@ fun InfoSymbol(modifier: Modifier = Modifier) {
 
 @Composable
 private fun LicenseDetailArea() {
-
     Text(stringResource(Res.string.general_license_info), fontSize = standardTextSize.value)
     if (!displayLicenseDetails.value) {
         Text(
             text = stringResource(Res.string.license_details_link_text),
             style = TextStyle(
-                color =
-                    if (UiStateHolder.darkModeState.value) Color(0xAA00FFFF) else Color.Blue,
+                color = if (UiStateHolder.darkModeState.value) darkmodeLinkBlue else Color.Blue,
                 textDecoration = TextDecoration.Underline
             ),
             fontSize = standardTextSize.value,

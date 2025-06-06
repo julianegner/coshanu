@@ -32,6 +32,7 @@ import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.titleTextSize
 import util.clickableHoverIcon
+import util.modeDependantColor
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
@@ -78,7 +79,7 @@ fun StartButtonRow() {
                 border = if (tutorial.isRestartStep()) {
                     BorderStroke(
                         2.dp,
-                        if (UiStateHolder.darkModeState.value) Color(0xCC00CC00) else Color.Green
+                        Color.Green.modeDependantColor
                     )
                 } else {
                     null
@@ -151,25 +152,15 @@ fun GridAndTutorial() {
 
                 width = 1.dp, color =
                     if (GameStateHolder.isGameState(GameState.LOST)) {
-                        if (UiStateHolder.darkModeState.value) {
-                            darkmodeRed
-                        } else {
-                            Color.Red
-                        }
+                        Color.Red.modeDependantColor
                         // } else if (GameStateHolder.isGameState(GameState.WON)) {
-                        //     if (UiStateHolder.darkModeState.value) {
-                        //         darkmodeGreen
-                        //     } else {
-                        //         Color.Green
+                        // Color.Green.modeDependantColor
                         //     }
                     } else
                         if (isPlatformAndroid)
                             Color.Transparent
                         else
-                            if (UiStateHolder.darkModeState.value)
-                                Color.LightGray
-                            else
-                                Color.Black
+                            Color.Black.modeDependantColor
             )
 
 
