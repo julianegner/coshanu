@@ -18,7 +18,6 @@ import coshanu.composeapp.generated.resources.single_element
 import coshanu.composeapp.generated.resources.tutorial
 import coshanu.composeapp.generated.resources.two_elements
 import game.GameStateHolder
-import game.darkmodeYellow
 import isPlatformAndroid
 import org.jetbrains.compose.resources.StringResource
 import com.hyperether.resources.stringResource
@@ -26,6 +25,10 @@ import ui.UiStateHolder.menuButtonWidth
 import ui.UiStateHolder.menuRowTextWidth
 import ui.UiStateHolder.standardTextSize
 import util.clickableHoverIcon
+import util.darkmodeYellow
+import util.lightBlue
+import util.lightLightBlue
+import util.modeDependantColor
 
 fun buttonModifier(level: Int) = Modifier.padding(
     start = 5.dp,
@@ -66,19 +69,17 @@ fun Menu() {
             buttonColors = ButtonDefaults.buttonColors()
         )
 
-        val LightBlue = Color(0xCC3333FF)
         MenuRow(
             levelTypeStringResource = Res.string.two_elements,
             levels = (10..13),
             elementTextModifier = elementTextModifier,
             currentLevelButtonColors = currentLevelButtonColors,
             buttonColors = ButtonDefaults.buttonColors(
-                contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
-                backgroundColor = if (UiStateHolder.darkModeState.value) LightBlue else Color.Blue
+                contentColor = Color.White.modeDependantColor,
+                backgroundColor = if (UiStateHolder.darkModeState.value) lightBlue else Color.Blue
             )
         )
 
-        val LightLightBlue = Color(0xEE5533FF)
         MenuRow(
             levelTypeStringResource = Res.string.two_elements_with_timer,
             levels = (20..26),
@@ -86,7 +87,7 @@ fun Menu() {
             currentLevelButtonColors = currentLevelButtonColors,
             buttonColors = ButtonDefaults.buttonColors(
                 contentColor = if (UiStateHolder.darkModeState.value) Color.Black else Color.White,
-                backgroundColor = if (UiStateHolder.darkModeState.value) LightLightBlue else LightBlue
+                backgroundColor = if (UiStateHolder.darkModeState.value) lightLightBlue else lightBlue
             )
         )
     }

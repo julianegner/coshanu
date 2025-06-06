@@ -10,6 +10,7 @@ import game.enums.GameMode
 import game.enums.ShapeEnum
 import com.hyperether.resources.stringResource
 import ui.UiStateHolder
+import util.modeDependantColor
 import util.toName
 import util.toSaveName
 
@@ -57,31 +58,6 @@ fun TileData.match(secondTileData: TileData): Boolean {
             // this should never happen
             throw RuntimeException("GameMode not valid")
         }
-    }
-}
-
-val darkmodeBlue = Color(0xAA0000FF)
-val darkmodeRed = Color(0xAAAA0000)
-val darkmodeGreen = Color(0xAA00AA00)
-val darkmodeYellow = Color(0xAAAAAA00)
-
-fun TileData.getColor(): Color {
-    return if (UiStateHolder.darkModeState.value) {
-
-        // todo create a color object where you can give a standard color and get the appropriate color back
-        when (this.color) {
-            Color.Blue -> darkmodeBlue
-            Color.Green -> darkmodeGreen
-            Color.Red -> darkmodeRed
-            Color.Yellow -> darkmodeYellow
-            Color.LightGray -> Color.DarkGray
-            Color.DarkGray -> Color.LightGray // Color(0xAA444444)
-            Color.Magenta -> Color(0xAAAA00AA)
-            Color.Cyan -> Color(0xAA00AAAA)
-            else -> Color.Black
-        }
-    } else {
-        this.color
     }
 }
 

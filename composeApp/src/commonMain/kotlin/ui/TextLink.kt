@@ -8,6 +8,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import util.callUrl
+import util.darkmodeLinkBlue
+import util.modeDependantColor
 import util.onClick
 
 @Composable
@@ -19,7 +21,7 @@ fun TextLink(
     Text(
         text = text,
         style = TextStyle(
-            color = if (UiStateHolder.darkModeState.value) Color(0xAA00FFFF) else Color.Blue,
+            color = if (UiStateHolder.darkModeState.value) darkmodeLinkBlue else Color.Blue,
             textDecoration = TextDecoration.Underline
         ),
         fontSize = fontSize,
