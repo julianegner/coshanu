@@ -2,6 +2,7 @@ package ui
 
 import DARK_MODE
 import SOUND_ACTIVE
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
@@ -27,6 +28,7 @@ object UiStateHolder {
     val displaySettingsArea: MutableState<Boolean> = mutableStateOf(false)
     val displayStickerArea: MutableState<Boolean> = mutableStateOf(false)
     val soundActive: MutableState<Boolean> = mutableStateOf(true)
+    val snackbarHost: MutableState<SnackbarHostState> = mutableStateOf(SnackbarHostState())
 
     fun setScreenType(newScreenType: ScreenType) {
         screenType.value = newScreenType
