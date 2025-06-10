@@ -8,9 +8,14 @@ import isPlatformJava
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 import java.util.jar.JarFile
-import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.Clip
 import java.io.BufferedInputStream
+
+import javax.sound.sampled.AudioFormat
+import javax.sound.sampled.AudioInputStream
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.AudioSystem.getAudioInputStream
+import javax.sound.sampled.DataLine.Info
+import javax.sound.sampled.SourceDataLine
 
 // https://github.com/LexiLabs-App/basic-sound
 
@@ -85,13 +90,29 @@ fun playAudioFromJar(jarFilePathWithEntry: String) {
         }
 
         val inputStream = BufferedInputStream(jarFile.getInputStream(jarEntry))
-        val audioInputStream = AudioSystem.getAudioInputStream(inputStream)
+        // val audioInputStream = AudioSystem.getAudioInputStream(inputStream)
 
+        getAudioInputStream(inputStream).use { `in` ->
+            val outFormat = getOutFormat(`in`.format)
+            val info = Info(SourceDataLine::class.java, outFormat)
+            AudioSystem.getLine(info).use { line ->
+                (line as? SourceDataLine)?.let { l ->
+                    l.open(outFormat)
+                    l.start()
+                    stream(getAudioInputStream(outFormat, `in`), l)
+                    l.drain()
+                    l.stop()
+                }
+            }
+        }
+
+        /*
         val clip: Clip = AudioSystem.getClip()
         clip.open(audioInputStream)
         clip.start()
         println("Playing audio: $entryPath")
         Thread.sleep(clip.microsecondLength / 1000)
+         */
     } catch (e: Exception) {
         println("Error playing audio: ${e.message}")
         e.printStackTrace()
@@ -99,36 +120,7 @@ fun playAudioFromJar(jarFilePathWithEntry: String) {
 }
 
     fun play(sound: SoundBytes) {
-
-        // todo begin remove
-        /*
-        println("play load sounds")
-        soundBoard.load(
-            SoundByte(
-                name = "click",
-                localPath = Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3")
-            )
-        )
-        println("play powerup")
-        soundBoard.powerUp()
-        println("play sound")
-         */
-        // todo end remove
-
-        // soundBoard.mixer.setVolume(sound.name, 1.0f) // Set volume to 100%
         if (isPlatformJava) {
-            // val path = "/home/jegner/javaProjects/noncustomer/coshanu/composeApp/build/compose/binaries/main/app/coshanu/lib/app/composeApp-desktop-94b0f8699f72398d1cdb3f8ee263eaf7.jar"
-            // val fileName = "/composeResources/coshanu.composeapp.generated.resources/files/678248__pixeliota__mouse-click-sound.mp3"
-            // val jar: JarFile = JarFile(path)
-            // val jen: JarEntry?
-            // jen = JarEntry(fileName)
-            // val audioInputStream = AudioSystem.getAudioInputStream(jar.getInputStream(jen))
-
-           // Res.getUri("files/678248__pixeliota__mouse-click-sound.mp3")
-
-            // soundBoard.mixer.
-            // soundBoard.mixer.play(sound.name)
-
             playAudioFromJar(Res.getUri(sound.soundResourceUri))
         } else {
             soundBoard.mixer.play(sound.name)
@@ -151,6 +143,22 @@ fun playAudioFromJar(jarFilePathWithEntry: String) {
 
     fun release() = audioByte.release()
      */
+
+
+    private fun getOutFormat(inFormat: AudioFormat): AudioFormat {
+        val ch = inFormat.channels
+        val rate = inFormat.sampleRate
+        return AudioFormat(AudioFormat.Encoding.PCM_SIGNED, rate, 16, ch, ch * 2, rate, false)
+    }
+
+    private fun stream(`in`: AudioInputStream, line: SourceDataLine) {
+        val buffer = ByteArray(65536)
+        var n = 0
+        while (n != -1) {
+            line.write(buffer, 0, n)
+            n = `in`.read(buffer, 0, buffer.size)
+        }
+    }
 }
 
 

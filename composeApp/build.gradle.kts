@@ -131,6 +131,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
             // implementation("com.guardsquare:proguard-gradle:7.7.0")
+            implementation("com.googlecode.soundlibs:mp3spi:1.9.5.4")
         }
 
         commonTest.dependencies {
