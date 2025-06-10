@@ -30,6 +30,8 @@ needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flag
 - pass withImpressum parameter to the app (see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt)
 - usage of Snackbar, including closing after defined time (see App.kt/App() and SettingsArea.kt/SettingsArea())
 - usage of extension functions and values for colors (see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
+- tooltip for all compile targets (see composeApp/src/commonMain/kotlin/ui/Tooltip.kt)
+instead of just for Android like TooltipBox or just for Desktop like TooltipArea
 
 # Kotlin Multiplatform Development
 

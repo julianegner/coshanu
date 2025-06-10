@@ -27,8 +27,8 @@ import isLandscape
 import kotlin.math.PI
 import landscapeOrAndroid
 import ui.UiStateHolder.standardTextSize
+import util.TooltipWrapper
 import util.clickableHoverIcon
-import util.tooltip
 
 
 @Composable
@@ -47,33 +47,38 @@ fun GameSymbol() {
         fontStyle = FontStyle.Italic,
         textAlign = TextAlign.Center,
         modifier = Modifier
-            .offset(y =
-                if (isLandscape)
-                    250.dp
-                else
-                    820.dp
-                    // 500.dp - 500 is inside of the circle
+            .offset(
+                y =
+                    if (isLandscape)
+                        250.dp
+                    else
+                        820.dp
+                // 500.dp - 500 is inside of the circle
             )
     )
-    CircleOfTiles(
-        elements = listOf(
-            newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
-            newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
-            newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
-            newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
-            newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
-            newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
-        ),
-        modifier =
-        Modifier
-            // todo offset for mobile
-            .tooltip(stringResource(hintTextResource), DpOffset(x = 70.dp, y = 150.dp))
-            .fillMaxSize()
-            .clickable(interactionSource = null, indication = null) {
-                GameStateHolder.openMenu()
-            }
-            .clickableHoverIcon()
-    )
+
+    TooltipWrapper(
+        stringResource(hintTextResource),
+        DpOffset(x = UiStateHolder.screenWidth.value / 2 + 50.dp, y = 150.dp)
+    ) {
+        CircleOfTiles(
+            elements = listOf(
+                newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3),
+                newTileData(Color.Red, ShapeEnum.CIRCLE, 1),
+                newTileData(Color.Cyan, ShapeEnum.SQUARE, 2),
+                newTileData(Color.Green, ShapeEnum.HEXAGON, 3),
+                newTileData(Color.DarkGray, ShapeEnum.OCTAGON, 4),
+                newTileData(Color.Magenta, ShapeEnum.PENTAGON, 5)
+            ),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .clickable(interactionSource = null, indication = null) {
+                        GameStateHolder.openMenu()
+                    }
+                    .clickableHoverIcon()
+        )
+    }
 }
 
 @Composable
@@ -103,11 +108,7 @@ fun CircleOfTiles(elements: List<TileData>,
                   centerY: Dp = 0.dp,
                   elementSize: Dp = 100.dp,
                   modifier: Modifier = Modifier) {
-    // val radius = if (landscapeOrAndroid) 50.dp else 220.dp
-    // val centerX = 0.dp
-    // val centerY = if (landscapeOrAndroid) 100.dp else 400.dp
     val angleStep = 360 / elements.size
-    // val elementSize = if (landscapeOrAndroid) 50.dp else 100.dp
 
     CircleOfTilesBox(
         elements = elements,
