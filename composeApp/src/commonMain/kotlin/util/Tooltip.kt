@@ -22,50 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import ui.UiStateHolder
 
-// function with changeable values from UI State Holder
 @Composable
-fun Modifier.tooltip(
+fun TooltipWrapper(
     text: String,
-    offset: DpOffset = DpOffset(0.dp, 0.dp)): Modifier
-        = this.tooltip(
-            offset = offset,
-            backgroundColor = if (UiStateHolder.darkModeState.value)
-                Color.Gray
-            else
-                Color.LightGray) {
-
-            Text(text,
-                fontSize = UiStateHolder.standardTextSize.value,
-                lineHeight = UiStateHolder.standardLineHeight.value
-            )
-        }
-
-// function without any UI stateholder calls, usable in a library
-@Composable
-fun Modifier.tooltip(
     offset: DpOffset = DpOffset(0.dp, 0.dp),
-    backgroundColor: Color = Color.LightGray,
-    content: @Composable () -> Unit
-): Modifier = this.tooltip(
-    modifier = Modifier
-        .offset(offset.x, offset.y)
-        .clip(RoundedCornerShape(8.dp))
-        .background(backgroundColor)
-        .padding(10.dp),
-    content
-)
-
-// function holding the tooltip logic
-@Composable
-fun Modifier.tooltip(
-        modifier: Modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
-            .background(Color.LightGray)
-            .padding(10.dp)
-            ,
-        content: @Composable () -> Unit
-    ): Modifier {
-
+    content: @Composable () -> Unit,
+) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = remember { mutableStateOf(false) }
 
@@ -77,72 +39,41 @@ fun Modifier.tooltip(
             }
         }
     }
-    if (isHovered.value) {
-        Tooltip(modifier, content)
+    Box(modifier = Modifier
+        .hoverable(interactionSource = interactionSource, enabled = true)) {
+        if (isHovered.value) {
+            Tooltip(text, offset)
+        }
+        content()
     }
-
-
-    return this
-        .hoverable(interactionSource = interactionSource, enabled = true)
 }
 
 // UI element to show the tooltip
 @Composable
 fun Tooltip(
-        modifier: Modifier,
-        content: @Composable () -> Unit,
+    text: String,
+    offset: DpOffset = DpOffset(0.dp, 0.dp),
 ) {
     Box(
-        modifier = Modifier
+        modifier =  Modifier
             .zIndex(1f)
             .layout { measurable, constraints ->
                 // Measure the tooltip but don't add it to the layout
                 val placeable = measurable.measure(constraints)
-                layout(0, 0) {
+                layout(0,0) { // Set the size to 0 to avoid taking up space and move other elements
                     placeable.place(0, 0)
                 }
             }
-            .then(modifier)
-
+            .offset(x = offset.x, y = offset.y)
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color.LightGray)
+            .padding(10.dp)
     ) {
-        content()
+        Text(
+            text,
+            fontSize = UiStateHolder.standardTextSize.value,
+            lineHeight = UiStateHolder.standardLineHeight.value
+        )
     }
 }
 
-/*
-this wrapper is ment for usage where the modifier extension function does not work
-like on the InfoSymbol, which is inside of a Row and the symbol flickers if not wrapped
-for the moment, the infoSymbol is wrapped in a row where the tooltip is used
-when the tooltip is moved to a library, this must be fixed
- */
-// @Composable
-// fun TooltipWrapper(
-//     text: String,
-//     offset: DpOffset = DpOffset(0.dp, 0.dp),
-//     modifier: Modifier? = null,
-//     content: @Composable () -> Unit
-// ) {
-//     // todo this does not work, it does not show the tooltip
-//     val mod = Modifier.tooltip(text)
-//     /*
-//         if (modifier != null)
-//             Modifier.tooltip(offset, modifier,
-//                 { Text(text) })
-//         else
-//             Modifier.tooltip(text, offset)
-//
-//      */
-//     Row {
-//         Box(modifier = mod) { // } Modifier.tooltip(text)) {
-//             content()
-//         }
-//     }
-//
-//     /*
-//     Row {
-//         Box(modifier = Modifier.tooltip(text)) {
-//             content()
-//         }
-//     }
-//      */
-// }

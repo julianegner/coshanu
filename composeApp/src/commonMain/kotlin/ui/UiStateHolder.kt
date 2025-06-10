@@ -16,6 +16,7 @@ import settings
 object UiStateHolder {
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
     val screenType: MutableState<ScreenType> = mutableStateOf(ScreenType.LANDSCAPE)
+    val screenWidth: MutableState<Dp> = mutableStateOf(1000.dp) // Default value, will be updated later
     val standardTextSize: MutableState<TextUnit> = mutableStateOf(TextUnit(1f, TextUnitType.Em))
     val standardLineHeight: MutableState<TextUnit> = mutableStateOf(TextUnit(1.5f, TextUnitType.Em))
     val titleTextSize: MutableState<TextUnit> = mutableStateOf(TextUnit(2f, TextUnitType.Em))

@@ -2,6 +2,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +29,7 @@ import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
 import coshanu.composeapp.generated.resources.info_area_title
-import util.tooltip
+import util.TooltipWrapper
 import util.clickableHoverIcon
 import util.onClick
 
@@ -98,6 +99,7 @@ fun App() {
                         ScreenType.PORTRAIT
                     }
                 )
+                UiStateHolder.screenWidth.value = this.maxWidth
 
                 val verticalScrollModifier = mutableStateOf(
                     if (
@@ -146,15 +148,10 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         ) {
             if (isPlatformWasm) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Row { // todo this row is needed for the tooltip to work properly
-                        InfoSymbol(
-                            infoSymbolModifier
-                                // todo offset for mobile
-                                .tooltip(
-                                    stringResource(Res.string.info_area_title),
-                                    DpOffset(x = 70.dp, y = 50.dp)
-                                )
-                        )
+                    TooltipWrapper(
+                        text = stringResource(Res.string.info_area_title),
+                        DpOffset(x = 70.dp, y = 50.dp)) {
+                        InfoSymbol(infoSymbolModifier)
                     }
                     Title()
                     if (isLandscape ||
@@ -190,17 +187,14 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         .fillMaxWidth()
                         .padding(start = 20.dp)
                 ) {
-                    //GameSymbol()
-
                     if (isPlatformWasm) {
-                        InfoSymbol(
-                            infoSymbolModifier
-                                // todo offset for mobile
-                                .tooltip(
-                                    stringResource(Res.string.info_area_title),
-                                    DpOffset(x = 70.dp, y = 50.dp)
-                                )
-                        )
+                        TooltipWrapper(
+                            text = stringResource(Res.string.info_area_title),
+                            // todo offset for mobile
+                            DpOffset(x = 70.dp, y = 50.dp)
+                        ) {
+                            InfoSymbol(infoSymbolModifier)
+                        }
                         ImpressumWrapper(Modifier.fillMaxWidth(0.5f))
                     }
                     SettingsAreaWrapper()
@@ -240,11 +234,6 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                         if (!GameStateHolder.tutorial.isTutorial()) {
                             Menu()
                         }
-                        // if (GameStateHolder.tutorial.isRestartStep()) {
-                        //     StartButtonRow()
-                        //     TutorialText()
-                        // }
-                        // LostImage()
                         Board()
                     }
 
