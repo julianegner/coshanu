@@ -31,6 +31,66 @@ needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flag
 - usage of Snackbar, including closing after defined time (see App.kt/App() and SettingsArea.kt/SettingsArea())
 - usage of extension functions and values for colors (see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
 
+# Kotlin Multiplatform Development
+
+* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+  - `commonMain` is for code that’s common for all targets.
+  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
+    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
+    `iosMain` would be the right folder for such calls.
+
+* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
+  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+
+
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
+[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
+[Kotlin/Wasm](https://kotl.in/wasm/)…
+
+You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+
+## additional inforamtion about Kotlin Multiplatform
+
+create a new KMP project
+https://kmp.jetbrains.com/
+
+Overview Kotlin Multiplatform Libraries
+https://klibs.io
+
+material3 component description
+https://kotlinlang.org/api/compose-multiplatform/material3/androidx.compose.material3/
+
+## deployment
+
+There are not many web hosters that support wasm at the moment, but github pages is one of them.
+
+### Github pages
+repository must be public or paid
+
+### deploy kotlin/wasm to github pages
+https://medium.com/@schott12521/deploy-kotlin-mutliplatform-wasmjs-to-github-pages-fe295d8b420f
+
+See: https://github.com/julianegner/coshanu/blob/main/.github/workflows/main.yml
+
+### Use your own Domain  for github pages
+https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a
+
+to see if changes you made to your domain at your webhoster are propagated worldwide:
+https://www.whatsmydns.net
+
+## used images
+composeApp/src/commonMain/composeResources/drawable
+- icon.png self-made, so MIT license
+- lost.png generated (https://iconscout.com/licenses#iconscout) https://iconscout.com/ai/illustration-generator
+- Noto_Emoji_Fingerpointing.png (Apache License, Version 2.0) from https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
+- stopwatch.png (MIT license) from https://iconduck.com/icons/157837/stopwatch
+- setting.png (Apache License, Version 2.0) from https://iconduck.com/icons/56992/setting
+
+composeApp/src/commonMain/composeResources/files
+- lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
+
+
 # Development
 
 ### Web
@@ -156,56 +216,3 @@ This pushes the tag to the remote repository and the release will be build by gi
 run github action 
   Build (and Release)
 
-
-
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
-
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
-
-# deployment
-
-There are not many web hosters that support wasm at the moment, but github pages is one of them.
-
-### Github pages
-repository must be public or paid
-
-### deploy kotlin/wasm to github pages
-https://medium.com/@schott12521/deploy-kotlin-mutliplatform-wasmjs-to-github-pages-fe295d8b420f
-
-See: https://github.com/julianegner/coshanu/blob/main/.github/workflows/main.yml
-
-### Use your own Domain  for github pages
-https://hossainkhan.medium.com/using-custom-domain-for-github-pages-86b303d3918a
-
-to see if changes you made to your domain at your webhoster are propagated worldwide:
-https://www.whatsmydns.net
-
-
-...
-## images
-composeApp/src/commonMain/composeResources/drawable
-- icon.png self-made, so MIT license
-- lost.png generated (https://iconscout.com/licenses#iconscout) https://iconscout.com/ai/illustration-generator
-- Noto_Emoji_Fingerpointing.png (Apache License, Version 2.0) from https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
-- stopwatch.png (MIT license) from https://iconduck.com/icons/157837/stopwatch
-- setting.png (Apache License, Version 2.0) from https://iconduck.com/icons/56992/setting
-
-composeApp/src/commonMain/composeResources/files
-- lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
-
-## Info
-Info: create a new KMP project
-https://kmp.jetbrains.com/
