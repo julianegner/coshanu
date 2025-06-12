@@ -10,28 +10,86 @@ Also, a timer runs, you can try to be faster to make the game more challenging.
 The project is a Kotlin Multiplatform project and has some solutions you might find interesting.
 As the code is licensed unter MIT license, you can use it for your own projects, even commercial ones.
 
-Interesting solutions are:
-- scrolling (see composeApp/src/commonMain/kotlin/App.kt and look for verticalScrollModifier)
-- timer (see composeApp/src/commonMain/kotlin/util/Timer.kt)
-- Polygon (see composeApp/src/commonMain/kotlin/ui/Polygon.kt and composeApp/src/commonMain/kotlin/ui/Tile.kt)
-- Dark Mode (see ui/DarkModeSwitch.kt and usage of UiStateHolder.darkModeState.value)
-- State Holders for changing game states and ui states at runtime (see composeApp/src/commonMain/kotlin/game/GameStateHolder.kt and composeApp/src/commonMain/kotlin/ui/UiState.kt)
-- Localisation (see composeApp/src/commonMain/resources/strings) and usage by stringResource(Res.string.myString)
-- usage of lottie animation (see composeApp/src/commonMain/kotlin/ui/WonAnimation.kt)
-- usage of image resources (search for "painterResource(Res.drawable.lost)" in LostImage.kt and Board.kt)
-- usage of expect/actual for platform specific code (see composeApp/src/commonMain/kotlin/util/Platform.kt and i.e. composeApp/src/androidMain/kotlin/util/Platform.kt)
-- usable Weblink in Text (see composeApp/src/commonMain/kotlin/ui/TextLink.kt and util/util.kt for callUrl (expect/actual))
-- toClipboard (see composeApp/src/commonMain/kotlin/util/Clipboard.kt and Clipboard.kt in the platform specific folders)
-- enums with localised strings (see composeApp/src/commonMain/kotlin/game/enums/GameState.kt)
-- run after delay (see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt)
-- show app loading info in wasm web page (see composeApp/src/wasmJsMain/resources/index.html and composeApp/src/wasmJsMain/kotlin/main.kt)
-- change language at runtime (see composeApp/src/commonMain/kotlin/App.kt and composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt)
+### Interesting solutions are:
+
+- ##### scrolling
+(see composeApp/src/commonMain/kotlin/App.kt and look for verticalScrollModifier)
+
+- ##### timer
+This counts the seconds since starting the timer when running,
+while not changing it when not running to show the time it took to finish the game.
+see composeApp/src/commonMain/kotlin/util/Timer.kt
+
+- ##### Polygon
+Creating an Outline of a polygon with a given number of sides.
+This is used in polygonBox to create the polygon shapes for the game.
+see composeApp/src/commonMain/kotlin/ui/Polygon.kt and composeApp/src/commonMain/kotlin/ui/Tile.kt
+
+- ##### Dark Mode
+see ui/DarkModeSwitch.kt and usage of UiStateHolder.darkModeState.value
+Also see Color.modeDependantColor in ColorExtension.kt for the usage of dark mode colors.
+
+- ##### State Holders
+for changing game states and ui states at runtime
+see composeApp/src/commonMain/kotlin/game/GameStateHolder.kt 
+and composeApp/src/commonMain/kotlin/ui/UiState.kt
+
+- #### Localisation
+see composeApp/src/commonMain/resources/strings
+and usage by stringResource(Res.string.myString)
+
+- ##### enums with localised strings
+see composeApp/src/commonMain/kotlin/game/enums/GameState.kt
+
+- ##### change language at runtime
+see composeApp/src/commonMain/kotlin/App.kt and
+composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt
 needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
-- pass withImpressum parameter to the app (see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt)
-- usage of Snackbar, including closing after defined time (see App.kt/App() and SettingsArea.kt/SettingsArea())
-- usage of extension functions and values for colors (see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
-- tooltip for all compile targets (see composeApp/src/commonMain/kotlin/ui/Tooltip.kt)
+
+- ##### usage of lottie animation
+Use lottie animations 
+see composeApp/src/commonMain/kotlin/ui/WonAnimation.kt
+
+- ##### usage of image resources 
+search for "painterResource(Res.drawable.lost)" in LostImage.kt and Board.kt
+
+- ##### usage of expect/actual for platform specific code 
+see composeApp/src/commonMain/kotlin/util/Platform.kt 
+and i.e. composeApp/src/androidMain/kotlin/util/Platform.kt
+
+- ##### usable Weblink in Text 
+see composeApp/src/commonMain/kotlin/ui/TextLink.kt and util/util.kt for callUrl (expect/actual)
+
+- ##### toClipboard 
+see composeApp/src/commonMain/kotlin/util/Clipboard.kt and Clipboard.kt in the platform specific folders
+
+- ##### run after delay 
+see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt
+
+- ##### show app loading info in wasm web page
+When the app is starting up in web/wasm, it takes some seconds until the app is ready.
+To show something else than a white page, the app shows a loading message.
+see composeApp/src/wasmJsMain/resources/index.html 
+and composeApp/src/wasmJsMain/kotlin/main.kt
+
+- ##### pass withImpressum parameter to the app 
+To be able to show the impressum in the web app, a parameter can be passed to the app.
+The Impressum is shown in the deployed web app at https://cosha.nu but not the one hosted at https://jegner.itch.io/coshanu.
+see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt
+
+- ##### usage of Snackbar, including closing after defined time
+Snackbar usually shows a message for short or long time - here we can set an exact time
+see App.kt/App() and SettingsArea.kt/SettingsArea()
+
+- ##### usage of extension functions and values for colors
+extension functions are a standard feature of kotlin itself, here used to add functionality to the Color class
+(see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
+
+- ##### tooltip for all compile targets 
+This is self written, as no library exists that supports all targets
 instead of just for Android like TooltipBox or just for Desktop like TooltipArea
+(see composeApp/src/commonMain/kotlin/ui/Tooltip.kt)
+
 
 # Kotlin Multiplatform Development
 
