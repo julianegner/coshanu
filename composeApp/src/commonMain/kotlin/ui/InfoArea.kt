@@ -1,7 +1,6 @@
 package ui
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -29,9 +28,9 @@ import ui.UiStateHolder.standardTextSize
 import ui.UiStateHolder.subtitleTextSize
 import ui.UiStateHolder.titleTextSize
 import WithImpressum.withImpressum
+import com.hyperether.resources.AppLocale
 import isLandscape
 import util.darkmodeLinkBlue
-import util.modeDependantColor
 import util.onClick
 
 val displayLicenseDetails: MutableState<Boolean> = mutableStateOf(false)
@@ -61,9 +60,7 @@ fun InfoArea() {
         BulletPoint(stringResource(Res.string.platform_availability_title))
         Text(stringResource(Res.string.platform_availability_info), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         PlatformOverviewTable()
-        // localization
-        BulletPoint(stringResource(Res.string.localization_title))
-        Text(stringResource(Res.string.localization_info), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+        LocalizationOverview()
         Text("${stringResource(Res.string.translators_prefix)} ${currentLanguage.value.nativeName}: ${stringResource(Res.string.translator)}", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
         // contribute
         BulletPoint(stringResource(Res.string.contribute_title))
@@ -77,6 +74,22 @@ fun InfoArea() {
         }
     }
     closingX { UiStateHolder.displayInfoArea.value = false }
+}
+
+@Composable
+fun LocalizationOverview() {
+    BulletPoint(stringResource(Res.string.localization_title))
+    Text(stringResource(Res.string.localization_info), fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+
+    if (currentLanguage.value.name == "DEFAULT" ) {
+        AppLocale.supportedLocales.forEach { locale ->
+            BulletPoint(locale.value, 1, false)
+        }
+    } else {
+        AppLocale.supportedNativeLocales.forEach { locale ->
+            BulletPoint(locale.value, 1, false)
+        }
+    }
 }
 
 // this is for legal reasons. Should not be needed, as its a non-commercial website, but better safe than sorry
@@ -168,8 +181,10 @@ fun ImpressumWrapper(rowModifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BulletPoint(text: String) {
-    Text("\n* $text", fontSize = standardTextSize.value, fontStyle = FontStyle.Italic, lineHeight = standardLineHeight.value)
+fun BulletPoint(text: String, indention: Int = 0, lineBreakBefore: Boolean = true) {
+    val lineBreakString = if (lineBreakBefore) "\n" else ""
+    val indentionString = if (indention > 0) " ".repeat(indention * 4) else ""
+    Text("$lineBreakString$indentionString* $text", fontSize = standardTextSize.value, fontStyle = FontStyle.Italic, lineHeight = standardLineHeight.value)
 }
 
 @Composable

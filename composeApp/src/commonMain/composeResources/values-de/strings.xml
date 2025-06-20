@@ -122,7 +122,7 @@
     <string name="platform">Plattform</string>
     <string name="link">Link</string>
     <string name="localization_title">Lokalisierung</string>
-    <string name="localization_info">Das Spiel ist in einigen Sprachen verfügbar.</string>
+    <string name="localization_info">Das Spiel ist in den folgenden Sprachen verfügbar:</string>
     <string name="translators_prefix">Übersetzer für</string>
     <string name="contribute_title">Beitragen</string>
     <string name="contribute_info">Das Spiel ist Open Source und Beiträge sind willkommen. \nDu kannst zum Spiel beitragen, indem du Übersetzungen hinzufügst, Fehler behebst oder neue Features hinzufügst. \nBitte kontaktiere mich über GitHub, wenn du beitragen möchtest. \n \nWenn du das Spiel übersetzen möchtest, kannst du die Übersetzungsdatei hier herunterladen:</string>

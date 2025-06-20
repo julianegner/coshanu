@@ -119,7 +119,7 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="platform">Platform</string>
     <string name="link">Link</string>
     <string name="localization_title">Localization</string>
-    <string name="localization_info">The game is available some languages.</string>
+    <string name="localization_info">The game is available these languages:</string>
     <string name="translators_prefix">Translator(s) for</string>
     <string name="contribute_title">Contribute</string>
     <string name="contribute_info">The game is open source and contributions are welcome. \nYou can contribute to the game by adding translations, fixing bugs or adding new features. \nPlease contact me via github if you want to contribute. \n \nIf you want to translate the game, you can download the translation file here:</string>
