@@ -4,18 +4,7 @@ import app.lexilabs.basic.sound.SoundBoard
 import app.lexilabs.basic.sound.SoundByte
 import app.lexilabs.basic.sound.play
 import coshanu.composeapp.generated.resources.Res
-import isPlatformJava
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-
-import java.util.jar.JarFile
-import java.io.BufferedInputStream
-
-import javax.sound.sampled.AudioFormat
-import javax.sound.sampled.AudioInputStream
-import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.AudioSystem.getAudioInputStream
-import javax.sound.sampled.DataLine.Info
-import javax.sound.sampled.SourceDataLine
 
 // https://github.com/LexiLabs-App/basic-sound
 
@@ -54,9 +43,7 @@ class SoundBoardTT(val context: Any) {
             soundBoard.load(
                 SoundByte(
                     name = sound.name,
-                    // localPath = "/composeResources/coshanu.composeapp.generated.resources/" + sound.soundResourceUri
                     localPath = Res.getUri(sound.soundResourceUri)
-                    // localPath = "/composeResources/coshanu.composeApp.generated.resources/files/678248__pixeliota__mouse-click-sound.mp3"
                 )
             )
         }
@@ -66,98 +53,13 @@ class SoundBoardTT(val context: Any) {
             println("Error powering up sound board: ${e.message}")
             e.printStackTrace()
         }
-
     }
-
-fun playAudioFromJar(jarFilePathWithEntry: String) {
-    try {
-        val parts = jarFilePathWithEntry.split("!")
-        if (parts.size != 2) {
-            println("Invalid JAR file path format: $jarFilePathWithEntry")
-            return
-        }
-
-        val jarFilePath = parts[0].substringAfter("jar:file:")
-        val entryPath = parts[1].removePrefix("/")
-
-        val jarFile = JarFile(jarFilePath)
-        val jarEntry = jarFile.getJarEntry(entryPath)
-        if (jarEntry == null) {
-            println("File not found in JAR: $entryPath")
-            return
-        } else {
-            println("Found entry in JAR: $entryPath")
-        }
-
-        val inputStream = BufferedInputStream(jarFile.getInputStream(jarEntry))
-        // val audioInputStream = AudioSystem.getAudioInputStream(inputStream)
-
-        getAudioInputStream(inputStream).use { `in` ->
-            val outFormat = getOutFormat(`in`.format)
-            val info = Info(SourceDataLine::class.java, outFormat)
-            AudioSystem.getLine(info).use { line ->
-                (line as? SourceDataLine)?.let { l ->
-                    l.open(outFormat)
-                    l.start()
-                    stream(getAudioInputStream(outFormat, `in`), l)
-                    l.drain()
-                    l.stop()
-                }
-            }
-        }
-
-        /*
-        val clip: Clip = AudioSystem.getClip()
-        clip.open(audioInputStream)
-        clip.start()
-        println("Playing audio: $entryPath")
-        Thread.sleep(clip.microsecondLength / 1000)
-         */
-    } catch (e: Exception) {
-        println("Error playing audio: ${e.message}")
-        e.printStackTrace()
-    }
-}
 
     fun play(sound: SoundBytes) {
-        if (isPlatformJava) {
-            playAudioFromJar(Res.getUri(sound.soundResourceUri))
-        } else {
-            soundBoard.mixer.play(sound.name)
-        }
-    }
-
-    // fun powerDown() = soundBoard.powerDown()
-
-    /*
-    // todo replace AudioByte with SoundBoard because AudioByte has a memory leak
-    // AudioByte' is deprecated. AudioByte greedily eats up memory. Switch to the newer channel-based implementation, SoundBoard(context = Any?).
-    private val audioByte = AudioByte()
-
-    fun play(sound: SoundBytes) {
-        if (UiStateHolder.soundActive.value) {
-            audioByte.play(audioByte.load("", Res.getUri(sound.soundResourceUri)))
-        }
-    }
-
-
-    fun release() = audioByte.release()
-     */
-
-
-    private fun getOutFormat(inFormat: AudioFormat): AudioFormat {
-        val ch = inFormat.channels
-        val rate = inFormat.sampleRate
-        return AudioFormat(AudioFormat.Encoding.PCM_SIGNED, rate, 16, ch, ch * 2, rate, false)
-    }
-
-    private fun stream(`in`: AudioInputStream, line: SourceDataLine) {
-        val buffer = ByteArray(65536)
-        var n = 0
-        while (n != -1) {
-            line.write(buffer, 0, n)
-            n = `in`.read(buffer, 0, buffer.size)
-        }
+        println("***")
+        println("Playing sound: ${sound.name} from resource: ${sound.soundResourceUri}")
+        println("***")
+        soundBoard.mixer.play(sound.name)
     }
 }
 
