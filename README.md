@@ -147,6 +147,16 @@ composeApp/src/commonMain/composeResources/drawable
 - stopwatch.png (MIT license) from https://iconduck.com/icons/157837/stopwatch
 - setting.png (Apache License, Version 2.0) from https://iconduck.com/icons/56992/setting
 
+patterns for the colorless version of the tiles:
+- waves.png <a href="https://www.flaticon.com/free-icons/water" title="water icons">Water icons created by Elias Bikbulatov - Flaticon</a>
+- dot_grid.png <a href="https://www.flaticon.com/free-icons/dots" title="dots icons">Dots icons created by Andrejs Kirma - Flaticon</a>
+- plant.png <a href="https://www.flaticon.com/free-icons/leaf" title="leaf icons">Leaf icons created by Pixel perfect - Flaticon</a>
+- fire.png <a href="https://www.flaticon.com/free-icons/fire" title="fire icons">Fire icons created by Those Icons - Flaticon</a>
+- pattern_lines_up.png <a href="https://www.flaticon.com/free-icons/abstract" title="abstract icons">Abstract icons created by Creatype - Flaticon</a>
+- pattern_lines_crossed.png <a href="https://www.flaticon.com/free-icons/pattern" title="pattern icons">Pattern icons created by Irfansusanto20 - Flaticon</a>
+- fish.png <a href="https://www.flaticon.com/free-icons/ocean" title="ocean icons">Ocean icons created by Freepik - Flaticon</a>
+- cat.png <a href="https://www.flaticon.com/free-icons/black-cat" title="black cat icons">Black cat icons created by PLANBSTUDIO - Flaticon</a>
+
 composeApp/src/commonMain/composeResources/files
 - lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
 

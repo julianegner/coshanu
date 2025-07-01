@@ -8,6 +8,9 @@
     <string name="tutorial">Tutorial</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
+    <string name="color_active">mit Farben</string>
+    <string name="color_inactive">ohne Farben</string>
+    <string name="color_option_description">Du kannst hier die Farben abschalten und durch Pattern ersetzen.</string>
 
     <string name="single_element">Ein Element</string>
     <string name="two_elements">Zwei Elemente</string>

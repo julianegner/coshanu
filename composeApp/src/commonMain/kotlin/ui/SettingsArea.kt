@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.color_option_description
 import coshanu.composeapp.generated.resources.reset_settings
 import coshanu.composeapp.generated.resources.setting
 import coshanu.composeapp.generated.resources.settings
@@ -94,6 +95,14 @@ private fun SettingsArea() {
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         DarkModeSwitch()
         LanguageChooser()
+
+        ColorActiveSwitch()
+        Text(
+            stringResource(Res.string.color_option_description),
+            fontSize = standardTextSize.value,
+            lineHeight = standardLineHeight.value,
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp)
+        )
 
         Button(onClick = {
             settings.clear()

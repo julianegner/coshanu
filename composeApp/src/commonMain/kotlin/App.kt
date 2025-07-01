@@ -40,6 +40,7 @@ val settings: Settings = Settings()
 val DARK_MODE = "dark_mode"
 val SOUND_ACTIVE = "sound_active"
 val CUSTOM_LOCALE = "custom_locale"
+val COLOR_ACTIVE = "color_active"
 
 object AppInitializer {
     var called = false
