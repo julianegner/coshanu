@@ -17,6 +17,7 @@ import game.TileData
 import game.same
 import isPlatformAndroid
 import util.clickableHoverIcon
+import util.modeDependantColor
 import util.onClick
 import util.runOnMainAfter
 
@@ -61,6 +62,8 @@ fun TileCard(
 
     if (!played.value) {
         val cardBorderState = remember { mutableStateOf(tileDataState.value.borderStroke) }
+        val isNextTutorialTile = GameStateHolder.tutorial.isTutorial() &&
+                GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
 
         Card(
             // only clickable if not tutorial or tutorial and allowed tile
@@ -72,17 +75,16 @@ fun TileCard(
             } else {
                 cardModifier
             },
-            backgroundColor = if (
-                GameStateHolder.tutorial.isTutorial() &&
-                GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
-            ) {
-                if (UiStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
+            backgroundColor = if (isNextTutorialTile) {
+                Color.DarkGray.modeDependantColor
+                // if (UiStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
             } else {
-                if (UiStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
+                Color.LightGray.modeDependantColor
+                // if (UiStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
             },
             border = cardBorderState.value,
         ) {
-            Tile(tileDataState, cardBorderState)
+            Tile(tileDataState, cardBorderState, isNextTutorialTile = isNextTutorialTile)
         }
     } else {
         Card(

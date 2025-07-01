@@ -8,31 +8,53 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.cat
+import coshanu.composeapp.generated.resources.dot_grid
+import coshanu.composeapp.generated.resources.fire
+import coshanu.composeapp.generated.resources.fish
+import coshanu.composeapp.generated.resources.pattern_lines_crossed
+import coshanu.composeapp.generated.resources.pattern_lines_up
+import coshanu.composeapp.generated.resources.plant
+import coshanu.composeapp.generated.resources.waves
 import game.*
 import game.enums.GameState
 import game.enums.ShapeEnum
 import isPlatformAndroid
+import org.jetbrains.compose.resources.painterResource
 import util.modeDependantColor
 import util.runOnMainAfter
 import util.darkmodeBlue
+import util.toName
 
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
          cardBorderState: MutableState<BorderStroke?>,
          boardSize: Int = GameStateHolder.boardDataState.value.size,
             modifier: Modifier = Modifier.clickable(onClick = { tileSelected(tileDataState, cardBorderState) }),
-         displayText: Boolean = true
+         displayText: Boolean = true,
+         isNextTutorialTile: Boolean = false
          ) {
 
-    val color = tileDataState.value.color.modeDependantColor
+
+    val color = getColor(tileDataState, isNextTutorialTile)
+    val additionalModifier: Modifier = getAdditionalModifier(tileDataState, isNextTutorialTile)
+
+    // todo remove
+    if (!UiStateHolder.colorActive.value) {
+        Text(tileDataState.value.color.toName())
+    }
 
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> polygonBox(color = color, sides = 1000, rotation = 0f,
+            additionalModifier = additionalModifier,
             modifier = when (boardSize) {
                 2 -> modifier.padding(20.dp)
                 4 -> modifier.padding(15.dp)
@@ -42,12 +64,13 @@ fun Tile(tileDataState: MutableState<TileData>,
                 else -> modifier.padding(5.dp)
             })
         ShapeEnum.TRIANGLE ->   polygonBox(color = color, sides = 3, rotation = 30f,
+            additionalModifier = additionalModifier,
             modifier = modifier.offset(y = if (boardSize < 8 || boardSize == 20) 15.dp else 5.dp)
         )
-        ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, modifier = modifier)
-        ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, modifier = modifier)
-        ShapeEnum.HEXAGON ->    polygonBox(color = color, sides = 6, rotation = 90f, modifier = modifier)
-        ShapeEnum.OCTAGON ->    polygonBox(color = color, sides = 8, rotation = 22.5f, modifier = modifier)
+        ShapeEnum.SQUARE ->     polygonBox(color = color, sides = 4, rotation = 45f, additionalModifier = additionalModifier, modifier = modifier)
+        ShapeEnum.PENTAGON ->   polygonBox(color = color, sides = 5, rotation = -18f, additionalModifier = additionalModifier, modifier = modifier)
+        ShapeEnum.HEXAGON ->    polygonBox(color = color, sides = 6, rotation = 90f, additionalModifier = additionalModifier, modifier = modifier)
+        ShapeEnum.OCTAGON ->    polygonBox(color = color, sides = 8, rotation = 22.5f, additionalModifier = additionalModifier, modifier = modifier)
     }
 
     if (displayText) {
@@ -171,12 +194,58 @@ private fun secondTileDoesNotMatch(
 }
 
 @Composable
-fun polygonBox(color: Color, sides: Int, rotation: Float, modifier: Modifier = Modifier) {
+fun polygonBox(
+    color: Color,
+    sides: Int,
+    rotation: Float,
+    modifier: Modifier = Modifier,
+    additionalModifier: Modifier = Modifier) {
     Box(modifier = modifier
         .clip(Polygon(sides = sides, rotation = rotation))
         .background(color)
+        .then(additionalModifier)
     ) {}
 }
 
+@Composable
+fun colorlessPattern(color: Color): androidx.compose.ui.graphics.painter.Painter =
+     when (color) {
+        Color.Blue -> painterResource(Res.drawable.waves)
+        Color.Green -> painterResource(Res.drawable.plant)
+        Color.Red -> painterResource(Res.drawable.fire)
+        Color.Yellow -> painterResource(Res.drawable.dot_grid)
+        Color.DarkGray -> painterResource(Res.drawable.pattern_lines_up)
+        Color.Magenta -> painterResource(Res.drawable.pattern_lines_crossed)
+        Color.Cyan -> painterResource(Res.drawable.fish)
+        else -> painterResource(Res.drawable.cat) // should never happer
+    }
 
+@Composable
+private fun getAdditionalModifier(
+    tileDataState: MutableState<TileData>,
+    isNextTutorialTile: Boolean
+): Modifier =
+    if (UiStateHolder.colorActive.value)
+        Modifier
+    else
+        Modifier.paint(
+            painter = colorlessPattern(tileDataState.value.color),
+            colorFilter = ColorFilter.tint(
+                if (isNextTutorialTile)
+                    Color.DarkGray.modeDependantColor
+                else
+                    Color.LightGray.modeDependantColor
+            ),
+        )
 
+private fun getColor(
+    tileDataState: MutableState<TileData>,
+    isNextTutorialTile: Boolean
+): Color =
+    if (UiStateHolder.colorActive.value)
+        tileDataState.value.color.modeDependantColor
+    // if the next playable card in tutorial, inverse the color of the tile
+    else if (isNextTutorialTile)
+        Color.LightGray.modeDependantColor
+    else
+        Color.DarkGray.modeDependantColor

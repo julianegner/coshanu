@@ -14,6 +14,9 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="tutorial">Tutorial</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
+    <string name="color_active">with colors</string>
+    <string name="color_inactive">colorless</string>
+    <string name="color_option_description">You can disable the colors and replace them with patterns.</string>
 
     <string name="single_element">Single Element</string>
     <string name="two_elements">Two Elements</string>
