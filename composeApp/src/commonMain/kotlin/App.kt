@@ -74,6 +74,7 @@ object AppInitializer {
         }
 
         UiStateHolder.soundActive.value = settings.getBoolean(SOUND_ACTIVE, true)
+        UiStateHolder.colorActive.value = settings.getBoolean(COLOR_ACTIVE, true)
     }
 
     private fun setAppLocale(locale: Locale) {

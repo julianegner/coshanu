@@ -18,16 +18,17 @@ import androidx.compose.ui.unit.dp
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.cat
 import coshanu.composeapp.generated.resources.dot_grid
-import coshanu.composeapp.generated.resources.fire
+import coshanu.composeapp.generated.resources.fire_pattern
 import coshanu.composeapp.generated.resources.fish
 import coshanu.composeapp.generated.resources.pattern_lines_crossed
 import coshanu.composeapp.generated.resources.pattern_lines_up
-import coshanu.composeapp.generated.resources.plant
+import coshanu.composeapp.generated.resources.plant_pattern
 import coshanu.composeapp.generated.resources.waves
 import game.*
 import game.enums.GameState
 import game.enums.ShapeEnum
 import isPlatformAndroid
+import org.jetbrains.compose.resources.imageResource
 import org.jetbrains.compose.resources.painterResource
 import util.modeDependantColor
 import util.runOnMainAfter
@@ -200,6 +201,7 @@ fun polygonBox(
     rotation: Float,
     modifier: Modifier = Modifier,
     additionalModifier: Modifier = Modifier) {
+
     Box(modifier = modifier
         .clip(Polygon(sides = sides, rotation = rotation))
         .background(color)
@@ -211,13 +213,13 @@ fun polygonBox(
 fun colorlessPattern(color: Color): androidx.compose.ui.graphics.painter.Painter =
      when (color) {
         Color.Blue -> painterResource(Res.drawable.waves)
-        Color.Green -> painterResource(Res.drawable.plant)
-        Color.Red -> painterResource(Res.drawable.fire)
+        Color.Green -> painterResource(Res.drawable.plant_pattern)
+        Color.Red -> painterResource(Res.drawable.fire_pattern)
         Color.Yellow -> painterResource(Res.drawable.dot_grid)
         Color.DarkGray -> painterResource(Res.drawable.pattern_lines_up)
         Color.Magenta -> painterResource(Res.drawable.pattern_lines_crossed)
         Color.Cyan -> painterResource(Res.drawable.fish)
-        else -> painterResource(Res.drawable.cat) // should never happer
+        else -> painterResource(Res.drawable.cat) // should never happen
     }
 
 @Composable
@@ -228,15 +230,16 @@ private fun getAdditionalModifier(
     if (UiStateHolder.colorActive.value)
         Modifier
     else
-        Modifier.paint(
-            painter = colorlessPattern(tileDataState.value.color),
-            colorFilter = ColorFilter.tint(
-                if (isNextTutorialTile)
-                    Color.DarkGray.modeDependantColor
-                else
-                    Color.LightGray.modeDependantColor
-            ),
-        )
+        Modifier
+            .paint(
+                painter = colorlessPattern(tileDataState.value.color),
+                colorFilter = ColorFilter.tint(
+                    if (isNextTutorialTile)
+                        Color.DarkGray.modeDependantColor
+                    else
+                        Color.LightGray.modeDependantColor
+                )
+            )
 
 private fun getColor(
     tileDataState: MutableState<TileData>,
