@@ -157,6 +157,14 @@ patterns for the colorless version of the tiles:
 - fish.png <a href="https://www.flaticon.com/free-icons/ocean" title="ocean icons">Ocean icons created by Freepik - Flaticon</a>
 - cat.png <a href="https://www.flaticon.com/free-icons/black-cat" title="black cat icons">Black cat icons created by PLANBSTUDIO - Flaticon</a>
 
+some images where not good to recognize, so a grid of them is better:
+plant.png -> plant_pattern.png
+fire.png -> fire_pattern.png
+first, create a 4x4 collage with foror,
+then remove the background with remove.bg (also shrinks the file size)
+https://www.fotor.com/design/project/d5ed6e5f-b847-4a8c-88db-7b2578eb31c3/collage
+https://www.remove.bg/de/upload
+
 composeApp/src/commonMain/composeResources/files
 - lottie_fireworks.json (Lottie simple license https://lottiefiles.com/page/license) https://lottiefiles.com/free-animation/fireworks-qE3wiVxSIg
 
