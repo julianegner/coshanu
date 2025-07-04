@@ -46,6 +46,8 @@ see composeApp/src/commonMain/kotlin/App.kt and
 composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt
 needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
 
+for hyperether.localization, see https://medium.com/@nikola.hadzic.n/compose-multiplatform-localization-plugin-simplified-multilingual-support-57682d0d10c8
+
 - ##### usage of lottie animation
 Use lottie animations 
 see composeApp/src/commonMain/kotlin/ui/WonAnimation.kt
