@@ -34,6 +34,7 @@ import util.modeDependantColor
 import util.runOnMainAfter
 import util.darkmodeBlue
 import util.toName
+import util.toPattern
 
 @Composable
 fun Tile(tileDataState: MutableState<TileData>,
@@ -210,19 +211,6 @@ fun polygonBox(
 }
 
 @Composable
-fun colorlessPattern(color: Color): androidx.compose.ui.graphics.painter.Painter =
-     when (color) {
-        Color.Blue -> painterResource(Res.drawable.waves)
-        Color.Green -> painterResource(Res.drawable.plant_pattern)
-        Color.Red -> painterResource(Res.drawable.fire_pattern)
-        Color.Yellow -> painterResource(Res.drawable.dot_grid)
-        Color.DarkGray -> painterResource(Res.drawable.pattern_lines_up)
-        Color.Magenta -> painterResource(Res.drawable.pattern_lines_crossed)
-        Color.Cyan -> painterResource(Res.drawable.fish)
-        else -> painterResource(Res.drawable.cat) // should never happen
-    }
-
-@Composable
 private fun getAdditionalModifier(
     tileDataState: MutableState<TileData>,
     isNextTutorialTile: Boolean
@@ -232,7 +220,7 @@ private fun getAdditionalModifier(
     else
         Modifier
             .paint(
-                painter = colorlessPattern(tileDataState.value.color),
+                painter = painterResource(tileDataState.value.color.toPattern().drawableResource),
                 colorFilter = ColorFilter.tint(
                     if (isNextTutorialTile)
                         Color.DarkGray.modeDependantColor

@@ -68,7 +68,9 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="hexagon">Hexagon</string>
     <string name="octagon">Octagon</string>
 
-    <string name="with_number">with Number</string>
+    <string name="with">with</string>
+    <string name="and">and</string>
+    <string name="the_number">Number</string>
 
     <string name="next_level">Next Level</string>
 
@@ -131,6 +133,16 @@ When using multiline strings, please be aware that all line breaks and indentati
 
     <string name="settings">Settings</string>
     <string name="reset_settings">reset settings</string>
+
+    <string name="pattern_waves">waves</string>
+    <string name="pattern_plant">plants</string>
+    <string name="pattern_fire">fire</string>
+    <string name="pattern_dot_grid">dots</string>
+    <string name="with_pattern_dot_grid">dots</string>
+    <string name="pattern_lines_up">lines</string>
+    <string name="pattern_lines_crossed">crossed lines</string>
+    <string name="pattern_fish">fishes</string>
+    <string name="pattern_cat">cat</string>
 
     <!--
     Dear translators, please put your name here.

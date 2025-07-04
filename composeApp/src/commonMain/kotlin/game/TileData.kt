@@ -12,6 +12,7 @@ import com.hyperether.resources.stringResource
 import ui.UiStateHolder
 import util.modeDependantColor
 import util.toName
+import util.toPattern
 import util.toSaveName
 
 data class TileData(
@@ -36,12 +37,53 @@ fun newTileData(color: Color, shape: ShapeEnum, number: Int): TileData =
 @Composable
 fun TileData.tutorialString(): String {
 
-    var colorPrefix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_prefix_circle) else stringResource(Res.string.color_prefix)
-    var colorPostfix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_postfix_circle) else stringResource(Res.string.color_postfix)
+    if (!UiStateHolder.colorActive.value) {
+        return colorlessTutorialString()
+    }
+
+    val colorPrefix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_prefix_circle) else stringResource(Res.string.color_prefix)
+    val colorPostfix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_postfix_circle) else stringResource(Res.string.color_postfix)
 
     return "${colorPrefix} ${this.color.toName().lowercase()}${colorPostfix} " +
             "${stringResource(this.shape.resourceId)} " +
-            "${stringResource(Res.string.with_number)} ${this.number}"
+            "${stringResource(Res.string.with)} ${stringResource(Res.string.the_number)} ${this.number}"
+}
+
+@Composable
+private fun TileData.colorlessTutorialString(): String {
+    /*
+
+Text in README anpassen und aus neue Funktion hinweisen
+remove: Text feld in Tile.kt
+
+evtl tooltip, der anzeigt, welche Karte da ist (z.B. "Dreieck mit Pflanze und der Nummer 4") oder Dreieck, Pflanze, 4
+
+evtl. extra klasse für colorless, wo die entsprechenden code teile zusammengefasst werden
+
+     */
+
+    val patternPrefix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_prefix_circle) else stringResource(Res.string.color_prefix)
+    val patternString = "${stringResource(this.color.toPattern().withStringResourceId)} "
+
+
+    /*
+todo
+
+
+Tutorial
+.. und nur noch blaue Karten bleiben
+
+tutorial 2 Karten
+..spiel das erste grüne Paar
+das zweite grüne Paar
+
+spiel eins der blauen Paare
+*/
+
+    return  "${patternPrefix} ${stringResource(this.shape.resourceId)} " +
+            "${stringResource(Res.string.with)} ${patternString}" +
+            "${stringResource(Res.string.and)} ${stringResource(Res.string.the_number)} ${this.number}"
+
 }
 
 fun TileData.same(secondTileData: TileData): Boolean = ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))

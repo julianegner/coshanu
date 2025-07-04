@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import coshanu.composeapp.generated.resources.*
 import com.hyperether.resources.stringResource
+import game.enums.Pattern
 import ui.UiStateHolder
 
 val darkmodeBlue = Color(0xAA0000FF)
@@ -71,4 +72,16 @@ fun stringToColor(colorString: String): Color =
         "magenta" -> Color.Magenta
         "cyan" -> Color.Cyan
         else -> Color.Unspecified
+    }
+
+fun Color.toPattern(): Pattern =
+    when (this) {
+        Color.Blue -> Pattern.Waves
+        Color.Green -> Pattern.Plant
+        Color.Red -> Pattern.Fire
+        Color.Yellow -> Pattern.DotGrid
+        Color.DarkGray -> Pattern.LinesUp
+        Color.Magenta -> Pattern.LinesCrossed
+        Color.Cyan -> Pattern.Fish
+        else -> Pattern.Cat // should never happen
     }

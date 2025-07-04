@@ -72,7 +72,9 @@
     <string name="hexagon">Sechseck</string>
     <string name="octagon">Achteck</string>
 
-    <string name="with_number">mit der Nummer</string>
+    <string name="with">mit</string>
+    <string name="and">und</string>
+    <string name="the_number">der Nummer</string>
 
     <string name="next_level">Nächstes Level</string>
 
@@ -134,6 +136,17 @@
 
     <string name="settings">Einstellungen</string>
     <string name="reset_settings">Einstellungen zurücksetzen</string>
+
+    <string name="pattern_waves">Wellen</string>
+    <string name="pattern_plant">Pflanzen</string>
+    <string name="pattern_fire">Feuer</string>
+    <string name="pattern_dot_grid">Punkte</string>
+    <string name="with_pattern_dot_grid">Punkten</string>
+    <string name="pattern_lines_up">schräge Linien</string>
+    <string name="pattern_lines_crossed">kreuzende Linien</string>
+    <string name="pattern_fish">Fische</string>
+    <string name="pattern_cat">Katze</string>
+
 
     <!--
 Dear translators, please put your name here.
