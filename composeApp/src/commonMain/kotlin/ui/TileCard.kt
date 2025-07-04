@@ -77,10 +77,8 @@ fun TileCard(
             },
             backgroundColor = if (isNextTutorialTile) {
                 Color.DarkGray.modeDependantColor
-                // if (UiStateHolder.darkModeState.value) { Color.LightGray } else { Color.DarkGray }
             } else {
                 Color.LightGray.modeDependantColor
-                // if (UiStateHolder.darkModeState.value) { Color.DarkGray } else { Color.LightGray }
             },
             border = cardBorderState.value,
         ) {
