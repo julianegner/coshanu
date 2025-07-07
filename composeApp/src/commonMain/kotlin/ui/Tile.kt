@@ -49,11 +49,6 @@ fun Tile(tileDataState: MutableState<TileData>,
     val color = getColor(tileDataState, isNextTutorialTile)
     val additionalModifier: Modifier = getAdditionalModifier(tileDataState, isNextTutorialTile)
 
-    // todo remove
-    if (!UiStateHolder.colorActive.value) {
-        Text(tileDataState.value.color.toName())
-    }
-
     when (tileDataState.value.shape) {
         ShapeEnum.CIRCLE -> polygonBox(color = color, sides = 1000, rotation = 0f,
             additionalModifier = additionalModifier,
