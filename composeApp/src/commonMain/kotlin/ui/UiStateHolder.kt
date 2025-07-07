@@ -1,5 +1,6 @@
 package ui
 
+import CARD_TOOLTIP_ACTIVE
 import COLOR_ACTIVE
 import DARK_MODE
 import SOUND_ACTIVE
@@ -17,6 +18,7 @@ import settings
 object UiStateHolder {
     val darkModeState: MutableState<Boolean> = mutableStateOf(false)
     val colorActive: MutableState<Boolean> = mutableStateOf(true)
+    val cardTooltipActive: MutableState<Boolean> = mutableStateOf(false)
     val screenType: MutableState<ScreenType> = mutableStateOf(ScreenType.LANDSCAPE)
     val screenWidth: MutableState<Dp> = mutableStateOf(1000.dp) // Default value, will be updated later
     val standardTextSize: MutableState<TextUnit> = mutableStateOf(TextUnit(1f, TextUnitType.Em))
@@ -66,4 +68,9 @@ object UiStateHolder {
         settings.putBoolean(COLOR_ACTIVE, value)
     }
 
+    fun setCardTooltipActive(value: Boolean) {
+        cardTooltipActive.value = value
+        // Save to settings
+        settings.putBoolean(CARD_TOOLTIP_ACTIVE, value)
+    }
 }

@@ -12,11 +12,15 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="tap_anywhere">tap anywhere to start</string>
     <string name="choose_level">Choose a Level:</string>
     <string name="tutorial">Tutorial</string>
+
+    <!-- settings area -->
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
     <string name="color_active">with colors</string>
     <string name="color_inactive">colorless</string>
     <string name="color_option_description">You can disable the colors and replace them with patterns.</string>
+    <string name="card_tooltip_active">with card tooltips</string>
+    <string name="card_tooltip_inactive">without card tooltips</string>
 
     <string name="single_element">Single Element</string>
     <string name="two_elements">Two Elements</string>
@@ -148,6 +152,7 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="with_pattern_dot_grid">dots</string>
     <string name="pattern_lines_up">lines</string>
     <string name="pattern_lines_crossed">crossed lines</string>
+    <string name="short_pattern_lines_crossed">crossed</string>
     <string name="pattern_fish">fishes</string>
     <string name="pattern_cat">cat</string>
 

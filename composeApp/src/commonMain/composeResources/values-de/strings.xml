@@ -6,11 +6,15 @@
     <string name="choose_level">Wähle ein Level:</string>
 
     <string name="tutorial">Tutorial</string>
+
+    <!-- settings area -->
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
     <string name="color_active">mit Farben</string>
     <string name="color_inactive">ohne Farben</string>
     <string name="color_option_description">Du kannst hier die Farben abschalten und durch Pattern ersetzen.</string>
+    <string name="card_tooltip_active">Karten mit Tooltips</string>
+    <string name="card_tooltip_inactive">Karten ohne Tooltips</string>
 
     <string name="single_element">Ein Element</string>
     <string name="two_elements">Zwei Elemente</string>
@@ -149,8 +153,9 @@
     <string name="pattern_fire">Feuer</string>
     <string name="pattern_dot_grid">Punkte</string>
     <string name="with_pattern_dot_grid">Punkten</string>
-    <string name="pattern_lines_up">schräge Linien</string>
+    <string name="pattern_lines_up">Linien</string>
     <string name="pattern_lines_crossed">kreuzende Linien</string>
+    <string name="short_pattern_lines_crossed">Kreuz</string>
     <string name="pattern_fish">Fische</string>
     <string name="pattern_cat">Katze</string>
 

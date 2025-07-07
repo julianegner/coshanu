@@ -24,7 +24,7 @@ import ui.UiStateHolder
 
 @Composable
 fun TooltipWrapper(
-    text: String,
+    text: String?,
     offset: DpOffset = DpOffset(0.dp, 0.dp),
     content: @Composable () -> Unit,
 ) {
@@ -41,7 +41,7 @@ fun TooltipWrapper(
     }
     Box(modifier = Modifier
         .hoverable(interactionSource = interactionSource, enabled = true)) {
-        if (isHovered.value) {
+        if (isHovered.value && !text.isNullOrEmpty()) {
             Tooltip(text, offset)
         }
         content()
