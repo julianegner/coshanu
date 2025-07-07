@@ -71,6 +71,7 @@ fun Tooltip(
     ) {
         Text(
             text,
+            color = Color.Black,
             fontSize = UiStateHolder.standardTextSize.value,
             lineHeight = UiStateHolder.standardLineHeight.value
         )
