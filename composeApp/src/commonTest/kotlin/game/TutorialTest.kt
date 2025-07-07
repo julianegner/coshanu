@@ -35,11 +35,11 @@ class TutorialTest {
             TutorialStep(1, Res.string.tutorial_one_1, tiles[0]),
             TutorialStep(2, Res.string.tutorial_one_2, tiles[3]),
             TutorialStep(3, Res.string.tutorial_one_3, tiles[2]),
-            TutorialStep(4, Res.string.tutorial_one_4, null, true),
+            TutorialStep(4, Res.string.tutorial_one_4, null, isRestart = true),
             TutorialStep(5, Res.string.tutorial_one_5, tiles[0]),
             TutorialStep(6, Res.string.tutorial_one_6, tiles[1]),
-            TutorialStep(7, Res.string.tutorial_one_7,  tiles[2]),
-            TutorialStep(8, Res.string.tutorial_one_8,  tiles[3]),
+            TutorialStep(7, Res.string.tutorial_one_7,  tiles[2], Res.string.tutorial_one_7_pattern),
+            TutorialStep(8, Res.string.tutorial_one_8,  tiles[3], Res.string.tutorial_one_8_pattern),
             TutorialStep(9, Res.string.tutorial_one_9, null)
         ), tutorial.getTutorialSteps())
 
@@ -78,20 +78,20 @@ class TutorialTest {
             TutorialStep(1, Res.string.tutorial_two_1, tiles[0]),
             TutorialStep(2, Res.string.tutorial_two_2, tiles[1]),
             TutorialStep(3, Res.string.tutorial_two_3, tiles[15]),
-            TutorialStep(4, Res.string.tutorial_two_4, null, true),
+            TutorialStep(4, Res.string.tutorial_two_4, null, isRestart = true),
             TutorialStep(5, Res.string.tutorial_two_5, tiles[0]),
             TutorialStep(6, Res.string.tutorial_two_6, tiles[8]),
             TutorialStep(7, Res.string.tutorial_two_7, tiles[12]),
             TutorialStep(8, Res.string.tutorial_two_8, tiles[15]),
-            TutorialStep(9, Res.string.tutorial_two_9, tiles[5]),
+            TutorialStep(9, Res.string.tutorial_two_9, tiles[5], Res.string.tutorial_two_9_pattern),
             TutorialStep(10, Res.string.tutorial_two_10, tiles[6]),
-            TutorialStep(11, Res.string.tutorial_two_11, tiles[1]),
+            TutorialStep(11, Res.string.tutorial_two_11, tiles[1], Res.string.tutorial_two_11_pattern),
             TutorialStep(12, Res.string.tutorial_two_12, tiles[10]),
-            TutorialStep(13, Res.string.tutorial_two_13, tiles[11]),
+            TutorialStep(13, Res.string.tutorial_two_13, tiles[11], Res.string.tutorial_two_13_pattern),
             TutorialStep(14, Res.string.tutorial_two_14, tiles[13]),
-            TutorialStep(15, Res.string.tutorial_two_15, tiles[3]),
+            TutorialStep(15, Res.string.tutorial_two_15, tiles[3], Res.string.tutorial_two_15_pattern),
             TutorialStep(16, Res.string.tutorial_two_16, tiles[4]),
-            TutorialStep(17, Res.string.tutorial_two_17, tiles[2]),
+            TutorialStep(17, Res.string.tutorial_two_17, tiles[2], Res.string.tutorial_two_17_pattern),
             TutorialStep(18, Res.string.tutorial_two_18, tiles[14]),
             TutorialStep(19, Res.string.tutorial_two_19, tiles[7]),
             TutorialStep(20, Res.string.tutorial_two_20, tiles[9]),
@@ -101,6 +101,7 @@ class TutorialTest {
 
     @Test
     fun testEndTutorial() {
+        GameStateHolder.gameMode.value = GameMode.SINGLE_ELEMENT
         tutorial.startTutorial()
         tutorial.endTutorial()
         assertFalse(tutorial.isTutorial())
