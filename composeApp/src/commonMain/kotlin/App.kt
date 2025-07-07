@@ -41,6 +41,7 @@ val DARK_MODE = "dark_mode"
 val SOUND_ACTIVE = "sound_active"
 val CUSTOM_LOCALE = "custom_locale"
 val COLOR_ACTIVE = "color_active"
+val CARD_TOOLTIP_ACTIVE = "card_tooltip_active"
 
 object AppInitializer {
     var called = false
@@ -75,6 +76,7 @@ object AppInitializer {
 
         UiStateHolder.soundActive.value = settings.getBoolean(SOUND_ACTIVE, true)
         UiStateHolder.colorActive.value = settings.getBoolean(COLOR_ACTIVE, true)
+        UiStateHolder.cardTooltipActive.value = settings.getBoolean(CARD_TOOLTIP_ACTIVE, false)
     }
 
     private fun setAppLocale(locale: Locale) {

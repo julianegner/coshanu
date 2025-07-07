@@ -9,6 +9,8 @@ import coshanu.composeapp.generated.resources.*
 import game.enums.GameMode
 import game.enums.ShapeEnum
 import com.hyperether.resources.stringResource
+import game.enums.getShortStringResourceId
+import game.enums.getWithStringResourceId
 import ui.UiStateHolder
 import util.modeDependantColor
 import util.toName
@@ -52,12 +54,21 @@ fun TileData.tutorialString(): String {
 @Composable
 private fun TileData.colorlessTutorialString(): String {
     val patternPrefix = if (this.shape == ShapeEnum.CIRCLE) stringResource(Res.string.color_prefix_circle) else stringResource(Res.string.color_prefix)
-    val patternString = "${stringResource(this.color.toPattern().withStringResourceId)} "
+    val patternString = "${stringResource(this.color.toPattern().getWithStringResourceId())} "
 
     return  "${patternPrefix} ${stringResource(this.shape.resourceId)} " +
             "${stringResource(Res.string.with)} ${patternString}" +
             "${stringResource(Res.string.and)} ${stringResource(Res.string.the_number)} ${this.number}"
 }
+
+// this should be short, so that it fits into 3 lines of the tooltip with the largest board size
+@Composable
+fun TileData.tooltipText(): String =
+    if (UiStateHolder.colorActive.value) {
+        "${this.color.toName()}\n${stringResource(this.shape.resourceId)}\n${this.number}"
+    } else {
+        "${stringResource(this.color.toPattern().getShortStringResourceId())}\n${stringResource(this.shape.resourceId)}\n${this.number}"
+    }
 
 fun TileData.same(secondTileData: TileData): Boolean = ((this.color == secondTileData.color) && (this.shape == secondTileData.shape) && (this.number == secondTileData.number))
 

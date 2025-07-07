@@ -20,7 +20,13 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.card_tooltip_active
+import coshanu.composeapp.generated.resources.card_tooltip_inactive
+import coshanu.composeapp.generated.resources.color_active
+import coshanu.composeapp.generated.resources.color_inactive
 import coshanu.composeapp.generated.resources.color_option_description
+import coshanu.composeapp.generated.resources.dark_mode
+import coshanu.composeapp.generated.resources.light_mode
 import coshanu.composeapp.generated.resources.reset_settings
 import coshanu.composeapp.generated.resources.setting
 import coshanu.composeapp.generated.resources.settings
@@ -93,15 +99,30 @@ private fun SettingsArea() {
     val coroutineScope = rememberCoroutineScope()
 
     Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        DarkModeSwitch()
+        GenericSwitch(
+            state = UiStateHolder.darkModeState,
+            checkedText = stringResource(Res.string.dark_mode),
+            uncheckedText = stringResource(Res.string.light_mode),
+            onCheckedChange = { UiStateHolder.setDarkModeState(it) }
+        )
         LanguageChooser()
-
-        ColorActiveSwitch()
+        GenericSwitch(
+            state = UiStateHolder.colorActive,
+            checkedText = stringResource(Res.string.color_active),
+            uncheckedText = stringResource(Res.string.color_inactive),
+            onCheckedChange = { UiStateHolder.setColorActive(it) }
+        )
         Text(
             stringResource(Res.string.color_option_description),
             fontSize = standardTextSize.value,
             lineHeight = standardLineHeight.value,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp)
+        )
+        GenericSwitch(
+            state = UiStateHolder.cardTooltipActive,
+            checkedText = stringResource(Res.string.card_tooltip_active),
+            uncheckedText = stringResource(Res.string.card_tooltip_inactive),
+            onCheckedChange = { UiStateHolder.setCardTooltipActive(it) }
         )
 
         Button(onClick = {

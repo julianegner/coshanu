@@ -15,7 +15,9 @@ import game.enums.GameState
 import game.GameStateHolder
 import game.TileData
 import game.same
+import game.tooltipText
 import isPlatformAndroid
+import util.TooltipWrapper
 import util.clickableHoverIcon
 import util.modeDependantColor
 import util.onClick
@@ -65,24 +67,31 @@ fun TileCard(
         val isNextTutorialTile = GameStateHolder.tutorial.isTutorial() &&
                 GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
 
-        Card(
-            // only clickable if not tutorial or tutorial and allowed tile
-            modifier = if (GameStateHolder.isGameState(GameState.RUNNING) &&
-                (!GameStateHolder.tutorial.isTutorial() || GameStateHolder.tutorial.isAllowedTile(tileDataState.value))
-                ) {
-                cardModifier
-                    .onClick(onClick = { tileSelected(tileDataState, cardBorderState) })
-            } else {
-                cardModifier
-            },
-            backgroundColor = if (isNextTutorialTile) {
-                Color.DarkGray.modeDependantColor
-            } else {
-                Color.LightGray.modeDependantColor
-            },
-            border = cardBorderState.value,
+        TooltipWrapper(
+            if (UiStateHolder.cardTooltipActive.value)
+                tileDataState.value.tooltipText()
+            else
+                null // no tooltip at all
         ) {
-            Tile(tileDataState, cardBorderState, isNextTutorialTile = isNextTutorialTile)
+            Card(
+                // only clickable if not tutorial or tutorial and allowed tile
+                modifier = if (GameStateHolder.isGameState(GameState.RUNNING) &&
+                    (!GameStateHolder.tutorial.isTutorial() || GameStateHolder.tutorial.isAllowedTile(tileDataState.value))
+                ) {
+                    cardModifier
+                        .onClick(onClick = { tileSelected(tileDataState, cardBorderState) })
+                } else {
+                    cardModifier
+                },
+                backgroundColor = if (isNextTutorialTile) {
+                    Color.DarkGray.modeDependantColor
+                } else {
+                    Color.LightGray.modeDependantColor
+                },
+                border = cardBorderState.value,
+            ) {
+                Tile(tileDataState, cardBorderState, isNextTutorialTile = isNextTutorialTile)
+            }
         }
     } else {
         Card(
