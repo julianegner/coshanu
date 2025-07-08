@@ -33,7 +33,7 @@ import util.TooltipWrapper
 import util.clickableHoverIcon
 import util.onClick
 
-val programVersion = "1.2.0"
+val programVersion = "1.2.1"
 val gameSaveAndLoadOption = false
 
 val settings: Settings = Settings()
