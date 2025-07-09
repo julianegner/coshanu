@@ -92,6 +92,20 @@ This is self written, as no library exists that supports all targets
 instead of just for Android like TooltipBox or just for Desktop like TooltipArea
 (see composeApp/src/commonMain/kotlin/ui/Tooltip.kt)
 
+- ##### replace colors with patterns for the colorless version of the tiles
+See Color.toPattern() in ColorExtension.kt and Pattern.kt,
+getAdditionalModifier() in Tile.kt
+and TileData.colorlessTutorialString() and TileData.tooltipText() in TileData.kt
+
+- ##### special string resources
+If you need special string resources only in some cases and the standardstring resources otherwise,
+you can use (extension) functions for this
+see Pattern.getWithStringResourceId() and Pattern.getWithStringResource() in Pattern.kt
+
+- ##### GenericSwitch UI component
+simple switch component with only few needed parameters
+see composeApp/src/commonMain/kotlin/ui/GenericSwitch.kt
+
 
 # Kotlin Multiplatform Development
 
