@@ -30,6 +30,8 @@ import coshanu.composeapp.generated.resources.light_mode
 import coshanu.composeapp.generated.resources.reset_settings
 import coshanu.composeapp.generated.resources.setting
 import coshanu.composeapp.generated.resources.settings
+import coshanu.composeapp.generated.resources.sound_active
+import coshanu.composeapp.generated.resources.sound_inactive
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import settings
@@ -105,7 +107,13 @@ private fun SettingsArea() {
             uncheckedText = stringResource(Res.string.light_mode),
             onCheckedChange = { UiStateHolder.setDarkModeState(it) }
         )
-        SoundSwitch()
+        GenericSwitch(
+            state = UiStateHolder.soundActive,
+            checkedText = stringResource(Res.string.sound_active),
+            uncheckedText = stringResource(Res.string.sound_inactive),
+            onCheckedChange = { UiStateHolder.setSoundActive(it) }
+        )
+
         LanguageChooser()
         GenericSwitch(
             state = UiStateHolder.colorActive,
