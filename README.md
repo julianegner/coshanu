@@ -13,98 +13,231 @@ As the code is licensed unter MIT license, you can use it for your own projects,
 ### Interesting solutions are:
 
 - ##### scrolling
-(see composeApp/src/commonMain/kotlin/App.kt and look for verticalScrollModifier)
+Add scrolling to the App
 
-- ##### timer
+<details>
+  <summary>Click to see details</summary>
+
+see [verticalScrollModifier in App.kt](composeApp/src/commonMain/kotlin/App.kt#L108)
+> val verticalScrollModifier = mutableStateOf(Modifier.verticalScroll( rememberScrollState())
+
+```
+        Row (
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = verticalScrollModifier.value
+                .fillMaxSize()
+        )
+        {
+        [App content]
+        }
+```
+</details>
+
+
+- ##### Timer
 This counts the seconds since starting the timer when running,
 while not changing it when not running to show the time it took to finish the game.
-see composeApp/src/commonMain/kotlin/util/Timer.kt
+
+see [Timer.kt](composeApp/src/commonMain/kotlin/util/Timer.kt#L10)
 
 - ##### Polygon
 Creating an Outline of a polygon with a given number of sides.
 This is used in polygonBox to create the polygon shapes for the game.
-see composeApp/src/commonMain/kotlin/ui/Polygon.kt and composeApp/src/commonMain/kotlin/ui/Tile.kt
+
+see [Polygon.kt](composeApp/src/commonMain/kotlin/ui/Polygon.kt#L15) 
+and [Tile.kt](composeApp/src/commonMain/kotlin/ui/Tile.kt#L52-L70)
 
 - ##### Dark Mode
-see ui/DarkModeSwitch.kt and usage of UiStateHolder.darkModeState.value
-Also see Color.modeDependantColor in ColorExtension.kt for the usage of dark mode colors.
+see [DarkModeSwitch.kt](ui/DarkModeSwitch.kt) and usage of UiStateHolder.darkModeState.value
+Also see [Color.modeDependantColor](composeApp/src/commonMain/kotlin/util/ColorExtension.kt#L18) for the usage of dark mode colors.
 
 - ##### State Holders
 for changing game states and ui states at runtime
-see composeApp/src/commonMain/kotlin/game/GameStateHolder.kt 
-and composeApp/src/commonMain/kotlin/ui/UiState.kt
+
+see [GameStateHolder.kt](composeApp/src/commonMain/kotlin/game/GameStateHolder.kt) 
+and [UiState.kt](composeApp/src/commonMain/kotlin/ui/UiState.kt)
 
 - #### Localisation
-see composeApp/src/commonMain/resources/strings
-and usage by stringResource(Res.string.myString)
+
+You need localization (L10n) to support multiple languages in your app.
+
+<details>
+  <summary>Click to see details</summary>
+For Translation, see the [resource files](composeApp/src/commonMain/composeResources/values/strings.xml) 
+and usage by stringResource(Res.string.myString) like
+
+```kotlin
+        Text(
+            text = stringResource(Res.string.title),
+            fontSize = titleTextSize.value
+        )
+```
+</details>
 
 - ##### enums with localised strings
-see composeApp/src/commonMain/kotlin/game/enums/GameState.kt
+You can use enums with localised strings for display
+<details>
+  <summary>Click to see details</summary>
+see [GameState.kt](composeApp/src/commonMain/kotlin/game/enums/GameState.kt)
+
+```kotlin
+enum class GameState(val resourceId: StringResource) {
+    RESTART(Res.string.restart),
+    STARTING(Res.string.starting),
+    WON(Res.string.won),
+    LOST(Res.string.lost),
+    RUNNING(Res.string.running),
+    LEVEL_CHANGE(Res.string.level_change),
+    LOAD_GAME(Res.string.load_game)
+}
+```
+</details>
 
 - ##### change language at runtime
-see composeApp/src/commonMain/kotlin/App.kt and
-composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt
-needs plugin com.hyperether.localization and dependency dev.carlsen.flagkit:flagkit (see build.gradle.kts)
+see 
+[LanguageChooser.kt](composeApp/src/commonMain/kotlin/ui/LanguageChooser.kt)
+
+needs plugin com.hyperether.localization  
+and dependency dev.carlsen.flagkit:flagkit 
+(see [gradle file](composeApp/build.gradle.kts))
 
 for hyperether.localization, see https://medium.com/@nikola.hadzic.n/compose-multiplatform-localization-plugin-simplified-multilingual-support-57682d0d10c8
 
 - ##### usage of lottie animation
-Use lottie animations 
-see composeApp/src/commonMain/kotlin/ui/WonAnimation.kt
+Use lottie animations
+
+see [WonAnimation.kt](composeApp/src/commonMain/kotlin/ui/WonAnimation.kt)
 
 - ##### usage of image resources 
-search for "painterResource(Res.drawable.lost)" in LostImage.kt and Board.kt
+Use of Image resources in the app.
+<details>
+  <summary>Click to see details</summary>
+Image Files (e.g. png) are stored in composeApp/src/commonMain/composeResources/drawable
 
-- ##### usage of expect/actual for platform specific code 
-see composeApp/src/commonMain/kotlin/util/Platform.kt 
-and i.e. composeApp/src/androidMain/kotlin/util/Platform.kt
+and then used like this:
+```
+    Image(
+        painter = painterResource(Res.drawable.lost),
+        contentDescription = null,
+        modifier = Modifier.size(350.dp)
+    )
+```
+</details>
 
-- ##### usable Weblink in Text 
-see composeApp/src/commonMain/kotlin/ui/TextLink.kt and util/util.kt for callUrl (expect/actual)
+- ##### usage of expect/actual for platform specific code
+
+It is not always possible to write code that works on all platforms,
+therefore kotlin multiplatform supports expect/actual, so that you can write the expect function in commonMain, so that the App knwos that there should be a function,
+and then implement the actual function in the platform specific folders, like androidMain, iosMain, desktopMain, wasmJsMain.
+see [commonMain Platform.kt](composeApp/src/commonMain/kotlin/util/Platform.kt) 
+and i.e. [androidMain Platform.kt](composeApp/src/androidMain/kotlin/util/Platform.kt)
+
+- ##### usable Weblink in Text
+Unlike in HTML, where a link is easy, in Compose you need to make a Text clickable and style it so that it looks like a link
+see [TextLink.kt](composeApp/src/commonMain/kotlin/ui/TextLink.kt) 
+
+Also, to really click a Link and call an URL, you need to use the expect/actual mechanism,
+because it is different in different platforms.
+see [callUrl function](util/util.kt) (expect/actual)
 
 - ##### toClipboard 
-see composeApp/src/commonMain/kotlin/util/Clipboard.kt and Clipboard.kt in the platform specific folders
+This is a function that copies a string to the clipboard,
+which is different in different platforms.
+
+see [Clipboard.kt](composeApp/src/commonMain/kotlin/util/Clipboard.kt) 
+and Clipboard.kt in the platform specific folders, e.g.
+[androidMain Clipboard.kt](composeApp/src/androidMain/kotlin/util/Clipboard.kt)
 
 - ##### run after delay 
-see runOnMainAfter() in composeApp/src/commonMain/kotlin/util/Util.kt
+see [runOnMainAfter function](composeApp/src/commonMain/kotlin/util/util.kt#L8)
 
 - ##### show app loading info in wasm web page
 When the app is starting up in web/wasm, it takes some seconds until the app is ready.
 To show something else than a white page, the app shows a loading message.
-see composeApp/src/wasmJsMain/resources/index.html 
-and composeApp/src/wasmJsMain/kotlin/main.kt
+
+<details>
+  <summary>Click to see details</summary>
+
+Add
+> document.getElementById("loader-container")?.remove()
+
+to composeApp/src/wasmJsMain/kotlin/main.kt
+
+```
+@OptIn(ExperimentalComposeUiApi::class)
+fun main() {
+document.getElementById("loader-container")?.remove()
+CanvasBasedWindow(canvasElementId = "ComposeTarget") { App() }
+}
+```
+
+and add 
+
+> <div id="loader-container">Loading coshanu ...</div>
+
+to composeApp/src/wasmJsMain/resources/index.html
+
+````
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CoShaNu</title>
+    <link id="page_favicon"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T7WS2w3AIAhFYZ/GKdylM3UXpzDdh0qU+MBEjdZPhJPDVYTNg5vz0AVYa8k5V90RECGg6lcFHhYrgfCw1FrIHOAJgDsihoDVTA6GGBYVx7EFZxIDzQbTgBwoQw6uMPbudiiDi7LimwzJGALvU0T159MrFABZMSRWfKTfAYtZbL/CBxlxMBGC/SHMAAAAAElFTkSuQmCC"
+          rel="icon" type="image/x-icon">
+
+    <script type="application/javascript" src="composeApp.js"></script>
+</head>
+<body>
+<div id="loader-container">Loading coshanu ...</div>
+<canvas id="ComposeTarget"></canvas>
+</body>
+</html>
+````
+</details>
 
 - ##### pass withImpressum parameter to the app 
 To be able to show the impressum in the web app, a parameter can be passed to the app.
 The Impressum is shown in the deployed web app at https://cosha.nu but not the one hosted at https://jegner.itch.io/coshanu.
-see build.gradle.kts and composeApp/src/commonMain/kotlin/ui/InfoArea.kt
+see [gradle file](composeApp/build.gradle.kts) and [InfoArea.kt](composeApp/src/commonMain/kotlin/ui/InfoArea.kt)
 
 - ##### usage of Snackbar, including closing after defined time
 Snackbar usually shows a message for short or long time - here we can set an exact time
-see App.kt/App() and SettingsArea.kt/SettingsArea()
+see [App.kt](App.kt#L89-L95) and [SettingsArea.kt](ui/SettingsArea.kt#L132)
 
 - ##### usage of extension functions and values for colors
 extension functions are a standard feature of kotlin itself, here used to add functionality to the Color class
-(see composeApp/src/commonMain/kotlin/util/ColorExtension.kt)
+(see [ColorExtension.kt](composeApp/src/commonMain/kotlin/util/ColorExtension.kt))
 
 - ##### tooltip for all compile targets 
 This is self written, as no library exists that supports all targets
 instead of just for Android like TooltipBox or just for Desktop like TooltipArea
-(see composeApp/src/commonMain/kotlin/ui/Tooltip.kt)
+(see [Tooltip.kt](composeApp/src/commonMain/kotlin/ui/Tooltip.kt))
 
 - ##### replace colors with patterns for the colorless version of the tiles
-See Color.toPattern() in ColorExtension.kt and Pattern.kt,
-getAdditionalModifier() in Tile.kt
-and TileData.colorlessTutorialString() and TileData.tooltipText() in TileData.kt
+To make the game accessible for colorblind people, the game can be played in a colorless mode.
+
+<details>
+  <summary>Click to see details</summary>
+See [Color.toPattern function](util/ColorExtension.kt#L77-L87) 
+and [Pattern.kt](game/enums/Pattern.kt),
+[getAdditionalModifier function](ui/Tile.kt#L208-L225)
+and [TileData.colorlessTutorialString function](game/TileData.kt#L54-L62) 
+and [TileData.tooltipText function](game/TileData.kt#L65-L671)
+</details>
 
 - ##### special string resources
 If you need special string resources only in some cases and the standardstring resources otherwise,
 you can use (extension) functions for this
-see Pattern.getWithStringResourceId() and Pattern.getWithStringResource() in Pattern.kt
+
+see [Pattern.getWithStringResourceId](game/enums/Pattern.kt#L37) 
+and [Pattern.getShortStringResourceId](game/enums/Pattern.kt#L43)
 
 - ##### GenericSwitch UI component
 simple switch component with only few needed parameters
-see composeApp/src/commonMain/kotlin/ui/GenericSwitch.kt
+see [GenericSwitch.kt](composeApp/src/commonMain/kotlin/ui/GenericSwitch.kt)
 
 
 # Kotlin Multiplatform Development
