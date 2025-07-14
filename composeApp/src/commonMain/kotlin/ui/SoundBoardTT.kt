@@ -34,9 +34,15 @@ enum class SoundBytes(val soundResourceUri: String) {
 @OptIn(ExperimentalResourceApi::class)
 class SoundBoardTT(val context: Any) {
 
-    val soundBoard = SoundBoard(this.context)
+    var soundBoard = SoundBoard(this.context)
+
+    var soundCounter: Int = 0
 
     init {
+        loadSoundboard()
+    }
+
+    private fun loadSoundboard() {
         SoundBytes.entries.forEach { sound ->
             println("adding sound file: ${sound.soundResourceUri}")
             println("local path: ${Res.getUri(sound.soundResourceUri)}")
@@ -56,7 +62,16 @@ class SoundBoardTT(val context: Any) {
     }
 
     fun play(sound: SoundBytes) {
+        soundCounter += 1
+        // if (soundCounter % 50 == 0) {
+        //     println("Soundboard PowerDown and PowerUp to reset the sound board.")
+        //     soundBoard.mixer.
+        //     soundBoard.powerDown()
+        //     soundBoard = SoundBoard(this.context)
+        //     loadSoundboard()
+        // }
         println("***")
+        println("Sound counter: $soundCounter")
         println("Playing sound: ${sound.name} from resource: ${sound.soundResourceUri}")
         println("***")
         soundBoard.mixer.play(sound.name)

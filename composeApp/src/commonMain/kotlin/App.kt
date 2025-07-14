@@ -213,6 +213,19 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                 // .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                Button(
+                    onClick = {
+                        for (i in 1..49) {
+                            println("Button clicked $i times")
+                            UiStateHolder.sound.play(SoundBytes.CLICK)
+                        }
+                    },
+                    content = {
+                      Text("TEST")
+                    }
+                )
+
                 when (GameStateHolder.gameState.value) {
                     GameState.RUNNING -> {
                         Board()

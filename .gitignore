@@ -23,3 +23,5 @@ captures
 /composeApp/coshanu-android-release.jks.base64
 /composeApp/coshanu-apk-encoded-secret.txt
 /composeApp/coshanu-apk-secret.txt
+/composeApp/coshanu-android*
+/composeApp/coshanu-apk*
