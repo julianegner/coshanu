@@ -9,8 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import coshanu.composeapp.generated.resources.Res
-import coshanu.composeapp.generated.resources.time_is_up
 import game.GameStateHolder
 import game.GameStateHolder.timer
 import game.GameStateHolder.updateGameState
