@@ -1,6 +1,8 @@
 package ui
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
@@ -44,7 +46,9 @@ fun Menu() {
         backgroundColor = darkmodeYellow
     )
 
-    Column() {
+    Column(
+        modifier = Modifier.horizontalScroll(rememberScrollState())
+    ) {
         Text(
             fontSize = standardTextSize.value,
             text = stringResource(Res.string.choose_level),
