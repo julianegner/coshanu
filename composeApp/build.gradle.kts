@@ -23,7 +23,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    id("com.hyperether.localization") version "1.1.1"
+    id("com.hyperether.localization") version "1.2.0"
 }
 
 val withImpressum: Boolean = project.findProperty("withImpressum")?.toString()?.toBoolean() ?: false
