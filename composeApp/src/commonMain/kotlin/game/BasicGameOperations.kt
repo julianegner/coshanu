@@ -5,6 +5,7 @@ import game.GameStateHolder.level
 import game.GameStateHolder.remainingTileAmount
 import game.GameStateHolder.tutorial
 import game.enums.GameState
+import util.logAnalyticsEvent
 import util.runOnMainAfter
 import util.toClipboard
 
@@ -38,6 +39,7 @@ fun restartGame(
 
     GameStateHolder.resetTotalAllowedTime()
     GameStateHolder.timer.startTimer()
+    logAnalyticsEvent("restart_game", mapOf("level" to level.value.toString()))
 }
 
 fun endGame(
@@ -61,6 +63,7 @@ fun newGame(
 
         GameStateHolder.timer.startTimer()
         GameStateHolder.resetTotalAllowedTime()
+        logAnalyticsEvent("new_game", mapOf("level" to level.value.toString()))
     }
 }
 

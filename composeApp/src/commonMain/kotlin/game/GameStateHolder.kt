@@ -6,6 +6,7 @@ import game.enums.GameMode
 import game.enums.GameState
 import game.enums.ShapeEnum
 import util.Timer
+import util.logAnalyticsEvent
 import util.stringToColor
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -104,9 +105,11 @@ object GameStateHolder {
         if ( remainingTileAmount.value == 0) {
             timer.stopTimer()
             updateGameState(GameState.WON)
+            logAnalyticsEvent("won_game", mapOf("level" to level.value.toString(), "timer" to timer.durationState().value))
         } else if (this.lostGame()) {
             updateGameState(GameState.LOST)
             timer.stopTimer()
+            logAnalyticsEvent("lost_game", mapOf("level" to level.value.toString(), "timer" to timer.durationState().value))
         } else {
             updateGameState(GameState.RUNNING)
         }
