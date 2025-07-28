@@ -6,11 +6,7 @@ external fun sa_event(
 )
 
 actual fun logAnalyticsEvent(eventName: String, parameters: Map<String, Any>) {
-    val parameterString = parameters.entries.joinToString(",") { "${it.key}=${it.value}" }
-    javaScriptLog(eventName, parameterString)
-}
-
-fun javaScriptLog(eventName: String, parameterString: String) {
+    val parameterString = parameters.entries.joinToString(",") { "${it.key}:\"${it.value}\"" }
     sa_event(
         eventName,
         parameterString
