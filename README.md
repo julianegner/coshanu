@@ -239,6 +239,69 @@ and [Pattern.getShortStringResourceId](game/enums/Pattern.kt#L43)
 simple switch component with only few needed parameters
 see [GenericSwitch.kt](composeApp/src/commonMain/kotlin/ui/GenericSwitch.kt)
 
+- ##### analytics for wasm/web
+to use standard analytics, you can simply add the analytics javascript to
+src/wasmJsMain/resources/index.html
+
+<details>
+  <summary>Click to see details</summary>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CoShaNu</title>
+    <link id="page_favicon"
+          href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T7WS2w3AIAhFYZ/GKdylM3UXpzDdh0qU+MBEjdZPhJPDVYTNg5vz0AVYa8k5V90RECGg6lcFHhYrgfCw1FrIHOAJgDsihoDVTA6GGBYVx7EFZxIDzQbTgBwoQw6uMPbudiiDi7LimwzJGALvU0T159MrFABZMSRWfKTfAYtZbL/CBxlxMBGC/SHMAAAAAElFTkSuQmCC"
+          rel="icon" type="image/x-icon">
+
+    <script type="application/javascript" src="composeApp.js"></script>
+</head>
+<body>
+<div id="loader-container">Loading coshanu ...</div>
+<canvas id="ComposeTarget"></canvas>
+
+<!-- 100% privacy-first analytics, Do Not Track will not be tracked -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</body>
+</html>
+```
+
+</details>
+
+- ##### analytics for wasm/web, now with events
+
+for events, you need a solution that supports events.  
+But that is not enough, because the usual solutions only use javascript code, which we cannot call from kotlin code.
+Or can we?
+
+Yes - we use expect/actual for the platform specific code, and then the ```js()``` function to call the javascript code from kotlin code.
+
+see [Analytics.kt](composeApp/src/wasmJsMain/kotlin/util/Analytics.kt)
+
+<details>
+  <summary>Click to see details</summary>
+
+```kotlin
+package util
+
+external fun sa_event(
+  event: String,
+  parameters: String
+)
+
+actual fun logAnalyticsEvent(eventName: String, parameters: Map<String, Any>) {
+  val parameterString = parameters.entries.joinToString(",") { "${it.key}:\"${it.value}\"" }
+  sa_event(
+    eventName,
+    parameterString
+  )
+}
+```
+</details>
+
+
 
 # Kotlin Multiplatform Development
 
@@ -259,7 +322,7 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 
 You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
 
-## additional inforamtion about Kotlin Multiplatform
+## additional information about Kotlin Multiplatform
 
 create a new KMP project
 https://kmp.jetbrains.com/
