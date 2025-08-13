@@ -127,10 +127,9 @@ private fun PlatformOverviewTable() {
             TextLink(url = "https://jegner.itch.io/coshanu", text = "itch.io")
         }
 
-        // ${programVersion}
-
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
             Text("Android apk\n(sideloading needed)", fontSize = standardTextSize.value, lineHeight = standardLineHeight.value)
+            TextLink(url = "https://github.com/julianegner/coshanu/releases/download/v${programVersion}/coshanu-release.apk", "download")
             Text("Work in progress", fontSize = standardTextSize.value)
         }
         Row (modifier = modifier, horizontalArrangement = horizontalArrangement) {
