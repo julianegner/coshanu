@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+# does not work as expected with gradle-version: current
+env:
+  GRADLE_VERSION: 8.14.1
+
 jobs:
   build_apk_release:
     runs-on: ubuntu-latest
@@ -35,7 +39,7 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: >-
             :composeApp:packageReleaseApk
             -PstorePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}

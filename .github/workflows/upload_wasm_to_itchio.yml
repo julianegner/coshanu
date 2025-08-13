@@ -3,6 +3,8 @@ name: upload_wasm_to_itchio.yml
 env:
   itchio_project: jegner/coshanu
   itchio_channel: wasm
+# does not work as expected with gradle-version: current
+  GRADLE_VERSION: 8.14.1
 
 on:
   push:
@@ -30,7 +32,7 @@ jobs:
       - name: "⚙️ Setup Gradle"
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
 
       # 4. Build the WasmJS App
       - name: "🛠️ Build WasmJS App"
