@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+# does not work as expected with gradle-version: current
+env:
+  GRADLE_VERSION: 8.14.1
+
 jobs:
 # wasm test do not work on github actions because chromium is not available
 #  run_tests_wasm:
@@ -39,7 +43,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: desktopTest
 
   run_tests_jvm_windows:
@@ -54,7 +58,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: desktopTest
 
   run_tests_jvm_macos:
@@ -69,7 +73,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: desktopTest
 
   run_tests_android:
@@ -84,6 +88,6 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
           arguments: deviceAndroidTest
 
