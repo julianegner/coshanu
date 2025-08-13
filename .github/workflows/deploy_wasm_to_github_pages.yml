@@ -12,6 +12,10 @@ permissions:
   pages: write    # Allow deployment to GitHub Pages
   id-token: write # Required by actions/configure-pages
 
+# does not work as expected with gradle-version: current
+env:
+  GRADLE_VERSION: 8.14.1
+
 jobs:
   build-and-deploy:
     environment:
@@ -35,7 +39,7 @@ jobs:
       - name: "⚙️ Setup Gradle"
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: current
+          gradle-version: ${{ env.GRADLE_VERSION }}
 
       # 4. Build the WasmJS App
       - name: "🛠️ Build WasmJS App"
