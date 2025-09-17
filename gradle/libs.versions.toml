@@ -17,7 +17,7 @@ kotlin = "2.1.21"
 kotlinx-coroutines = "1.10.1"
 compottie="2.0.0-rc04"
 composeIcons = "1.1.1"
-lexilabs-basic = "0.2.6-SNAPSHOT"
+lexilabs-basic = "0.2.6-beta02"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
