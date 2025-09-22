@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import de.julianegner.multiplatformTooltip.TooltipWrapper
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.click_anywhere
@@ -27,7 +28,6 @@ import isLandscape
 import kotlin.math.PI
 import landscapeOrAndroid
 import ui.UiStateHolder.standardTextSize
-import util.TooltipWrapper
 import util.clickableHoverIcon
 
 

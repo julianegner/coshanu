@@ -15,7 +15,14 @@ val properties = if (localProperties.exists()) {
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
+        google()
     }
+}
+repositories {
+    mavenCentral()
+    mavenLocal()
+    google()
 }
 
 plugins {
@@ -59,7 +66,7 @@ kotlin {
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "CoShaNu"
+        outputModuleName = "CoShaNu"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -122,6 +129,8 @@ kotlin {
             implementation("com.russhwolf:multiplatform-settings-no-arg:1.3.0")
 
             implementation("br.com.devsrsouza.compose.icons:octicons:1.1.1")
+
+            implementation("de.julianegner:multiplatform-tooltip:0.5.16") // 1.0.0-beta
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

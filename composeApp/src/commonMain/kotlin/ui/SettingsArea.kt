@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
+import de.julianegner.multiplatformTooltip.TooltipWrapper
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.card_tooltip_active
 import coshanu.composeapp.generated.resources.card_tooltip_inactive
@@ -36,7 +37,6 @@ import settings
 import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
-import util.TooltipWrapper
 import util.colorFilter
 import util.onClick
 import util.runOnMainAfter

@@ -2,7 +2,6 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -12,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import de.julianegner.multiplatformTooltip.TooltipWrapper
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.subtitle
 import coshanu.composeapp.generated.resources.title
@@ -29,7 +29,6 @@ import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
 import coshanu.composeapp.generated.resources.info_area_title
-import util.TooltipWrapper
 import util.clickableHoverIcon
 import util.onClick
 
@@ -153,8 +152,7 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
             if (isPlatformWasm) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     TooltipWrapper(
-                        text = stringResource(Res.string.info_area_title),
-                        DpOffset(x = 70.dp, y = 50.dp)) {
+                        text = stringResource(Res.string.info_area_title)) {
                         InfoSymbol(infoSymbolModifier)
                     }
                     Title()
@@ -194,8 +192,6 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
                     if (isPlatformWasm) {
                         TooltipWrapper(
                             text = stringResource(Res.string.info_area_title),
-                            // todo offset for mobile
-                            DpOffset(x = 70.dp, y = 50.dp)
                         ) {
                             InfoSymbol(infoSymbolModifier)
                         }
