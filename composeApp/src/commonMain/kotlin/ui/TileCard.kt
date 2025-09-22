@@ -11,14 +11,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import de.julianegner.multiplatformTooltip.TooltipWrapper
 import game.enums.GameState
 import game.GameStateHolder
 import game.TileData
 import game.same
 import game.tooltipText
 import isPlatformAndroid
-import util.TooltipWrapper
-import util.clickableHoverIcon
 import util.modeDependantColor
 import util.onClick
 import util.runOnMainAfter
