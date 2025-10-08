@@ -130,7 +130,7 @@ kotlin {
 
             implementation("br.com.devsrsouza.compose.icons:octicons:1.1.1")
 
-            implementation("de.julianegner:multiplatform-tooltip:0.5.16") // 1.0.0-beta
+            implementation("de.julianegner:multiplatform-tooltip:0.5.20") // 1.0.0-beta
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
