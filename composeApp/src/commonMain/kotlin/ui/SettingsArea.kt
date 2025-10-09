@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.hyperether.resources.stringResource
 import de.julianegner.multiplatformTooltip.TooltipWrapper
+import de.julianegner.multiplatformTooltip.tooltipCompatibleClick
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.card_tooltip_active
 import coshanu.composeapp.generated.resources.card_tooltip_inactive
@@ -38,8 +39,8 @@ import ui.UiStateHolder.largerTextSize
 import ui.UiStateHolder.standardLineHeight
 import ui.UiStateHolder.standardTextSize
 import util.colorFilter
-import util.onClick
 import util.runOnMainAfter
+import util.clickableHoverIcon
 
 @Composable
 fun SettingsAreaWrapper() {
@@ -87,7 +88,9 @@ fun SettingsAreaWrapper() {
                     modifier = Modifier
                         .padding(start = 5.dp, top = 10.dp, end = 10.dp)
                         .size(40.dp)
-                        .onClick(onClick = { UiStateHolder.displaySettingsArea.value = true })
+                        .tooltipCompatibleClick(interactionSource = null, indication = null) { UiStateHolder.displaySettingsArea.value = true }
+                        .clickableHoverIcon()
+                        //.onClick(onClick = { UiStateHolder.displaySettingsArea.value = true })
                 )
             }
         }

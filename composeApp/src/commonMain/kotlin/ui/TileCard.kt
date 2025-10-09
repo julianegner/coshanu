@@ -1,17 +1,24 @@
 package ui
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import de.julianegner.multiplatformTooltip.TooltipWrapper
+import de.julianegner.multiplatformTooltip.tooltipCompatibleClick
+import de.julianegner.multiplatformTooltip.standardTooltipModifier
 import game.enums.GameState
 import game.GameStateHolder
 import game.TileData
@@ -19,7 +26,6 @@ import game.same
 import game.tooltipText
 import isPlatformAndroid
 import util.modeDependantColor
-import util.onClick
 import util.runOnMainAfter
 
 @Composable
@@ -67,10 +73,19 @@ fun TileCard(
                 GameStateHolder.tutorial.isAllowedTile(tileDataState.value)
 
         TooltipWrapper(
-            if (UiStateHolder.cardTooltipActive.value)
-                tileDataState.value.tooltipText()
-            else
-                null // no tooltip at all
+            tooltipComposable = {
+                if (UiStateHolder.cardTooltipActive.value) {
+                    Box(
+                        modifier = Modifier
+                            .standardTooltipModifier()
+                            .height(200.dp)
+                            .width(200.dp)
+                            .padding(10.dp)
+                    ) {
+                        Text(tileDataState.value.tooltipText())
+                    }
+                }
+            }
         ) {
             Card(
                 // only clickable if not tutorial or tutorial and allowed tile
@@ -78,7 +93,8 @@ fun TileCard(
                     (!GameStateHolder.tutorial.isTutorial() || GameStateHolder.tutorial.isAllowedTile(tileDataState.value))
                 ) {
                     cardModifier
-                        .onClick(onClick = { tileSelected(tileDataState, cardBorderState) })
+                        .tooltipCompatibleClick { tileSelected(tileDataState, cardBorderState) }
+                        .pointerHoverIcon(PointerIcon.Hand)
                 } else {
                     cardModifier
                 },
