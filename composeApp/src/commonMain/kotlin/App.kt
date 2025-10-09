@@ -1,4 +1,5 @@
 import androidx.compose.foundation.*
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -8,8 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import de.julianegner.multiplatformTooltip.TooltipWrapper
 import coshanu.composeapp.generated.resources.Res
@@ -124,7 +126,11 @@ fun App() {
 @Composable
 private fun Main(verticalScrollModifier: MutableState<Modifier>) {
     val infoSymbolModifier = Modifier
-        .onClick(onClick = { UiStateHolder.displayInfoArea.value = true })
+        .clickable(
+            interactionSource = null,
+            indication = null,
+            onClick = { UiStateHolder.displayInfoArea.value = true })
+        .pointerHoverIcon(PointerIcon.Hand)
         .padding(10.dp)
 
     // todo add navigation to access this without changing the code

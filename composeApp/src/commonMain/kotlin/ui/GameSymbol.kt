@@ -1,6 +1,5 @@
 package ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -15,6 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import de.julianegner.multiplatformTooltip.TooltipWrapper
+import de.julianegner.multiplatformTooltip.tooltipCompatibleClick
 import com.hyperether.resources.stringResource
 import coshanu.composeapp.generated.resources.Res
 import coshanu.composeapp.generated.resources.click_anywhere
@@ -29,7 +29,6 @@ import kotlin.math.PI
 import landscapeOrAndroid
 import ui.UiStateHolder.standardTextSize
 import util.clickableHoverIcon
-
 
 @Composable
 fun GameSymbol() {
@@ -73,9 +72,12 @@ fun GameSymbol() {
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .clickable(interactionSource = null, indication = null) {
+                    .tooltipCompatibleClick(interactionSource = null, indication = null)  {
                         GameStateHolder.openMenu()
                     }
+                    // .clickable(interactionSource = null, indication = null) {
+                    //     GameStateHolder.openMenu()
+                    // }
                     .clickableHoverIcon()
         )
     }
