@@ -31,6 +31,7 @@ import com.hyperether.resources.stringResource
 import com.hyperether.resources.currentLanguage
 import com.russhwolf.settings.Settings
 import coshanu.composeapp.generated.resources.info_area_title
+import isPlatformMobile
 import util.clickableHoverIcon
 import util.onClick
 
@@ -183,7 +184,8 @@ private fun Main(verticalScrollModifier: MutableState<Modifier>) {
         }
         ImpressumWrapper(if (isLandscape) Modifier.fillMaxWidth(0.5f) else Modifier.fillMaxWidth())
     } else {
-        Column {
+        // to avoid the settings icon being displayed behind the upper system bar on mobile
+        Column(modifier = Modifier.padding(top = if (isPlatformMobile) 50.dp else 0.dp)) {
             Column(
                 modifier = verticalScrollModifier.value
                     .fillMaxWidth(),
