@@ -212,9 +212,8 @@ extension functions are a standard feature of kotlin itself, here used to add fu
 (see [ColorExtension.kt](composeApp/src/commonMain/kotlin/util/ColorExtension.kt))
 
 - ##### tooltip for all compile targets 
-This is self written, as no library exists that supports all targets
-instead of just for Android like TooltipBox or just for Desktop like TooltipArea
-(see [Tooltip.kt](composeApp/src/commonMain/kotlin/ui/Tooltip.kt))
+Instead of the self implemented version, from now on we use the library
+[de.julianegner:multiplatform-tooltip](https://github.com/julianegner/multiplatform-tooltip)
 
 - ##### replace colors with patterns for the colorless version of the tiles
 To make the game accessible for colorblind people, the game can be played in a colorless mode.
