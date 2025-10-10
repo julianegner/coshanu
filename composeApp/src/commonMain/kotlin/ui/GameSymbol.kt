@@ -75,9 +75,6 @@ fun GameSymbol() {
                     .tooltipCompatibleClick(interactionSource = null, indication = null)  {
                         GameStateHolder.openMenu()
                     }
-                    // .clickable(interactionSource = null, indication = null) {
-                    //     GameStateHolder.openMenu()
-                    // }
                     .clickableHoverIcon()
         )
     }
