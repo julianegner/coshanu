@@ -90,7 +90,6 @@ fun SettingsAreaWrapper() {
                         .size(40.dp)
                         .tooltipCompatibleClick(interactionSource = null, indication = null) { UiStateHolder.displaySettingsArea.value = true }
                         .clickableHoverIcon()
-                        //.onClick(onClick = { UiStateHolder.displaySettingsArea.value = true })
                 )
             }
         }
