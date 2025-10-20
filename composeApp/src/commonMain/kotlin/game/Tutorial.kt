@@ -38,6 +38,7 @@ class Tutorial {
                     newTileData(Color.Blue, ShapeEnum.CIRCLE, 1)
                 )
                 tutorialSteps = listOf(
+                    TutorialStep(0, Res.string.tutorial_one_0, null),
                     TutorialStep(1, Res.string.tutorial_one_1, tiles[0]),
                     TutorialStep(2, Res.string.tutorial_one_2, tiles[3]),
                     TutorialStep(3, Res.string.tutorial_one_3, tiles[2]),
@@ -72,12 +73,13 @@ class Tutorial {
 
                 tutorialSteps = listOf(
 
-                    TutorialStep(1,
+                    TutorialStep(0,
                         if (GameStateHolder.gameMode.value == GameMode.TWO_ELEMENTS_WITH_TIMER) {
-                            Res.string.tutorial_two_1_with_timer
+                            Res.string.tutorial_two_0_with_timer
                         } else {
-                            Res.string.tutorial_two_1
-                        }, tiles[0]),
+                            Res.string.tutorial_two_0
+                        }, null),
+                    TutorialStep(1, Res.string.tutorial_two_1, tiles[0]),
                     TutorialStep(2, Res.string.tutorial_two_2, tiles[1]),
                     TutorialStep(3, Res.string.tutorial_two_3, tiles[15]),
                     TutorialStep(4, Res.string.tutorial_two_4, null, isRestart = true),

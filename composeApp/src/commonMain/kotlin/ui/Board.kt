@@ -225,6 +225,9 @@ fun GridAndTutorial() {
                 )
             }
             TutorialText()
+            if (tutorial.isTutorial() && tutorial.getCurrentStep()?.step == 0) {
+                GameRuleVisualization(GameStateHolder.gameMode.value!!)
+            }
         }
     }
 }

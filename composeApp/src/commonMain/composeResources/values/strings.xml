@@ -78,7 +78,8 @@ When using multiline strings, please be aware that all line breaks and indentati
 
     <string name="next_level">Next Level</string>
 
-    <string name="tutorial_one_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
+    <string name="tutorial_one_0">Welcome to the Tutorial!.</string>
+    <string name="tutorial_one_1">Please click on the upper left [].</string>
     <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
     <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
     <string name="tutorial_one_4">Both Tiles disappear, because this fits. \nYes, this game was lost. \nBut no problem, just click on 'Restart Game' \nThis restarts the game with the same cards.</string>
@@ -90,8 +91,9 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="tutorial_one_8_pattern">These Tiles are played and only the Tiles with waves are there.\nNow click on the lower right [].</string>
     <string name="tutorial_one_9">Congratulations! You have finished the Tutorial.\nNow you know how to play the game.\nYou can start a new game with the Menu above.</string>
 
-    <string name="tutorial_two_1_with_timer">Welcome to the Tutorial!\nIn this variant, you have to play against the time.\nFor every fitting pair you select, you will get 10 seconds.\nPlease click on the upper left [].</string>
-    <string name="tutorial_two_1">Welcome to the Tutorial!\nPlease click on the upper left [].</string>
+    <string name="tutorial_two_0_with_timer">Welcome to the Tutorial!\nIn this variant, you have to play against the time.\nFor every fitting pair you select, you will get 10 seconds.</string>
+    <string name="tutorial_two_0">Welcome to the Tutorial!</string>
+    <string name="tutorial_two_1">Please click on the upper left [].</string>
     <string name="tutorial_two_2">Now click on [] right to the first Tile</string>
     <string name="tutorial_two_3">You see that the frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\n\nFor Tiles to fit, two of the elements Color, Shape or Number must be equal.\nThat's why the Name is CoShaNu.\nNow click on the lower right [].</string>
     <string name="tutorial_two_4">Both Tiles disappear, because this fits. \nYes, this game was lost. \nBut no problem, just click on 'Restart Game' \nThis restarts the game with the same cards.</string>
