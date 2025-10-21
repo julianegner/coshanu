@@ -8,27 +8,44 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.hyperether.resources.stringResource
 import compose.icons.Octicons
 import compose.icons.octicons.ArrowRight24
 import compose.icons.octicons.X24
+import coshanu.composeapp.generated.resources.Res
+import coshanu.composeapp.generated.resources.next_step
+import coshanu.composeapp.generated.resources.tutorial_rule_examples
+import game.GameStateHolder
 import game.enums.GameMode
 import game.enums.ShapeEnum
 import game.newTileData
+import game.TileData
+import game.enums.GameState
+import game.enums.ScreenType
+import ui.UiStateHolder.standardLineHeight
+import ui.UiStateHolder.standardTextSize
 import util.colorFilter
 import util.modeDependantColor
 
-val gameRuleElementSize = 150.dp
+var gameRuleElementSize = 150.dp
+
+data class RuleExample(
+    val left: TileData,
+    val right: TileData,
+    val fits: Boolean
+)
 
 @Composable
 fun GameRuleVisualization(gameMode: GameMode) {
 
     /*
-    todo implement visialization of game rules
     for SINGLE_ELEMENT:
     examples of same color, shape or number does fit
     examples of something that does not fit
@@ -37,72 +54,96 @@ fun GameRuleVisualization(gameMode: GameMode) {
     examples of something that does not fit, but fits for SINGLE_ELEMENT
      */
 
-    Box(
-        modifier = Modifier
-            .height(gameRuleElementSize * 4)
-            .verticalScroll(rememberScrollState()),
-        contentAlignment = Alignment.Center
-    ) {
+    val ruleExamples = when (gameMode) {
+        GameMode.SINGLE_ELEMENT -> listOf(
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Blue, ShapeEnum.CIRCLE, 1), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.TRIANGLE, 1), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.CIRCLE, 3), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.CIRCLE, 1), false)
+        )
 
-        when (gameMode) {
-            GameMode.SINGLE_ELEMENT -> {
-                // Visualization for SINGLE_ELEMENT
+        GameMode.TWO_ELEMENTS, GameMode.TWO_ELEMENTS_WITH_TIMER -> listOf(
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Blue, ShapeEnum.TRIANGLE, 1), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Blue, ShapeEnum.CIRCLE, 3), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.TRIANGLE, 3), true),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Blue, ShapeEnum.CIRCLE, 1), false),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.TRIANGLE, 1), false),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.CIRCLE, 3), false),
+            RuleExample(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3), newTileData(Color.Red, ShapeEnum.CIRCLE, 1), false),
+        )
+    }
 
-                // todo add description text
-                // todo refactor to avoid code duplication
-                Column {
-                    Row(modifier = Modifier.height(gameRuleElementSize)) {
-                        TileCard(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3))
-                        FitsImage()
-                        TileCard(newTileData(Color.Blue, ShapeEnum.CIRCLE, 1))
-                    }
-                    Row(modifier = Modifier.height(gameRuleElementSize)) {
-                        TileCard(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3))
-                        FitsImage()
-                        TileCard(newTileData(Color.Red, ShapeEnum.TRIANGLE, 1))
-                    }
-                    Row(modifier = Modifier.height(gameRuleElementSize)) {
-                        TileCard(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3))
-                        FitsImage()
-                        TileCard(newTileData(Color.Red, ShapeEnum.CIRCLE, 3))
-                    }
-                    Row(modifier = Modifier.height(gameRuleElementSize)) {
-                        TileCard(newTileData(Color.Blue, ShapeEnum.TRIANGLE, 3))
-                        DoesNotFitImage()
-                        TileCard(newTileData(Color.Red, ShapeEnum.CIRCLE, 1))
-                    }
-                }
-            }
+    gameRuleElementSize = if (gameMode == GameMode.SINGLE_ELEMENT) 150.dp else 100.dp
 
-            GameMode.TWO_ELEMENTS, GameMode.TWO_ELEMENTS_WITH_TIMER -> {
-                // Visualization for TWO_ELEMENTS and TWO_ELEMENTS_WITH_TIMER
-
-                // todo
-            }
+    if (GameStateHolder.isGameState(GameState.RUNNING)) {
+        Button(onClick = { GameStateHolder.tutorial.nextStep() }) {
+            Text(stringResource(Res.string.next_step))
         }
     }
 
+    Box(
+        modifier = Modifier
+            .height(gameRuleElementSize * ruleExamples.size)
+            .verticalScroll(rememberScrollState()),
+        contentAlignment = Alignment.Center
+    ) {
+        RuleExamplesArea(ruleExamples)
+    }
 }
 
-/*
-thumbs up
-https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f44d.svg
-thumbs down
-https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f44e.svg
+@Composable
+fun RuleExamplesArea(examples: List<RuleExample>) {
+    Column {
+        Text(stringResource(Res.string.tutorial_rule_examples),
+            fontSize = standardTextSize.value,
+            lineHeight = standardLineHeight.value
+        )
 
-https://commons.wikimedia.org/w/index.php?title=Category:Noto_Color_Emoji_Pie&filefrom=Noto+Emoji+Pie+1f530.svg#mw-category-media
- */
+        when (UiStateHolder.screenType.value) {
+            ScreenType.PORTRAIT -> {
+                for (example in examples) {
+                    Row(modifier = Modifier.height(gameRuleElementSize)) {
+                        RuleExampleRow(example)
+                    }
+                }
+            }
+            ScreenType.LANDSCAPE -> {
+                Row {
+                    Column {
+                        for (example in examples.filterIndexed { index, _ -> index % 2 == 0 }) {
+                            Row(modifier = Modifier.height(gameRuleElementSize)) {
+                                RuleExampleRow(example)
+                            }
+
+                        }
+                    }
+                    Column {
+                        for (example in examples.filterIndexed { index, _ -> index % 2 == 1 }) {
+                            Row(modifier = Modifier.height(gameRuleElementSize)) {
+                                RuleExampleRow(example)
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun RuleExampleRow(example: RuleExample) {
+    TileCard(example.left)
+    if (example.fits) {
+        FitsImage()
+    } else {
+        DoesNotFitImage()
+    }
+    TileCard(example.right)
+}
+
 @Composable
 fun FitsImage() {
-    /*
-    Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
-        // todo find good image
-        painter = painterResource(Res.drawable.Noto_Emoji_Fingerpointing),
-        contentDescription = null,
-        modifier = Modifier.size(gameRuleElementSize)
-    )
-     */
-
     Image(
         imageVector = Octicons.ArrowRight24,
         contentDescription = "arrow right",
@@ -113,14 +154,6 @@ fun FitsImage() {
 
 @Composable
 fun DoesNotFitImage() {
-    /*
-    Image( // source: https://commons.wikimedia.org/wiki/File:Noto_Emoji_Oreo_1f449.svg
-        // todo find good image
-        painter = painterResource(Res.drawable.stopwatch),
-        contentDescription = null,
-        modifier = Modifier.size(gameRuleElementSize)
-    )
-     */
     Image(
         imageVector = Octicons.X24,
         contentDescription = "x",

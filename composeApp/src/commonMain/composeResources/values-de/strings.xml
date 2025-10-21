@@ -81,6 +81,9 @@
     <string name="the_number">der Nummer</string>
 
     <string name="next_level">Nächstes Level</string>
+    <string name="next_step">weiter</string>
+
+    <string name="tutorial_rule_examples">Beispiele für Karten, die zusammenpassen (Pfeil) und nicht zusammenpassen (X):</string>
 
     <string name="tutorial_one_0">Willkommen beim Tutorial!</string>
     <string name="tutorial_one_1">Bitte klick auf [] oben links.</string>

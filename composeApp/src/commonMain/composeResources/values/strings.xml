@@ -77,8 +77,11 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="the_number">Number</string>
 
     <string name="next_level">Next Level</string>
+    <string name="next_step">Next Step</string>
 
-    <string name="tutorial_one_0">Welcome to the Tutorial!.</string>
+    <string name="tutorial_rule_examples">Examples for Cards, that do fit (Arrow) and do not fit (X):</string>
+
+    <string name="tutorial_one_0">Welcome to the Tutorial!</string>
     <string name="tutorial_one_1">Please click on the upper left [].</string>
     <string name="tutorial_one_2">you see that the Frame of that Tile is green now.\nNow click on the lower right []</string>
     <string name="tutorial_one_3">you see that the Frame of that tile is red for a moment.\nThat is because the Tiles do not fit together.\nFor Tiles to fit, they must have the same Color, Shape or Number, therefore the Name CoShaNu.\nNow click on the lower left [].</string>
