@@ -1,0 +1,166 @@
+<!--
+Dear translators, to add a translation, copy this file to a new file with the language code in the path.
+For example, for german, the path is composeApp/src/commonMain/composeResources/values-de/strings.xml
+Then translate the strings in the new file.
+When using multiline strings, please be aware that all line breaks and indentation are displayed
+-->
+<resources>
+    <!-- default language: english -->
+    <string name="title">CoShaNu - Color, Shape, Number</string>
+    <string name="subtitle">Colores, Formas, Números</string>
+    <string name="click_anywhere">Haz click para iniciar</string>
+    <string name="tap_anywhere">Haz tap para iniciar</string>
+    <string name="choose_level">Elige un nivel:</string>
+    <string name="tutorial">Tutorial</string>
+
+    <!-- settings area -->
+    <string name="dark_mode">Modo oscuro</string>
+    <string name="light_mode">Modo día</string>
+    <string name="color_active">con colores</string>
+    <string name="color_inactive">sin colores</string>
+    <string name="color_option_description">Puedes desabilitar los colores y reemplazarlos con colores.</string>
+    <string name="card_tooltip_active">con descripción</string>
+    <string name="card_tooltip_inactive">sin descripción</string>
+
+    <string name="single_element">Un elemento</string>
+    <string name="two_elements">Dos elementos</string>
+    <string name="two_elements_with_timer">Dos elementos con tiempo</string>
+
+    <string name="single_element_must_fit">Debe haber un elemento en común para combinar las cartas.</string>
+    <string name="two_elements_must_fit">Debe haber dos elementos en común para combinar las cartas.</string>
+    <string name="time_is_running">El tiempo corre. Gana tiempo al combinar las cartas.</string>
+    <string name="time_is_up">¡Se acabó el tiempo!</string>
+
+    <string name="restart">reiniciar</string>
+    <string name="starting">iniciando</string>
+    <string name="won">¡Ganaste!</string>
+    <string name="lost">Lo siento, ¡perdiste!</string>
+    <string name="running">Corrindo...</string>
+    <string name="level_change">cambiando nivel</string>
+
+    <string name="remaining_tiles">Cartas restantes:</string>
+
+    <string name="restart_game">Reiniciar juego</string>
+    <string name="end_game">Terminar juego</string>
+    <string name="start_game">Iniciar juego</string>
+    <string name="save_game">Guardar juego</string>
+    <string name="load_game">Cargar juego</string>
+
+    <string name="level">Nivel</string>
+    <string name="single_element_tutorial">Tutorial para un elemento</string>
+    <string name="two_elements_tutorial">Tutorial para dos elementos</string>
+
+    <string name="color_blue">Azul</string>
+    <string name="color_green">Verde</string>
+    <string name="color_red">Rojo</string>
+    <string name="color_yellow">Amarillo</string>
+    <string name="color_light_gray">GrisClaro</string>
+    <string name="color_dark_gray">GrisOscuro</string>
+    <string name="color_magenta">Magenta</string>
+    <string name="color_cyan">Cian</string>
+    <string name="color_unknown">Desconocido</string>
+
+    <string name="color_prefix">el</string>
+    <string name="color_prefix_circle">el</string>
+    <string name="color_postfix"></string>
+    <string name="color_postfix_circle"></string>
+
+    <string name="circle">Círculo</string>
+    <string name="triangle">Triangulo</string>
+    <string name="square">Cuadrado</string>
+    <string name="pentagon">Pentagono</string>
+    <string name="hexagon">Hexagono</string>
+    <string name="octagon">Octagono</string>
+
+    <string name="with">con</string>
+    <string name="and">y</string>
+    <string name="the_number">Número</string>
+
+    <string name="next_level">Siguente nivel</string>
+
+    <string name="tutorial_one_1">¡Bienvenido al Tutorial!\nPor favor haz click en la esquina superior izquierda [].</string>
+    <string name="tutorial_one_2">puedes ver que el Contorno de esa Carta ahora es verde.\nAhora haz click en la esquina inferior derecha []</string>
+    <string name="tutorial_one_3">puedes ver que el Contorno de la Carta es rojo por un momento.\nEso es porque las Cartas no combinan.\nPara que las Cartas combinen, deben tener el mismo Color, Forma o Número, de ahí el Nombre CoShaNu.\nAhora haz click en la esquina inferior izquierda [].</string>
+    <string name="tutorial_one_4">Ambas Cartas desaparecen porque combinan. \nSí, perdiste este juego. \nPero no hay problema, sólo haz click en "Reiniciar juego" \nEsto reinicia el juego con las mismas Cartas.</string>
+    <string name="tutorial_one_5">Para ganar debes combinar todas las Cartas. Pero ten cuidado, no combines las cartas incorrectas, como antes.\nAhora haz click en la esquina superior izquiera [] ...</string>
+    <string name="tutorial_one_6">Para ganar debes combinar todas las Cartas. Pero ten cuidado, no combines las cartas incorrectas, como antes.\n... entonces [].</string>
+    <string name="tutorial_one_7">Se jugaron estas Cartas y sólo quedan las Cartas Azules.\nAhora haz click en la esquina inferior izquierda [].</string>
+    <string name="tutorial_one_8">Se jugaron estas Cartas y sólo quedan las Cartas Azules.\nAhora haz click en la esquina inferior derecha [].</string>
+    <string name="tutorial_one_7_pattern">Se juegaron estas Cartas y sólo quedan las Cartas con olas.\nAhora haz click en la esquina inferior izquierda [].</string>
+    <string name="tutorial_one_8_pattern">Se juegaron estas Cartas y sólo quedan las Cartas con olas.\nAhora haz click en la esquina inferior derecha [].</string>
+    <string name="tutorial_one_9">¡Felicidades! Terminaste el Tutorial.\nAhora sabes jugar el juego.\nPuedes iniciar un nuevo juego en el Menú.</string>
+
+    <string name="tutorial_two_1_with_timer">¡Bienvenido al Tutorial!\nEn esta variante, debes jugar contra reloj.\nPor cada par combinado, obtendras 10 segundos.\nPor favor haz click en la esquina superior izquierda [].</string>
+    <string name="tutorial_two_1">¡Bienvenido al Tutorial!\nPor favor haz click en la esquina superior izquierda [].</string>
+    <string name="tutorial_two_2">Ahora haz click en [] justo en la primera Carta</string>
+    <string name="tutorial_two_3">Puedes ver que el marco de las cartas es rojo por el momento.\nEso es porque las Cartas no combinan.\n\nPara que las Cartas combinen, dos elementos como Color, Forma o Número, deben coincidir.\nDe ahí el Nombre CoShaNu.\nAhora haz click en la esquina inferior derecha [].</string>
+    <string name="tutorial_two_4">Ambas Cartas desaparecen porque combinan. \nSí, perdiste este juego. \nPero no hay problema, sólo haz click en "Reiniciar juego" \nEsto reinicia el juego con las mismas Cartas.</string>
+    <string name="tutorial_two_5">Para ganar debes combinar todas las Cartas. Pero ten cuidado, no combines las cartas incorrectas, como antes.\nAhora haz click en la esquina superior izquiera [] ...</string>
+    <string name="tutorial_two_6">ahora elige las que coinciden [].</string>
+    <string name="tutorial_two_7">Se jugaron estas Cartas - ¡Juguemos el siguiente par!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_8">... []</string>
+    <string name="tutorial_two_9">Se jugaron estas Cartas - ¡Juguemos el par rojo!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_9_pattern">Se jugaron estas Cartas - ¡Juguemos el par con fuego!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_10">... []</string>
+    <string name="tutorial_two_11">Se jugaron estas Cartas - ¡Juguemos el primer par verde!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_11_pattern">Se jugaron estas Cartas - ¡Juguemos el primer par con plantas!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_12">... []</string>
+    <string name="tutorial_two_13">Se jugaron estas Cartas - ¡Juguemos el par verde!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_13_pattern">Se jugaron estas Cartas - ¡Juguemos el par con plantas!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_14">... []</string>
+    <string name="tutorial_two_15">Se jugaron estas Cartas - ¡Juguemos uno de los pares azules!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_15_pattern">Se jugaron estas Cartas - ¡Juguemos uno de los pares con olas!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_16">... []</string>
+    <string name="tutorial_two_17">Se jugaron estas Cartas - ¡Juguemos el penultimo par azul!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_17_pattern">Se jugaron estas Cartas - ¡Juguemos el penultimo par con olas!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_18">... []</string>
+    <string name="tutorial_two_19">Se jugaron estas Cartas - ¡Juguemos el ultimo par!\nAhora haz click en [] y ...</string>
+    <string name="tutorial_two_20">... []</string>
+    <string name="tutorial_two_21">¡Felicidades! Terminaste el Tutorial.\nAhora sabes jugar.\nPuedes iniciar un nuevo juego en el Menú.</string>
+
+
+    <!-- info area -->
+    <string name="info_area_title">Información</string>
+    <string name="version">Versión</string>
+    <string name="general_information_title">Información general</string>
+    <string name="general_information_text">CoShaNu es un juego donde combinas pares de cartas qut tienen el mismo color, forma o número. \nHay dos modos de juego, el simple, donde deben coincidir al menos el color, la forma o el número; y el complejo, donde dos deben coincidir. \nJuega el tutorial para aprender cómo jugar. \n \nEl juego fue escrito en Kotlin multiplatform con Jetpack Compose. \nEl juego esta disponible en diferentes idiomas y plataformas. \n \nEs de código abierto (licencia MIT), así que puedes usar funciones y fragmentos de código para tu propio proyecto. \nLas contribuciones y traducciones son bienvenidas.</string>
+    <string name="license_title">Licencia</string>
+    <string name="general_license_info">El juego está licenciado bajo la licencia MIT.</string>
+    <!-- info for translation: the license text itself is in english, so please add "(english)" to this translated string -->
+    <string name="license_details_link_text">Información de licencia (inglés)</string>
+    <string name="code_title">Código</string>
+    <string name="code_info">El código está disponible en GitHub. Vease:</string>
+    <string name="platform_availability_title">Disponibilidad en plataformas</string>
+    <string name="platform_availability_info">El juego está disponible en las siguientes plataformas:</string>
+    <string name="platform">Plataforma</string>
+    <string name="link">Link</string>
+    <string name="localization_title">Localización</string>
+    <string name="localization_info">El juego está disponible en los siguientes idiomas:</string>
+    <string name="translators_prefix">Traductor(es) de</string>
+    <string name="contribute_title">Contribuye</string>
+    <string name="contribute_info">El juego es de código abierto y las contribuciones son bienvenidas. \nPuedes contribuir al juego añadiendo traducciones, arreglando bugs o añadiendo nuevas funciones. \nPor favor contactame por Github si te gustaría contribuir. \n \nSi te quieres traducir el juego, pudes descargar el archivo de traducción aquí:</string>
+    <string name="contribute_translation_mail">Puedes enviar el archivo traducido por e-mail en</string>
+
+
+    <string name="settings">Ajustes</string>
+    <string name="reset_settings">restablecer</string>
+
+    <string name="pattern_waves">olas</string>
+    <string name="pattern_plant">plantas</string>
+    <string name="pattern_fire">fuego</string>
+    <string name="pattern_dot_grid">puntos</string>
+    <string name="with_pattern_dot_grid">puntos</string>
+    <string name="pattern_lines_up">líneas</string>
+    <string name="pattern_lines_crossed">líneas cruzadas</string>
+    <string name="short_pattern_lines_crossed">cruces</string>
+    <string name="pattern_fish">peces</string>
+    <string name="pattern_cat">gato</string>
+
+    <!--
+    Dear translators, please put your name here.
+    If you add/ change a translation, please add your name here.
+    example:
+    <string name="translator">Aaron Beman, Cecil Dallas</string>
+    -->
+    <string name="translator">Karen Plascencia</string>
+</resources>
