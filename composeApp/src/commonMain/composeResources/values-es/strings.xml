@@ -16,11 +16,11 @@ When using multiline strings, please be aware that all line breaks and indentati
     <!-- settings area -->
     <string name="dark_mode">Modo oscuro</string>
     <string name="light_mode">Modo día</string>
-    <string name="color_active">con colores</string>
-    <string name="color_inactive">sin colores</string>
-    <string name="color_option_description">Puedes desabilitar los colores y reemplazarlos con colores.</string>
-    <string name="card_tooltip_active">con descripción</string>
-    <string name="card_tooltip_inactive">sin descripción</string>
+    <string name="color_active">Con colores</string>
+    <string name="color_inactive">Sin colores</string>
+    <string name="color_option_description">Puedes desabilitar los colores y reemplazarlos con patrones.</string>
+    <string name="card_tooltip_active">Con descripción</string>
+    <string name="card_tooltip_inactive">Sin descripción</string>
 
     <string name="single_element">Un elemento</string>
     <string name="two_elements">Dos elementos</string>
@@ -35,7 +35,7 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="starting">iniciando</string>
     <string name="won">¡Ganaste!</string>
     <string name="lost">Lo siento, ¡perdiste!</string>
-    <string name="running">Corrindo...</string>
+    <string name="running">Cargando...</string>
     <string name="level_change">cambiando nivel</string>
 
     <string name="remaining_tiles">Cartas restantes:</string>
@@ -60,9 +60,9 @@ When using multiline strings, please be aware that all line breaks and indentati
     <string name="color_cyan">Cian</string>
     <string name="color_unknown">Desconocido</string>
 
-    <string name="color_prefix">el</string>
-    <string name="color_prefix_circle">el</string>
-    <string name="color_postfix"></string>
+    <string name="color_prefix">en la Carta de color</string>
+    <string name="color_prefix_circle">en la Carta con el</string>
+    <string name="color_postfix">con un</string>
     <string name="color_postfix_circle"></string>
 
     <string name="circle">Círculo</string>
@@ -143,7 +143,7 @@ When using multiline strings, please be aware that all line breaks and indentati
 
 
     <string name="settings">Ajustes</string>
-    <string name="reset_settings">restablecer</string>
+    <string name="reset_settings">Restablecer</string>
 
     <string name="pattern_waves">olas</string>
     <string name="pattern_plant">plantas</string>

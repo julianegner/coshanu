@@ -212,7 +212,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             packageName = "coshanu"
-            packageVersion = "1.3.0"
+            packageVersion = "1.3.1"
         }
     }
 }
