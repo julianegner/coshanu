@@ -35,7 +35,7 @@ import isPlatformMobile
 import util.clickableHoverIcon
 import util.onClick
 
-val programVersion = "1.3.0"
+val programVersion = "1.3.1"
 val gameSaveAndLoadOption = false
 
 val settings: Settings = Settings()
