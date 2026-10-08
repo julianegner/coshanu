@@ -52,9 +52,9 @@ jobs:
       - name: Run dependency updates check
         continue-on-error: true
         run: |
-          ./gradlew dependencyUpdates --init-script /tmp/init-versions.gradle -q --continue
-          EXIT_CODE=$?
-          if [ $EXIT_CODE -ne 0 ]; then
+          EXIT_CODE=0
+          ./gradlew dependencyUpdates --init-script /tmp/init-versions.gradle -q --continue || EXIT_CODE=$?
+          if [ "$EXIT_CODE" -ne 0 ]; then
             echo "::warning::Gradle dependencyUpdates task exited with code $EXIT_CODE. Dependency report may be incomplete."
           fi
           exit 0
